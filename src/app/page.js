@@ -154,6 +154,17 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
+
+  // Pricing animation hook call
+useStaggeredAnimation(".price-container", {
+  isDesktop: isDesktop,
+  desktopGaps: [320, 640, 1280],
+  mobileGaps: [120, 120, 120],
+  trigger: ".price-section",
+  numberOfItems: pricingSection?.items?.length || 3,
+});
+
+
   useEffect(() => {
   const videoElement = document.querySelector('.video video'); // ✅ Video element directly
   const videoContainer = document.querySelector('.video');
@@ -193,13 +204,100 @@ export default function page() {
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
 
-  useStaggeredAnimation(".price-container", {
-  isDesktop: isDesktop,
-  desktopGaps: [320, 640, 1280], // 4 items ke liye gaps
-  mobileGaps: [120, 120, 120],
-  trigger: ".price-section",
-  // numberOfItems: pricingPlans.length // Dynamic number
-});
+
+// useEffect(() => {
+//   if (!pricingSection?.items || pricingSection.items.length === 0) {
+//     console.log('❌ No pricing items found');
+//     return;
+//   }
+
+//   const timer = setTimeout(() => {
+//     const container = document.querySelector('.price-container');
+//     const triggerElement = document.querySelector('.price-section');
+    
+//     if (!container || !triggerElement) {
+//       console.log('❌ Container or trigger not found');
+//       return;
+//     }
+
+//     console.log('🎯 Starting animation with', pricingSection.items.length, 'items');
+
+//     if (isDesktop) {
+//       // Desktop animation
+//       gsap.set(".price-container > *:nth-child(1)", { y: 320 });
+//       gsap.set(".price-container > *:nth-child(2)", { y: 640 });
+//       gsap.set(".price-container > *:nth-child(3)", { y: 1280 });
+      
+//       gsap.to(".price-container > *", {
+//         y: 0,
+//         ease: "none",
+//         scrollTrigger: {
+//           trigger: ".price-section",
+//           start: "top bottom",
+//           end: "center center",
+//           scrub: true,
+//           once: true,
+//           markers: true,
+//         },
+//       });
+//     } else {
+//       // Mobile animation
+//       gsap.set(".price-container > *:nth-child(1)", { y: 120 });
+//       gsap.set(".price-container > *:nth-child(2)", { y: 120 });
+//       gsap.set(".price-container > *:nth-child(3)", { y: 120 });
+      
+//       gsap.to(".price-container > *:nth-child(1)", {
+//         y: 0,
+//         ease: "none",
+//         scrollTrigger: {
+//           trigger: ".price-container > *:nth-child(1)",
+//           start: "top 90%",
+//           end: "top 40%",
+//           scrub: true,
+//           once: true,
+//           markers: true,
+//         },
+//       });
+      
+//       gsap.to(".price-container > *:nth-child(2)", {
+//         y: 0,
+//         ease: "none",
+//         scrollTrigger: {
+//           trigger: ".price-container > *:nth-child(2)",
+//           start: "top 90%",
+//           end: "top 40%",
+//           scrub: true,
+//           once: true,
+//           markers: true,
+//         },
+//       });
+      
+//       gsap.to(".price-container > *:nth-child(3)", {
+//         y: 0,
+//         ease: "none",
+//         scrollTrigger: {
+//           trigger: ".price-container > *:nth-child(3)",
+//           start: "top 90%",
+//           end: "top 40%",
+//           scrub: true,
+//           once: true,
+//           markers: true,
+//         },
+//       });
+//     }
+//   }, 200);
+
+//   return () => clearTimeout(timer);
+// }, [isDesktop, pricingSection]);
+
+
+  // useStaggeredAnimation(".price-container", {
+  //   isDesktop: isDesktop,
+  //   desktopGaps: [320, 640, 1280],
+  //   mobileGaps: [120, 120, 120],
+  //   trigger: ".price-section",
+  //   numberOfItems: 3,
+  // });
 
 
 

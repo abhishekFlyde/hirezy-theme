@@ -11,55 +11,83 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
     mobileGaps = [120, 120, 120],
     trigger = containerClass,
     start = "top bottom",
-    end = "center center",
+    end = "bottom 10%",
     mobileStart = "top 90%",
     mobileEnd = "top 40%",
-    numberOfItems = 3 // Default to 3, but can be passed dynamically
+    numberOfItems = 3
   } = options;
 
   useEffect(() => {
-    if (isDesktop) {
-      // Desktop animation - set initial positions for each child
-      for (let i = 0; i < numberOfItems; i++) {
-        gsap.set(`${containerClass} > *:nth-child(${i + 1})`, { 
-          y: desktopGaps[i] || desktopGaps[desktopGaps.length - 1] 
-        });
-      }
+    console.log('🎯 useStaggeredAnimation running...', {
+      containerClass,
+      isDesktop,
+      numberOfItems
+    });
+
+    // Wait for DOM to be ready
+    const timer = setTimeout(() => {
+      const container = document.querySelector(containerClass);
+      const triggerElement = document.querySelector(trigger);
       
-      // Animate all children to y:0
-      gsap.to(`${containerClass} > *`, {
-        y: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: trigger,
-          start: start,
-          end: end,
-          scrub: true,
-          once: true,
-        },
-      });
-    } else {
-      // Mobile animation - set initial positions for each child
-      for (let i = 0; i < numberOfItems; i++) {
-        gsap.set(`${containerClass} > *:nth-child(${i + 1})`, { 
-          y: mobileGaps[i] || mobileGaps[mobileGaps.length - 1] 
-        });
+      if (!container || !triggerElement) {
+        console.log('❌ Elements not found');
+        return;
       }
-      
-      // Animate each child individually on mobile
-      for (let i = 0; i < numberOfItems; i++) {
-        gsap.to(`${containerClass} > *:nth-child(${i + 1})`, {
+
+      console.log('✅ Elements found, starting animation');
+
+      // Clear any existing transforms
+      gsap.set(`${containerClass} > *`, { clearProps: "all" });
+
+      if (isDesktop) {
+        console.log('🖥️ Desktop animation setup');
+        
+        // Set initial positions for desktop
+        for (let i = 0; i < numberOfItems; i++) {
+          gsap.set(`${containerClass} > *:nth-child(${i + 1})`, { 
+            y: desktopGaps[i] || desktopGaps[desktopGaps.length - 1] 
+          });
+        }
+        
+        // Animate all cards together
+        gsap.to(`${containerClass} > *`, {
           y: 0,
           ease: "none",
           scrollTrigger: {
-            trigger: `${containerClass} > *:nth-child(${i + 1})`,
-            start: mobileStart,
-            end: mobileEnd,
+            trigger: trigger,
+            start: start,
+            end: end,
             scrub: true,
             once: true,
           },
         });
+      } else {
+        console.log('📱 Mobile animation setup');
+        
+        // Set initial positions for mobile
+        for (let i = 0; i < numberOfItems; i++) {
+          gsap.set(`${containerClass} > *:nth-child(${i + 1})`, { 
+            y: mobileGaps[i] || mobileGaps[mobileGaps.length - 1] 
+          });
+        }
+        
+        // Animate each card individually on mobile
+        for (let i = 0; i < numberOfItems; i++) {
+          gsap.to(`${containerClass} > *:nth-child(${i + 1})`, {
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: `${containerClass} > *:nth-child(${i + 1})`,
+              start: mobileStart,
+              end: mobileEnd,
+              scrub: true,
+              once: true,
+            },
+          });
+        }
       }
-    }
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [isDesktop, containerClass, desktopGaps, mobileGaps, trigger, start, end, mobileStart, mobileEnd, numberOfItems]);
 };
