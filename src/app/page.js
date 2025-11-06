@@ -38,6 +38,7 @@ import api from "@/lib/api";
 export default function page() {
   // const { scrollYProgress } = useScroll();
 
+  
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -555,6 +556,45 @@ export default function page() {
                 "Having all the tools in one place makes our hiring process easier, more organized, and helps our team feel confident in every data-driven decision.",
               name: "David Chen",
               role: "Recruitment Lead at InnovateX",
+              imageSrc:
+                "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
+            },
+            {
+              companyLogo:
+                "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
+              company: "NextWave",
+              quote:
+                "The integrations and analytics give us a clear edge over competitors.",
+              details:
+                "Having all the tools in one place makes our hiring process easier, more organized, and helps our team feel confident in every data-driven decision.",
+              name: "Sophia Lee",
+              role: "Operations Director at NextWave",
+              imageSrc:
+                "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
+            },
+            {
+              companyLogo:
+                "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
+              company: "NextWave",
+              quote:
+                "The integrations and analytics give us a clear edge over competitors.",
+              details:
+                "Having all the tools in one place makes our hiring process easier, more organized, and helps our team feel confident in every data-driven decision.",
+              name: "Sophia Lee",
+              role: "Operations Director at NextWave",
+              imageSrc:
+                "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
+            },
+            {
+              companyLogo:
+                "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
+              company: "NextWave",
+              quote:
+                "The integrations and analytics give us a clear edge over competitors.",
+              details:
+                "Having all the tools in one place makes our hiring process easier, more organized, and helps our team feel confident in every data-driven decision.",
+              name: "Sophia Lee",
+              role: "Operations Director at NextWave",
               imageSrc:
                 "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
             },
