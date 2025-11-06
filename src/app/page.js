@@ -24,6 +24,7 @@ import {
   AnimatePresence,
   useScroll,
   useTransform,
+  number,
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
@@ -148,77 +149,55 @@ export default function page() {
 
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
-  useStaggeredAnimation(".price-container", {
-    isDesktop: isDesktop,
-    desktopGaps: [320, 640, 1280],
-    mobileGaps: [120, 120, 120],
-    trigger: ".price-section",
-  });
-  // useEffect(() => {
 
+  useEffect(() => {
+  const videoElement = document.querySelector('.video video'); // ✅ Video element directly
+  const videoContainer = document.querySelector('.video');
+  
+  if (!videoElement || !videoContainer) return;
+  
+  let hasReachedFullSize = false;
+  
+  const handleScroll = () => {
+    if (hasReachedFullSize) return;
+
+    const rect = videoContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
     
-  //    // Desktop ke liye staggered animation
-  // if (isDesktop) {
-  //   // Pehle card ko 0px, doosre ko 20px, teesre ko 40px niche set karenge
-  //   gsap.set(".price-container > *:nth-child(1)", { y: 320 });
-  //   gsap.set(".price-container > *:nth-child(2)", { y: 640 });
-  //   gsap.set(".price-container > *:nth-child(3)", { y: 1280 });
+    const videoCenter = rect.top + (rect.height / 2);
+    const viewportCenter = windowHeight / 2;
+    
+    const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
+    const maxDistance = 500;
+    
+    const progress = Math.max(0, Math.min(1,
+      (maxDistance - distanceFromCenter) / maxDistance
+    ));
+    
+    const scale = 0.5 + (0.5 * progress);
+    videoElement.style.transform = `scale(${scale})`; // ✅ Video element pe scale
+    
+    if (scale >= 0.98) {
+      hasReachedFullSize = true;
+      videoElement.style.transform = `scale(1)`;
+    }
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+  
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
-  //   // Scroll animation - yPercent to 0 AND y to 0 (sab cards same level pe)
-  //   gsap.to(".price-container > *", {
-  //     yPercent: 0,
-  //     y: 0, // Sab cards ki y position 0 ho jayegi
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: ".price-section",
-  //       start: "top bottom",
-  //       end: "center center",
-  //       scrub: true,
-  //     },
-  //   });
-  // } else {
-  //   // Mobile/tablet ke liye individual card triggers
-  //   gsap.set(".price-container > *:nth-child(1)", { y: 120 });
-  //   gsap.set(".price-container > *:nth-child(2)", { y: 120 });
-  //   gsap.set(".price-container > *:nth-child(3)", { y: 120 });
+  useStaggeredAnimation(".price-container", {
+  isDesktop: isDesktop,
+  desktopGaps: [320, 640, 1280], // 4 items ke liye gaps
+  mobileGaps: [120, 120, 120],
+  trigger: ".price-section",
+  // numberOfItems: pricingPlans.length // Dynamic number
+});
 
-  //   // Har card ke liye alag ScrollTrigger
-  //   gsap.to(".price-container > *:nth-child(1)", {
-  //     y: 0,
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: ".price-container > *:nth-child(1)",
-  //       start: "top 90%", // Jab card ka top 90% viewport mein ho
-  //       end: "top 40%",
-  //       scrub: true,
-  //     },
-  //   });
 
-  //   gsap.to(".price-container > *:nth-child(2)", {
-  //     y: 0,
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: ".price-container > *:nth-child(2)",
-  //       start: "top 90%", // Jab card ka top 90% viewport mein ho
-  //       end: "top 40%",
-  //       scrub: true,
-  //     },
-  //   });
-
-  //   gsap.to(".price-container > *:nth-child(3)", {
-  //     y: 0,
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: ".price-container > *:nth-child(3)",
-  //       start: "top 90%", // Jab card ka top 90% viewport mein ho
-  //       end: "top 40%",
-  //       scrub: true,
-  //     },
-  //   });
-
-  // }
-
-  // }, [isDesktop]);
 
   const fetchHero = async () => {
     try {

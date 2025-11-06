@@ -50,6 +50,26 @@ html {
   display: block;
 }
 
+.video {
+  position: relative;
+  border-radius: var(--sp-24);
+  overflow: hidden;
+  height: 426px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.video video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transform: scale(0.5); /* Initial scale */
+  transition: transform 0.2s ease-out;
+  transform-origin: center center;
+}
 .sp-24Home {
   display: flex;
   gap: var(--sp-24);
