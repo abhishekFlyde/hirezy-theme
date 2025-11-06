@@ -155,6 +155,8 @@ export default function page() {
     trigger: ".price-section",
   });
   // useEffect(() => {
+
+    
   //    // Desktop ke liye staggered animation
   // if (isDesktop) {
   //   // Pehle card ko 0px, doosre ko 20px, teesre ko 40px niche set karenge
