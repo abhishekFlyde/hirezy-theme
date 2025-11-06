@@ -1,0 +1,50 @@
+// === CARD ===
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  background-color: var(--color-white-600);
+  border-radius: 12px;
+  padding: var(--sp-32);
+  transition: all 0.25s ease-in-out;
+
+  @media (max-width: 768px) {
+    gap: 24px;
+    padding: var(--sp-24);
+  }
+
+  /* --- Icon Circle --- */
+  .card-icon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .icon-img {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  /* --- Content --- */
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title {
+    color: var(--color-black-500);
+    margin-bottom: 16px;
+  }
+
+  .card-description {
+    color: var(--color-black-400);
+  }
+}

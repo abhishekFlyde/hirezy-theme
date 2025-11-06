@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.hirezy.com
+
+# Sitemaps
+Sitemap: https://www.hirezy.com/sitemap.xml
