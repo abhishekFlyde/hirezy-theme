@@ -581,10 +581,11 @@ useEffect(() => {
         variant="secondary"
         className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]  "
       >
-        <Metric number="10k" label="Successful Hires" />
-        <Metric number="500+" label="Teams Worldwide" />
-        <Metric number="50k" label="Seamless Integration" />
-        <Metric number="95%" label="Customer Satisfaction" />
+        {metricsSection?.items.map((m, i) => (
+
+          
+          <Metric key={i} number={m.number} label={m.label} />
+        ))}
       </Container>
       <Container
         variant="primary"
@@ -592,9 +593,10 @@ useEffect(() => {
       >
         <div className="">
           <SectionHeader
-            label="Integration"
-            title="Seamlessly Connected"
-            subtitle="Connect Hirezy to your favorite tools and keep your hiring workflow running smoothly."
+
+            label={integrationsSection?.label}
+            title={integrationsSection?.title}
+            subtitle={integrationsSection?.subtitle}
             align={isIpad || isMobile ? "center" : "left"}
             className="lg:max-w-[510px] w-full"
           />
@@ -630,6 +632,7 @@ useEffect(() => {
 
       <Container className="price-section">
         <div className="mainSec">
+
           <SectionHeader
             label="Pricing Plan"
             title="Simple Plans, Clear Value"
