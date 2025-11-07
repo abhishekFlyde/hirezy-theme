@@ -159,55 +159,124 @@ export default function page() {
   useStaggeredScroll(".price-container", {
   isDesktop: isDesktop,
   desktopGaps: [320, 640, 1280],
-  mobileGaps: [200, 200, 200],
-  trigger: ".price-section",
-  numberOfItems: 3,
-
-  startPosition: 0.4,  
-  endPosition: 0.1,    
-  animationDuration: 0.8, 
-  staggerDelay: 0.1 
+  startPosition: 0.7,  // 40% from top
+  endPosition: 0.1,    // 10% from top
 });
+
+
+// useEffect(() => {
+//   const videoContainer = document.querySelector('.video');
+//   const videoElement = document.querySelector('.video video');
+  
+//   if (!videoContainer || !videoElement) return;
+
+//   let hasReachedFullSize = false;
+
+//   const observer = new IntersectionObserver(
+//     (entries) => {
+//       entries.forEach((entry) => {
+//         if (hasReachedFullSize) return;
+        
+//         const ratio = entry.intersectionRatio;
+//         const scale = 0.7 + (0.3 * ratio);
+        
+//         videoContainer.style.transform = `scale(${scale})`;
+//         console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
+        
+//         if (ratio >= 0.95) {
+//           hasReachedFullSize = true;
+//           videoContainer.style.transform = `scale(1)`;
+//           observer.unobserve(videoContainer);
+//         }
+//       });
+//     },
+//     {
+//       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+//       rootMargin: '0px'
+//     }
+//   );
+
+//   observer.observe(videoContainer);
+  
+//   return () => {
+//     observer.disconnect();
+//   };
+// }, [about]);
 
 useEffect(() => {
   const videoContainer = document.querySelector('.video');
   const videoElement = document.querySelector('.video video');
   
-  if (!videoContainer || !videoElement) return;
+  console.log("Video elements found:", !!videoContainer, !!videoElement);
+  
+  if (!videoContainer || !videoElement) {
+    console.log("Video elements not found, retrying...");
+    return;
+  }
 
   let hasReachedFullSize = false;
+  let animationFrameId = null;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (hasReachedFullSize) return;
-        
-        const ratio = entry.intersectionRatio;
-        const scale = 0.7 + (0.3 * ratio);
-        
-        videoContainer.style.transform = `scale(${scale})`;
-        console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
-        
-        if (ratio >= 0.95) {
-          hasReachedFullSize = true;
-          videoContainer.style.transform = `scale(1)`;
-          observer.unobserve(videoContainer);
-        }
-      });
-    },
-    {
-      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-      rootMargin: '0px'
+  const handleScroll = () => {
+    if (hasReachedFullSize) return;
+
+    const rect = videoContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // ✅ Better calculation - video viewport mein kitna visible hai
+    const videoTop = rect.top;
+    const videoBottom = rect.bottom;
+    
+    // ✅ Animation start when video enters viewport (80% se)
+    const triggerStart = windowHeight * 0.8;
+    // ✅ Animation complete when video reaches center (20% pe)
+    const triggerEnd = windowHeight * 0.2;
+    
+    let progress = 0;
+    
+    if (videoTop < triggerStart && videoBottom > 0) {
+      // Video viewport mein hai
+      const distanceFromTop = Math.max(0, triggerStart - videoTop);
+      const totalRange = triggerStart - triggerEnd;
+      progress = Math.min(1, distanceFromTop / totalRange);
     }
-  );
+    
+    const scale = 0.7 + (0.3 * progress);
+    
+    // ✅ Smooth animation with requestAnimationFrame
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    
+    animationFrameId = requestAnimationFrame(() => {
+      videoContainer.style.transform = `scale(${scale})`;
+      console.log("Scroll Progress:", progress.toFixed(2), "Scale:", scale.toFixed(2));
+      
+      if (scale >= 0.98) {
+        hasReachedFullSize = true;
+        videoContainer.style.transform = `scale(1)`;
+        console.log("Video animation completed");
+      }
+    });
+  };
 
-  observer.observe(videoContainer);
+  // ✅ Event listeners
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
+  
+  // ✅ Initial call with small delay to ensure rendering
+  setTimeout(() => {
+    handleScroll();
+  }, 100);
   
   return () => {
-    observer.disconnect();
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleScroll);
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
   };
-}, [about]);
-
+}, [about]); // ✅ about ke change pe re-run hoga
 
   const fetchHero = async () => {
     try {

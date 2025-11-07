@@ -69,7 +69,7 @@ html {
   transform: scale(0.7);
   transform-origin: center center;
   will-change: transform;
-  transition: transform 0.1s linear;
+  // transition: transform 0.1s linear;
   /* ✅ Transition hata diya, JavaScript handle karega */
 }
 
@@ -152,7 +152,7 @@ html {
 }
 
 .price-container .pricing-card:hover {
-  transform: translateY(-25px) scale(1.03);
+  // transform: translateY(-25px) scale(1.03);
   cursor: pointer;
 }
 
