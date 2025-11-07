@@ -156,65 +156,6 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  //   useEffect(() => {
-  //   const videoContainer = document.querySelector('.video');
-  //   const videoElement = document.querySelector('.video video');
-
-  //   console.log("Video Elements:", { videoContainer, videoElement });
-  //   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
-
-  //   if (!videoContainer || !videoElement) {
-  //     console.log("Video elements not found, retrying...");
-  //     return;
-  //   }
-
-  //   let animationFrameId = null;
-
-  //   const handleScroll = () => {
-  //     const rect = videoContainer.getBoundingClientRect();
-  //     const windowHeight = window.innerHeight;
-
-  //     // ✅ Video viewport mein kitna visible hai
-  //     const videoTop = rect.top;
-  //     const videoBottom = rect.bottom;
-  //     const viewportHeight = windowHeight;
-
-  //     // ✅ Animation start when video enters viewport
-  //     const triggerStart = viewportHeight;
-  //     const triggerEnd = viewportHeight * 0.3;
-
-  //     let progress = 0;
-
-  //     if (videoTop < triggerStart && videoBottom > 0) {
-  //       const distanceFromTop = Math.max(0, triggerStart - videoTop);
-  //       const totalRange = triggerStart - triggerEnd;
-  //       progress = Math.min(1, distanceFromTop / totalRange);
-  //     }
-
-  //     const scale = 0.7 + (0.3 * progress);
-
-  //     if (animationFrameId) {
-  //       cancelAnimationFrame(animationFrameId);
-  //     }
-
-  //     animationFrameId = requestAnimationFrame(() => {
-  //       videoElement.style.transform = `scale(${scale})`;
-  //       console.log("Scroll - Progress:", progress, "Scale:", scale);
-  //     });
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll, { passive: true });
-  //   window.addEventListener('resize', handleScroll, { passive: true });
-  //   handleScroll();
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //     window.removeEventListener('resize', handleScroll);
-  //     if (animationFrameId) {
-  //       cancelAnimationFrame(animationFrameId);
-  //     }
-  //   };
-  // }, [about]); // ✅ about ko dependency mein daala
 
   useEffect(() => {
     const videoContainer = document.querySelector(".video");
@@ -287,59 +228,6 @@ export default function page() {
     numberOfItems: pricingSection?.items?.length || 3,
   });
 
-  // useEffect(() => {
-  //   const videoElement = document.querySelector(".video"); // :white_check_mark: Video element directly
-  //   const videoContainer = document.querySelector(".video");
-  //   if (!videoElement || !videoContainer) return;
-  //   let hasReachedFullSize = false;
-  //   const handleScroll = () => {
-  //     // if (hasReachedFullSize) return; // :white_check_mark: Stop animation once full size reached
-  //     if (hasReachedFullSize) return; // :white_check_mark: Stop animation once full size reached
-  //     const rect = videoContainer.getBoundingClientRect(); // :white_check_mark: Video container ka position
-  //     const windowHeight = window.innerHeight;
-  //     // :white_check_mark: Video ka center position calculate karein
-  //     const videoCenter = rect.top + rect.height / 2;
-  //     const viewportCenter = windowHeight / 2;
-  //     // :white_check_mark: Distance from viewport center
-  //     const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
-  //     const maxDistance = 500; // Animation range
-  //     // Progress: 1 = exact center, 0 = max distance
-  //     const progress = Math.max(
-  //       0,
-  //       Math.min(1, (maxDistance - distanceFromCenter) / maxDistance)
-  //     );
-  //     // :white_check_mark: Scale from 0.5 to 1 (adjust as needed)
-  //     const scale = 0.5 + 0.5 * progress;
-  //     videoElement.style.transform = `scale(${scale})`; // :white_check_mark: Direct transform
-  //     // :white_check_mark: Mark as completed when scale reaches 1
-  //     if (scale >= 0.98) {
-  //       hasReachedFullSize = true;
-  //       videoElement.style.transform = `scale(1)`;
-  //     }
-  //   };
-  //   window.addEventListener("scroll", handleScroll, { passive: true });
-  //   handleScroll();
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-
-  //   useEffect(() => {
-  //   const videoContainer = document.querySelector('.video');
-  //   const videoElement = document.querySelector('.video video');
-
-  //   if (!videoContainer || !videoElement) return;
-
-  //   let hasReachedFullSize = false;
-  //   let animationFrameId = null;
-
-  //   const handleScroll = () => {
-  //     if (hasReachedFullSize) return;
-
-  //     const rect = videoContainer.getBoundingClientRect();
-  //     const windowHeight = window.innerHeight;
-
-  //     // Video ka center position calculate karein
-  //     const videoCenter = rect.top + (rect.height / 2);
-  //     const viewportCenter = windowHeight / 2;
 
   const fetchHero = async () => {
     try {
@@ -487,6 +375,7 @@ export default function page() {
           rightImage={hero.rightImage}
         />
       </Container>
+      
       <Container variant="primary">
         <GridSection
           label={section.label}
