@@ -128,6 +128,7 @@ export default function page() {
   const [metricsSection, setMetricsSection] = useState(null);
   const [pricingSection, setPricingSection] = useState(null);
   const [faqSection, setFaqSection] = useState(null);
+  const [testimonialsSection, setTestimonialsSection] = useState(null);
 
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
@@ -155,128 +156,126 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  
-//   useEffect(() => {
-//   const videoContainer = document.querySelector('.video');
-//   const videoElement = document.querySelector('.video video');
-  
-//   console.log("Video Elements:", { videoContainer, videoElement });
-//   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
-  
-//   if (!videoContainer || !videoElement) {
-//     console.log("Video elements not found, retrying...");
-//     return;
-//   }
+  //   useEffect(() => {
+  //   const videoContainer = document.querySelector('.video');
+  //   const videoElement = document.querySelector('.video video');
 
-//   let animationFrameId = null;
+  //   console.log("Video Elements:", { videoContainer, videoElement });
+  //   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
 
-//   const handleScroll = () => {
-//     const rect = videoContainer.getBoundingClientRect();
-//     const windowHeight = window.innerHeight;
-    
-//     // ✅ Video viewport mein kitna visible hai
-//     const videoTop = rect.top;
-//     const videoBottom = rect.bottom;
-//     const viewportHeight = windowHeight;
-    
-//     // ✅ Animation start when video enters viewport
-//     const triggerStart = viewportHeight;
-//     const triggerEnd = viewportHeight * 0.3;
-    
-//     let progress = 0;
-    
-//     if (videoTop < triggerStart && videoBottom > 0) {
-//       const distanceFromTop = Math.max(0, triggerStart - videoTop);
-//       const totalRange = triggerStart - triggerEnd;
-//       progress = Math.min(1, distanceFromTop / totalRange);
-//     }
-    
-//     const scale = 0.7 + (0.3 * progress);
-    
-//     if (animationFrameId) {
-//       cancelAnimationFrame(animationFrameId);
-//     }
-    
-//     animationFrameId = requestAnimationFrame(() => {
-//       videoElement.style.transform = `scale(${scale})`;
-//       console.log("Scroll - Progress:", progress, "Scale:", scale);
-//     });
-//   };
-  
-//   window.addEventListener('scroll', handleScroll, { passive: true });
-//   window.addEventListener('resize', handleScroll, { passive: true });
-//   handleScroll();
-  
-//   return () => {
-//     window.removeEventListener('scroll', handleScroll);
-//     window.removeEventListener('resize', handleScroll);
-//     if (animationFrameId) {
-//       cancelAnimationFrame(animationFrameId);
-//     }
-//   };
-// }, [about]); // ✅ about ko dependency mein daala
+  //   if (!videoContainer || !videoElement) {
+  //     console.log("Video elements not found, retrying...");
+  //     return;
+  //   }
 
+  //   let animationFrameId = null;
 
-useEffect(() => {
-  const videoContainer = document.querySelector('.video');
-  const videoElement = document.querySelector('.video video');
-  
-  if (!videoContainer || !videoElement) return;
+  //   const handleScroll = () => {
+  //     const rect = videoContainer.getBoundingClientRect();
+  //     const windowHeight = window.innerHeight;
 
-  let animationFrameId = null;
-  let hasReachedFullSize = false;
+  //     // ✅ Video viewport mein kitna visible hai
+  //     const videoTop = rect.top;
+  //     const videoBottom = rect.bottom;
+  //     const viewportHeight = windowHeight;
 
-  const handleScroll = () => {
-    if (hasReachedFullSize) return;
+  //     // ✅ Animation start when video enters viewport
+  //     const triggerStart = viewportHeight;
+  //     const triggerEnd = viewportHeight * 0.3;
 
-    const rect = videoContainer.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    
-    const videoTop = rect.top;
-    const videoBottom = rect.bottom;
-    const viewportHeight = windowHeight;
-    
-    const triggerStart = viewportHeight;
-    const triggerEnd = viewportHeight * 0.3;
-    
-    let progress = 0;
-    
-    if (videoTop < triggerStart && videoBottom > 0) {
-      const distanceFromTop = Math.max(0, triggerStart - videoTop);
-      const totalRange = triggerStart - triggerEnd;
-      progress = Math.min(1, distanceFromTop / totalRange);
-    }
-    
-    const scale = 0.7 + (0.3 * progress);
-    
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-    
-    animationFrameId = requestAnimationFrame(() => {
-      // ✅ CONTAINER ko scale karo, video ko nahi
-      videoContainer.style.transform = `scale(${scale})`;
-      console.log("Scroll - Progress:", progress, "Scale:", scale);
-      
-      if (scale >= 0.98) {
-        hasReachedFullSize = true;
-        videoContainer.style.transform = `scale(1)`;
+  //     let progress = 0;
+
+  //     if (videoTop < triggerStart && videoBottom > 0) {
+  //       const distanceFromTop = Math.max(0, triggerStart - videoTop);
+  //       const totalRange = triggerStart - triggerEnd;
+  //       progress = Math.min(1, distanceFromTop / totalRange);
+  //     }
+
+  //     const scale = 0.7 + (0.3 * progress);
+
+  //     if (animationFrameId) {
+  //       cancelAnimationFrame(animationFrameId);
+  //     }
+
+  //     animationFrameId = requestAnimationFrame(() => {
+  //       videoElement.style.transform = `scale(${scale})`;
+  //       console.log("Scroll - Progress:", progress, "Scale:", scale);
+  //     });
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll, { passive: true });
+  //   window.addEventListener('resize', handleScroll, { passive: true });
+  //   handleScroll();
+
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     window.removeEventListener('resize', handleScroll);
+  //     if (animationFrameId) {
+  //       cancelAnimationFrame(animationFrameId);
+  //     }
+  //   };
+  // }, [about]); // ✅ about ko dependency mein daala
+
+  useEffect(() => {
+    const videoContainer = document.querySelector(".video");
+    const videoElement = document.querySelector(".video video");
+
+    if (!videoContainer || !videoElement) return;
+
+    let animationFrameId = null;
+    let hasReachedFullSize = false;
+
+    const handleScroll = () => {
+      if (hasReachedFullSize) return;
+
+      const rect = videoContainer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const videoTop = rect.top;
+      const videoBottom = rect.bottom;
+      const viewportHeight = windowHeight;
+
+      const triggerStart = viewportHeight;
+      const triggerEnd = viewportHeight * 0.3;
+
+      let progress = 0;
+
+      if (videoTop < triggerStart && videoBottom > 0) {
+        const distanceFromTop = Math.max(0, triggerStart - videoTop);
+        const totalRange = triggerStart - triggerEnd;
+        progress = Math.min(1, distanceFromTop / totalRange);
       }
-    });
-  };
-  
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll, { passive: true });
-  handleScroll();
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', handleScroll);
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-  };
-}, [about]);
+
+      const scale = 0.7 + 0.3 * progress;
+
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      animationFrameId = requestAnimationFrame(() => {
+        // ✅ CONTAINER ko scale karo, video ko nahi
+        videoContainer.style.transform = `scale(${scale})`;
+        console.log("Scroll - Progress:", progress, "Scale:", scale);
+
+        if (scale >= 0.98) {
+          hasReachedFullSize = true;
+          videoContainer.style.transform = `scale(1)`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [about]);
 
   useStaggeredAnimation(".price-container", {
     isDesktop: isDesktop,
@@ -411,6 +410,15 @@ useEffect(() => {
     }
   };
 
+  const fetchTestimonialsSection = async () => {
+    try {
+      const res = await api.get("/testimonial-section");
+      setTestimonialsSection(res.data?.section || { items: [] });
+    } catch {
+      console.log("Failed to load testimonials");
+    }
+  };
+
   useEffect(() => {
     fetchHero();
     fetchTeamsSection();
@@ -420,11 +428,13 @@ useEffect(() => {
     fetchIntegrationsSchema();
     fetchPricingSection();
     fetchFAQSection();
+    fetchTestimonialsSection();
   }, []);
 
-  if (heroLoading || teamsLoading || aboutSectionLoading  ) return null;
+  if (heroLoading || teamsLoading || aboutSectionLoading) return null;
 
   const desktopOrder = [0, 3, 1, 2, 4];
+  console.log(testimonialsSection);
 
   return (
     <>
@@ -510,7 +520,6 @@ useEffect(() => {
         <div className="video">
           <video autoPlay loop muted playsInline src={about.media || ""} />
         </div>
-        
       </Container>
       <WhyChoose open={open} setOpen={setOpen} />
 
@@ -580,8 +589,6 @@ useEffect(() => {
         className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]"
       >
         {metricsSection?.items.map((m, i) => (
-
-
           <Metric key={i} number={m.number} label={m.label} />
         ))}
       </Container>
@@ -591,7 +598,6 @@ useEffect(() => {
       >
         <div>
           <SectionHeader
-
             label={integrationsSection?.label}
             title={integrationsSection?.title}
             subtitle={integrationsSection?.subtitle}
@@ -601,16 +607,13 @@ useEffect(() => {
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
-
           <Tools items={integrationsSection?.items} />
         </div>
       </Container>
 
       <Container className="price-section">
         <div className="mainSec">
-
           <SectionHeader
-          
             label={pricingSection?.label}
             title={pricingSection?.title}
             subtitle={pricingSection?.subtitle}
@@ -618,7 +621,6 @@ useEffect(() => {
           />
 
           <div className="price-container">
-
             {pricingSection?.items.map((p, i) => (
               <Pricing
                 key={i}
