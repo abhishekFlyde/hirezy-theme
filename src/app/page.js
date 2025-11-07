@@ -377,6 +377,7 @@ useEffect(() => {
             ),
             colSpan: card.colSpan,
             rowSpan: card.rowSpan,
+            
           }))}
         />
       </Container>
