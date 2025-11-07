@@ -175,6 +175,8 @@ export default function page() {
     numberOfItems: pricingSection?.items?.length || 3,
   });
 
+  
+
   useEffect(() => {
     const videoElement = document.querySelector(".video video"); // ✅ Video element directly
     const videoContainer = document.querySelector(".video");
