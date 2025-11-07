@@ -33,6 +33,31 @@ html {
   scroll-behavior: smooth;
 }
 
+// .video {
+//   position: relative;
+//   border-radius: var(--sp-24);
+//   overflow: hidden;
+//   height: 426px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   // background: #000;
+  
+//   /* ✅ Container scaling ke liye */
+//   transform: scale(0.7); /* Initial scale */
+//   transform-origin: center center;
+//   will-change: transform;
+//   transition: transform 0.1s linear;
+// }
+
+// .video video {
+//   width: 100%;
+//   height: auto;
+//   object-fit: contain;
+//   display: block;
+//   /* ✅ Video pe koi transform nahi - container handle karega */
+// }
+
 .video {
   position: relative;
   border-radius: var(--sp-24);
@@ -41,13 +66,11 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  // background: #000;
-  
-  /* ✅ Container scaling ke liye */
-  transform: scale(0.7); /* Initial scale */
+  transform: scale(0.7);
   transform-origin: center center;
   will-change: transform;
   transition: transform 0.1s linear;
+  /* ✅ Transition hata diya, JavaScript handle karega */
 }
 
 .video video {
@@ -55,9 +78,7 @@ html {
   height: auto;
   object-fit: contain;
   display: block;
-  /* ✅ Video pe koi transform nahi - container handle karega */
 }
-
 
 .sp-24Home {
   display: flex;
@@ -135,12 +156,44 @@ html {
   cursor: pointer;
 }
 
+.price-container {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 24px;
+  position: relative;
+}
+
+.price-container > * {
+  /* ✅ Smooth transitions with easing */
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* ✅ Hover effects alag se */
+.price-container .pricing-card:hover {
+  transform: translateY(-25px) scale(1.03) !important;
+  cursor: pointer;
+  transition: transform 0.3s ease-out !important;
+}
+
 @media (max-width: 900px) {
   .price-container {
     flex-direction: column;
     align-items: center;
   }
+  
+  .price-container .pricing-card:hover {
+    transform: translateY(-15px) scale(1.02) !important;
+  }
 }
+
+// @media (max-width: 900px) {
+//   .price-container {
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
 
 .faq-header {
   width: 40%;

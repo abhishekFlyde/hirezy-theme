@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/ui-kit/header";
@@ -31,13 +30,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
+// import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
+import { useStaggeredScroll } from '@/hooks/useStaggeredScroll';
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
 export default function page() {
-  // const { scrollYProgress } = useScroll();
 
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
@@ -157,76 +156,57 @@ export default function page() {
   }, []);
 
 
-  useEffect(() => {
-    const videoContainer = document.querySelector(".video");
-    const videoElement = document.querySelector(".video video");
+  useStaggeredScroll(".price-container", {
+  isDesktop: isDesktop,
+  desktopGaps: [320, 640, 1280],
+  mobileGaps: [200, 200, 200],
+  trigger: ".price-section",
+  numberOfItems: 3,
 
-    if (!videoContainer || !videoElement) return;
+  startPosition: 0.4,  
+  endPosition: 0.1,    
+  animationDuration: 0.8, 
+  staggerDelay: 0.1 
+});
 
-    let animationFrameId = null;
-    let hasReachedFullSize = false;
+useEffect(() => {
+  const videoContainer = document.querySelector('.video');
+  const videoElement = document.querySelector('.video video');
+  
+  if (!videoContainer || !videoElement) return;
 
-    const handleScroll = () => {
-      if (hasReachedFullSize) return;
+  let hasReachedFullSize = false;
 
-      const rect = videoContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const videoTop = rect.top;
-      const videoBottom = rect.bottom;
-      const viewportHeight = windowHeight;
-
-      const triggerStart = viewportHeight;
-      const triggerEnd = viewportHeight * 0.3;
-
-      let progress = 0;
-
-      if (videoTop < triggerStart && videoBottom > 0) {
-        const distanceFromTop = Math.max(0, triggerStart - videoTop);
-        const totalRange = triggerStart - triggerEnd;
-        progress = Math.min(1, distanceFromTop / totalRange);
-      }
-
-      const scale = 0.7 + 0.3 * progress;
-
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-
-      animationFrameId = requestAnimationFrame(() => {
-        // ✅ CONTAINER ko scale karo, video ko nahi
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (hasReachedFullSize) return;
+        
+        const ratio = entry.intersectionRatio;
+        const scale = 0.7 + (0.3 * ratio);
+        
         videoContainer.style.transform = `scale(${scale})`;
-        console.log("Scroll - Progress:", progress, "Scale:", scale);
-
-        if (scale >= 0.98) {
+        console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
+        
+        if (ratio >= 0.95) {
           hasReachedFullSize = true;
           videoContainer.style.transform = `scale(1)`;
+          observer.unobserve(videoContainer);
         }
       });
-    };
+    },
+    {
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      rootMargin: '0px'
+    }
+  );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  }, [about]);
-
-  useStaggeredAnimation(".price-container", {
-    isDesktop: isDesktop,
-    desktopGaps: [320, 640, 1280],
-    mobileGaps: [200, 200, 200],
-    trigger: ".price-section",
-    mobileStart: "40% bottom",
-    mobileEnd: "top 20%",
-    numberOfItems: pricingSection?.items?.length || 3,
-  });
+  observer.observe(videoContainer);
+  
+  return () => {
+    observer.disconnect();
+  };
+}, [about]);
 
 
   const fetchHero = async () => {
@@ -396,6 +376,7 @@ export default function page() {
             ),
             colSpan: card.colSpan,
             rowSpan: card.rowSpan,
+
           }))}
         />
       </Container>
@@ -559,6 +540,7 @@ export default function page() {
       </Container>
 
       <Container>
+        
         <Testimonial
           items={[
             {
