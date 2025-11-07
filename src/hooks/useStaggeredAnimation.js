@@ -18,11 +18,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
   } = options;
 
   useEffect(() => {
-    console.log('🎯 useStaggeredAnimation running...', {
-      containerClass,
-      isDesktop,
-      numberOfItems
-    });
 
     // Wait for DOM to be ready
     const timer = setTimeout(() => {
@@ -30,17 +25,13 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
       const triggerElement = document.querySelector(trigger);
       
       if (!container || !triggerElement) {
-        console.log('❌ Elements not found');
         return;
       }
-
-      console.log('✅ Elements found, starting animation');
 
       // Clear any existing transforms
       gsap.set(`${containerClass} > *`, { clearProps: "all" });
 
       if (isDesktop) {
-        console.log('🖥️ Desktop animation setup');
         
         // Set initial positions for desktop
         for (let i = 0; i < numberOfItems; i++) {
@@ -62,7 +53,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
           },
         });
       } else {
-        console.log('📱 Mobile animation setup');
         
         // Set initial positions for mobile
         for (let i = 0; i < numberOfItems; i++) {

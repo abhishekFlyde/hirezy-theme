@@ -154,30 +154,25 @@ export default function page() {
   }, []);
 
   
-//   useEffect(() => {
+// useEffect(() => {
 //   const videoContainer = document.querySelector('.video');
 //   const videoElement = document.querySelector('.video video');
   
-//   console.log("Video Elements:", { videoContainer, videoElement });
-//   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
-  
-//   if (!videoContainer || !videoElement) {
-//     console.log("Video elements not found, retrying...");
-//     return;
-//   }
+//   if (!videoContainer || !videoElement) return;
 
 //   let animationFrameId = null;
+//   let hasReachedFullSize = false;
 
 //   const handleScroll = () => {
+//     if (hasReachedFullSize) return;
+
 //     const rect = videoContainer.getBoundingClientRect();
 //     const windowHeight = window.innerHeight;
     
-//     // ✅ Video viewport mein kitna visible hai
 //     const videoTop = rect.top;
 //     const videoBottom = rect.bottom;
 //     const viewportHeight = windowHeight;
     
-//     // ✅ Animation start when video enters viewport
 //     const triggerStart = viewportHeight;
 //     const triggerEnd = viewportHeight * 0.3;
     
@@ -196,8 +191,14 @@ export default function page() {
 //     }
     
 //     animationFrameId = requestAnimationFrame(() => {
-//       videoElement.style.transform = `scale(${scale})`;
+//       // ✅ CONTAINER ko scale karo, video ko nahi
+//       videoContainer.style.transform = `scale(${scale})`;
 //       console.log("Scroll - Progress:", progress, "Scale:", scale);
+      
+//       if (scale >= 0.98) {
+//         hasReachedFullSize = true;
+//         videoContainer.style.transform = `scale(1)`;
+//       }
 //     });
 //   };
   
@@ -212,67 +213,51 @@ export default function page() {
 //       cancelAnimationFrame(animationFrameId);
 //     }
 //   };
-// }, [about]); // ✅ about ko dependency mein daala
+// }, [about]);
 
 
 useEffect(() => {
   const videoContainer = document.querySelector('.video');
-  const videoElement = document.querySelector('.video video');
   
-  if (!videoContainer || !videoElement) return;
+  if (!videoContainer) return;
 
-  let animationFrameId = null;
   let hasReachedFullSize = false;
+  let rafId = null;
 
-  const handleScroll = () => {
-    if (hasReachedFullSize) return;
-
+  const updateScale = () => {
     const rect = videoContainer.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     
-    const videoTop = rect.top;
-    const videoBottom = rect.bottom;
-    const viewportHeight = windowHeight;
+    // ✅ Simple and effective calculation
+    const visibility = Math.max(0, Math.min(1, 
+      (windowHeight - rect.top) / (windowHeight * 0.8)
+    ));
     
-    const triggerStart = viewportHeight;
-    const triggerEnd = viewportHeight * 0.3;
+    const scale = 0.7 + (0.3 * visibility);
     
-    let progress = 0;
+    videoContainer.style.transform = `scale(${scale})`;
     
-    if (videoTop < triggerStart && videoBottom > 0) {
-      const distanceFromTop = Math.max(0, triggerStart - videoTop);
-      const totalRange = triggerStart - triggerEnd;
-      progress = Math.min(1, distanceFromTop / totalRange);
+    if (scale >= 0.98 && !hasReachedFullSize) {
+      hasReachedFullSize = true;
+      videoContainer.style.transform = `scale(1)`;
     }
-    
-    const scale = 0.7 + (0.3 * progress);
-    
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-    
-    animationFrameId = requestAnimationFrame(() => {
-      // ✅ CONTAINER ko scale karo, video ko nahi
-      videoContainer.style.transform = `scale(${scale})`;
-      console.log("Scroll - Progress:", progress, "Scale:", scale);
-      
-      if (scale >= 0.98) {
-        hasReachedFullSize = true;
-        videoContainer.style.transform = `scale(1)`;
-      }
-    });
   };
-  
+
+  const handleScroll = () => {
+    if (hasReachedFullSize) return;
+    
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(updateScale);
+  };
+
   window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll, { passive: true });
-  handleScroll();
+  
+  // ✅ Initial check
+  updateScale();
   
   return () => {
     window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', handleScroll);
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
+    if (rafId) cancelAnimationFrame(rafId);
   };
 }, [about]);
 
