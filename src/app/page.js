@@ -126,6 +126,7 @@ export default function page() {
   const [teamsLoading, setTeamsLoading] = useState(true);
   const [aboutSectionLoading, setAboutSectionsLoading] = useState(true);
   const [FeaturesSection, setFeaturesSection] = useState(null);
+  
 
   const fetchFeaturesSection = async () => {
     try {
