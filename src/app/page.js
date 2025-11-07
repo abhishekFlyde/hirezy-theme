@@ -156,126 +156,153 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  //   useEffect(() => {
-  //   const videoContainer = document.querySelector('.video');
-  //   const videoElement = document.querySelector('.video video');
+  
+// useEffect(() => {
+//   const videoContainer = document.querySelector('.video');
+//   const videoElement = document.querySelector('.video video');
+  
+//   if (!videoContainer || !videoElement) return;
 
-  //   console.log("Video Elements:", { videoContainer, videoElement });
-  //   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
+//   let animationFrameId = null;
+//   let hasReachedFullSize = false;
 
-  //   if (!videoContainer || !videoElement) {
-  //     console.log("Video elements not found, retrying...");
-  //     return;
-  //   }
+//   const handleScroll = () => {
+//     if (hasReachedFullSize) return;
+
+//     const rect = videoContainer.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+    
+//     const videoTop = rect.top;
+//     const videoBottom = rect.bottom;
+//     const viewportHeight = windowHeight;
+    
+//     const triggerStart = viewportHeight;
+//     const triggerEnd = viewportHeight * 0.3;
+    
+//     let progress = 0;
+    
+//     if (videoTop < triggerStart && videoBottom > 0) {
+//       const distanceFromTop = Math.max(0, triggerStart - videoTop);
+//       const totalRange = triggerStart - triggerEnd;
+//       progress = Math.min(1, distanceFromTop / totalRange);
+//     }
+    
+//     const scale = 0.7 + (0.3 * progress);
+    
+//     if (animationFrameId) {
+//       cancelAnimationFrame(animationFrameId);
+//     }
+    
+//     animationFrameId = requestAnimationFrame(() => {
+//       // ✅ CONTAINER ko scale karo, video ko nahi
+//       videoContainer.style.transform = `scale(${scale})`;
+//       console.log("Scroll - Progress:", progress, "Scale:", scale);
+      
+//       if (scale >= 0.98) {
+//         hasReachedFullSize = true;
+//         videoContainer.style.transform = `scale(1)`;
+//       }
+//     });
+//   };
+  
+//   window.addEventListener('scroll', handleScroll, { passive: true });
+//   window.addEventListener('resize', handleScroll, { passive: true });
+//   handleScroll();
+  
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     window.removeEventListener('resize', handleScroll);
+//     if (animationFrameId) {
+//       cancelAnimationFrame(animationFrameId);
+//     }
+//   };
+// }, [about]);
 
   //   let animationFrameId = null;
 
-  //   const handleScroll = () => {
-  //     const rect = videoContainer.getBoundingClientRect();
-  //     const windowHeight = window.innerHeight;
+// useEffect(() => {
+//   const videoContainer = document.querySelector('.video');
+  
+//   if (!videoContainer) return;
 
-  //     // ✅ Video viewport mein kitna visible hai
-  //     const videoTop = rect.top;
-  //     const videoBottom = rect.bottom;
-  //     const viewportHeight = windowHeight;
+//   let hasReachedFullSize = false;
+//   let rafId = null;
 
-  //     // ✅ Animation start when video enters viewport
-  //     const triggerStart = viewportHeight;
-  //     const triggerEnd = viewportHeight * 0.3;
+//   const updateScale = () => {
+//     const rect = videoContainer.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+    
+//     // ✅ Simple and effective calculation
+//     const visibility = Math.max(0, Math.min(1, 
+//       (windowHeight - rect.top) / (windowHeight * 0.8)
+//     ));
+    
+//     const scale = 0.7 + (0.3 * visibility);
+    
+//     videoContainer.style.transform = `scale(${scale})`;
+    
+//     if (scale >= 0.98 && !hasReachedFullSize) {
+//       hasReachedFullSize = true;
+//       videoContainer.style.transform = `scale(1)`;
+//     }
+//   };
 
-  //     let progress = 0;
+//   const handleScroll = () => {
+//     if (hasReachedFullSize) return;
+    
+//     if (rafId) cancelAnimationFrame(rafId);
+//     rafId = requestAnimationFrame(updateScale);
+//   };
 
-  //     if (videoTop < triggerStart && videoBottom > 0) {
-  //       const distanceFromTop = Math.max(0, triggerStart - videoTop);
-  //       const totalRange = triggerStart - triggerEnd;
-  //       progress = Math.min(1, distanceFromTop / totalRange);
-  //     }
+//   window.addEventListener('scroll', handleScroll, { passive: true });
+  
+//   // ✅ Initial check
+//   updateScale();
+  
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     if (rafId) cancelAnimationFrame(rafId);
+//   };
+// }, [about]);
 
-  //     const scale = 0.7 + (0.3 * progress);
+useEffect(() => {
+  const videoContainer = document.querySelector('.video');
+  const videoElement = document.querySelector('.video video');
+  
+  if (!videoContainer || !videoElement) return;
 
-  //     if (animationFrameId) {
-  //       cancelAnimationFrame(animationFrameId);
-  //     }
+  let hasReachedFullSize = false;
 
-  //     animationFrameId = requestAnimationFrame(() => {
-  //       videoElement.style.transform = `scale(${scale})`;
-  //       console.log("Scroll - Progress:", progress, "Scale:", scale);
-  //     });
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll, { passive: true });
-  //   window.addEventListener('resize', handleScroll, { passive: true });
-  //   handleScroll();
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //     window.removeEventListener('resize', handleScroll);
-  //     if (animationFrameId) {
-  //       cancelAnimationFrame(animationFrameId);
-  //     }
-  //   };
-  // }, [about]); // ✅ about ko dependency mein daala
-
-  useEffect(() => {
-    const videoContainer = document.querySelector(".video");
-    const videoElement = document.querySelector(".video video");
-
-    if (!videoContainer || !videoElement) return;
-
-    let animationFrameId = null;
-    let hasReachedFullSize = false;
-
-    const handleScroll = () => {
-      if (hasReachedFullSize) return;
-
-      const rect = videoContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const videoTop = rect.top;
-      const videoBottom = rect.bottom;
-      const viewportHeight = windowHeight;
-
-      const triggerStart = viewportHeight;
-      const triggerEnd = viewportHeight * 0.3;
-
-      let progress = 0;
-
-      if (videoTop < triggerStart && videoBottom > 0) {
-        const distanceFromTop = Math.max(0, triggerStart - videoTop);
-        const totalRange = triggerStart - triggerEnd;
-        progress = Math.min(1, distanceFromTop / totalRange);
-      }
-
-      const scale = 0.7 + 0.3 * progress;
-
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-
-      animationFrameId = requestAnimationFrame(() => {
-        // ✅ CONTAINER ko scale karo, video ko nahi
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (hasReachedFullSize) return;
+        
+        const ratio = entry.intersectionRatio;
+        const scale = 0.7 + (0.3 * ratio);
+        
         videoContainer.style.transform = `scale(${scale})`;
-        console.log("Scroll - Progress:", progress, "Scale:", scale);
-
-        if (scale >= 0.98) {
+        console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
+        
+        if (ratio >= 0.95) {
           hasReachedFullSize = true;
           videoContainer.style.transform = `scale(1)`;
+          observer.unobserve(videoContainer);
         }
       });
-    };
+    },
+    {
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      rootMargin: '0px'
+    }
+  );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  }, [about]);
+  observer.observe(videoContainer);
+  
+  return () => {
+    observer.disconnect();
+  };
+}, [about]);
 
   useStaggeredAnimation(".price-container", {
     isDesktop: isDesktop,
@@ -283,7 +310,7 @@ export default function page() {
     mobileGaps: [200, 200, 200],
     trigger: ".price-section",
     mobileStart: "40% bottom",
-    mobileEnd: "top 20%",
+    mobileEnd: "top 40%",
     numberOfItems: pricingSection?.items?.length || 3,
   });
 

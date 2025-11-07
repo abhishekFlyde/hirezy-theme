@@ -10,19 +10,14 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
     desktopGaps = [320, 640, 1280],
     mobileGaps = [120, 120, 120],
     trigger = containerClass,
-    start = "top bottom",
-    end = "center center",
+    start = "40% bottom",
+    end = "bottom 50%",
     mobileStart = "top 80%",
-    mobileEnd = "top 20%",
+    mobileEnd = "bottom 20%",
     numberOfItems = 3
   } = options;
 
   useEffect(() => {
-    console.log('🎯 useStaggeredAnimation running...', {
-      containerClass,
-      isDesktop,
-      numberOfItems
-    });
 
     // Wait for DOM to be ready
     const timer = setTimeout(() => {
@@ -30,17 +25,13 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
       const triggerElement = document.querySelector(trigger);
       
       if (!container || !triggerElement) {
-        console.log('❌ Elements not found');
         return;
       }
-
-      console.log('✅ Elements found, starting animation');
 
       // Clear any existing transforms
       gsap.set(`${containerClass} > *`, { clearProps: "all" });
 
       if (isDesktop) {
-        console.log('🖥️ Desktop animation setup');
         
         // Set initial positions for desktop
         for (let i = 0; i < numberOfItems; i++) {
@@ -59,10 +50,10 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
             end: end,
             scrub: true,
             once: true,
+            markers: true,
           },
         });
       } else {
-        console.log('📱 Mobile animation setup');
         
         // Set initial positions for mobile
         for (let i = 0; i < numberOfItems; i++) {
@@ -82,6 +73,7 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
               end: mobileEnd,
               scrub: true,
               once: true,
+              markers: true,
             },
           });
         }
