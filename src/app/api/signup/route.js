@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
-import User from "@/models/User";
 import bcrypt from "bcryptjs";
+import SignupUser from "@/models/User.js";
 
 // ✅ CORS Header
 const corsHeaders = {
@@ -28,7 +28,7 @@ export async function POST(req) {
       );
     }
 
-    const userExists = await User.findOne({ email });
+    const userExists = await SignupUser.findOne({ email });
     if (userExists) {
       return NextResponse.json(
         { success: false, msg: "Email already exists" },
@@ -38,7 +38,7 @@ export async function POST(req) {
 
     const hashedPass = await bcrypt.hash(password, 10);
 
-    await User.create({ name, email, password: hashedPass });
+    await SignupUser.create({ name, email, password: hashedPass });
 
     return NextResponse.json(
       { success: true, msg: "User registered successfully" },
@@ -56,7 +56,7 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectDB();
-    const users = await User.find().sort({ createdAt: -1 });
+    const users = await SignupUser.find().sort({ createdAt: -1 });
 
     return NextResponse.json(
       {

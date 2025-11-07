@@ -1,47 +1,52 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "./typography";
 import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./spacing";
+import api from "@/lib/api";
 
 export default function Header() {
-  const [activeLink, setActiveLink] = React.useState("Home");
-  
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Features", href: "#" },
-    { name: "Pricing", href: "#" },
-    { name: "Contact", href: "#" },
-  ];
-  
-  const handleLinkClick = (linkName) => {
-    setActiveLink(linkName);
-  };
+  const [activeLink, setActiveLink] = useState("");
+  const [header, setHeader] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await api.get("/header-section");
+        setHeader(res.data?.section || {});
+      } catch (err) {
+        console.log("Failed to load header");
+      }
+    })();
+  }, []);
+
+  if (!header) return null;
 
   return (
     <Container variant="header">
-      <header className="header-container flex items-center justify-between ">
-        {/* Logo */}
+      <header className="header-container flex items-center justify-between">
+        {/* ✅ Dynamic Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="https://ik.imagekit.io/75zj3bigp/Logo.png?updatedAt=1761897402413"
+            src={header.logo}
             alt="Hirezy"
             width={140.3}
             height={37}
             className="header-logo"
           />
         </Link>
-        {/* Desktop Navigation */}
+
+        {/* ✅ Dynamic Desktop Navigation */}
         <nav className="nav-link-container">
-          {navLinks.map((link) => (
+          {header.navLinks?.map((link, i) => (
             <Link
-              key={link.name}
+              key={i}
               href={link.href}
               onClick={(e) => {
                 e.preventDefault();
-                handleLinkClick(link.name);
+                setActiveLink(link.name);
               }}
               className={activeLink === link.name ? "active-link" : ""}
             >
@@ -63,24 +68,11 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* CTA Buttons */}
+        {/* ✅ Dynamic CTA */}
         <div className="flex items-center">
-          <Link href="/sign-in">
-            <Button
-              variant="primary"
-              size="xl"
-              showIcon={false}
-              icon={
-                <Image
-                  src="/Arrow Right.png"
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
-              }
-            >
-              Sign In
+          <Link href={header.ctaLink}>
+            <Button variant="primary" size="xl" showIcon={false}>
+              {header.ctaText}
             </Button>
           </Link>
         </div>
