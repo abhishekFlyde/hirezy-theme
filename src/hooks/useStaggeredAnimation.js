@@ -7,11 +7,11 @@ gsap.registerPlugin(ScrollTrigger);
 export const useStaggeredAnimation = (containerClass, options = {}) => {
   const {
     isDesktop = true,
-    desktopGaps = [320, 640, 1280],
+    desktopGaps = [320, 440, 680],
     mobileGaps = [120, 120, 120],
     trigger = containerClass,
-    start = "40% bottom",
-    end = "bottom 50%",
+    start = "10% bottom",
+    end = "center 30%",
     mobileStart = "top 80%",
     mobileEnd = "bottom 20%",
     numberOfItems = 3
@@ -50,7 +50,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
             end: end,
             scrub: true,
             once: true,
-            markers: true,
           },
         });
       } else {
@@ -73,7 +72,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
               end: mobileEnd,
               scrub: true,
               once: true,
-              markers: true,
             },
           });
         }

@@ -31,7 +31,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
+// import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
+import { useStaggeredScroll } from '@/hooks/useStaggeredScroll';
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
@@ -300,15 +301,38 @@ useEffect(() => {
   };
 }, [about]);
 
-  useStaggeredAnimation(".price-container", {
-    isDesktop: isDesktop,
-    desktopGaps: [320, 640, 1280],
-    mobileGaps: [200, 200, 200],
-    trigger: ".price-section",
-    mobileStart: "40% bottom",
-    mobileEnd: "top 40%",
-    numberOfItems: pricingSection?.items?.length || 3,
-  });
+// Component ke andar:
+// useStaggeredScroll(".price-container", {
+//   isDesktop: isDesktop,
+//   desktopGaps: [320, 640, 1280],
+//   mobileGaps: [200, 200, 200],
+//   trigger: ".price-section",
+//   mobileStart: "40% bottom", 
+//   mobileEnd: "top 40%",
+//   numberOfItems: pricingSection?.items?.length || 3,
+// });
+
+useStaggeredScroll(".price-container", {
+  isDesktop: isDesktop,
+  desktopGaps: [320, 640, 1280],
+  mobileGaps: [200, 200, 200],
+  
+  // ✅ Animation 50% se start, 35% pe complete (bahut pehle complete)
+  startPosition: 0.5,
+  endPosition: 0.35,  // ✅ Top se 35% pehle complete
+  animationDuration: 1.0,
+  staggerDelay: 0.2
+});
+
+  // useStaggeredAnimation(".price-container", {
+  //   isDesktop: isDesktop,
+  //   desktopGaps: [320, 640, 1280],
+  //   mobileGaps: [200, 200, 200],
+  //   trigger: ".price-section",
+  //   mobileStart: "40% bottom",
+  //   mobileEnd: "top 40%",
+  //   numberOfItems: pricingSection?.items?.length || 3,
+  // });
 
   // useEffect(() => {
   //   const videoElement = document.querySelector(".video"); // :white_check_mark: Video element directly
