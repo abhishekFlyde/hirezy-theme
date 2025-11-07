@@ -17,6 +17,7 @@ export default function Testimonial({ items = [] }) {
   });
 
   
+  
   useEffect(() => {
     if (!items.length) return;
     const unsubscribe = scrollYProgress.on("change", (progress) => {
