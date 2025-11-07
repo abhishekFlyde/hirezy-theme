@@ -172,19 +172,14 @@ html {
 
 /* ✅ Hover effects alag se */
 .price-container .pricing-card:hover {
-  transform: translateY(-25px) scale(1.03) !important;
   cursor: pointer;
-  transition: transform 0.3s ease-out !important;
 }
 
 @media (max-width: 900px) {
   .price-container {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .price-container .pricing-card:hover {
-    transform: translateY(-15px) scale(1.02) !important;
+    
   }
 }
 
