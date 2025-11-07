@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/ui-kit/header";
@@ -38,7 +37,6 @@ gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
 export default function page() {
-  // const { scrollYProgress } = useScroll();
 
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
@@ -377,7 +375,7 @@ useEffect(() => {
             ),
             colSpan: card.colSpan,
             rowSpan: card.rowSpan,
-            
+
           }))}
         />
       </Container>
