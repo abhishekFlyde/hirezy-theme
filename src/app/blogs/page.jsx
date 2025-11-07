@@ -1,10 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Link from "next/link";
 import { Container } from "@/components/ui-kit/spacing";
 import GridSection from "@/components/ui-kit/GridWrapper";
 import { ImageCard } from "@/components/ui-kit/card";
 import Header from "@/components/ui-kit/header";
 import Footer from "@/components/ui-kit/footer";
+import Image from "next/image";
 
 export default function Blogs() {
   const [section, setSection] = useState({
@@ -15,43 +18,42 @@ export default function Blogs() {
     gap: "24px",
     columns: 3,
     centerTitle: true,
-    items: [
-      {
-        heading: "How to Build a Better Brand",
-        description:
-          "Discover strategies for creating a brand that connects with your audience.",
-        imageLink:
-          "https://ik.imagekit.io/a9uxeuyhx/Widget.png?updatedAt=1762516572667",
-        textPosition: "bottom",
-        colSpan: 1,
-        rowSpan: 1,
-      },
-      {
-        heading: "Design Trends in 2025",
-        description:
-          "A deep dive into upcoming trends shaping modern UI and UX design.",
-        imageLink:
-          "https://ik.imagekit.io/a9uxeuyhx/Widget.png?updatedAt=1762516572667",
-        textPosition: "bottom",
-        colSpan: 1,
-        rowSpan: 1,
-      },
-      {
-        heading: "The Future of Remote Work",
-        description:
-          "How teams are evolving in a post-pandemic world and what it means for you.",
-        imageLink:
-          "https://ik.imagekit.io/a9uxeuyhx/Widget.png?updatedAt=1762516572667",
-        textPosition: "bottom",
-        colSpan: 1,
-        rowSpan: 1,
-      },
-    ],
+    items: [],
   });
+
+  useEffect(() => {
+    const getBlogs = async () => {
+      try {
+        const res = await axios.get(
+          "https://mediumaquamarine-porcupine-223241.hostingersite.com/wp-json/wp/v2/posts?_embed"
+        );
+        const data = res.data;
+
+        setSection((prev) => ({
+          ...prev,
+          items: data.map((item) => ({
+            slug: item.slug,
+            heading: item.title?.rendered || "Untitled",
+            description: item.excerpt?.rendered?.replace(/<[^>]+>/g, "") || "",
+            imageLink:
+              item._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+              "/default-image.jpg",
+            textPosition: "bottom",
+            colSpan: 1,
+            rowSpan: 1,
+          })),
+        }));
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    getBlogs();
+  }, []);
 
   return (
     <>
-    <Header/>
+      <Header />
       <Container variant="primary">
         <GridSection
           label={section.label}
@@ -63,20 +65,21 @@ export default function Blogs() {
           centerTitle={section.centerTitle}
           items={section.items.map((card) => ({
             component: (
-              <ImageCard
-                key={card.heading}
-                heading={card.heading}
-                description={card.description}
-                imageLink={card.imageLink}
-                textPosition={card.textPosition}
-              />
+              <Link href={`/blogs/${card.slug}`} key={card.slug}>
+                <ImageCard
+                  heading={card.heading}
+                  description={card.description}
+                  imageLink={card.imageLink}
+                  textPosition={card.textPosition}
+                />
+              </Link>
             ),
             colSpan: card.colSpan,
             rowSpan: card.rowSpan,
           }))}
         />
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 }
