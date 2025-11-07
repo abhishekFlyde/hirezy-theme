@@ -128,6 +128,8 @@ export default function page() {
   const [FeaturesSection, setFeaturesSection] = useState(null);
   const [metricsSection, setMetricsSection] = useState(null);
   const [pricingSection, setPricingSection] = useState(null);
+
+  
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
   const fetchFeaturesSection = async () => {
