@@ -44,10 +44,10 @@ export default function Header() {
             <Link
               key={i}
               href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveLink(link.name);
-              }}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   setActiveLink(link.name);
+              // }}
               className={activeLink === link.name ? "active-link" : ""}
             >
               <Typography
