@@ -155,16 +155,129 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  //   // Pricing animation hook call
-  // useStaggeredAnimation(".price-container", {
-  //   isDesktop: isDesktop,
-  //   desktopGaps: [320, 640, 1280],
-  //   mobileGaps: [120, 120, 120],
-  //   trigger: ".price-section",
-  //   numberOfItems: pricingSection?.items?.length || 3,
-  // });
+  
+//   useEffect(() => {
+//   const videoContainer = document.querySelector('.video');
+//   const videoElement = document.querySelector('.video video');
+  
+//   console.log("Video Elements:", { videoContainer, videoElement });
+//   console.log("About data:", about); // ✅ Check karein about load hua ya nahi
+  
+//   if (!videoContainer || !videoElement) {
+//     console.log("Video elements not found, retrying...");
+//     return;
+//   }
 
-  // More precise mobile settings
+//   let animationFrameId = null;
+
+//   const handleScroll = () => {
+//     const rect = videoContainer.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+    
+//     // ✅ Video viewport mein kitna visible hai
+//     const videoTop = rect.top;
+//     const videoBottom = rect.bottom;
+//     const viewportHeight = windowHeight;
+    
+//     // ✅ Animation start when video enters viewport
+//     const triggerStart = viewportHeight;
+//     const triggerEnd = viewportHeight * 0.3;
+    
+//     let progress = 0;
+    
+//     if (videoTop < triggerStart && videoBottom > 0) {
+//       const distanceFromTop = Math.max(0, triggerStart - videoTop);
+//       const totalRange = triggerStart - triggerEnd;
+//       progress = Math.min(1, distanceFromTop / totalRange);
+//     }
+    
+//     const scale = 0.7 + (0.3 * progress);
+    
+//     if (animationFrameId) {
+//       cancelAnimationFrame(animationFrameId);
+//     }
+    
+//     animationFrameId = requestAnimationFrame(() => {
+//       videoElement.style.transform = `scale(${scale})`;
+//       console.log("Scroll - Progress:", progress, "Scale:", scale);
+//     });
+//   };
+  
+//   window.addEventListener('scroll', handleScroll, { passive: true });
+//   window.addEventListener('resize', handleScroll, { passive: true });
+//   handleScroll();
+  
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     window.removeEventListener('resize', handleScroll);
+//     if (animationFrameId) {
+//       cancelAnimationFrame(animationFrameId);
+//     }
+//   };
+// }, [about]); // ✅ about ko dependency mein daala
+
+
+useEffect(() => {
+  const videoContainer = document.querySelector('.video');
+  const videoElement = document.querySelector('.video video');
+  
+  if (!videoContainer || !videoElement) return;
+
+  let animationFrameId = null;
+  let hasReachedFullSize = false;
+
+  const handleScroll = () => {
+    if (hasReachedFullSize) return;
+
+    const rect = videoContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    const videoTop = rect.top;
+    const videoBottom = rect.bottom;
+    const viewportHeight = windowHeight;
+    
+    const triggerStart = viewportHeight;
+    const triggerEnd = viewportHeight * 0.3;
+    
+    let progress = 0;
+    
+    if (videoTop < triggerStart && videoBottom > 0) {
+      const distanceFromTop = Math.max(0, triggerStart - videoTop);
+      const totalRange = triggerStart - triggerEnd;
+      progress = Math.min(1, distanceFromTop / totalRange);
+    }
+    
+    const scale = 0.7 + (0.3 * progress);
+    
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    
+    animationFrameId = requestAnimationFrame(() => {
+      // ✅ CONTAINER ko scale karo, video ko nahi
+      videoContainer.style.transform = `scale(${scale})`;
+      console.log("Scroll - Progress:", progress, "Scale:", scale);
+      
+      if (scale >= 0.98) {
+        hasReachedFullSize = true;
+        videoContainer.style.transform = `scale(1)`;
+      }
+    });
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
+  handleScroll();
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleScroll);
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+  };
+}, [about]);
+
   useStaggeredAnimation(".price-container", {
     isDesktop: isDesktop,
     desktopGaps: [320, 640, 1280],
@@ -175,140 +288,59 @@ export default function page() {
     numberOfItems: pricingSection?.items?.length || 3,
   });
 
-  
-
-  useEffect(() => {
-    const videoElement = document.querySelector(".video video"); // ✅ Video element directly
-    const videoContainer = document.querySelector(".video");
-
-    if (!videoElement || !videoContainer) return;
-
-    let hasReachedFullSize = false;
-
-    const handleScroll = () => {
-      if (hasReachedFullSize) return;
-
-      const rect = videoContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const videoCenter = rect.top + rect.height / 2;
-      const viewportCenter = windowHeight / 2;
-
-      const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
-      const maxDistance = 500;
-
-      const progress = Math.max(
-        0,
-        Math.min(1, (maxDistance - distanceFromCenter) / maxDistance)
-      );
-
-      const scale = 0.5 + 0.5 * progress;
-      videoElement.style.transform = `scale(${scale})`; // ✅ Video element pe scale
-
-      if (scale >= 0.98) {
-        hasReachedFullSize = true;
-        videoElement.style.transform = `scale(1)`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // useEffect(() => {
-  //   if (!pricingSection?.items || pricingSection.items.length === 0) {
-  //     console.log('❌ No pricing items found');
-  //     return;
-  //   }
-
-  //   const timer = setTimeout(() => {
-  //     const container = document.querySelector('.price-container');
-  //     const triggerElement = document.querySelector('.price-section');
-
-  //     if (!container || !triggerElement) {
-  //       console.log('❌ Container or trigger not found');
-  //       return;
+  //   const videoElement = document.querySelector(".video"); // :white_check_mark: Video element directly
+  //   const videoContainer = document.querySelector(".video");
+  //   if (!videoElement || !videoContainer) return;
+  //   let hasReachedFullSize = false;
+  //   const handleScroll = () => {
+  //     // if (hasReachedFullSize) return; // :white_check_mark: Stop animation once full size reached
+  //     if (hasReachedFullSize) return; // :white_check_mark: Stop animation once full size reached
+  //     const rect = videoContainer.getBoundingClientRect(); // :white_check_mark: Video container ka position
+  //     const windowHeight = window.innerHeight;
+  //     // :white_check_mark: Video ka center position calculate karein
+  //     const videoCenter = rect.top + rect.height / 2;
+  //     const viewportCenter = windowHeight / 2;
+  //     // :white_check_mark: Distance from viewport center
+  //     const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
+  //     const maxDistance = 500; // Animation range
+  //     // Progress: 1 = exact center, 0 = max distance
+  //     const progress = Math.max(
+  //       0,
+  //       Math.min(1, (maxDistance - distanceFromCenter) / maxDistance)
+  //     );
+  //     // :white_check_mark: Scale from 0.5 to 1 (adjust as needed)
+  //     const scale = 0.5 + 0.5 * progress;
+  //     videoElement.style.transform = `scale(${scale})`; // :white_check_mark: Direct transform
+  //     // :white_check_mark: Mark as completed when scale reaches 1
+  //     if (scale >= 0.98) {
+  //       hasReachedFullSize = true;
+  //       videoElement.style.transform = `scale(1)`;
   //     }
+  //   };
+  //   window.addEventListener("scroll", handleScroll, { passive: true });
+  //   handleScroll();
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
-  //     console.log('🎯 Starting animation with', pricingSection.items.length, 'items');
+  //   useEffect(() => {
+  //   const videoContainer = document.querySelector('.video');
+  //   const videoElement = document.querySelector('.video video');
 
-  //     if (isDesktop) {
-  //       // Desktop animation
-  //       gsap.set(".price-container > *:nth-child(1)", { y: 320 });
-  //       gsap.set(".price-container > *:nth-child(2)", { y: 640 });
-  //       gsap.set(".price-container > *:nth-child(3)", { y: 1280 });
+  //   if (!videoContainer || !videoElement) return;
 
-  //       gsap.to(".price-container > *", {
-  //         y: 0,
-  //         ease: "none",
-  //         scrollTrigger: {
-  //           trigger: ".price-section",
-  //           start: "top bottom",
-  //           end: "center center",
-  //           scrub: true,
-  //           once: true,
-  //           markers: true,
-  //         },
-  //       });
-  //     } else {
-  //       // Mobile animation
-  //       gsap.set(".price-container > *:nth-child(1)", { y: 120 });
-  //       gsap.set(".price-container > *:nth-child(2)", { y: 120 });
-  //       gsap.set(".price-container > *:nth-child(3)", { y: 120 });
+  //   let hasReachedFullSize = false;
+  //   let animationFrameId = null;
 
-  //       gsap.to(".price-container > *:nth-child(1)", {
-  //         y: 0,
-  //         ease: "none",
-  //         scrollTrigger: {
-  //           trigger: ".price-container > *:nth-child(1)",
-  //           start: "top 90%",
-  //           end: "top 40%",
-  //           scrub: true,
-  //           once: true,
-  //           markers: true,
-  //         },
-  //       });
+  //   const handleScroll = () => {
+  //     if (hasReachedFullSize) return;
 
-  //       gsap.to(".price-container > *:nth-child(2)", {
-  //         y: 0,
-  //         ease: "none",
-  //         scrollTrigger: {
-  //           trigger: ".price-container > *:nth-child(2)",
-  //           start: "top 90%",
-  //           end: "top 40%",
-  //           scrub: true,
-  //           once: true,
-  //           markers: true,
-  //         },
-  //       });
+  //     const rect = videoContainer.getBoundingClientRect();
+  //     const windowHeight = window.innerHeight;
 
-  //       gsap.to(".price-container > *:nth-child(3)", {
-  //         y: 0,
-  //         ease: "none",
-  //         scrollTrigger: {
-  //           trigger: ".price-container > *:nth-child(3)",
-  //           start: "top 90%",
-  //           end: "top 40%",
-  //           scrub: true,
-  //           once: true,
-  //           markers: true,
-  //         },
-  //       });
-  //     }
-  //   }, 200);
-
-  //   return () => clearTimeout(timer);
-  // }, [isDesktop, pricingSection]);
-
-  // useStaggeredAnimation(".price-container", {
-  //   isDesktop: isDesktop,
-  //   desktopGaps: [320, 640, 1280],
-  //   mobileGaps: [120, 120, 120],
-  //   trigger: ".price-section",
-  //   numberOfItems: 3,
-  // });
+  //     // Video ka center position calculate karein
+  //     const videoCenter = rect.top + (rect.height / 2);
+  //     const viewportCenter = windowHeight / 2;
 
   const fetchHero = async () => {
     try {
@@ -480,6 +512,7 @@ export default function page() {
         <div className="video">
           <video autoPlay loop muted playsInline src={about.media || ""} />
         </div>
+        
       </Container>
       <WhyChoose open={open} setOpen={setOpen} />
 
