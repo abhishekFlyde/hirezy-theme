@@ -69,8 +69,7 @@ html {
   transform: scale(0.7);
   transform-origin: center center;
   will-change: transform;
-  // transition: transform 0.1s linear;
-  /* ✅ Transition hata diya, JavaScript handle karega */
+
 }
 
 .video video {
@@ -179,7 +178,7 @@ html {
   .price-container {
     flex-direction: column;
     align-items: center;
-    
+
   }
 }
 
