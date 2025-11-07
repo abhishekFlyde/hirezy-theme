@@ -69,9 +69,10 @@ html {
   transform: scale(0.7);
   transform-origin: center center;
   will-change: transform;
-  transition: transform 0.1s linear;
-  /* ✅ Transition hata diya, JavaScript handle karega */
+
 }
+
+
 
 .video video {
   width: 100%;
@@ -152,7 +153,7 @@ html {
 }
 
 .price-container .pricing-card:hover {
-  transform: translateY(-25px) scale(1.03);
+  // transform: translateY(-25px) scale(1.03);
   cursor: pointer;
 }
 
@@ -172,19 +173,14 @@ html {
 
 /* ✅ Hover effects alag se */
 .price-container .pricing-card:hover {
-  transform: translateY(-25px) scale(1.03) !important;
   cursor: pointer;
-  transition: transform 0.3s ease-out !important;
 }
 
 @media (max-width: 900px) {
   .price-container {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .price-container .pricing-card:hover {
-    transform: translateY(-15px) scale(1.02) !important;
+
   }
 }
 
