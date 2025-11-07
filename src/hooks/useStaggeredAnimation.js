@@ -58,7 +58,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
             start: start,
             end: end,
             scrub: true,
-            markers: true,
             once: true,
           },
         });
@@ -82,7 +81,6 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
               start: mobileStart,
               end: mobileEnd,
               scrub: true,
-              markers: true,
               once: true,
             },
           });
