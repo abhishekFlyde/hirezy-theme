@@ -17,7 +17,7 @@ export default function Blogs() {
     minColWidth: "300px",
     gap: "24px",
     columns: 3,
-    centerTitle: true,
+    centerTitle: "center",
     items: [],
   });
 
