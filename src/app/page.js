@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -39,7 +39,6 @@ import api from "@/lib/api";
 export default function page() {
   // const { scrollYProgress } = useScroll();
 
-  
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -128,8 +127,8 @@ export default function page() {
   const [FeaturesSection, setFeaturesSection] = useState(null);
   const [metricsSection, setMetricsSection] = useState(null);
   const [pricingSection, setPricingSection] = useState(null);
+  const [faqSection, setFaqSection] = useState(null);
 
-  
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
   const fetchFeaturesSection = async () => {
@@ -156,153 +155,150 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
+  //   // Pricing animation hook call
+  // useStaggeredAnimation(".price-container", {
+  //   isDesktop: isDesktop,
+  //   desktopGaps: [320, 640, 1280],
+  //   mobileGaps: [120, 120, 120],
+  //   trigger: ".price-section",
+  //   numberOfItems: pricingSection?.items?.length || 3,
+  // });
 
-//   // Pricing animation hook call
-// useStaggeredAnimation(".price-container", {
-//   isDesktop: isDesktop,
-//   desktopGaps: [320, 640, 1280],
-//   mobileGaps: [120, 120, 120],
-//   trigger: ".price-section",
-//   numberOfItems: pricingSection?.items?.length || 3,
-// });
-
-
-// More precise mobile settings
-useStaggeredAnimation(".price-container", {
-  isDesktop: isDesktop,
-  desktopGaps: [320, 640, 1280],
-  mobileGaps: [200, 200, 200], 
-  trigger: ".price-section", 
-  mobileStart: "40% bottom", 
-  mobileEnd: "top 20%",  
-  numberOfItems: pricingSection?.items?.length || 3,
-});
+  // More precise mobile settings
+  useStaggeredAnimation(".price-container", {
+    isDesktop: isDesktop,
+    desktopGaps: [320, 640, 1280],
+    mobileGaps: [200, 200, 200],
+    trigger: ".price-section",
+    mobileStart: "40% bottom",
+    mobileEnd: "top 20%",
+    numberOfItems: pricingSection?.items?.length || 3,
+  });
 
   useEffect(() => {
-  const videoElement = document.querySelector('.video video'); // ✅ Video element directly
-  const videoContainer = document.querySelector('.video');
-  
-  if (!videoElement || !videoContainer) return;
-  
-  let hasReachedFullSize = false;
-  
-  const handleScroll = () => {
-    if (hasReachedFullSize) return;
+    const videoElement = document.querySelector(".video video"); // ✅ Video element directly
+    const videoContainer = document.querySelector(".video");
 
-    const rect = videoContainer.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    
-    const videoCenter = rect.top + (rect.height / 2);
-    const viewportCenter = windowHeight / 2;
-    
-    const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
-    const maxDistance = 500;
-    
-    const progress = Math.max(0, Math.min(1,
-      (maxDistance - distanceFromCenter) / maxDistance
-    ));
-    
-    const scale = 0.5 + (0.5 * progress);
-    videoElement.style.transform = `scale(${scale})`; // ✅ Video element pe scale
-    
-    if (scale >= 0.98) {
-      hasReachedFullSize = true;
-      videoElement.style.transform = `scale(1)`;
-    }
-  };
-  
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-  
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+    if (!videoElement || !videoContainer) return;
 
+    let hasReachedFullSize = false;
 
-// useEffect(() => {
-//   if (!pricingSection?.items || pricingSection.items.length === 0) {
-//     console.log('❌ No pricing items found');
-//     return;
-//   }
+    const handleScroll = () => {
+      if (hasReachedFullSize) return;
 
-//   const timer = setTimeout(() => {
-//     const container = document.querySelector('.price-container');
-//     const triggerElement = document.querySelector('.price-section');
-    
-//     if (!container || !triggerElement) {
-//       console.log('❌ Container or trigger not found');
-//       return;
-//     }
+      const rect = videoContainer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-//     console.log('🎯 Starting animation with', pricingSection.items.length, 'items');
+      const videoCenter = rect.top + rect.height / 2;
+      const viewportCenter = windowHeight / 2;
 
-//     if (isDesktop) {
-//       // Desktop animation
-//       gsap.set(".price-container > *:nth-child(1)", { y: 320 });
-//       gsap.set(".price-container > *:nth-child(2)", { y: 640 });
-//       gsap.set(".price-container > *:nth-child(3)", { y: 1280 });
-      
-//       gsap.to(".price-container > *", {
-//         y: 0,
-//         ease: "none",
-//         scrollTrigger: {
-//           trigger: ".price-section",
-//           start: "top bottom",
-//           end: "center center",
-//           scrub: true,
-//           once: true,
-//           markers: true,
-//         },
-//       });
-//     } else {
-//       // Mobile animation
-//       gsap.set(".price-container > *:nth-child(1)", { y: 120 });
-//       gsap.set(".price-container > *:nth-child(2)", { y: 120 });
-//       gsap.set(".price-container > *:nth-child(3)", { y: 120 });
-      
-//       gsap.to(".price-container > *:nth-child(1)", {
-//         y: 0,
-//         ease: "none",
-//         scrollTrigger: {
-//           trigger: ".price-container > *:nth-child(1)",
-//           start: "top 90%",
-//           end: "top 40%",
-//           scrub: true,
-//           once: true,
-//           markers: true,
-//         },
-//       });
-      
-//       gsap.to(".price-container > *:nth-child(2)", {
-//         y: 0,
-//         ease: "none",
-//         scrollTrigger: {
-//           trigger: ".price-container > *:nth-child(2)",
-//           start: "top 90%",
-//           end: "top 40%",
-//           scrub: true,
-//           once: true,
-//           markers: true,
-//         },
-//       });
-      
-//       gsap.to(".price-container > *:nth-child(3)", {
-//         y: 0,
-//         ease: "none",
-//         scrollTrigger: {
-//           trigger: ".price-container > *:nth-child(3)",
-//           start: "top 90%",
-//           end: "top 40%",
-//           scrub: true,
-//           once: true,
-//           markers: true,
-//         },
-//       });
-//     }
-//   }, 200);
+      const distanceFromCenter = Math.abs(videoCenter - viewportCenter);
+      const maxDistance = 500;
 
-//   return () => clearTimeout(timer);
-// }, [isDesktop, pricingSection]);
+      const progress = Math.max(
+        0,
+        Math.min(1, (maxDistance - distanceFromCenter) / maxDistance)
+      );
 
+      const scale = 0.5 + 0.5 * progress;
+      videoElement.style.transform = `scale(${scale})`; // ✅ Video element pe scale
+
+      if (scale >= 0.98) {
+        hasReachedFullSize = true;
+        videoElement.style.transform = `scale(1)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // useEffect(() => {
+  //   if (!pricingSection?.items || pricingSection.items.length === 0) {
+  //     console.log('❌ No pricing items found');
+  //     return;
+  //   }
+
+  //   const timer = setTimeout(() => {
+  //     const container = document.querySelector('.price-container');
+  //     const triggerElement = document.querySelector('.price-section');
+
+  //     if (!container || !triggerElement) {
+  //       console.log('❌ Container or trigger not found');
+  //       return;
+  //     }
+
+  //     console.log('🎯 Starting animation with', pricingSection.items.length, 'items');
+
+  //     if (isDesktop) {
+  //       // Desktop animation
+  //       gsap.set(".price-container > *:nth-child(1)", { y: 320 });
+  //       gsap.set(".price-container > *:nth-child(2)", { y: 640 });
+  //       gsap.set(".price-container > *:nth-child(3)", { y: 1280 });
+
+  //       gsap.to(".price-container > *", {
+  //         y: 0,
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: ".price-section",
+  //           start: "top bottom",
+  //           end: "center center",
+  //           scrub: true,
+  //           once: true,
+  //           markers: true,
+  //         },
+  //       });
+  //     } else {
+  //       // Mobile animation
+  //       gsap.set(".price-container > *:nth-child(1)", { y: 120 });
+  //       gsap.set(".price-container > *:nth-child(2)", { y: 120 });
+  //       gsap.set(".price-container > *:nth-child(3)", { y: 120 });
+
+  //       gsap.to(".price-container > *:nth-child(1)", {
+  //         y: 0,
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: ".price-container > *:nth-child(1)",
+  //           start: "top 90%",
+  //           end: "top 40%",
+  //           scrub: true,
+  //           once: true,
+  //           markers: true,
+  //         },
+  //       });
+
+  //       gsap.to(".price-container > *:nth-child(2)", {
+  //         y: 0,
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: ".price-container > *:nth-child(2)",
+  //           start: "top 90%",
+  //           end: "top 40%",
+  //           scrub: true,
+  //           once: true,
+  //           markers: true,
+  //         },
+  //       });
+
+  //       gsap.to(".price-container > *:nth-child(3)", {
+  //         y: 0,
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: ".price-container > *:nth-child(3)",
+  //           start: "top 90%",
+  //           end: "top 40%",
+  //           scrub: true,
+  //           once: true,
+  //           markers: true,
+  //         },
+  //       });
+  //     }
+  //   }, 200);
+
+  //   return () => clearTimeout(timer);
+  // }, [isDesktop, pricingSection]);
 
   // useStaggeredAnimation(".price-container", {
   //   isDesktop: isDesktop,
@@ -311,8 +307,6 @@ useStaggeredAnimation(".price-container", {
   //   trigger: ".price-section",
   //   numberOfItems: 3,
   // });
-
-
 
   const fetchHero = async () => {
     try {
@@ -374,6 +368,14 @@ useStaggeredAnimation(".price-container", {
       console.log("Failed to load pricing");
     }
   };
+  const fetchFAQSection = async () => {
+    try {
+      const res = await api.get("/faq-section");
+      setFaqSection(res.data?.section || { items: [] });
+    } catch {
+      console.log("Failed to load pricing");
+    }
+  };
 
   useEffect(() => {
     fetchHero();
@@ -383,9 +385,10 @@ useStaggeredAnimation(".price-container", {
     fetchMetricSection();
     fetchIntegrationsSchema();
     fetchPricingSection();
+    fetchFAQSection();
   }, []);
 
-  if (heroLoading || teamsLoading || aboutSectionLoading) return null;
+  if (heroLoading || teamsLoading || aboutSectionLoading  ) return null;
 
   const desktopOrder = [0, 3, 1, 2, 4];
 
@@ -593,11 +596,10 @@ useStaggeredAnimation(".price-container", {
       <Container className="page-faq-container">
         <div className="faq-header">
           <SectionHeader
-            label="FAQ"
-            title="Have a Question?"
-            subtitle="Save time with straightforward answers to common questions recruiters and HR teams often ask."
-            align="start" // ya "left" / "right"
-            className=""
+            label={faqSection?.label}
+            title={faqSection?.title}
+            subtitle={faqSection?.subtitle}
+            align="start"
           />
 
           <div className="faq-cta-section">
@@ -617,8 +619,9 @@ useStaggeredAnimation(".price-container", {
             </Button>
           </div>
         </div>
+
         <div className="faq-content">
-          <FAQ className="" faqs={faqData} />
+          <FAQ faqs={faqSection?.items} />
         </div>
       </Container>
 
