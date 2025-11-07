@@ -580,6 +580,8 @@ useEffect(() => {
         className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]"
       >
         {metricsSection?.items.map((m, i) => (
+
+          
           <Metric key={i} number={m.number} label={m.label} />
         ))}
       </Container>
@@ -589,6 +591,7 @@ useEffect(() => {
       >
         <div>
           <SectionHeader
+
             label={integrationsSection?.label}
             title={integrationsSection?.title}
             subtitle={integrationsSection?.subtitle}
@@ -604,6 +607,7 @@ useEffect(() => {
 
       <Container className="price-section">
         <div className="mainSec">
+
           <SectionHeader
             label={pricingSection?.label}
             title={pricingSection?.title}
