@@ -37,6 +37,7 @@ export default function Header() {
             className="header-logo"
           />
         </Link>
+        
 
         {/* ✅ Dynamic Desktop Navigation */}
         <nav className="nav-link-container">
