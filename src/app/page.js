@@ -424,7 +424,7 @@ useEffect(() => {
 
   if (heroLoading || teamsLoading || aboutSectionLoading  ) return null;
 
-  console.log(about);
+  console.log(faqSection);
 
   const desktopOrder = [0, 3, 1, 2, 4];
 
@@ -603,7 +603,7 @@ useEffect(() => {
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
-        
+
           <Tools items={integrationsSection?.items} />
         </div>
       </Container>
@@ -612,9 +612,10 @@ useEffect(() => {
         <div className="mainSec">
 
           <SectionHeader
-            label="Pricing Plan"
-            title="Simple Plans, Clear Value"
-            subtitle=" Choose a plan that fits your team’s needs."
+          
+            label={pricingSection?.label}
+            title={pricingSection?.title}
+            subtitle={pricingSection?.subtitle}
             align="center"
           />
           <div className="price-container">
