@@ -10,10 +10,10 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
     desktopGaps = [320, 640, 1280],
     mobileGaps = [120, 120, 120],
     trigger = containerClass,
-    start = "top bottom",
-    end = "center center",
+    start = "40% bottom",
+    end = "bottom 50%",
     mobileStart = "top 80%",
-    mobileEnd = "top 20%",
+    mobileEnd = "bottom 20%",
     numberOfItems = 3
   } = options;
 
@@ -50,6 +50,7 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
             end: end,
             scrub: true,
             once: true,
+            markers: true,
           },
         });
       } else {
@@ -72,6 +73,7 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
               end: mobileEnd,
               scrub: true,
               once: true,
+              markers: true,
             },
           });
         }

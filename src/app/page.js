@@ -216,48 +216,87 @@ export default function page() {
 // }, [about]);
 
 
+// useEffect(() => {
+//   const videoContainer = document.querySelector('.video');
+  
+//   if (!videoContainer) return;
+
+//   let hasReachedFullSize = false;
+//   let rafId = null;
+
+//   const updateScale = () => {
+//     const rect = videoContainer.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+    
+//     // ✅ Simple and effective calculation
+//     const visibility = Math.max(0, Math.min(1, 
+//       (windowHeight - rect.top) / (windowHeight * 0.8)
+//     ));
+    
+//     const scale = 0.7 + (0.3 * visibility);
+    
+//     videoContainer.style.transform = `scale(${scale})`;
+    
+//     if (scale >= 0.98 && !hasReachedFullSize) {
+//       hasReachedFullSize = true;
+//       videoContainer.style.transform = `scale(1)`;
+//     }
+//   };
+
+//   const handleScroll = () => {
+//     if (hasReachedFullSize) return;
+    
+//     if (rafId) cancelAnimationFrame(rafId);
+//     rafId = requestAnimationFrame(updateScale);
+//   };
+
+//   window.addEventListener('scroll', handleScroll, { passive: true });
+  
+//   // ✅ Initial check
+//   updateScale();
+  
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     if (rafId) cancelAnimationFrame(rafId);
+//   };
+// }, [about]);
+
 useEffect(() => {
   const videoContainer = document.querySelector('.video');
+  const videoElement = document.querySelector('.video video');
   
-  if (!videoContainer) return;
+  if (!videoContainer || !videoElement) return;
 
   let hasReachedFullSize = false;
-  let rafId = null;
 
-  const updateScale = () => {
-    const rect = videoContainer.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    
-    // ✅ Simple and effective calculation
-    const visibility = Math.max(0, Math.min(1, 
-      (windowHeight - rect.top) / (windowHeight * 0.8)
-    ));
-    
-    const scale = 0.7 + (0.3 * visibility);
-    
-    videoContainer.style.transform = `scale(${scale})`;
-    
-    if (scale >= 0.98 && !hasReachedFullSize) {
-      hasReachedFullSize = true;
-      videoContainer.style.transform = `scale(1)`;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (hasReachedFullSize) return;
+        
+        const ratio = entry.intersectionRatio;
+        const scale = 0.7 + (0.3 * ratio);
+        
+        videoContainer.style.transform = `scale(${scale})`;
+        console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
+        
+        if (ratio >= 0.95) {
+          hasReachedFullSize = true;
+          videoContainer.style.transform = `scale(1)`;
+          observer.unobserve(videoContainer);
+        }
+      });
+    },
+    {
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      rootMargin: '0px'
     }
-  };
+  );
 
-  const handleScroll = () => {
-    if (hasReachedFullSize) return;
-    
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(updateScale);
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  
-  // ✅ Initial check
-  updateScale();
+  observer.observe(videoContainer);
   
   return () => {
-    window.removeEventListener('scroll', handleScroll);
-    if (rafId) cancelAnimationFrame(rafId);
+    observer.disconnect();
   };
 }, [about]);
 
@@ -267,7 +306,7 @@ useEffect(() => {
     mobileGaps: [200, 200, 200],
     trigger: ".price-section",
     mobileStart: "40% bottom",
-    mobileEnd: "top 20%",
+    mobileEnd: "top 40%",
     numberOfItems: pricingSection?.items?.length || 3,
   });
 
