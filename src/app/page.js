@@ -161,8 +161,8 @@ export default function page() {
   useStaggeredScroll(".price-container", {
   isDesktop: isDesktop,
   desktopGaps: [320, 640, 1280],
-  startPosition: 0.7,  // 40% from top
-  endPosition: 0.1,    // 10% from top
+  startPosition: 0.7,  
+  endPosition: 0.1,    
 });
 
 
