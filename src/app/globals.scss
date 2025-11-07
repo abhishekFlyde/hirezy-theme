@@ -59,7 +59,7 @@ html {
 // }
 
 .video {
-  position: relative;
+  position: relative !important;
   border-radius: var(--sp-24);
   overflow: hidden;
   height: 426px;

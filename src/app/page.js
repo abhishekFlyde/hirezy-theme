@@ -37,6 +37,20 @@ import { useStaggeredScroll } from '@/hooks/useStaggeredScroll';
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
+const Loader = () => {
+  return (
+    <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+        <Typography variant="body-2" className="text-gray-600">
+          Loading...
+        </Typography>
+      </div>
+    </div>
+  );
+};
+
+
 export default function page() {
   // const { scrollYProgress } = useScroll();
 
@@ -49,6 +63,11 @@ export default function page() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
+
+  // Loader state
+  const [isLoading, setIsLoading] = useState(true);
+  const [headerLoaded, setHeaderLoaded] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,6 +152,33 @@ export default function page() {
 
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
+
+  // Check if header and hero section are loaded
+  useEffect(() => {
+    // Header ko loaded maan lete hain kyunki wo local component hai
+    setHeaderLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    // Jab hero data load ho jaye aur heroLoading false ho jaye
+    if (!heroLoading && hero) {
+      setHeroLoaded(true);
+    }
+  }, [heroLoading, hero]);
+
+  useEffect(() => {
+    // Jab dono header aur hero load ho jayein tab loader hide karenge
+    if (headerLoaded && heroLoaded) {
+      // Thoda delay dekar smooth transition ke liye
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 500); // 500ms delay for smooth transition
+      
+      return () => clearTimeout(timer);
+    }
+  }, [headerLoaded, heroLoaded]);
+
+
   const fetchFeaturesSection = async () => {
     try {
       const res = await api.get("/features-section");
@@ -165,120 +211,97 @@ export default function page() {
   endPosition: 0.1,    
 });
 
-
-// useEffect(() => {
-//   const videoContainer = document.querySelector('.video');
-//   const videoElement = document.querySelector('.video video');
-  
-//   if (!videoContainer || !videoElement) return;
-
-//   let hasReachedFullSize = false;
-
-//   const observer = new IntersectionObserver(
-//     (entries) => {
-//       entries.forEach((entry) => {
-//         if (hasReachedFullSize) return;
-        
-//         const ratio = entry.intersectionRatio;
-//         const scale = 0.7 + (0.3 * ratio);
-        
-//         videoContainer.style.transform = `scale(${scale})`;
-//         console.log("Intersection Ratio:", ratio.toFixed(2), "Scale:", scale.toFixed(2));
-        
-//         if (ratio >= 0.95) {
-//           hasReachedFullSize = true;
-//           videoContainer.style.transform = `scale(1)`;
-//           observer.unobserve(videoContainer);
-//         }
-//       });
-//     },
-//     {
-//       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-//       rootMargin: '0px'
-//     }
-//   );
-
-//   observer.observe(videoContainer);
-  
-//   return () => {
-//     observer.disconnect();
-//   };
-// }, [about]);
-
+// ✅ REPLACE THIS ENTIRE useEffect WITH THIS NEW CODE
 useEffect(() => {
-  const videoContainer = document.querySelector('.video');
-  const videoElement = document.querySelector('.video video');
-  
-  console.log("Video elements found:", !!videoContainer, !!videoElement);
-  
-  if (!videoContainer || !videoElement) {
-    console.log("Video elements not found, retrying...");
+  if (!about || !about.media) {
+    console.log("About data not loaded yet");
     return;
   }
 
-  let hasReachedFullSize = false;
-  let animationFrameId = null;
-
-  const handleScroll = () => {
-    if (hasReachedFullSize) return;
-
-    const rect = videoContainer.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+  const initializeVideoAnimation = () => {
+    const videoContainer = document.querySelector('.video');
+    const videoElement = document.querySelector('.video video');
     
-    // ✅ Better calculation - video viewport mein kitna visible hai
-    const videoTop = rect.top;
-    const videoBottom = rect.bottom;
+    console.log("Video elements found:", !!videoContainer, !!videoElement);
     
-    // ✅ Animation start when video enters viewport (80% se)
-    const triggerStart = windowHeight * 0.8;
-    // ✅ Animation complete when video reaches center (20% pe)
-    const triggerEnd = windowHeight * 0.2;
-    
-    let progress = 0;
-    
-    if (videoTop < triggerStart && videoBottom > 0) {
-      // Video viewport mein hai
-      const distanceFromTop = Math.max(0, triggerStart - videoTop);
-      const totalRange = triggerStart - triggerEnd;
-      progress = Math.min(1, distanceFromTop / totalRange);
+    if (!videoContainer || !videoElement) {
+      console.log("Video elements not found, will retry...");
+      // Retry after a short delay
+      setTimeout(initializeVideoAnimation, 100);
+      return;
     }
+
+    // ✅ IMPORTANT: Ensure video container has proper positioning
+    videoContainer.style.position = 'relative';
+    videoContainer.style.transformOrigin = 'center center';
     
-    const scale = 0.7 + (0.3 * progress);
-    
-    // ✅ Smooth animation with requestAnimationFrame
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-    
-    animationFrameId = requestAnimationFrame(() => {
-      videoContainer.style.transform = `scale(${scale})`;
-      console.log("Scroll Progress:", progress.toFixed(2), "Scale:", scale.toFixed(2));
+    let hasReachedFullSize = false;
+    let animationFrameId = null;
+
+    const handleScroll = () => {
+      if (hasReachedFullSize) return;
+
+      const rect = videoContainer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
       
-      if (scale >= 0.98) {
-        hasReachedFullSize = true;
-        videoContainer.style.transform = `scale(1)`;
-        console.log("Video animation completed");
+      // ✅ Better calculation
+      const videoTop = rect.top;
+      const videoBottom = rect.bottom;
+      const videoHeight = rect.height;
+      
+      // ✅ Animation start when video enters viewport (bottom se)
+      const triggerStart = windowHeight;
+      // ✅ Animation complete when video reaches center
+      const triggerEnd = windowHeight * 0.3;
+      
+      let progress = 0;
+      
+      if (videoTop < triggerStart && videoBottom > 0) {
+        const distanceFromTop = Math.max(0, triggerStart - videoTop);
+        const totalRange = triggerStart - triggerEnd;
+        progress = Math.min(1, distanceFromTop / totalRange);
       }
-    });
+      
+      const scale = 0.7 + (0.3 * progress);
+      
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      
+      animationFrameId = requestAnimationFrame(() => {
+        videoContainer.style.transform = `scale(${scale})`;
+        console.log("Scroll Progress:", progress.toFixed(2), "Scale:", scale.toFixed(2));
+        
+        if (progress >= 0.95) {
+          hasReachedFullSize = true;
+          videoContainer.style.transform = `scale(1)`;
+          console.log("Video animation completed");
+        }
+      });
+    };
+
+    // ✅ Event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // ✅ Initial call
+    setTimeout(() => {
+      handleScroll();
+    }, 200);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   };
 
-  // ✅ Event listeners
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll, { passive: true });
-  
-  // ✅ Initial call with small delay to ensure rendering
-  setTimeout(() => {
-    handleScroll();
-  }, 100);
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', handleScroll);
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-  };
-}, [about]); // ✅ about ke change pe re-run hoga
+  // ✅ Initialize when about data is ready
+  const cleanup = initializeVideoAnimation();
+  return cleanup;
+}, [about]); // ✅ Only run when about data changes
 
   const fetchHero = async () => {
     try {
@@ -371,6 +394,17 @@ useEffect(() => {
   }, []);
 
   if (heroLoading || teamsLoading || aboutSectionLoading) return null;
+
+    // Agar data load ho raha hai ya loader show karna hai to return karo
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  // Agar data loading complete nahi hua hai to bhi loader show karo
+  if (heroLoading || teamsLoading || aboutSectionLoading) {
+    return <Loader />;
+  }
+
 
   console.log(faqSection);
 
