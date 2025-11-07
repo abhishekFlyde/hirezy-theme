@@ -583,7 +583,7 @@ useEffect(() => {
       >
         {metricsSection?.items.map((m, i) => (
 
-          
+
           <Metric key={i} number={m.number} label={m.label} />
         ))}
       </Container>
@@ -603,30 +603,8 @@ useEffect(() => {
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
-          <Tools
-            items={[
-              {
-                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(4).png?updatedAt=1761911669465",
-                alt: "Figma",
-              },
-              {
-                src: "https://ik.imagekit.io/a9uxeuyhx/Logo.png?updatedAt=1761911498084",
-                alt: "Notion",
-              },
-              {
-                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(2).png?updatedAt=1761911703538",
-                alt: "Slack",
-              },
-              {
-                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(1).png?updatedAt=1761911729926",
-                alt: "VS Code",
-              },
-              {
-                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(3).png?updatedAt=1761912113713",
-                alt: "GitHub",
-              },
-            ]}
-          />
+        
+          <Tools items={integrationsSection?.items} />
         </div>
       </Container>
 
@@ -640,45 +618,19 @@ useEffect(() => {
             align="center"
           />
           <div className="price-container">
-            <Pricing
-              planName="Starter"
-              description="Best for  teams that need more insights."
-              features={[
-                "Up to 10 team members for growing teams",
-                "Advanced analytics & insights",
-                "Faster & priority support",
-              ]}
-              price="99"
-              tag="Top Picks"
-              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(2).png?updatedAt=1761828645214"
-              variant="blue"
-            />
-            <Pricing
-              planName="Pro"
-              description="Best for  teams that need more insights."
-              features={[
-                "Up to 10 team members for growing teams",
-                "Advanced analytics & insights",
-                "Faster & priority support",
-              ]}
-              price="49"
-              tag=""
-              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(1).png?updatedAt=1761823327862"
-              variant="lime"
-            />
-            <Pricing
-              planName="Enterprice"
-              description="Best for  teams that need more insights."
-              features={[
-                "Up to 10 team members for growing teams",
-                "Advanced analytics & insights",
-                "Faster & priority support",
-              ]}
-              price="99"
-              tag="Top Picks"
-              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(2).png?updatedAt=1761828645214"
-              variant="blue"
-            />
+
+            {pricingSection?.items.map((p, i) => (
+              <Pricing
+                key={i}
+                planName={p.planName}
+                description={p.description}
+                features={p.features.map((f) => f.text)}
+                price={p.price}
+                tag={p.tag}
+                iconSrc={p.iconSrc}
+                variant={p.variant}
+              />
+            ))}
           </div>
         </div>
       </Container>
