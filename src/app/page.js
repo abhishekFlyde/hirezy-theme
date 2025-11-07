@@ -601,7 +601,7 @@ useEffect(() => {
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
-        
+
           <Tools items={integrationsSection?.items} />
         </div>
       </Container>
@@ -610,6 +610,7 @@ useEffect(() => {
         <div className="mainSec">
 
           <SectionHeader
+          
             label={pricingSection?.label}
             title={pricingSection?.title}
             subtitle={pricingSection?.subtitle}
