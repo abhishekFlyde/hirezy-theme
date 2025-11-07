@@ -581,7 +581,7 @@ useEffect(() => {
       >
         {metricsSection?.items.map((m, i) => (
 
-          
+
           <Metric key={i} number={m.number} label={m.label} />
         ))}
       </Container>
@@ -601,6 +601,7 @@ useEffect(() => {
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
+        
           <Tools items={integrationsSection?.items} />
         </div>
       </Container>
@@ -616,6 +617,7 @@ useEffect(() => {
           />
 
           <div className="price-container">
+
             {pricingSection?.items.map((p, i) => (
               <Pricing
                 key={i}
