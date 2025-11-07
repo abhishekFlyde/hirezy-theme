@@ -125,9 +125,6 @@ export default function page() {
   const [teamsLoading, setTeamsLoading] = useState(true);
   const [aboutSectionLoading, setAboutSectionsLoading] = useState(true);
   const [FeaturesSection, setFeaturesSection] = useState(null);
-  const [metricsSection, setMetricsSection] = useState(null);
-  const [pricingSection, setPricingSection] = useState(null);
-  const [integrationsSection, setIntegrationsSection] = useState(null);
 
   const fetchFeaturesSection = async () => {
     try {
@@ -255,45 +252,16 @@ export default function page() {
     }
   };
 
-  const fetchMetricSection = async () => {
-    try {
-      const res = await api.get("/metrics-section");
-      setMetricsSection(res.data?.section || { items: [] });
-    } catch (err) {
-      console.error("Failed to load metrics section");
-    }
-  };
-
-  const fetchIntegrationsSchema = async () => {
-    try {
-      const res = await api.get("/integration-section");
-      setIntegrationsSection(res.data?.section || { items: [] });
-      console.log(res.data.section);
-    } catch (err) {
-      console.log("Failed to load integration");
-    }
-  };
-
-  const fetchPricingSection = async () => {
-    try {
-      const res = await api.get("/pricing-section");
-      setPricingSection(res.data?.section || { items: [] });
-    } catch {
-      console.log("Failed to load pricing");
-    }
-  };
-
   useEffect(() => {
     fetchHero();
     fetchTeamsSection();
     fetchAboutSection();
     fetchFeaturesSection();
-    fetchMetricSection();
-    fetchIntegrationsSchema();
-    fetchPricingSection();
   }, []);
 
   if (heroLoading || teamsLoading || aboutSectionLoading) return null;
+
+  console.log(about);
 
   const desktopOrder = [0, 3, 1, 2, 4];
 
@@ -447,57 +415,106 @@ export default function page() {
       <CTA />
       <Container
         variant="secondary"
-        className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]"
+        className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]  "
       >
-        {metricsSection?.items.map((m, i) => (
-          <Metric key={i} number={m.number} label={m.label} />
-        ))}
+        <Metric number="10k" label="Successful Hires" />
+        <Metric number="500+" label="Teams Worldwide" />
+        <Metric number="50k" label="Seamless Integration" />
+        <Metric number="95%" label="Customer Satisfaction" />
       </Container>
       <Container
         variant="primary"
-        className="flex flex-wrap justify-between items-start gap-16"
+        className="flex flex-wrap justify-between items-start gap-16 "
       >
-        <div>
+        <div className="">
           <SectionHeader
-            label={integrationsSection?.label}
-            title={integrationsSection?.title}
-            subtitle={integrationsSection?.subtitle}
+            label="Integration"
+            title="Seamlessly Connected"
+            subtitle="Connect Hirezy to your favorite tools and keep your hiring workflow running smoothly."
             align={isIpad || isMobile ? "center" : "left"}
             className="lg:max-w-[510px] w-full"
           />
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
-          <Tools items={integrationsSection?.items} />
+          <Tools
+            items={[
+              {
+                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(4).png?updatedAt=1761911669465",
+                alt: "Figma",
+              },
+              {
+                src: "https://ik.imagekit.io/a9uxeuyhx/Logo.png?updatedAt=1761911498084",
+                alt: "Notion",
+              },
+              {
+                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(2).png?updatedAt=1761911703538",
+                alt: "Slack",
+              },
+              {
+                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(1).png?updatedAt=1761911729926",
+                alt: "VS Code",
+              },
+              {
+                src: "https://ik.imagekit.io/a9uxeuyhx/Logo%20(3).png?updatedAt=1761912113713",
+                alt: "GitHub",
+              },
+            ]}
+          />
         </div>
       </Container>
 
       <Container className="price-section">
         <div className="mainSec">
           <SectionHeader
-            label={pricingSection?.label}
-            title={pricingSection?.title}
-            subtitle={pricingSection?.subtitle}
+            label="Pricing Plan"
+            title="Simple Plans, Clear Value"
+            subtitle=" Choose a plan that fits your team’s needs."
             align="center"
           />
-
           <div className="price-container">
-            {pricingSection?.items.map((p, i) => (
-              <Pricing
-                key={i}
-                planName={p.planName}
-                description={p.description}
-                features={p.features.map((f) => f.text)}
-                price={p.price}
-                tag={p.tag}
-                iconSrc={p.iconSrc}
-                variant={p.variant}
-              />
-            ))}
+            <Pricing
+              planName="Starter"
+              description="Best for  teams that need more insights."
+              features={[
+                "Up to 10 team members for growing teams",
+                "Advanced analytics & insights",
+                "Faster & priority support",
+              ]}
+              price="99"
+              tag="Top Picks"
+              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(2).png?updatedAt=1761828645214"
+              variant="blue"
+            />
+            <Pricing
+              planName="Pro"
+              description="Best for  teams that need more insights."
+              features={[
+                "Up to 10 team members for growing teams",
+                "Advanced analytics & insights",
+                "Faster & priority support",
+              ]}
+              price="49"
+              tag=""
+              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(1).png?updatedAt=1761823327862"
+              variant="lime"
+            />
+            <Pricing
+              planName="Enterprice"
+              description="Best for  teams that need more insights."
+              features={[
+                "Up to 10 team members for growing teams",
+                "Advanced analytics & insights",
+                "Faster & priority support",
+              ]}
+              price="99"
+              tag="Top Picks"
+              iconSrc="https://ik.imagekit.io/a9uxeuyhx/Icon%20(2).png?updatedAt=1761828645214"
+              variant="blue"
+            />
           </div>
         </div>
       </Container>
-
       <Container className="page-faq-container">
         <div className="faq-header">
           <SectionHeader
@@ -585,20 +602,7 @@ export default function page() {
               imageSrc:
                 "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
             },
-            {
-              companyLogo:
-                "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
-              company: "NextWave",
-              quote:
-                "The integrations and analytics give us a clear edge over competitors.",
-              details:
-                "Having all the tools in one place makes our hiring process easier, more organized, and helps our team feel confident in every data-driven decision.",
-              name: "Sophia Lee",
-              role: "Operations Director at NextWave",
-              imageSrc:
-                "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
-            },
-            {
+               {
               companyLogo:
                 "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
               company: "NextWave",
