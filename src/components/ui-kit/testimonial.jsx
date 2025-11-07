@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectionHeader from "./sectionHeader";
 import Typography from "./typography";
 
+
 export default function Testimonial({ items = [] }) {
   const sectionRef = useRef(null);
   const [index, setIndex] = useState(0);
@@ -16,7 +17,6 @@ export default function Testimonial({ items = [] }) {
     offset: ["start center", "end center"],
   });
 
-  
   useEffect(() => {
     if (!items.length) return;
     const unsubscribe = scrollYProgress.on("change", (progress) => {
@@ -34,15 +34,30 @@ export default function Testimonial({ items = [] }) {
 
   if (!items || items.length === 0) return null;
 
+  // ✅ smoother + blink-free animation
   const variants = {
     enter: (dir) => ({
-      x: dir > 0 ? 100 : -100,
+      x: dir > 0 ? 80 : -80,
       opacity: 0,
+      filter: "blur(6px)",
     }),
-    center: { x: 0, opacity: 1 },
+    center: {
+      x: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
     exit: (dir) => ({
-      x: dir > 0 ? -100 : 100,
+      x: dir > 0 ? -80 : 80,
       opacity: 0,
+      filter: "blur(6px)",
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
     }),
   };
 
@@ -65,7 +80,7 @@ export default function Testimonial({ items = [] }) {
           align="center"
         />
 
-        <div className="testimonial-card-container relative mt-8">
+        <div className="testimonial-card-container relative mt-8 overflow-visible">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={index}
@@ -75,7 +90,6 @@ export default function Testimonial({ items = [] }) {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.4, ease: "easeInOut" }}
             >
               {/* Image */}
               <div className="image-wrapper">
@@ -85,6 +99,7 @@ export default function Testimonial({ items = [] }) {
                   width={600}
                   height={900}
                   priority
+                  className="object-cover rounded-2xl"
                 />
               </div>
 

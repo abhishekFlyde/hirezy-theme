@@ -1,16 +1,18 @@
 "use client";
-import React from "react";
-import Typography from "./typography";
+import React, { Suspense } from "react";
 
-export default function Label({
-  text,
-  className = "",
-  ...props
-}) {
+const Typography = React.lazy(() => import("./typography"));
+
+export default function Label({ text, className = "", ...props }) {
   return (
-    <div {...props} style={{ padding: "0px 0px" }}> 
-        {text && <Typography variant="body-4" className={`${className}`}>{text}</Typography>}
+    <div {...props} style={{ padding: "0px 0px" }}>
+      <Suspense fallback={<div style={{ height: "1em" }} />}>
+        {text && (
+          <Typography variant="body-4" className={`${className}`}>
+            {text}
+          </Typography>
+        )}
+      </Suspense>
     </div>
   );
 }
-3
