@@ -10,4 +10,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+export default mongoose.models.SignupUser || mongoose.model("SignupUser", UserSchema);

@@ -156,7 +156,6 @@ html {
   cursor: pointer;
 }
 
-/* Staggered Animation Styles */
 .price-container {
   display: flex;
   justify-content: center;
@@ -166,15 +165,16 @@ html {
 }
 
 .price-container > * {
-  /* ✅ Default styles for animated elements */
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-  will-change: transform, opacity;
+  /* ✅ Smooth transitions with easing */
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
 }
 
-/* ✅ Hover effects (optional) */
+/* ✅ Hover effects alag se */
 .price-container .pricing-card:hover {
-  transform: translateY(-25px) scale(1.03);
+  transform: translateY(-25px) scale(1.03) !important;
   cursor: pointer;
+  transition: transform 0.3s ease-out !important;
 }
 
 @media (max-width: 900px) {
@@ -184,7 +184,7 @@ html {
   }
   
   .price-container .pricing-card:hover {
-    transform: translateY(-15px) scale(1.02);
+    transform: translateY(-15px) scale(1.02) !important;
   }
 }
 

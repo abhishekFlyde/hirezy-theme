@@ -77,12 +77,12 @@ export const useStaggeredScroll = (containerClass, options = {}) => {
           return;
         }
         
-        console.log("Animation Progress:", {
-          progress: progress.toFixed(2),
-          startPosition,
-          endPosition,
-          duration: animationDuration
-        });
+        // console.log("Animation Progress:", {
+        //   progress: progress.toFixed(2),
+        //   startPosition,
+        //   endPosition,
+        //   duration: animationDuration
+        // });
         
         if (progress > 0) {
           cards.forEach((card, index) => {
