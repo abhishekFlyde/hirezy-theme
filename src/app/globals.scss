@@ -129,6 +129,10 @@ html {
   gap: var(--sp-80);
 }
 
+.pricing-card {
+  justify-content: space-between;
+}
+
 .price-container {
   display: flex;
   justify-content: center;

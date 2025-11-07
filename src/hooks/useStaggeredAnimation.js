@@ -11,9 +11,9 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
     mobileGaps = [120, 120, 120],
     trigger = containerClass,
     start = "top bottom",
-    end = "bottom 10%",
-    mobileStart = "top 90%",
-    mobileEnd = "top 40%",
+    end = "center center",
+    mobileStart = "top 80%",
+    mobileEnd = "top 20%",
     numberOfItems = 3
   } = options;
 
@@ -58,6 +58,7 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
             start: start,
             end: end,
             scrub: true,
+            markers: true,
             once: true,
           },
         });
@@ -81,6 +82,7 @@ export const useStaggeredAnimation = (containerClass, options = {}) => {
               start: mobileStart,
               end: mobileEnd,
               scrub: true,
+              markers: true,
               once: true,
             },
           });

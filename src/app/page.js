@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -155,15 +155,26 @@ export default function page() {
   }, []);
 
 
-  // Pricing animation hook call
+//   // Pricing animation hook call
+// useStaggeredAnimation(".price-container", {
+//   isDesktop: isDesktop,
+//   desktopGaps: [320, 640, 1280],
+//   mobileGaps: [120, 120, 120],
+//   trigger: ".price-section",
+//   numberOfItems: pricingSection?.items?.length || 3,
+// });
+
+
+// More precise mobile settings
 useStaggeredAnimation(".price-container", {
   isDesktop: isDesktop,
   desktopGaps: [320, 640, 1280],
-  mobileGaps: [120, 120, 120],
-  trigger: ".price-section",
+  mobileGaps: [200, 200, 200], 
+  trigger: ".price-section", 
+  mobileStart: "40% bottom", 
+  mobileEnd: "top 20%",  
   numberOfItems: pricingSection?.items?.length || 3,
 });
-
 
   useEffect(() => {
   const videoElement = document.querySelector('.video video'); // ✅ Video element directly
