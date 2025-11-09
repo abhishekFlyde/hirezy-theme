@@ -209,6 +209,9 @@ export default function page() {
   endPosition: 0.1,    
 });
 
+
+
+
 // ✅ REPLACE THIS ENTIRE useEffect WITH THIS NEW CODE
 useEffect(() => {
   if (!about || !about.media) {
