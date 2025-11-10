@@ -31,7 +31,8 @@ import { toast } from "react-toastify";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
-import { useStaggeredScroll } from '@/hooks/useStaggeredScroll';
+import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
+import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
@@ -49,9 +50,7 @@ const Loader = () => {
   );
 };
 
-
 export default function page() {
-
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -150,7 +149,6 @@ export default function page() {
 
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
-
   // Check if header and hero section are loaded
   useEffect(() => {
     // Header ko loaded maan lete hain kyunki wo local component hai
@@ -171,11 +169,10 @@ export default function page() {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 500); // 500ms delay for smooth transition
-      
+
       return () => clearTimeout(timer);
     }
   }, [headerLoaded, heroLoaded]);
-
 
   const fetchFeaturesSection = async () => {
     try {
@@ -201,108 +198,109 @@ export default function page() {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-
   useStaggeredScroll(".price-container", {
-  isDesktop: isDesktop,
-  desktopGaps: [320, 640, 1280],
-  startPosition: 0.7,  
-  endPosition: 0.1,    
-});
+    isDesktop: isDesktop,
+    desktopGaps: [320, 640, 1280],
+    startPosition: 0.7,
+    endPosition: 0.1,
+  });
 
-
-
-
-// ✅ REPLACE THIS ENTIRE useEffect WITH THIS NEW CODE
-useEffect(() => {
-  if (!about || !about.media) {
-    console.log("About data not loaded yet");
-    return;
-  }
-
-  const initializeVideoAnimation = () => {
-    const videoContainer = document.querySelector('.video');
-    const videoElement = document.querySelector('.video video');
-    
-    console.log("Video elements found:", !!videoContainer, !!videoElement);
-    
-    if (!videoContainer || !videoElement) {
-      console.log("Video elements not found, will retry...");
-      // Retry after a short delay
-      setTimeout(initializeVideoAnimation, 100);
+  // ✅ REPLACE THIS ENTIRE useEffect WITH THIS NEW CODE
+  useEffect(() => {
+    if (!about || !about.media) {
+      console.log("About data not loaded yet");
       return;
     }
 
-    // ✅ IMPORTANT: Ensure video container has proper positioning
-    videoContainer.style.position = 'relative';
-    videoContainer.style.transformOrigin = 'center center';
-    
-    let hasReachedFullSize = false;
-    let animationFrameId = null;
+    const initializeVideoAnimation = () => {
+      const videoContainer = document.querySelector(".video");
+      const videoElement = document.querySelector(".video video");
 
-    const handleScroll = () => {
-      if (hasReachedFullSize) return;
+      console.log("Video elements found:", !!videoContainer, !!videoElement);
 
-      const rect = videoContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // ✅ Better calculation
-      const videoTop = rect.top;
-      const videoBottom = rect.bottom;
-      const videoHeight = rect.height;
-      
-      // ✅ Animation start when video enters viewport (bottom se)
-      const triggerStart = windowHeight;
-      // ✅ Animation complete when video reaches center
-      const triggerEnd = windowHeight * 0.3;
-      
-      let progress = 0;
-      
-      if (videoTop < triggerStart && videoBottom > 0) {
-        const distanceFromTop = Math.max(0, triggerStart - videoTop);
-        const totalRange = triggerStart - triggerEnd;
-        progress = Math.min(1, distanceFromTop / totalRange);
+      if (!videoContainer || !videoElement) {
+        console.log("Video elements not found, will retry...");
+        // Retry after a short delay
+        setTimeout(initializeVideoAnimation, 100);
+        return;
       }
-      
-      const scale = 0.7 + (0.3 * progress);
-      
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-      
-      animationFrameId = requestAnimationFrame(() => {
-        videoContainer.style.transform = `scale(${scale})`;
-        console.log("Scroll Progress:", progress.toFixed(2), "Scale:", scale.toFixed(2));
-        
-        if (progress >= 0.95) {
-          hasReachedFullSize = true;
-          videoContainer.style.transform = `scale(1)`;
-          console.log("Video animation completed");
+
+      // ✅ IMPORTANT: Ensure video container has proper positioning
+      videoContainer.style.position = "relative";
+      videoContainer.style.transformOrigin = "center center";
+
+      let hasReachedFullSize = false;
+      let animationFrameId = null;
+
+      const handleScroll = () => {
+        if (hasReachedFullSize) return;
+
+        const rect = videoContainer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // ✅ Better calculation
+        const videoTop = rect.top;
+        const videoBottom = rect.bottom;
+        const videoHeight = rect.height;
+
+        // ✅ Animation start when video enters viewport (bottom se)
+        const triggerStart = windowHeight;
+        // ✅ Animation complete when video reaches center
+        const triggerEnd = windowHeight * 0.3;
+
+        let progress = 0;
+
+        if (videoTop < triggerStart && videoBottom > 0) {
+          const distanceFromTop = Math.max(0, triggerStart - videoTop);
+          const totalRange = triggerStart - triggerEnd;
+          progress = Math.min(1, distanceFromTop / totalRange);
         }
-      });
+
+        const scale = 0.7 + 0.3 * progress;
+
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+
+        animationFrameId = requestAnimationFrame(() => {
+          videoContainer.style.transform = `scale(${scale})`;
+          console.log(
+            "Scroll Progress:",
+            progress.toFixed(2),
+            "Scale:",
+            scale.toFixed(2)
+          );
+
+          if (progress >= 0.95) {
+            hasReachedFullSize = true;
+            videoContainer.style.transform = `scale(1)`;
+            console.log("Video animation completed");
+          }
+        });
+      };
+
+      // ✅ Event listeners
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener("resize", handleScroll, { passive: true });
+
+      // ✅ Initial call
+      setTimeout(() => {
+        handleScroll();
+      }, 200);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleScroll);
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      };
     };
 
-    // ✅ Event listeners
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    
-    // ✅ Initial call
-    setTimeout(() => {
-      handleScroll();
-    }, 200);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  };
-
-  // ✅ Initialize when about data is ready
-  const cleanup = initializeVideoAnimation();
-  return cleanup;
-}, [about]); // ✅ Only run when about data changes
+    // ✅ Initialize when about data is ready
+    const cleanup = initializeVideoAnimation();
+    return cleanup;
+  }, [about]); // ✅ Only run when about data changes
 
   const fetchHero = async () => {
     try {
@@ -396,7 +394,7 @@ useEffect(() => {
 
   if (heroLoading || teamsLoading || aboutSectionLoading) return null;
 
-    // Agar data load ho raha hai ya loader show karna hai to return karo
+  // Agar data load ho raha hai ya loader show karna hai to return karo
   if (isLoading) {
     return <Loader />;
   }
@@ -405,7 +403,6 @@ useEffect(() => {
   if (heroLoading || teamsLoading || aboutSectionLoading) {
     return <Loader />;
   }
-
 
   console.log(faqSection);
 
@@ -418,73 +415,111 @@ useEffect(() => {
 
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
-          <Typography variant="h1" style={{ whiteSpace: "pre-line" }}>
-            {hero.title}
-          </Typography>
-
-          <div className="md:w-[534px] flex flex-col justify-between spacing-40">
-            <Typography variant="body-4" style={{ whiteSpace: "pre-line" }}>
-              {hero.subtitle}
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{
+              type: "spring",
+              damping: 12,
+              stiffness: 100,
+              bounce: 0.5,
+              duration: 0.8,
+              delay: 0.2,
+            }}
+          >
+            <Typography variant="h1" style={{ whiteSpace: "pre-line" }}>
+              {hero.title}
             </Typography>
+          </motion.div>
 
-            <div className="sp-24Home">
-              {hero.primaryButtonText && (
-                <Button
-                  variant="primary"
-                  icon={
-                    <Image
-                      src="/Arrow Right.png"
-                      width={14}
-                      height={12}
-                      alt="arrow"
-                      className="arrow-img"
-                    />
-                  }
-                  iconPosition="right"
-                >
-                  {hero.primaryButtonText}
-                </Button>
-              )}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{
+              type: "spring",
+              damping: 12,
+              stiffness: 100,
+              bounce: 0.5,
+              duration: 0.8,
+              delay: 0.4,
+            }}
+          >
+            <div className="md:w-[534px] flex flex-col justify-between spacing-40">
+              <Typography variant="body-4" style={{ whiteSpace: "pre-line" }}>
+                {hero.subtitle}
+              </Typography>
 
-              {hero.secondaryButtonText && (
-                <Button variant="black-outline" size="xl">
-                  {hero.secondaryButtonText}
-                </Button>
-              )}
+              <div className="sp-24Home">
+                {hero.primaryButtonText && (
+                  <Button
+                    variant="primary"
+                    icon={
+                      <Image
+                        src="/Arrow Right.png"
+                        width={14}
+                        height={12}
+                        alt="arrow"
+                        className="arrow-img"
+                      />
+                    }
+                    iconPosition="right"
+                  >
+                    {hero.primaryButtonText}
+                  </Button>
+                )}
+
+                {hero.secondaryButtonText && (
+                  <Button variant="black-outline" size="xl">
+                    {hero.secondaryButtonText}
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <HeroImageSection
-          mainImage={hero.mainImage}
-          leftImage={hero.leftImage}
-          rightImage={hero.rightImage}
-        />
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            type: "spring",
+            damping: 12,
+            stiffness: 100,
+            bounce: 0.5,
+            duration: 0.8,
+            delay: 0.6,
+          }}
+        >
+          <HeroImageSection
+            mainImage={hero.mainImage}
+            leftImage={hero.leftImage}
+            rightImage={hero.rightImage}
+          />
+        </motion.div>
       </Container>
-      
-      <Container variant="primary">
-        <GridSection
-          label={section.label}
-          title={section.title}
-          subtitle={section.subtitle}
-          minColWidth={section.minColWidth}
-          gap={section.gap}
-          columns={section.columns}
-          centerTitle={section.centerTitle}
-          items={section?.items?.map((card) => ({
-            component: (
-              <ImageCard
-                heading={card.heading}
-                description={card.description}
-                imageLink={card.imageLink}
-                textPosition={card.textPosition}
-              />
-            ),
-            colSpan: card.colSpan,
-            rowSpan: card.rowSpan,
 
-          }))}
-        />
+      <Container variant="primary">
+          <GridSection
+            label={section.label}
+            title={section.title}
+            subtitle={section.subtitle}
+            minColWidth={section.minColWidth}
+            gap={section.gap}
+            columns={section.columns}
+            centerTitle={section.centerTitle}
+            items={section?.items?.map((card) => ({
+              component: (
+                  <ImageCard
+                    heading={card.heading}
+                    description={card.description}
+                    imageLink={card.imageLink}
+                    textPosition={card.textPosition}
+                />
+              ),
+              colSpan: card.colSpan,
+              rowSpan: card.rowSpan,
+            }))}
+          />
       </Container>
 
       <Container variant="primary" className="mainSec">
@@ -646,7 +681,6 @@ useEffect(() => {
       </Container>
 
       <Container>
-        
         <Testimonial
           items={[
             {
@@ -701,7 +735,7 @@ useEffect(() => {
               imageSrc:
                 "https://ik.imagekit.io/a9uxeuyhx/3b074c847439e9d8f091ab35c5fdda46cc380b62.jpg?updatedAt=1762113238869",
             },
-               {
+            {
               companyLogo:
                 "https://ik.imagekit.io/a9uxeuyhx/Company.png?updatedAt=1762113891027",
               company: "NextWave",

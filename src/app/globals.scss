@@ -147,7 +147,7 @@ html {
 .price-container {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: stretch;
   gap: 24px;
   // transition: transform 0.3s ease-in-out;
 }
@@ -160,7 +160,6 @@ html {
 .price-container {
   display: flex;
   justify-content: center;
-  align-items: end;
   gap: 24px;
   position: relative;
 }
