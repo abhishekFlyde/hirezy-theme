@@ -50,7 +50,10 @@ const Loader = () => {
   );
 };
 
+
 export default function page() {
+  const [allHovered, setAllHovered] = useState(false);
+  
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -60,7 +63,7 @@ export default function page() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-
+  
   // Loader state
   const [isLoading, setIsLoading] = useState(true);
   const [headerLoaded, setHeaderLoaded] = useState(false);
@@ -409,6 +412,7 @@ export default function page() {
   const desktopOrder = [0, 3, 1, 2, 4];
   console.log(testimonialsSection);
 
+
   return (
     <>
       <Header />
@@ -499,27 +503,27 @@ export default function page() {
       </Container>
 
       <Container variant="primary">
-          <GridSection
-            label={section.label}
-            title={section.title}
-            subtitle={section.subtitle}
-            minColWidth={section.minColWidth}
-            gap={section.gap}
-            columns={section.columns}
-            centerTitle={section.centerTitle}
-            items={section?.items?.map((card) => ({
-              component: (
-                  <ImageCard
-                    heading={card.heading}
-                    description={card.description}
-                    imageLink={card.imageLink}
-                    textPosition={card.textPosition}
-                />
-              ),
-              colSpan: card.colSpan,
-              rowSpan: card.rowSpan,
-            }))}
-          />
+        <GridSection
+          label={section.label}
+          title={section.title}
+          subtitle={section.subtitle}
+          minColWidth={section.minColWidth}
+          gap={section.gap}
+          columns={section.columns}
+          centerTitle={section.centerTitle}
+          items={section?.items?.map((card) => ({
+            component: (
+              <ImageCard
+                heading={card.heading}
+                description={card.description}
+                imageLink={card.imageLink}
+                textPosition={card.textPosition}
+              />
+            ),
+            colSpan: card.colSpan,
+            rowSpan: card.rowSpan,
+          }))}
+        />
       </Container>
 
       <Container variant="primary" className="mainSec">
@@ -643,6 +647,7 @@ export default function page() {
                 tag={p.tag}
                 iconSrc={p.iconSrc}
                 variant={p.variant}
+                allHovered={allHovered}
               />
             ))}
           </div>
