@@ -518,7 +518,7 @@ useEffect(() => {
                     <ImageCard
                       heading={card.heading}
                       description={card.description}
-                      imageLink={card.imageLink}
+                      imageLink={card.imageLink} 
                       textPosition={card.textPosition}
                       className={card.className || ""}
                     />
