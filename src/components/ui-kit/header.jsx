@@ -12,6 +12,9 @@ export default function Header() {
   const [header, setHeader] = useState(null);
 
   useEffect(() => {
+    window.dispatchEvent(new Event("header-ready"));
+  }, []);
+  useEffect(() => {
     (async () => {
       try {
         const res = await api.get("/header-section");

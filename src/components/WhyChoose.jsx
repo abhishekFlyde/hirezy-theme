@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { Container } from "./ui-kit/spacing";
 import Label from "./ui-kit/lable";
@@ -10,35 +11,20 @@ import api from "@/lib/api";
 
 const WhyChoose = ({ open, setOpen }) => {
   const [section, setSection] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   // ✅ Fetch CMS data
   useEffect(() => {
     (async () => {
       try {
         const res = await api.get("/why-choose");
-        setSection(res.data.data); // only section object
+        setSection(res.data.data);
       } catch (err) {
         console.log("Failed to load section", err);
-      } finally {
-        setLoading(false);
       }
     })();
   }, []);
 
-  console.log(section);
-
-  if (loading || !section) {
-    return (
-      <section className="why-choose">
-        <Container variant="secondary">
-          <div className="animate-pulse h-64 bg-gray-200 rounded-lg w-full"></div>
-        </Container>
-      </section>
-    );
-  }
-
-  const { title, label, description, buttonText, features } = section;
+  const { title, label, description, buttonText, features } = section || {};
 
   return (
     <section className="why-choose">
@@ -70,14 +56,7 @@ const WhyChoose = ({ open, setOpen }) => {
           {/* Right Section – Features */}
           <div className="why-right">
             {features?.map((feature, index) => (
-              <Card
-                key={index}
-                iconSrc={feature.icon}
-                title={feature.title}
-                iconAlt={feature.title}
-                description={feature.desc}
-                className="why-card"
-              />
+              <FlipCard key={index} feature={feature} delay={index * 0.25} />
             ))}
           </div>
         </div>
@@ -99,3 +78,34 @@ const WhyChoose = ({ open, setOpen }) => {
 };
 
 export default WhyChoose;
+
+/* 🔥 Flip animation component */
+function FlipCard({ feature, delay = 0 }) {
+  const ref = useRef(null); // ✅ useRef instead of useState
+  const inView = useInView(ref, { once: true, margin: "50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ rotateX: 90, opacity: 0, y: 100 }}
+      animate={inView ? { rotateX: 0, opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.8,
+        delay,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      style={{
+        transformOrigin: "bottom center",
+        perspective: 100,
+      }}
+    >
+      <Card
+        iconSrc={feature.icon}
+        title={feature.title}
+        iconAlt={feature.title}
+        description={feature.desc}
+        className="why-card"
+      />
+    </motion.div>
+  );
+}
