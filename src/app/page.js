@@ -30,30 +30,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import { useStaggeredAnimation } from "@/hooks/useStaggeredAnimation";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
-const Loader = () => {
-  return (
-    <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-        <Typography variant="body-2" className="text-gray-600">
-          Loading...
-        </Typography>
-      </div>
-    </div>
-  );
-};
-
-
-export default function page() {
-  const [allHovered, setAllHovered] = useState(false);
-  
+export default function Page() {
   const [open, setOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -63,11 +46,6 @@ export default function page() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  
-  // Loader state
-  const [isLoading, setIsLoading] = useState(true);
-  const [headerLoaded, setHeaderLoaded] = useState(false);
-  const [heroLoaded, setHeroLoaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,8 +75,6 @@ export default function page() {
 
       if (res.data.success) {
         setMessageSent(true);
-
-        // ✅ Clear form
         setFormData({ fullName: "", email: "", phone: "", message: "" });
       } else {
         toast.error(res.data.msg || "Something went wrong");
@@ -149,34 +125,9 @@ export default function page() {
   const [pricingSection, setPricingSection] = useState(null);
   const [faqSection, setFaqSection] = useState(null);
   const [testimonialsSection, setTestimonialsSection] = useState(null);
-
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
-  // Check if header and hero section are loaded
-  useEffect(() => {
-    // Header ko loaded maan lete hain kyunki wo local component hai
-    setHeaderLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    // Jab hero data load ho jaye aur heroLoading false ho jaye
-    if (!heroLoading && hero) {
-      setHeroLoaded(true);
-    }
-  }, [heroLoading, hero]);
-
-  useEffect(() => {
-    // Jab dono header aur hero load ho jayein tab loader hide karenge
-    if (headerLoaded && heroLoaded) {
-      // Thoda delay dekar smooth transition ke liye
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 500); // 500ms delay for smooth transition
-
-      return () => clearTimeout(timer);
-    }
-  }, [headerLoaded, heroLoaded]);
-
+  
   const fetchFeaturesSection = async () => {
     try {
       const res = await api.get("/features-section");
@@ -188,7 +139,6 @@ export default function page() {
 
   const checkDevice = () => {
     const width = window.innerWidth;
-
     setIsMobile(width <= 600);
     setIsIpad(width > 600 && width <= 1100);
     setIsDesktop(width > 1024);
@@ -197,7 +147,6 @@ export default function page() {
   useEffect(() => {
     checkDevice();
     window.addEventListener("resize", checkDevice);
-
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
@@ -208,27 +157,18 @@ export default function page() {
     endPosition: 0.1,
   });
 
-  // ✅ REPLACE THIS ENTIRE useEffect WITH THIS NEW CODE
   useEffect(() => {
-    if (!about || !about.media) {
-      console.log("About data not loaded yet");
-      return;
-    }
+    if (!about || !about.media) return;
 
     const initializeVideoAnimation = () => {
       const videoContainer = document.querySelector(".video");
       const videoElement = document.querySelector(".video video");
 
-      console.log("Video elements found:", !!videoContainer, !!videoElement);
-
       if (!videoContainer || !videoElement) {
-        console.log("Video elements not found, will retry...");
-        // Retry after a short delay
         setTimeout(initializeVideoAnimation, 100);
         return;
       }
 
-      // ✅ IMPORTANT: Ensure video container has proper positioning
       videoContainer.style.position = "relative";
       videoContainer.style.transformOrigin = "center center";
 
@@ -240,19 +180,12 @@ export default function page() {
 
         const rect = videoContainer.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-
-        // ✅ Better calculation
         const videoTop = rect.top;
         const videoBottom = rect.bottom;
-        const videoHeight = rect.height;
-
-        // ✅ Animation start when video enters viewport (bottom se)
         const triggerStart = windowHeight;
-        // ✅ Animation complete when video reaches center
         const triggerEnd = windowHeight * 0.3;
 
         let progress = 0;
-
         if (videoTop < triggerStart && videoBottom > 0) {
           const distanceFromTop = Math.max(0, triggerStart - videoTop);
           const totalRange = triggerStart - triggerEnd;
@@ -261,49 +194,31 @@ export default function page() {
 
         const scale = 0.7 + 0.3 * progress;
 
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
         animationFrameId = requestAnimationFrame(() => {
           videoContainer.style.transform = `scale(${scale})`;
-          console.log(
-            "Scroll Progress:",
-            progress.toFixed(2),
-            "Scale:",
-            scale.toFixed(2)
-          );
-
           if (progress >= 0.95) {
             hasReachedFullSize = true;
             videoContainer.style.transform = `scale(1)`;
-            console.log("Video animation completed");
           }
         });
       };
 
-      // ✅ Event listeners
       window.addEventListener("scroll", handleScroll, { passive: true });
       window.addEventListener("resize", handleScroll, { passive: true });
 
-      // ✅ Initial call
-      setTimeout(() => {
-        handleScroll();
-      }, 200);
+      setTimeout(() => handleScroll(), 200);
 
       return () => {
         window.removeEventListener("scroll", handleScroll);
         window.removeEventListener("resize", handleScroll);
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
       };
     };
 
-    // ✅ Initialize when about data is ready
     const cleanup = initializeVideoAnimation();
     return cleanup;
-  }, [about]); // ✅ Only run when about data changes
+  }, [about]);
 
   const fetchHero = async () => {
     try {
@@ -351,7 +266,6 @@ export default function page() {
     try {
       const res = await api.get("/integration-section");
       setIntegrationsSection(res.data?.section || { items: [] });
-      console.log(res.data.section);
     } catch (err) {
       console.log("Failed to load integration");
     }
@@ -365,6 +279,7 @@ export default function page() {
       console.log("Failed to load pricing");
     }
   };
+
   const fetchFAQSection = async () => {
     try {
       const res = await api.get("/faq-section");
@@ -397,18 +312,6 @@ export default function page() {
 
   if (heroLoading || teamsLoading || aboutSectionLoading) return null;
 
-  // Agar data load ho raha hai ya loader show karna hai to return karo
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  // Agar data loading complete nahi hua hai to bhi loader show karo
-  if (heroLoading || teamsLoading || aboutSectionLoading) {
-    return <Loader />;
-  }
-
-  console.log(faqSection);
-
   const desktopOrder = [0, 3, 1, 2, 4];
   console.log(testimonialsSection);
 
@@ -420,15 +323,12 @@ export default function page() {
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
+            initial={{ x: -60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{
-              type: "spring",
-              damping: 12,
-              stiffness: 100,
-              bounce: 0.5,
               duration: 0.8,
-              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1], // smooth cubic-bezier easing
+              delay: 0.1,
             }}
           >
             <Typography variant="h1" style={{ whiteSpace: "pre-line" }}>
@@ -437,15 +337,12 @@ export default function page() {
           </motion.div>
 
           <motion.div
-            initial={{ x: 100, opacity: 0 }}
+            initial={{ x: 60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{
-              type: "spring",
-              damping: 12,
-              stiffness: 100,
-              bounce: 0.5,
-              duration: 0.8,
-              delay: 0.4,
+              duration: 0.9,
+              ease: [0.25, 0.1, 0.25, 1],
+              delay: 0.25,
             }}
           >
             <div className="md:w-[534px] flex flex-col justify-between spacing-40">
@@ -482,16 +379,14 @@ export default function page() {
           </motion.div>
         </div>
 
+        {/* ✨ Smooth image animation */}
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ y: 80, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{
-            type: "spring",
-            damping: 12,
-            stiffness: 100,
-            bounce: 0.5,
-            duration: 0.8,
-            delay: 0.6,
+            duration: 1.2,
+            ease: [0.33, 1, 0.68, 1], // "easeOutQuart" style smoothness
+            delay: 0.5,
           }}
         >
           <HeroImageSection
@@ -527,7 +422,7 @@ export default function page() {
       </Container>
 
       <Container variant="primary" className="mainSec">
-        <SectionHeader 
+        <SectionHeader
           label={about.label || ""}
           title={about.title || ""}
           subtitle={about.subtitle || ""}
@@ -557,7 +452,7 @@ export default function page() {
                     <ImageCard
                       heading={card.heading}
                       description={card.description}
-                      imageLink={card.imageLink} 
+                      imageLink={card.imageLink}
                       textPosition={card.textPosition}
                       className={card.className || ""}
                     />
