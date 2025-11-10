@@ -10,6 +10,7 @@ export const ImageCard = ({
   classNameCustom,
   imageClassName,
 }) => {
+  
   const isRight = textPosition === "right";
 
   const TextBlock = () => (
