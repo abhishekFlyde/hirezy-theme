@@ -78,6 +78,12 @@ export default function Pricing({
             </span>
             <Typography variant="body-6">Extra features</Typography>
             </li>
+            <li>
+            <span className="check-icon">
+              <Check size={14} />
+            </span>
+            <Typography variant="body-6">Extra features</Typography>
+            </li>
           </div>
         </ul>
         <div className="pricing-cost">

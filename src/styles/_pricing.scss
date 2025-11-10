@@ -23,11 +23,18 @@
 }
 
 /* When hovering on this specific card */
+
+/* 👇 When any card is hovered — expand height for all cards */
+.price-container:hover .extra-section {
+  max-height: 200px; /* gives height to all */
+}
+
+/* 👇 But only the hovered card shows content */
 .pricing-card:hover .extra-section {
-  max-height: 200px; /* Adjust if needed */
   opacity: 1;
   transform: translateY(0);
 }
+
 
 
 .pricing-header {
