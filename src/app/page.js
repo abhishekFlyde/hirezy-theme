@@ -488,7 +488,7 @@ useEffect(() => {
       </Container>
 
       <Container variant="primary" className="mainSec">
-        <SectionHeader
+        <SectionHeader 
           label={about.label || ""}
           title={about.title || ""}
           subtitle={about.subtitle || ""}

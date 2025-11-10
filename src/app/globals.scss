@@ -18,8 +18,6 @@
 @import "../styles/input";
 @import "../styles/signin";
 
-
-
 body {
   background-color: var(--color-white);
   box-sizing: border-box;
@@ -42,7 +40,7 @@ html {
 //   justify-content: center;
 //   align-items: center;
 //   // background: #000;
-  
+
 //   /* ✅ Container scaling ke liye */
 //   transform: scale(0.7); /* Initial scale */
 //   transform-origin: center center;
@@ -69,10 +67,7 @@ html {
   transform: scale(0.7);
   transform-origin: center center;
   will-change: transform;
-
 }
-
-
 
 .video video {
   width: 100%;
@@ -180,7 +175,6 @@ html {
   .price-container {
     flex-direction: column;
     align-items: center;
-
   }
 }
 
