@@ -84,10 +84,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--sp-40);
-    align-items: stretch;
-    .why-right > * {
-      height: 100%; /* ✅ make each Card fill its grid cell */
-    }
+    align-items: stretch ;
+   
 
     @media (max-width: 900px) {
       grid-area: cards;
@@ -100,6 +98,7 @@
     .why-card {
       display: flex;
       flex-direction: row;
+      height: 100%;
       align-items: flex-start;
       background-color: var(--color-blue-300);
       transition: all 0.3s ease;
@@ -130,7 +129,9 @@
       }
     }
   }
-
+  .why-right > * {
+    height: 100%; 
+  }
   .mobile-button-container {
     display: none;
 
