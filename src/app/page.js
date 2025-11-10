@@ -33,6 +33,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 
+
+
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
