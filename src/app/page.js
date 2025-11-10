@@ -38,6 +38,7 @@ import api from "@/lib/api";
 
 export default function Page() {
   const [open, setOpen] = useState(false);
+  const [allHovered, setAllHovered] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
