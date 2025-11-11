@@ -33,11 +33,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 
+
+
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 
 export default function Page() {
   const [open, setOpen] = useState(false);
+  const [allHovered, setAllHovered] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -315,6 +318,7 @@ export default function Page() {
   const desktopOrder = [0, 3, 1, 2, 4];
   console.log(testimonialsSection);
 
+
   return (
     <>
       <Header />
@@ -541,6 +545,7 @@ export default function Page() {
                 tag={p.tag}
                 iconSrc={p.iconSrc}
                 variant={p.variant}
+                allHovered={allHovered}
               />
             ))}
           </div>

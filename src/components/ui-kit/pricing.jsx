@@ -30,6 +30,7 @@ export default function Pricing({
 
     
   return (
+    <div>
     <div className={`pricing-card ${variant} ${highlight ? "highlight" : ""}`}>
       {/* Icon and Tag */}
       <div className="pricing-header">
@@ -64,6 +65,26 @@ export default function Pricing({
               {item}
             </li>
           ))}
+          <div className="extra-section pricing-features">
+            <li>
+            <span className="check-icon">
+              <Check size={14} />
+            </span>
+            <Typography variant="body-6">Extra features</Typography>
+            </li>
+            <li>
+            <span className="check-icon">
+              <Check size={14} />
+            </span>
+            <Typography variant="body-6">Extra features</Typography>
+            </li>
+            <li>
+            <span className="check-icon">
+              <Check size={14} />
+            </span>
+            <Typography variant="body-6">Extra features</Typography>
+            </li>
+          </div>
         </ul>
         <div className="pricing-cost">
           <Typography variant="h2" className="price">
@@ -81,6 +102,7 @@ export default function Pricing({
       <div className="pricing-bottom">
         <button className="choose-btn">Choose Plan</button>
       </div>
+    </div>
     </div>
   );
 }

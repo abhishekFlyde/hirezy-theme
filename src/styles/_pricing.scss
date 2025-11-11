@@ -10,6 +10,33 @@
   transition: all 0.3s ease;
 }
 
+/* Default hidden state */
+.extra-section {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-10px);
+  transition:
+    max-height 0.5s ease,
+    opacity 0.5s ease,
+    transform 0.4s ease;
+}
+
+/* When hovering on this specific card */
+
+/* 👇 When any card is hovered — expand height for all cards */
+.price-container:hover .extra-section {
+  max-height: 200px; /* gives height to all */
+}
+
+/* 👇 But only the hovered card shows content */
+.pricing-card:hover .extra-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
 .pricing-header {
   display: flex;
   justify-content: space-between;
