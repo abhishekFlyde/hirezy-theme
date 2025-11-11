@@ -35,7 +35,7 @@ const TransformSection = () => {
 
   // Background animation (comes first)
   const bgVariants = {
-    hidden: { opacity: 0, scale: 1.1 },
+    hidden: { opacity: 0, scale: 0},
     visible: {
       opacity: 1,
       scale: 1,
