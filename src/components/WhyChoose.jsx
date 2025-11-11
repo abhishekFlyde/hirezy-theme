@@ -92,10 +92,10 @@ function FlipCard({ feature, delay = 0 }) {
       transition={{
         duration: 0.8,
         delay,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: [0.13, 0.1, 0.12, 1],
       }}
       style={{
-        transformOrigin: "bottom center",
+       
         perspective: 100,
       }}
     >

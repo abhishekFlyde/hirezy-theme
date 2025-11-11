@@ -466,7 +466,7 @@ export default function Page() {
               />
             </Container>
           ) : isDesktop ? (
-            <Container variant="primary" className="flex flex-col gap-[56px] ">
+            <Container variant="section" className="flex flex-col gap-[56px] ">
               {" "}
               <SectionHeader
                 label={FeaturesSection.label}

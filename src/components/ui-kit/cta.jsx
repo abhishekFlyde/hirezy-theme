@@ -5,6 +5,7 @@ import Button from "./button";
 import Image from "next/image";
 import { Container } from "./spacing";
 import api from "@/lib/api";
+import { motion } from "framer-motion";
 
 const TransformSection = () => {
   const [section, setSection] = useState(null);
@@ -32,46 +33,98 @@ const TransformSection = () => {
 
   if (!section) return null;
 
+  // Background animation (comes first)
+  const bgVariants = {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  // Text container animation (delayed after bg)
+  const textContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        delayChildren: 0.8, // wait until bg anim finishes
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  // Individual text items
+  const textItem = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100, damping: 18 },
+    },
+  };
+
   return (
     <Container variant="section">
-      <section className="transform-section section">
-        <div
+      <motion.section
+        className="transform-section section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        {/* Background animation */}
+        <motion.div
           key={section.id}
           className="transform-card"
-          style={{ backgroundImage: `url(${section.bgImage})` }}
+          variants={bgVariants}
+          style={{
+            backgroundImage: `url(${section.bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-          <div className="transform-card-content">
-            <Typography variant="h1" className="cta-title">
-              {section.title}
-            </Typography>
+          {/* Text content appears after bg */}
+          <motion.div
+            className="transform-card-content"
+            variants={textContainer}
+          >
+            <motion.div variants={textItem}>
+              <Typography variant="h1" className="cta-title">
+                {section.title}
+              </Typography>
+            </motion.div>
 
-            <Typography variant="body-3" className="cta-desc">
-              {section.desc}
-            </Typography>
+            <motion.div variants={textItem}>
+              <Typography variant="body-3" className="cta-desc">
+                {section.desc}
+              </Typography>
+            </motion.div>
 
-            <Button
-              variant="white"
-              size="smTwo"
-              showIcon={true}
-              iconPosition="right"
-              className="btn"
-              icon={
-                <Image
-                  src={section.btnIcon}
-                  width={14}
-                  height={12}
-                  alt="arrow"
-                  className="arrow-img"
-                />
-              }
-              as={section.buttonLink ? "a" : "button"}
-              href={section.buttonLink || undefined}
-            >
-              <Typography variant="h4">{section.btnText}</Typography>
-            </Button>
-          </div>
-        </div>
-      </section>
+            <motion.div variants={textItem}>
+              <Button
+                variant="white"
+                size="smTwo"
+                showIcon={true}
+                iconPosition="right"
+                className="btn"
+                icon={
+                  <Image
+                    src={section.btnIcon}
+                    width={14}
+                    height={12}
+                    alt="arrow"
+                    className="arrow-img"
+                  />
+                }
+                as={section.buttonLink ? "a" : "button"}
+                href={section.buttonLink || undefined}
+              >
+                <Typography variant="h4">{section.btnText}</Typography>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </motion.section>
     </Container>
   );
 };
