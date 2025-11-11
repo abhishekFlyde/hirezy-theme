@@ -5,7 +5,6 @@ import Image from "next/image";
 import SectionHeader from "./sectionHeader";
 import Typography from "./typography";
 
-
 export default function Testimonial({ items = [] }) {
   const sectionRef = useRef(null);
   const [index, setIndex] = useState(0);
@@ -91,8 +90,20 @@ export default function Testimonial({ items = [] }) {
               animate="center"
               exit="exit"
             >
-              {/* Image */}
-              <div className="image-wrapper">
+              {/* Image - Left se aayega */}
+              <motion.div
+                className="image-wrapper"
+                initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
+                whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "0px" }}
+                transition={{
+                  type: "spring",
+                  damping: 15,
+                  stiffness: 100,
+                  bounce: 0.4,
+                  duration: 0.8,
+                }}
+              >
                 <Image
                   src={imageSrc}
                   alt={name}
@@ -101,10 +112,26 @@ export default function Testimonial({ items = [] }) {
                   priority
                   className="object-cover rounded-2xl"
                 />
-              </div>
+              </motion.div>
 
-              {/* Text content */}
-              <div className="content-wrapper">
+              {/* Text content - Pehle entire section right se aayega */}
+              <motion.div
+                className="content-wrapper"
+                initial={{ x: 50, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true, margin: "0px" }}
+                transition={{
+                  type: "spring",
+                  damping: 15,
+                  stiffness: 100,
+                  bounce: 0.4,
+                  duration: 0.8,
+                }}
+                onAnimationComplete={() => {
+                  // Yahan aap text animation trigger kar sakte hain
+                  // ya phir nested whileInView use karenge
+                }}
+              >
                 <div className="card-content">
                   <div className="company-logo">
                     <Image
@@ -115,24 +142,92 @@ export default function Testimonial({ items = [] }) {
                       className="object-contain"
                     />
                   </div>
-                  <div>
-                    <Typography variant="body-1" className="quote">
-                      {quote}
-                    </Typography>
-                    <Typography variant="body-4" className="details">
-                      {details}
-                    </Typography>
-                    <div className="author">
+
+                  {/* Text Elements - Jab right section aa jaye tab one by one aayenge */}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "0px" }}
+                    variants={{
+                      visible: {
+                        transition: {
+                          staggerChildren: 0.2,
+                        },
+                      },
+                    }}
+                  >
+                    {/* Quote */}
+                    <motion.div
+                      variants={{
+                        hidden: { y: 30, opacity: 0 },
+                        visible: {
+                          y: 0,
+                          opacity: 1,
+                          transition: {
+                            type: "spring",
+                            damping: 15,
+                            stiffness: 100,
+                            bounce: 0.3,
+                            duration: 0.6,
+                          },
+                        },
+                      }}
+                    >
+                      <Typography variant="body-1" className="quote">
+                        {quote}
+                      </Typography>
+                    </motion.div>
+
+                    {/* Details */}
+                    <motion.div
+                      variants={{
+                        hidden: { y: 30, opacity: 0 },
+                        visible: {
+                          y: 0,
+                          opacity: 1,
+                          transition: {
+                            type: "spring",
+                            damping: 15,
+                            stiffness: 100,
+                            bounce: 0.3,
+                            duration: 0.6,
+                          },
+                        },
+                      }}
+                    >
+                      <Typography variant="body-4" className="details">
+                        {details}
+                      </Typography>
+                    </motion.div>
+
+                    {/* Author */}
+                    <motion.div
+                      className="author"
+                      variants={{
+                        hidden: { y: 30, opacity: 0 },
+                        visible: {
+                          y: 0,
+                          opacity: 1,
+                          transition: {
+                            type: "spring",
+                            damping: 15,
+                            stiffness: 100,
+                            bounce: 0.3,
+                            duration: 0.6,
+                          },
+                        },
+                      }}
+                    >
                       <Typography variant="h6" className="name">
                         {name}
                       </Typography>
                       <Typography variant="body-5" className="role">
                         {role}
                       </Typography>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </AnimatePresence>
         </div>

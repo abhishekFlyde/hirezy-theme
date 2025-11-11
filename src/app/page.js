@@ -470,34 +470,6 @@ export default function Page() {
               />
             </Container>
           ) : isDesktop ? (
-            // <Container variant="section" className="flex flex-col gap-[56px] ">
-            //   {" "}
-            //   <SectionHeader
-            //     label={FeaturesSection.label}
-            //     title={FeaturesSection.title}
-            //     subtitle={FeaturesSection.subtitle}
-            //   />{" "}
-            //   <div className="columns-3 !gap-[32px]">
-            //     {desktopOrder.map((idx) => {
-            //       const f = FeaturesSection.items[idx];
-
-            //       return (
-            //         <ImageCard
-            //           key={idx}
-            //           heading={f.heading}
-            //           description={f.description}
-            //           imageLink={f.imageLink}
-            //           textPosition={f.textPosition}
-            //           classNameCustom={
-            //             idx == 0
-            //               ? "break-inside-avoid "
-            //               : "break-inside-avoid  mt-[32px]"
-            //           }
-            //         />
-            //       );
-            //     })}
-            //   </div>
-            // </Container>
             <Container variant="section" className="flex flex-col gap-[56px]">
               {/* Section Header with Animation */}
               <motion.div
@@ -601,9 +573,20 @@ export default function Page() {
           />
         </div>
 
-        <div className="w-full lg:w-1/2 flex justify-center">
-          <Tools items={integrationsSection?.items} />
-        </div>
+        <motion.div className="w-full lg:w-1/2 flex justify-center"          
+            initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "0px" }}
+            transition={{
+              type: "spring",
+              damping: 15,
+              stiffness: 100,
+              bounce: 0.4,
+              duration: 0.8,
+            }}
+            >
+            <Tools items={integrationsSection?.items} />
+        </motion.div>
       </Container>
 
       <Container className="price-section">
