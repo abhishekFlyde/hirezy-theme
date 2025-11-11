@@ -6,11 +6,11 @@ import clsx from "clsx";
 export default function HeroImageSection({
   mainImage,
   leftImage,
-  rightImage,
+  rightImage, 
   className,
 }) {
   return (
-    <section className={clsx("w-full flex justify-center imageSec", className)}>
+    <section className={clsx("w-full flex justify-center imageSec pb-[50px]", className)}>
       <div className="relative w-full flex justify-center items-center">
         {/* MAIN IMAGE */}
         <div className="relative mainImageHome">
