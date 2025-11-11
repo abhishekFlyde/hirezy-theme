@@ -63,17 +63,20 @@ export default function Blogs() {
           gap={section.gap}
           columns={section.columns}
           centerTitle={section.centerTitle}
-          items={section.items}
-          renderItem={(card) => (
-            <Link href={`/blogs/${card.slug}`} key={card.slug}>
-              <ImageCard
-                heading={card.heading}
-                description={card.description}
-                imageLink={card.imageLink}
-                textPosition={card.textPosition}
-              />
-            </Link>
-          )}
+          items={section.items.map((card) => ({
+            component: (
+              <Link href={`/blogs/${card.slug}`} key={card.slug}>
+                <ImageCard
+                  heading={card.heading}
+                  description={card.description}
+                  imageLink={card.imageLink}
+                  textPosition={card.textPosition}
+                />
+              </Link>
+            ),
+            colSpan: card.colSpan,
+            rowSpan: card.rowSpan,
+          }))}
         />
       </Container>
       <Footer />

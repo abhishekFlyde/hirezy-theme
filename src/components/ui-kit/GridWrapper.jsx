@@ -2,13 +2,22 @@
 
 import React, { useRef } from "react";
 import clsx from "clsx";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import SectionHeader from "./sectionHeader";
 
-function StackedCard({ index, smoothProgress, itemData, renderItem }) {
-  const startY = 100 - index * 25;
-  const startScale = 0.85 + index * 0.05;
+// 🔹 Child component — handles per-item animation safely
+function GridItem({ itemData, i, smoothProgress }) {
+  // Each card’s stacking offset
+  const startY = 100 - i * 25; // deeper cards stack more
+  const startScale = 0.85 + i * 0.05;
 
+  // Animate from stack → natural position
   const y = useTransform(smoothProgress, [0, 0.6], [startY, 0]);
   const scale = useTransform(smoothProgress, [0, 0.6], [startScale, 1]);
   const rotateX = useTransform(smoothProgress, [0, 0.6], [15, 0]);
@@ -25,16 +34,12 @@ function StackedCard({ index, smoothProgress, itemData, renderItem }) {
         gridColumn: itemData.colSpan ? `span ${itemData.colSpan}` : undefined,
         gridRow: itemData.rowSpan ? `span ${itemData.rowSpan}` : undefined,
       }}
-      className={clsx(itemData.className, "flex justify-center")}
-    >
-      {/* ✅ Safe rendering even if renderItem isn't provided */}
-      {typeof renderItem === "function" ? (
-        renderItem(itemData)
-      ) : (
-        <div className="w-full p-4 bg-gray-100 rounded-xl text-center text-gray-500">
-          ⚠️ No renderItem function provided
-        </div>
+      className={clsx(
+        itemData.className,
+        "flex justify-center transition-transform"
       )}
+    >
+      {itemData.component}
     </motion.div>
   );
 }
@@ -49,15 +54,17 @@ export default function GridSection({
   columns = 3,
   items = [],
   wrapperClass = "",
-  renderItem,
 }) {
   const ref = useRef(null);
+  const inView = useInView(ref, { once: false });
 
+  // Scroll progress across this section
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "center center"],
+    offset: ["start end", "center center"], // starts before fully visible, ends when centered
   });
 
+  // Smooth spring for better feel
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 80,
     damping: 20,
@@ -73,7 +80,7 @@ export default function GridSection({
       />
 
       <div
-        className="relative grid gridSectionAuto auto-rows-max grid-flow-dense"
+        className="relative grid gridSectionAuto !items-between !auto-rows-max !grid-flow-dense"
         style={{
           gap,
           gridTemplateColumns: `repeat(${columns}, minmax(${minColWidth}, 1fr))`,
@@ -81,12 +88,11 @@ export default function GridSection({
         }}
       >
         {items.map((itemData, i) => (
-          <StackedCard
+          <GridItem
             key={i}
-            index={i}
-            smoothProgress={smoothProgress}
+            i={i}
             itemData={itemData}
-            renderItem={renderItem}
+            smoothProgress={smoothProgress}
           />
         ))}
       </div>
