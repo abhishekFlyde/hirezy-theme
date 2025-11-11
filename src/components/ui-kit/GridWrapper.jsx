@@ -11,6 +11,39 @@ import {
 } from "framer-motion";
 import SectionHeader from "./sectionHeader";
 
+// 🔹 Child component — handles per-item animation safely
+function GridItem({ itemData, i, smoothProgress }) {
+  // Each card’s stacking offset
+  const startY = 100 - i * 25; // deeper cards stack more
+  const startScale = 0.85 + i * 0.05;
+
+  // Animate from stack → natural position
+  const y = useTransform(smoothProgress, [0, 0.6], [startY, 0]);
+  const scale = useTransform(smoothProgress, [0, 0.6], [startScale, 1]);
+  const rotateX = useTransform(smoothProgress, [0, 0.6], [15, 0]);
+  const opacity = useTransform(smoothProgress, [0.1, 0.6], [0.5, 1]);
+
+  return (
+    <motion.div
+      style={{
+        y,
+        scale,
+        rotateX,
+        opacity,
+        transformOrigin: "center center",
+        gridColumn: itemData.colSpan ? `span ${itemData.colSpan}` : undefined,
+        gridRow: itemData.rowSpan ? `span ${itemData.rowSpan}` : undefined,
+      }}
+      className={clsx(
+        itemData.className,
+        "flex justify-center transition-transform"
+      )}
+    >
+      {itemData.component}
+    </motion.div>
+  );
+}
+
 export default function GridSection({
   label,
   title,
@@ -54,42 +87,14 @@ export default function GridSection({
           perspective: "1200px",
         }}
       >
-        {items.map((itemData, i) => {
-          // Each card’s stacking offset
-          const startY = 100 - i * 25; // deeper cards stack more
-          const startScale = 0.85 + i * 0.05;
-
-          // Animate from stack → natural position
-          const y = useTransform(smoothProgress, [0, 0.6], [startY, 0]);
-          const scale = useTransform(smoothProgress, [0, 0.6], [startScale, 1]);
-          const rotateX = useTransform(smoothProgress, [0, 0.6], [15, 0]);
-          const opacity = useTransform(smoothProgress, [0.1, 0.6], [0.5, 1]);
-
-          return (
-            <motion.div
-              key={i}
-              style={{
-                y,
-                scale,
-                rotateX,
-                opacity,
-                transformOrigin: "center center",
-                gridColumn: itemData.colSpan
-                  ? `span ${itemData.colSpan}`
-                  : undefined,
-                gridRow: itemData.rowSpan
-                  ? `span ${itemData.rowSpan}`
-                  : undefined,
-              }}
-              className={clsx(
-                itemData.className,
-                "flex justify-center transition-transform"
-              )}
-            >
-              {itemData.component}
-            </motion.div>
-          );
-        })}
+        {items.map((itemData, i) => (
+          <GridItem
+            key={i}
+            i={i}
+            itemData={itemData}
+            smoothProgress={smoothProgress}
+          />
+        ))}
       </div>
     </section>
   );
