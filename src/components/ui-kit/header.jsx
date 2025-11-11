@@ -6,14 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./spacing";
 import api from "@/lib/api";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState("Home");
   const [header, setHeader] = useState(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     window.dispatchEvent(new Event("header-ready"));
   }, []);
+
   useEffect(() => {
     (async () => {
       try {
@@ -24,6 +27,34 @@ export default function Header() {
       }
     })();
   }, []);
+
+  // Set active link based on current pathname
+  useEffect(() => {
+    if (header?.navLinks) {
+      // Find the link that matches the current path
+      const currentLink = header.navLinks.find(link => 
+        pathname === link.href || 
+        (link.href !== "/" && pathname.startsWith(link.href))
+      );
+      
+      if (currentLink) {
+        setActiveLink(currentLink.name);
+      } else if (pathname === "/") {
+        setActiveLink("Home");
+      }
+    }
+  }, [pathname, header]);
+
+  // Handle link click
+  const handleLinkClick = (linkName, href, e) => {
+    e.preventDefault();
+    setActiveLink(linkName);
+    
+    // Navigate after state update
+    setTimeout(() => {
+      window.location.href = href;
+    }, 0);
+  };
 
   if (!header) return null;
 
@@ -40,7 +71,6 @@ export default function Header() {
             className="header-logo"
           />
         </Link>
-        
 
         {/* ✅ Dynamic Desktop Navigation */}
         <nav className="nav-link-container">
@@ -48,24 +78,19 @@ export default function Header() {
             <Link
               key={i}
               href={link.href}
-              // onClick={(e) => {
-              //   e.preventDefault();
-              //   setActiveLink(link.name);
-              // }}
-              className={activeLink === link.name ? "active-link" : ""}
+              onClick={(e) => handleLinkClick(link.name, link.href, e)}
+              className={`nav-link ${activeLink === link.name ? "active-link" : ""}`}
             >
               <Typography
-                className={`transition-colors ${
+                className={`nav-link-color transition-colors ${
                   activeLink === link.name ? "font-semibold" : ""
                 }`}
                 variant="body-4"
                 style={{
-                  fontWeight: activeLink === link.name ? 600 : 400,
                   lineHeight: "150%",
                   fontSize: "16px",
                 }}
               >
-                
                 {link.name}
               </Typography>
             </Link>
