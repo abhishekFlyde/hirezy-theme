@@ -18,7 +18,7 @@ const Button = ({
     showIcon !== undefined ? showIcon : variant === "primary";
   const Tag = as || "button";
 
-  return (
+  return ( 
     <Tag
       disabled={disabled}
       className={clsx(

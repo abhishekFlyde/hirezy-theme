@@ -48,7 +48,7 @@
   /* Variants */
   &--primary {
     background: var(--color-lime);
-    color: var(--color-black-500);
+    color: black ;
     transition: 0.2s ease-in-out;
     border: 0.5px solid transparent;
 
@@ -125,7 +125,7 @@
     width: 40px;
     height: 40px;
     border-radius: 48px;
-    background: var(--color-white);
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,7 +180,7 @@
       width: 22px;
       height: 22px;
       border-radius: 48px;
-      background: var(--color-white);
+      background: white;
       font-size: 16px;
       color: var(--color-black-500);
     }

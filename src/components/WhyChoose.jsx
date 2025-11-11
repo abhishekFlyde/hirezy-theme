@@ -41,7 +41,7 @@ const WhyChoose = ({ open, setOpen }) => {
                 {description}
               </Typography>
             </div>
- 
+
             <Button
               variant="primary"
               size="xl"
@@ -95,7 +95,6 @@ function FlipCard({ feature, delay = 0 }) {
         ease: [0.13, 0.1, 0.12, 1],
       }}
       style={{
-       
         perspective: 100,
       }}
     >

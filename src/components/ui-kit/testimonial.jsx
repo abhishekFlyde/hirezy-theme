@@ -12,7 +12,7 @@ export default function Testimonial({ items = [] }) {
   const [direction, setDirection] = useState(0);
 
   // Scroll tracking for testimonial section
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress } = useScroll({ 
     target: sectionRef,
     offset: ["start center", "end center"],
   });

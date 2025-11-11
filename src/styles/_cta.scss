@@ -28,6 +28,16 @@
     padding: var(--sp-80) 66px;
   }
 
+  .cta-title {
+    margin-bottom: var(--sp-24);
+    color: black ;
+  }
+
+  .cta-desc {
+    margin-bottom: var(--sp-56);
+    color: black ;
+  }
+
   @media (max-width: 680px) {
     .transform-card-content {
       padding: var(--sp-40) var(--sp-24);
@@ -49,14 +59,6 @@
   .cta-desc {
     margin-bottom: var(--sp-32);
   }
-}
-
-.cta-title {
-  margin-bottom: var(--sp-24);
-}
-
-.cta-desc {
-  margin-bottom: var(--sp-56);
 }
 
 // h2 {

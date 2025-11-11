@@ -36,6 +36,7 @@ import AssembleSection from "@/components/ui-kit/FramerMotion Animation/Assemble
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
 import { applyTheme } from "@/lib/applyTheme";
+import { initThemeSocket } from "@/lib/themeSocket";
 
 export default function Page() {
   const [open, setOpen] = useState(false);
@@ -52,7 +53,7 @@ export default function Page() {
   useEffect(() => {
     api.get("/theme-setting").then((res) => {
       applyTheme(res.data.theme);
-      console.log(res.data);
+      // console.log(res.data);
     });
   }, []);
 
@@ -154,6 +155,8 @@ export default function Page() {
 
   useEffect(() => {
     checkDevice();
+    initThemeSocket()
+    
     window.addEventListener("resize", checkDevice);
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
@@ -321,7 +324,7 @@ export default function Page() {
   if (heroLoading || teamsLoading || aboutSectionLoading) return null;
 
   const desktopOrder = [0, 3, 1, 2, 4];
-  console.log(testimonialsSection);
+  // console.log(testimonialsSection);
 
   return (
     <>
