@@ -24,7 +24,7 @@ const Button = ({
       className={clsx(
         "btn",
         `btn--${variant}`,
-        `btn--${size}`,
+        `btn--${size}`, 
         disabled && "btn--disabled",
         icon && shouldShowIcon && "btn--with-icon",
         className

@@ -20,7 +20,7 @@ import Pricing from "@/components/ui-kit/pricing";
 import FAQ from "@/components/ui-kit/faq";
 import {
   motion,
-  AnimatePresence, 
+  AnimatePresence,
   useScroll,
   useTransform,
   number,
@@ -33,10 +33,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 
-
-
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
+import { applyTheme } from "@/lib/applyTheme";
 
 export default function Page() {
   const [open, setOpen] = useState(false);
@@ -49,6 +48,13 @@ export default function Page() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    api.get("/theme-setting").then((res) => {
+      applyTheme(res.data.theme);
+      console.log(res.data);
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -130,7 +136,6 @@ export default function Page() {
   const [testimonialsSection, setTestimonialsSection] = useState(null);
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
-  
   const fetchFeaturesSection = async () => {
     try {
       const res = await api.get("/features-section");
@@ -317,7 +322,6 @@ export default function Page() {
 
   const desktopOrder = [0, 3, 1, 2, 4];
   console.log(testimonialsSection);
-
 
   return (
     <>

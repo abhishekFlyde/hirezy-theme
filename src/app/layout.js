@@ -1,7 +1,9 @@
-import React from "react";
+
+
 import { Geist, Geist_Mono, Lato, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.scss";
 import ClientLayout from "./ClientLayout";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +49,8 @@ export const metadata = {
   },
   metadataBase: new URL("https://www.hirezy.com"),
 };
+
+
 
 export default function RootLayout({ children }) {
   return (

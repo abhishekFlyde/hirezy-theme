@@ -41,13 +41,13 @@ const WhyChoose = ({ open, setOpen }) => {
                 {description}
               </Typography>
             </div>
-
+ 
             <Button
               variant="primary"
               size="xl"
               showIcon={false}
               onClick={() => setOpen(true)}
-              className="why-btn"
+              className="why-btn "
             >
               <Typography variant="h4">{buttonText}</Typography>
             </Button>
