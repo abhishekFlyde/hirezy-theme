@@ -72,7 +72,7 @@ export default function Testimonial({ items = [] }) {
       }}
     >
       {/* Sticky container keeps testimonials pinned */}
-      <div className="sticky top-0 h-[100vh] flex flex-col justify-center">
+      <div className="sticky top-0  flex flex-col justify-center">
         <SectionHeader
           label="Testimonial"
           title="What Our Users Say"
