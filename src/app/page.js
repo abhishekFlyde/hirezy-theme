@@ -20,7 +20,7 @@ import Pricing from "@/components/ui-kit/pricing";
 import FAQ from "@/components/ui-kit/faq";
 import {
   motion,
-  AnimatePresence,
+  AnimatePresence, 
   useScroll,
   useTransform,
   number,
