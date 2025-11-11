@@ -138,7 +138,7 @@ export default function Testimonial({ items = [] }) {
         </div>
 
         {/* Arrows (optional manual control) */}
-        <div className="arrows mt-6">
+        <div className="arrows !mt-6">
           <button
             className="prev"
             onClick={() => {
