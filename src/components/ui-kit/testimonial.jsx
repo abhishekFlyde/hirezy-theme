@@ -18,6 +18,7 @@
 
 //   useEffect(() => {
 //     if (!items.length) return;
+    
 //     const unsubscribe = scrollYProgress.on("change", (progress) => {
 //       const newIndex = Math.floor(progress * items.length);
 //       const clamped = Math.max(0, Math.min(items.length - 1, newIndex));
@@ -36,7 +37,7 @@
 //   // ✅ smoother + blink-free animation
 //   const variants = {
 //     enter: (dir) => ({
-//       x: dir > 0 ? 80 : -80,
+//       x: dir > 0 ? 80 : -180,
 //       opacity: 0,
 //       filter: "blur(6px)",
 //     }),
@@ -60,6 +61,34 @@
 //     }),
 //   };
 
+//   // Inner content animation variants
+//   const contentVariants = {
+//     hidden: {
+//       opacity: 0,
+//     },
+//     visible: {
+//       opacity: 1,
+//       transition: {
+//         staggerChildren: 0.2
+//       }
+//     }
+//   };
+
+//   const itemVariants = {
+//     hidden: { y: 30, opacity: 0 },
+//     visible: {
+//       y: 0,
+//       opacity: 1,
+//       transition: {
+//         type: "spring",
+//         damping: 15,
+//         stiffness: 100,
+//         bounce: 0.3,
+//         duration: 0.6
+//       }
+//     }
+//   };
+
 //   const { quote, details, name, role, imageSrc, companyLogo } = items[index];
 
 //   return (
@@ -67,11 +96,11 @@
 //       ref={sectionRef}
 //       className="testimonial-section mainSec relative"
 //       style={{
-//         height: `${items.length * 100}vh`, // 🔥 Auto height
+//         height: `${items.length * 100}vh`,
 //       }}
 //     >
 //       {/* Sticky container keeps testimonials pinned */}
-//       <div className="sticky top-0  flex flex-col justify-center">
+//       <div className="sticky top-0 flex flex-col justify-center">
 //         <SectionHeader
 //           label="Testimonial"
 //           title="What Our Users Say"
@@ -90,18 +119,18 @@
 //               animate="center"
 //               exit="exit"
 //             >
-//               {/* Image - Left se aayega */}
+//               {/* Image - Simple delay-based animation */}
 //               <motion.div
 //                 className="image-wrapper"
 //                 initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
-//                 whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
-//                 viewport={{ once: true, margin: "0px" }}
+//                 animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
 //                 transition={{
 //                   type: "spring",
 //                   damping: 15,
 //                   stiffness: 100,
 //                   bounce: 0.4,
 //                   duration: 0.8,
+//                   delay: 0.2
 //                 }}
 //               >
 //                 <Image
@@ -114,22 +143,18 @@
 //                 />
 //               </motion.div>
 
-//               {/* Text content - Pehle entire section right se aayega */}
+//               {/* Text content - Simple delay-based animation */}
 //               <motion.div
 //                 className="content-wrapper"
 //                 initial={{ x: 50, opacity: 0 }}
-//                 whileInView={{ x: 0, opacity: 1 }}
-//                 viewport={{ once: true, margin: "0px" }}
+//                 animate={{ x: 0, opacity: 1 }}
 //                 transition={{
 //                   type: "spring",
 //                   damping: 15,
 //                   stiffness: 100,
 //                   bounce: 0.4,
 //                   duration: 0.8,
-//                 }}
-//                 onAnimationComplete={() => {
-//                   // Yahan aap text animation trigger kar sakte hain
-//                   // ya phir nested whileInView use karenge
+//                   delay: 0.3
 //                 }}
 //               >
 //                 <div className="card-content">
@@ -143,81 +168,29 @@
 //                     />
 //                   </div>
 
-//                   {/* Text Elements - Jab right section aa jaye tab one by one aayenge */}
+//                   {/* Text Elements - Simple delay-based approach */}
 //                   <motion.div
 //                     initial="hidden"
-//                     whileInView="visible"
-//                     viewport={{ once: true, margin: "0px" }}
-//                     variants={{
-//                       visible: {
-//                         transition: {
-//                           staggerChildren: 0.2,
-//                         },
-//                       },
-//                     }}
+//                     animate="visible"
+//                     transition={{ delay: 0.6 }} // Right section ke baad text aayega
+//                     variants={contentVariants}
 //                   >
 //                     {/* Quote */}
-//                     <motion.div
-//                       variants={{
-//                         hidden: { y: 30, opacity: 0 },
-//                         visible: {
-//                           y: 0,
-//                           opacity: 1,
-//                           transition: {
-//                             type: "spring",
-//                             damping: 15,
-//                             stiffness: 100,
-//                             bounce: 0.3,
-//                             duration: 0.6,
-//                           },
-//                         },
-//                       }}
-//                     >
+//                     <motion.div variants={itemVariants}>
 //                       <Typography variant="body-1" className="quote">
 //                         {quote}
 //                       </Typography>
 //                     </motion.div>
 
 //                     {/* Details */}
-//                     <motion.div
-//                       variants={{
-//                         hidden: { y: 30, opacity: 0 },
-//                         visible: {
-//                           y: 0,
-//                           opacity: 1,
-//                           transition: {
-//                             type: "spring",
-//                             damping: 15,
-//                             stiffness: 100,
-//                             bounce: 0.3,
-//                             duration: 0.6,
-//                           },
-//                         },
-//                       }}
-//                     >
+//                     <motion.div variants={itemVariants}>
 //                       <Typography variant="body-4" className="details">
 //                         {details}
 //                       </Typography>
 //                     </motion.div>
 
 //                     {/* Author */}
-//                     <motion.div
-//                       className="author"
-//                       variants={{
-//                         hidden: { y: 30, opacity: 0 },
-//                         visible: {
-//                           y: 0,
-//                           opacity: 1,
-//                           transition: {
-//                             type: "spring",
-//                             damping: 15,
-//                             stiffness: 100,
-//                             bounce: 0.3,
-//                             duration: 0.6,
-//                           },
-//                         },
-//                       }}
-//                     >
+//                     <motion.div className="author" variants={itemVariants}>
 //                       <Typography variant="h6" className="name">
 //                         {name}
 //                       </Typography>
@@ -268,6 +241,7 @@
 //   );
 // }
 
+
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
@@ -279,7 +253,7 @@ export default function Testimonial({ items = [] }) {
   const sectionRef = useRef(null);
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [textAnimationTrigger, setTextAnimationTrigger] = useState(false);
 
   // Scroll tracking for testimonial section
   const { scrollYProgress } = useScroll({ 
@@ -297,8 +271,8 @@ export default function Testimonial({ items = [] }) {
       if (clamped !== index) {
         setDirection(clamped > index ? 1 : -1);
         setIndex(clamped);
-        // Reset animation flag when testimonial changes
-        setHasAnimated(false);
+        // Reset text animation trigger when testimonial changes
+        setTextAnimationTrigger(false);
       }
     });
 
@@ -310,7 +284,7 @@ export default function Testimonial({ items = [] }) {
   // ✅ smoother + blink-free animation
   const variants = {
     enter: (dir) => ({
-      x: dir > 0 ? 80 : -80,
+      x: dir > 0 ? 80 : -180,
       opacity: 0,
       filter: "blur(6px)",
     }),
@@ -338,29 +312,26 @@ export default function Testimonial({ items = [] }) {
   const contentVariants = {
     hidden: {
       opacity: 0,
-      transition: {
-        staggerChildren: 0.2
-      }
     },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: "spring",
-        damping: 15,
+        damping: 20,
         stiffness: 100,
-        bounce: 0.3,
-        duration: 0.6
+        bounce: 0.2,
+        duration: 0.3
       }
     }
   };
@@ -372,11 +343,11 @@ export default function Testimonial({ items = [] }) {
       ref={sectionRef}
       className="testimonial-section mainSec relative"
       style={{
-        height: `${items.length * 100}vh`, // 🔥 Auto height
+        height: `${items.length * 100}vh`,
       }}
     >
       {/* Sticky container keeps testimonials pinned */}
-      <div className="sticky top-0  flex flex-col justify-center">
+      <div className="sticky top-0 flex flex-col justify-center">
         <SectionHeader
           label="Testimonial"
           title="What Our Users Say"
@@ -394,16 +365,13 @@ export default function Testimonial({ items = [] }) {
               initial="enter"
               animate="center"
               exit="exit"
-              onAnimationComplete={() => {
-                // Set animation complete when main card animation finishes
-                setHasAnimated(true);
-              }}
             >
-              {/* Image - Use animate instead of whileInView */}
+              {/* Image - whileInView use karein */}
               <motion.div
                 className="image-wrapper"
                 initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
-                animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "0px" }}
                 transition={{
                   type: "spring",
                   damping: 15,
@@ -423,11 +391,12 @@ export default function Testimonial({ items = [] }) {
                 />
               </motion.div>
 
-              {/* Text content - Use animate instead of whileInView */}
+              {/* Text content - whileInView use karein */}
               <motion.div
                 className="content-wrapper"
                 initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true, margin: "0px" }}
                 transition={{
                   type: "spring",
                   damping: 15,
@@ -435,6 +404,10 @@ export default function Testimonial({ items = [] }) {
                   bounce: 0.4,
                   duration: 0.8,
                   delay: 0.3
+                }}
+                onAnimationComplete={() => {
+                  // Text animation trigger karo jab right section animate ho jaye
+                  setTextAnimationTrigger(true);
                 }}
               >
                 <div className="card-content">
@@ -448,10 +421,10 @@ export default function Testimonial({ items = [] }) {
                     />
                   </div>
 
-                  {/* Text Elements - Animate after main content appears */}
+                  {/* Text Elements - State-based animation */}
                   <motion.div
                     initial="hidden"
-                    animate={hasAnimated ? "visible" : "hidden"}
+                    animate={textAnimationTrigger ? "visible" : "hidden"}
                     variants={contentVariants}
                   >
                     {/* Quote */}
@@ -491,7 +464,7 @@ export default function Testimonial({ items = [] }) {
             onClick={() => {
               setDirection(-1);
               setIndex((i) => Math.max(0, i - 1));
-              setHasAnimated(false);
+              setTextAnimationTrigger(false);
             }}
           >
             <Image
@@ -506,7 +479,7 @@ export default function Testimonial({ items = [] }) {
             onClick={() => {
               setDirection(1);
               setIndex((i) => Math.min(items.length - 1, i + 1));
-              setHasAnimated(false);
+              setTextAnimationTrigger(false);
             }}
           >
             <Image
