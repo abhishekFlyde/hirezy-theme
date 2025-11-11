@@ -20,7 +20,7 @@ import Pricing from "@/components/ui-kit/pricing";
 import FAQ from "@/components/ui-kit/faq";
 import {
   motion,
-  AnimatePresence, 
+  AnimatePresence,
   useScroll,
   useTransform,
   number,
@@ -32,8 +32,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
-
-
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
@@ -130,7 +128,6 @@ export default function Page() {
   const [testimonialsSection, setTestimonialsSection] = useState(null);
   const [integrationsSection, setIntegrationsSection] = useState(null);
 
-  
   const fetchFeaturesSection = async () => {
     try {
       const res = await api.get("/features-section");
@@ -318,7 +315,6 @@ export default function Page() {
   const desktopOrder = [0, 3, 1, 2, 4];
   console.log(testimonialsSection);
 
-
   return (
     <>
       <Header />
@@ -466,33 +462,109 @@ export default function Page() {
               />
             </Container>
           ) : isDesktop ? (
-            <Container variant="section" className="flex flex-col gap-[56px] ">
-              {" "}
-              <SectionHeader
-                label={FeaturesSection.label}
-                title={FeaturesSection.title}
-                subtitle={FeaturesSection.subtitle}
-              />{" "}
-              <div className="columns-3 !gap-[32px]">
+            // <Container variant="section" className="flex flex-col gap-[56px] ">
+            //   {" "}
+            //   <SectionHeader
+            //     label={FeaturesSection.label}
+            //     title={FeaturesSection.title}
+            //     subtitle={FeaturesSection.subtitle}
+            //   />{" "}
+            //   <div className="columns-3 !gap-[32px]">
+            //     {desktopOrder.map((idx) => {
+            //       const f = FeaturesSection.items[idx];
+
+            //       return (
+            //         <ImageCard
+            //           key={idx}
+            //           heading={f.heading}
+            //           description={f.description}
+            //           imageLink={f.imageLink}
+            //           textPosition={f.textPosition}
+            //           classNameCustom={
+            //             idx == 0
+            //               ? "break-inside-avoid "
+            //               : "break-inside-avoid  mt-[32px]"
+            //           }
+            //         />
+            //       );
+            //     })}
+            //   </div>
+            // </Container>
+            <Container variant="section" className="flex flex-col gap-[56px]">
+              {/* Section Header with Animation */}
+              <motion.div
+                initial={{ y: 50, opacity: 0, filter: "blur(10px)" }}
+                whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                }}
+              >
+                <SectionHeader
+                  label={FeaturesSection.label}
+                  title={FeaturesSection.title}
+                  subtitle={FeaturesSection.subtitle}
+                />
+              </motion.div>
+
+              {/* Cards Container with Staggered Animation */}
+              <motion.div
+                className="columns-3 !gap-[32px]"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-30px" }}
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.6, // Har card ke beech 0.3 seconds ka gap
+                    },
+                  },
+                }}
+              >
                 {desktopOrder.map((idx) => {
                   const f = FeaturesSection.items[idx];
 
                   return (
-                    <ImageCard
+                    <motion.div
                       key={idx}
-                      heading={f.heading}
-                      description={f.description}
-                      imageLink={f.imageLink}
-                      textPosition={f.textPosition}
-                      classNameCustom={
+                      variants={{
+                        hidden: {
+                          y: 80,
+                          opacity: 0,
+                          filter: "blur(15px)",
+                          scale: 0.9,
+                        },
+                        visible: {
+                          y: 0,
+                          opacity: 1,
+                          filter: "blur(0px)",
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            damping: 15,
+                            stiffness: 100,
+                            bounce: 0.4,
+                            duration: 0.8,
+                          },
+                        },
+                      }}
+                      className={
                         idx == 0
-                          ? "break-inside-avoid "
-                          : "break-inside-avoid  mt-[32px]"
+                          ? "break-inside-avoid"
+                          : "break-inside-avoid mt-[32px]"
                       }
-                    />
+                    >
+                      <ImageCard
+                        heading={f.heading}
+                        description={f.description}
+                        imageLink={f.imageLink}
+                        textPosition={f.textPosition}
+                      />
+                    </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
             </Container>
           ) : null}
         </>

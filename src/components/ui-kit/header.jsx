@@ -6,12 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./spacing";
 import api from "@/lib/api";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
-  const [activeLink, setActiveLink] = useState("Home");
+  const [activeLink, setActiveLink] = useState("");
   const [header, setHeader] = useState(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     window.dispatchEvent(new Event("header-ready"));
@@ -32,28 +33,29 @@ export default function Header() {
   useEffect(() => {
     if (header?.navLinks) {
       // Find the link that matches the current path
-      const currentLink = header.navLinks.find(link => 
-        pathname === link.href || 
-        (link.href !== "/" && pathname.startsWith(link.href))
-      );
+      const currentLink = header.navLinks.find(link => {
+        // Exact match or starts with for nested routes
+        return pathname === link.href || 
+               (link.href !== "/" && pathname.startsWith(link.href));
+      });
       
       if (currentLink) {
         setActiveLink(currentLink.name);
       } else if (pathname === "/") {
         setActiveLink("Home");
+      } else {
+        // If no match found, set to empty or keep previous state
+        setActiveLink("");
       }
     }
   }, [pathname, header]);
 
-  // Handle link click
+  // Handle link click with proper navigation
   const handleLinkClick = (linkName, href, e) => {
     e.preventDefault();
     setActiveLink(linkName);
-    
-    // Navigate after state update
-    setTimeout(() => {
-      window.location.href = href;
-    }, 0);
+    // Use Next.js router for client-side navigation
+    router.push(href);
   };
 
   if (!header) return null;
@@ -62,7 +64,15 @@ export default function Header() {
     <Container variant="header">
       <header className="header-container flex items-center justify-between">
         {/* ✅ Dynamic Logo */}
-        <Link href="/" className="flex-shrink-0">
+        <Link 
+          href="/" 
+          className="flex-shrink-0"
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveLink("Home");
+            router.push("/");
+          }}
+        >
           <Image
             src={header.logo}
             alt="Hirezy"
@@ -82,9 +92,7 @@ export default function Header() {
               className={`nav-link ${activeLink === link.name ? "active-link" : ""}`}
             >
               <Typography
-                className={`nav-link-color transition-colors ${
-                  activeLink === link.name ? "font-semibold" : ""
-                }`}
+                className="nav-link-color transition-colors"
                 variant="body-4"
                 style={{
                   lineHeight: "150%",
