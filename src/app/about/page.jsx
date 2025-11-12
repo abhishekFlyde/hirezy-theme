@@ -46,7 +46,7 @@ export default function AboutUs() {
         </div>
       </Container>
 
-      <Container variant="primary">
+      <Container className='about-spacing-two' variant="primary">
         <div className="about-container">
           <div className="about-heading">
             <SectionHeader
