@@ -8,11 +8,18 @@ export default function Card({
   description,
   iconSrc,
   iconAlt = "",
+  variant = "default",
   className = "",
   ...props
-}) {
+})
+{
+  const variants = {
+    default: "card",
+    secondary: "card-secondary",
+  };
+
   return (
-    <div className={`card ${className}`} {...props}>
+    <div className={`${variants[variant]} ${className}`} {...props}>
       {iconSrc && (
         <div className="card-icon">
           <Image

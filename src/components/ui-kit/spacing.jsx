@@ -8,6 +8,7 @@ export const Container = ({ children, variant = "primary", className }) => {
     secondary: "secondary-spacing",
     section: "section-spacing",
     header : "header-spacing",
+    normal : "normal-spacing",
     auth : "auth-spacing"
   };
 
