@@ -23,15 +23,14 @@ export default function AboutUs() {
     checkScreenSize();
 
     // Add resize event listener
-    window.addEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
 
     // Cleanup function
     return () => {
-      window.removeEventListener('resize', checkScreenSize);
+      window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
 
-  
   return (
     <>
       <Header />
@@ -46,13 +45,15 @@ export default function AboutUs() {
         </div>
       </Container>
 
-      <Container className='about-spacing-two' variant="primary">
+      <Container className="about-spacing-two" variant="primary">
         <div className="about-container">
           <div className="about-heading">
             <SectionHeader
               label="Our Story"
               title="Building Better Hiring Since 2019"
               align="left"
+              imageSrc="https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843"
+              imageAlt="About image"
               subtitle=<>
                 Founded by a team of HR professionals and tech innovators,
                 Hirezy was born from a simple observation: recruitment was
@@ -64,15 +65,13 @@ export default function AboutUs() {
                 platform has facilitated more than 10,000 successful hires and
                 continues to evolve based on real feedback from real recruiters.
               </>
-              
             />
-            
           </div>
 
           <div className="about-image">
             <Image
               src="https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843"
-              alt="About Us"
+              alt="About image"
               width={571}
               height={520}
             />
@@ -161,7 +160,7 @@ export default function AboutUs() {
         <Metric key="3" number="50+" label="Seamless Integrations" />
         <Metric key="4" number="95%" label="Customer Satisfaction" />
       </Container>
-      
+
       <Container variant="normal">
         <CTA />
       </Container>

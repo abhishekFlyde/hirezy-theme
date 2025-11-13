@@ -87,7 +87,7 @@
   // padding-bottom: 0px;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 767px) {
   .team-heading {
     max-width: 100%;
     // text-align: start;
@@ -106,11 +106,22 @@
     width: 100%;
     height: 267px;
     margin-top: var(--sp-16);
+    // display: none;
   }
   .about-our-value-container {
     margin-inline: 0px;
   }
   .about-spacing-two{
     padding-top: 0px;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .about-image {
+    display: none;
+  }
+  .about-heading {
+    width: 100%;
   }
 }
