@@ -1,0 +1,192 @@
+{
+  "header": {
+    "logo": "/images/logo.svg",
+    "favicon": "/images/favicon.ico",
+    "ctaText": "Get Started",
+    "ctaLink": "/get-started",
+    "navLinks": [
+      { "name": "Home", "href": "/" },
+      { "name": "Features", "href": "/#features" },
+      { "name": "Pricing", "href": "/pricing" },
+      { "name": "About", "href": "/about" },
+      { "name": "Contact", "href": "/contact" }
+    ]
+  },
+
+  "hero": {
+    "title": "Hire Faster With Next-Gen Recruitment",
+    "subtitle": "AI-assisted hiring platform built to improve sourcing, interviews and onboarding.",
+    "primaryButtonText": "Start Free",
+    "secondaryButtonText": "Book Demo",
+    "mainImage": "/images/hero-main.png",
+    "leftImage": "/images/hero-left.png",
+    "rightImage": "/images/hero-right.png"
+  },
+
+  "about": {
+    "label": "About",
+    "title": "Discover Hirezy",
+    "subtitle": "Designed for modern hiring teams",
+    "description": "Hirezy helps HR teams source, screen and hire talent faster — with built-in ATS, automation and smart filtering.",
+    "media": "/images/about.png",
+    "centerTitle": "center"
+  },
+
+  "featuresSection": {
+    "label": "Features",
+    "title": "Smart Recruitments, Better Results",
+    "subtitle": "From job posting to hiring — everything in one workflow.",
+    "minColWidth": "310px",
+    "gap": "32px",
+    "columns": 3,
+    "centerTitle": "center",
+    "items": [
+      {
+        "heading": "AI Resume Screening",
+        "description": "Instantly filter top candidates with AI-powered matching.",
+        "imageLink": "/images/feature1.png",
+        "textPosition": "bottom",
+        "rowSpan": 1,
+        "colSpan": 1
+      },
+      {
+        "heading": "Automated Emailing",
+        "description": "Send emails + follow ups automatically to candidates.",
+        "imageLink": "/images/feature2.png",
+        "textPosition": "bottom",
+        "rowSpan": 1,
+        "colSpan": 1
+      },
+      {
+        "heading": "Team Collaboration",
+        "description": "Share candidates & assign reviewers in one click.",
+        "imageLink": "/images/feature3.png",
+        "textPosition": "bottom",
+        "rowSpan": 1,
+        "colSpan": 1
+      }
+    ]
+  },
+
+  "integrationSection": {
+    "label": "Integration",
+    "title": "Seamlessly Connected",
+    "subtitle": "Integrate with your favourite HR, hiring & productivity tools.",
+    "items": [
+      { "src": "/logos/slack.svg", "alt": "Slack" },
+      { "src": "/logos/notion.svg", "alt": "Notion" },
+      { "src": "/logos/google.svg", "alt": "Google" }
+    ]
+  },
+
+  "whyChooseSection": {
+    "title": "Why Choose Hirezy",
+    "label": "Value",
+    "description": "Built with recruiters to provide the tools they need — helping them find the right talent faster.",
+    "buttonText": "Get to Know Us",
+    "features": [
+      {
+        "icon": "/icons/speed.svg",
+        "title": "Faster Hiring",
+        "desc": "Reduce hiring time and get the best matches instantly."
+      },
+      {
+        "icon": "/icons/team.svg",
+        "title": "Team Friendly",
+        "desc": "Collaborate with your entire HR team in one dashboard."
+      }
+    ]
+  },
+
+  "metricsSection": {
+    "items": [
+      { "number": "5K+", "label": "Hires" },
+      { "number": "200+", "label": "Recruiters" },
+      { "number": "98%", "label": "Success Rate" }
+    ]
+  },
+
+  "pricingSection": {
+    "label": "Pricing Plan",
+    "title": "Simple Plans, Clear Value",
+    "subtitle": "Choose a plan that fits your team’s needs.",
+    "items": [
+      {
+        "planName": "Starter",
+        "description": "Perfect for small teams",
+        "price": "₹999/mo",
+        "tag": "Popular",
+        "iconSrc": "/icons/plan1.svg",
+        "variant": "blue",
+        "features": [
+          { "text": "Up to 5 job postings" },
+          { "text": "Email Automation" },
+          { "text": "Basic Analytics" }
+        ]
+      },
+      {
+        "planName": "Growth",
+        "description": "For fast-growing companies",
+        "price": "₹2499/mo",
+        "tag": "",
+        "iconSrc": "/icons/plan2.svg",
+        "variant": "lime",
+        "features": [
+          { "text": "Unlimited job postings" },
+          { "text": "AI Resume Screening" },
+          { "text": "Advanced Analytics" }
+        ]
+      }
+    ]
+  },
+
+  "faqSection": {
+    "label": "FAQ",
+    "title": "Have a Question?",
+    "subtitle": "Straightforward answers to common recruiter questions.",
+    "items": [
+      {
+        "question": "How does Hirezy help in hiring?",
+        "answer": "It automates job postings, resume screening, communication & analytics."
+      },
+      {
+        "question": "Do you support integrations?",
+        "answer": "Yes, we support Google, Slack, Notion and more."
+      }
+    ]
+  },
+
+  "testimonialSection": {
+    "items": [
+      {
+        "companyLogo": "/logos/stripe.svg",
+        "company": "Stripe",
+        "quote": "Amazing product — hiring became 10x faster!",
+        "details": "We moved from manual resume sorting to full automation.",
+        "name": "Rohit Sharma",
+        "role": "HR Lead",
+        "imageSrc": "/users/rohit.png"
+      }
+    ]
+  },
+
+  "footerSection": {
+    "logo": "/images/logo.svg",
+    "description": "Smart hiring software for fast-growing teams.",
+    "quickLinks": [
+      { "name": "Pricing", "href": "/pricing" },
+      { "name": "Privacy Policy", "href": "/privacy" }
+    ],
+    "contacts": [
+      { "icon": "phone", "text": "+91-9998887770" },
+      { "icon": "mail", "text": "support@hirezy.com" }
+    ],
+    "socials": [
+      { "name": "LinkedIn", "href": "https://linkedin.com" },
+      { "name": "Instagram", "href": "https://instagram.com" }
+    ],
+    "subscribeTitle": "Stay Updated",
+    "subscribeSubtitle": "Join our newsletter for hiring tips",
+    "copyright": "© 2025 Hirezy"
+  }
+}
