@@ -260,9 +260,7 @@ export default function Testimonial({ items = [] }) {
             />
           ))}
         </div>
-        {/* Arrows */}
-
-        {/* Animated Dots */}
+      
       </div>
     </section>
   );
