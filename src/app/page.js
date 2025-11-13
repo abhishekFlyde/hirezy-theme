@@ -534,7 +534,7 @@ export default function Page() {
       <CTA />
       <Container
         variant="secondary"
-        className="grid sm:grid-cols-4 grid-cols-2 gap-[50px]  "
+        className="grid lg:grid-cols-4 grid-cols-2 gap-[50px]  "
       >
         {metricsSection?.items.map((m, i) => (
           <Metric key={i} number={m.number} label={m.label} />
