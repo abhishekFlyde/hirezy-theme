@@ -64,6 +64,12 @@ export default function SectionHeader({
         </motion.div>
       )}
 
+      {/* {imageSrc && (
+        <motion.div variants={item} className="w-full">
+          <Image src={imageSrc} alt="Section Header" />
+        </motion.div>
+      )} */}
+
       {title && (
         <motion.div variants={item} className="w-full">
           <Typography variant="h2" style={{ whiteSpace: "pre-line" }}>

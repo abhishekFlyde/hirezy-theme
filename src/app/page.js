@@ -17,6 +17,7 @@ import GridSection from "@/components/ui-kit/GridWrapper";
 import { ImageCard } from "@/components/ui-kit/card";
 import Tools from "@/components/ui-kit/tools";
 import Pricing from "@/components/ui-kit/pricing";
+import TeamCard from "@/components/ui-kit/ourTeamCard";
 import FAQ from "@/components/ui-kit/faq";
 import {
   motion,

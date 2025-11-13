@@ -48,3 +48,32 @@
     color: var(--color-black-400);
   }
 }
+
+.card-secondary {
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+        padding: var(--sp-32);
+
+
+    &.card-secondary .card-icon {
+      width: 54px;
+    height: 54px;
+    border-radius: var(--radius-lg);
+  }
+  &.card-secondary img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &.card-secondary .card-title {
+  margin-top: var(--sp-24);  
+}
+&.card-secondary .card-description {
+  margin-top: var(--sp-16);
+}
+
+@media (max-width: 450px) {
+  justify-content: center;
+}
+}
