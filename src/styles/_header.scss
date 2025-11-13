@@ -1,56 +1,99 @@
 .header-container {
-    // padding: var(--sp-24) var(--sp-50);
-    font-family: var(--font-jakarta);
-  }
-  
-  .nav-link-container {
-    display: flex;
-    gap: var(--sp-80);
-  }
-  
-  .header-logo {
-    width: 140.3px;
-    height: 37px;
-  }
-  
+  font-family: var(--font-jakarta);
+  // position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-white);
+  z-index: 1000;
+  // padding: var(--sp-24) var(--sp-50);
+  // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link-container {
+  display: flex;
+  gap: var(--sp-80);
+}
+
+.header-logo {
+  width: 140.3px;
+  height: 37px;
+}
+
+.nav-link-color {
+  color: var(--color-black-400);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Active link styles */
+.active-link {
   .nav-link-color {
-    color: var(--color-black-400);
-    transition: all 0.2s ease-in-out;
+    color: var(--color-black-500);
+    font-weight: 600;
   }
-  
-  /* Active link styles */
-  .active-link {
-    .nav-link-color {
-      color: var(--color-black-500);
-      font-weight: 600;
-    }
-  
-    position: relative;
-  
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   bottom: -4px;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 2px;
-    //   background-color: var(--color-black-500);
-    // }
+
+  position: relative;
+
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: -4px;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 2px;
+  //   background-color: var(--color-black-500);
+  // }
+}
+
+@media (max-width: 834px) {
+  .nav-link-container {
+    gap: var(--sp-40);
   }
-  
-  @media (max-width: 834px) {
-    .nav-link-container {
-      gap: var(--sp-40);
-    }
+}
+
+@media (max-width: 650px) {
+  .header-logo {
+    width: 107px;
+    height: 28px;
   }
-  
-  @media (max-width: 650px) {
-    .header-logo {
-      width: 107px;
-      height: 28px;
-    }
-    .nav-link-container {
-      display: none;
-    }
+  .nav-link-container {
+    display: none;
   }
-  
+}
+
+
+/* Hidden State */
+.header-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.25s ease;
+}
+
+/* Visible State + Bounce */
+.header-visible {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.45s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
+}
+
+/* When navbar becomes fixed */
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  animation: bounceIn 0.35s ease-out;
+}
+
+/* Extra smooth bounce pop */
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-25%);
+  }
+  60% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

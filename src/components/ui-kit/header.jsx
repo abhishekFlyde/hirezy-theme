@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Typography from "./typography";
 import Button from "./button";
 import Image from "next/image";
@@ -11,50 +11,79 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Header() {
   const [activeLink, setActiveLink] = useState("");
   const [header, setHeader] = useState(null);
+
+  const [isVisible, setIsVisible] = useState(true);
+  const [isFixed, setIsFixed] = useState(false);
+
+  // REFS
+  const firstScrollRef = useRef(false);
+  const timeoutRef = useRef(null);
+
   const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    window.dispatchEvent(new Event("header-ready"));
-  }, []);
-
+  // Load header data
   useEffect(() => {
     (async () => {
       try {
         const res = await api.get("/header-section");
         setHeader(res.data?.section || {});
-      } catch (err) {
+      } catch {
         console.log("Failed to load header");
       }
     })();
   }, []);
 
-  // Set active link based on current pathname
+  // Set active link
   useEffect(() => {
-    if (header?.navLinks) {
-      // Find the link that matches the current path
-      const currentLink = header.navLinks.find(link => {
-        // Exact match or starts with for nested routes
-        return pathname === link.href || 
-               (link.href !== "/" && pathname.startsWith(link.href));
-      });
-      
-      if (currentLink) {
-        setActiveLink(currentLink.name);
-      } else if (pathname === "/") {
-        setActiveLink("Home");
-      } else {
-        // If no match found, set to empty or keep previous state
-        setActiveLink("");
-      }
-    }
+    if (!header?.navLinks) return;
+    const currentLink = header.navLinks.find(
+      (link) =>
+        pathname === link.href ||
+        (link.href !== "/" && pathname.startsWith(link.href))
+    );
+    if (currentLink) setActiveLink(currentLink.name);
+    else if (pathname === "/") setActiveLink("Home");
   }, [pathname, header]);
 
-  // Handle link click with proper navigation
-  const handleLinkClick = (linkName, href, e) => {
+  // FINAL FIRST-SCROLL LOGIC
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+
+      // On first scroll → HIDE immediately → show after 1 second
+      if (!firstScrollRef.current && y > 10) {
+        firstScrollRef.current = true;
+
+        // hide instantly
+        setIsVisible(false);
+
+        timeoutRef.current = setTimeout(() => {
+          setIsFixed(true);
+          setIsVisible(true);
+        }, 1000);
+
+        return;
+      }
+
+      // After first scroll, header ALWAYS visible + fixed
+      if (firstScrollRef.current) {
+        setIsFixed(true);
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  // Navigation click
+  const handleLinkClick = (name, href, e) => {
     e.preventDefault();
-    setActiveLink(linkName);
-    // Use Next.js router for client-side navigation
+    setActiveLink(name);
     router.push(href);
   };
 
@@ -62,10 +91,14 @@ export default function Header() {
 
   return (
     <Container variant="header">
-      <header className="header-container flex items-center justify-between">
-        {/* ✅ Dynamic Logo */}
-        <Link 
-          href="/" 
+      <header
+        className={`header-container flex items-center justify-between
+          ${isFixed ? "header-fixed" : ""}
+          ${isVisible ? "header-visible" : "header-hidden"}
+        `}
+      >
+        <Link
+          href="/"
           className="flex-shrink-0"
           onClick={(e) => {
             e.preventDefault();
@@ -82,22 +115,20 @@ export default function Header() {
           />
         </Link>
 
-        {/* ✅ Dynamic Desktop Navigation */}
         <nav className="nav-link-container">
           {header.navLinks?.map((link, i) => (
             <Link
               key={i}
               href={link.href}
               onClick={(e) => handleLinkClick(link.name, link.href, e)}
-              className={`nav-link ${activeLink === link.name ? "active-link" : ""}`}
+              className={`nav-link ${
+                activeLink === link.name ? "active-link" : ""
+              }`}
             >
               <Typography
-                className="nav-link-color transition-colors"
+                className="nav-link-color"
                 variant="body-4"
-                style={{
-                  lineHeight: "150%",
-                  fontSize: "16px",
-                }}
+                style={{ fontSize: "16px", lineHeight: "150%" }}
               >
                 {link.name}
               </Typography>
@@ -105,7 +136,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* ✅ Dynamic CTA */}
         <div className="flex items-center">
           <Link href={header.ctaLink}>
             <Button variant="primary" size="xl" showIcon={false}>
