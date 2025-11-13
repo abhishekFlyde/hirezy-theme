@@ -97,29 +97,6 @@ export default function Page() {
     }
   };
 
-  const faqData = [
-    {
-      question: "How does the free trial work?",
-      active: "",
-      answer:
-        "We provide hiring solutions, recruitment tools, and consulting services.",
-    },
-    {
-      question: "Can I cancel my subscription anytime?",
-      active: "",
-      answer: "Yes, you can cancel or upgrade at any time.",
-    },
-    {
-      question: "Can I cancel my subscription anytime?",
-      active: "",
-      answer: "Yes, you can cancel or upgrade at any time.",
-    },
-    {
-      question: "Can I cancel my subscription anytime?",
-      active: "",
-      answer: "Yes, you can cancel or upgrade at any time.",
-    },
-  ];
 
   const [isMobile, setIsMobile] = useState(false);
   const [isIpad, setIsIpad] = useState(false);
@@ -577,19 +554,20 @@ export default function Page() {
           />
         </div>
 
-        <motion.div className="w-full lg:w-1/2 flex justify-center"          
-            initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "0px" }}
-            transition={{
-              type: "spring",
-              damping: 15,
-              stiffness: 100,
-              bounce: 0.4,
-              duration: 0.8,
-            }}
-            >
-            <Tools items={integrationsSection?.items} />
+        <motion.div
+          className="w-full lg:w-1/2 flex justify-center"
+          initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+          whileInView={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "0px" }}
+          transition={{
+            type: "spring",
+            damping: 15,
+            stiffness: 100,
+            bounce: 0.4,
+            duration: 0.8,
+          }}
+        >
+          <Tools items={integrationsSection?.items} />
         </motion.div>
       </Container>
 
@@ -632,16 +610,23 @@ export default function Page() {
             <Typography variant="body-4">
               Get in touch and we’ll take care of the rest.
             </Typography>
-            <Button
-              variant="primary"
-              size="smTwo"
-              showIcon={true}
-              icon={
-                <Image src="/Arrow Right.png" width={14} height={12} alt="" />
-              }
-            >
-              Contact Us
-            </Button>
+            <Link href="/contact-us" passHref>
+              <Button
+                variant="primary"
+                size="smTwo"
+                showIcon={true}
+                icon={
+                  <Image
+                    src="/Arrow Right.png"
+                    width={14}
+                    height={12}
+                    alt="Arrow Right"
+                  />
+                }
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
 
