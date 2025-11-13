@@ -11,15 +11,14 @@ export default function Testimonial({ items = [] }) {
   const [direction, setDirection] = useState(0);
   const [isFirstCard, setIsFirstCard] = useState(true);
 
-  // Scroll tracking for testimonial section
-  const { scrollYProgress } = useScroll({ 
+  const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start center", "end center"],
   });
 
   useEffect(() => {
     if (!items.length) return;
-    
+
     const unsubscribe = scrollYProgress.on("change", (progress) => {
       const newIndex = Math.floor(progress * items.length);
       const clamped = Math.max(0, Math.min(items.length - 1, newIndex));
@@ -27,7 +26,7 @@ export default function Testimonial({ items = [] }) {
       if (clamped !== index) {
         setDirection(clamped > index ? 1 : -1);
         setIndex(clamped);
-        setIsFirstCard(false); // First card scroll hone ke baad
+        setIsFirstCard(false);
       }
     });
 
@@ -36,7 +35,6 @@ export default function Testimonial({ items = [] }) {
 
   if (!items || items.length === 0) return null;
 
-  // ✅ smoother + blink-free animation
   const variants = {
     enter: (dir) => ({
       x: dir > 0 ? 80 : -180,
@@ -63,17 +61,12 @@ export default function Testimonial({ items = [] }) {
     }),
   };
 
-  // Inner content animation variants
   const contentVariants = {
-    hidden: {
-      opacity: 0,
-    },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
@@ -86,9 +79,9 @@ export default function Testimonial({ items = [] }) {
         damping: 15,
         stiffness: 100,
         bounce: 0.3,
-        duration: 0.6
-      }
-    }
+        duration: 0.6,
+      },
+    },
   };
 
   const { quote, details, name, role, imageSrc, companyLogo } = items[index];
@@ -101,7 +94,6 @@ export default function Testimonial({ items = [] }) {
         height: `${items.length * 100}vh`,
       }}
     >
-      {/* Sticky container keeps testimonials pinned */}
       <div className="sticky top-0 flex flex-col justify-center">
         <SectionHeader
           label="Testimonial"
@@ -110,111 +102,7 @@ export default function Testimonial({ items = [] }) {
           align="center"
         />
 
-        <div className="testimonial-card-container relative mt-8 overflow-visible">
-          <AnimatePresence custom={direction} mode="wait">
-            <motion.div
-              key={index}
-              className="testimonial-card"
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              {/* Image - First card ke liye whileInView, baaki ke liye animate */}
-              <motion.div
-                className="image-wrapper"
-                initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
-                animate={isFirstCard ? {} : { x: 0, opacity: 1, filter: "blur(0px)" }}
-                whileInView={isFirstCard ? { x: 0, opacity: 1, filter: "blur(0px)" } : {}}
-                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                transition={{
-                  type: "spring",
-                  damping: 15,
-                  stiffness: 100,
-                  bounce: 0.4,
-                  duration: 0.8,
-                  delay: isFirstCard ? 0 : 0.2
-                }}
-              >
-                <Image
-                  src={imageSrc}
-                  alt={name}
-                  width={600}
-                  height={900}
-                  priority
-                  className="object-cover rounded-2xl"
-                />
-              </motion.div>
-
-              {/* Text content - First card ke liye whileInView, baaki ke liye animate */}
-              <motion.div
-                className="content-wrapper"
-                initial={{ x: 50, opacity: 0 }}
-                animate={isFirstCard ? {} : { x: 0, opacity: 1 }}
-                whileInView={isFirstCard ? { x: 0, opacity: 1 } : {}}
-                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                transition={{
-                  type: "spring",
-                  damping: 15,
-                  stiffness: 100,
-                  bounce: 0.4,
-                  duration: 0.8,
-                  delay: isFirstCard ? 0.1 : 0.3
-                }}
-              >
-                <div className="card-content">
-                  <div className="company-logo">
-                    <Image
-                      src={companyLogo}
-                      alt="Company Logo"
-                      width={100}
-                      height={40}
-                      className="object-contain"
-                    />
-                  </div>
-
-                  {/* Text Elements - First card ke liye whileInView, baaki ke liye animate */}
-                  <motion.div
-                    initial="hidden"
-                    animate={isFirstCard ? {} : "visible"}
-                    whileInView={isFirstCard ? "visible" : {}}
-                    viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                    transition={{ delay: isFirstCard ? 0.2 : 0.6 }}
-                    variants={contentVariants}
-                  >
-                    {/* Quote */}
-                    <motion.div variants={itemVariants}>
-                      <Typography variant="body-1" className="quote">
-                        {quote}
-                      </Typography>
-                    </motion.div>
-
-                    {/* Details */}
-                    <motion.div variants={itemVariants}>
-                      <Typography variant="body-4" className="details">
-                        {details}
-                      </Typography>
-                    </motion.div>
-
-                    {/* Author */}
-                    <motion.div className="author" variants={itemVariants}>
-                      <Typography variant="h6" className="name">
-                        {name}
-                      </Typography>
-                      <Typography variant="body-5" className="role">
-                        {role}
-                      </Typography>
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Arrows (optional manual control) */}
-        <div className="arrows !mt-6">
+        <div className="arrows !mt-6 flex items-center justify-center gap-4">
           <button
             className="prev"
             onClick={() => {
@@ -246,6 +134,135 @@ export default function Testimonial({ items = [] }) {
             />
           </button>
         </div>
+
+        <div className="testimonial-card-container relative mt-8 overflow-visible">
+          <AnimatePresence custom={direction} mode="wait">
+            <motion.div
+              key={index}
+              className="testimonial-card"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              <motion.div
+                className="image-wrapper"
+                initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
+                animate={
+                  isFirstCard ? {} : { x: 0, opacity: 1, filter: "blur(0px)" }
+                }
+                whileInView={
+                  isFirstCard ? { x: 0, opacity: 1, filter: "blur(0px)" } : {}
+                }
+                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
+                transition={{
+                  type: "spring",
+                  damping: 15,
+                  stiffness: 100,
+                  bounce: 0.4,
+                  duration: 0.8,
+                  delay: isFirstCard ? 0 : 0.2,
+                }}
+              >
+                <Image
+                  src={imageSrc}
+                  alt={name}
+                  width={600}
+                  height={900}
+                  priority
+                  className="object-cover rounded-2xl"
+                />
+              </motion.div>
+
+              <motion.div
+                className="content-wrapper"
+                initial={{ x: 50, opacity: 0 }}
+                animate={isFirstCard ? {} : { x: 0, opacity: 1 }}
+                whileInView={isFirstCard ? { x: 0, opacity: 1 } : {}}
+                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
+                transition={{
+                  type: "spring",
+                  damping: 15,
+                  stiffness: 100,
+                  bounce: 0.4,
+                  duration: 0.8,
+                  delay: isFirstCard ? 0.1 : 0.3,
+                }}
+              >
+                <div className="card-content">
+                  <div className="company-logo">
+                    <Image
+                      src={companyLogo}
+                      alt="Company Logo"
+                      width={100}
+                      height={40}
+                      className="object-contain"
+                    />
+                  </div>
+
+                  <motion.div
+                    initial="hidden"
+                    animate={isFirstCard ? {} : "visible"}
+                    whileInView={isFirstCard ? "visible" : {}}
+                    viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
+                    transition={{ delay: isFirstCard ? 0.2 : 0.6 }}
+                    variants={contentVariants}
+                  >
+                    <motion.div variants={itemVariants}>
+                      <Typography variant="body-1" className="quote">
+                        {quote}
+                      </Typography>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants}>
+                      <Typography variant="body-4" className="details">
+                        {details}
+                      </Typography>
+                    </motion.div>
+
+                    <motion.div className="author" variants={itemVariants}>
+                      <Typography variant="h6" className="name">
+                        {name}
+                      </Typography>
+                      <Typography variant="body-5" className="role">
+                        {role}
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div className="slick-dots flex justify-center gap-2 mt-4">
+          {items.map((_, i) => (
+            <motion.button
+              key={i}
+              onClick={() => {
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+                setIsFirstCard(false);
+              }}
+              initial={false}
+              animate={{
+                width: i === index ? 24 : 8, // active one expands
+                opacity: i === index ? 1 : 0.4,
+                backgroundColor: i === index ? "#CCEF55" : "#9CA3AF",
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 250,
+                damping: 20,
+              }}
+              className="h-2 rounded-full"
+            />
+          ))}
+        </div>
+        {/* Arrows */}
+
+        {/* Animated Dots */}
       </div>
     </section>
   );
