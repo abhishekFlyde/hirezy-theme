@@ -11,6 +11,8 @@
 // export default function Header() {
 //   const [activeLink, setActiveLink] = useState("");
 //   const [header, setHeader] = useState(null);
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [isHiding, setIsHiding] = useState(false);
 //   const pathname = usePathname();
 //   const router = useRouter();
 
@@ -29,22 +31,56 @@
 //     })();
 //   }, []);
 
+//   // Scroll behavior
+//   useEffect(() => {
+//     let lastScrollY = window.scrollY;
+//     let hideTimeout;
+//     let showTimeout;
+
+//     const handleScroll = () => {
+//       const currentScrollY = window.scrollY;
+
+//       // Only trigger when scrolling down (not up) and not already scrolled
+//       if (currentScrollY > lastScrollY && currentScrollY > 50 && !isScrolled) {
+//         // Step 1: Hide navbar
+//         setIsHiding(true);
+
+//         // Clear any existing timeouts
+//         clearTimeout(hideTimeout);
+//         clearTimeout(showTimeout);
+
+//         // Step 2: After 300ms, show navbar with bounce and set as fixed
+//         showTimeout = setTimeout(() => {
+//           setIsHiding(false);
+//           setIsScrolled(true);
+//         }, 30);
+//       }
+
+//       lastScrollY = currentScrollY;
+//     };
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//       clearTimeout(hideTimeout);
+//       clearTimeout(showTimeout);
+//     };
+//   }, [isScrolled]);
+
 //   // Set active link based on current pathname
 //   useEffect(() => {
 //     if (header?.navLinks) {
-//       // Find the link that matches the current path
 //       const currentLink = header.navLinks.find(link => {
-//         // Exact match or starts with for nested routes
-//         return pathname === link.href || 
+//         return pathname === link.href ||
 //                (link.href !== "/" && pathname.startsWith(link.href));
 //       });
-      
+
 //       if (currentLink) {
 //         setActiveLink(currentLink.name);
 //       } else if (pathname === "/") {
 //         setActiveLink("Home");
 //       } else {
-//         // If no match found, set to empty or keep previous state
 //         setActiveLink("");
 //       }
 //     }
@@ -54,7 +90,6 @@
 //   const handleLinkClick = (linkName, href, e) => {
 //     e.preventDefault();
 //     setActiveLink(linkName);
-//     // Use Next.js router for client-side navigation
 //     router.push(href);
 //   };
 
@@ -62,10 +97,14 @@
 
 //   return (
 //     <Container variant="header">
-//       <header className="header-container flex items-center justify-between">
+//       <header
+//         className={`header-container flex items-center justify-between ${
+//           isHiding ? 'header-hiding' : ''
+//         } ${isScrolled ? 'header-scrolled' : ''}`}
+//       >
 //         {/* ✅ Dynamic Logo */}
-//         <Link 
-//           href="/" 
+//         <Link
+//           href="/"
 //           className="flex-shrink-0"
 //           onClick={(e) => {
 //             e.preventDefault();
@@ -118,8 +157,6 @@
 //   );
 // }
 
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import Typography from "./typography";
@@ -134,7 +171,7 @@ export default function Header() {
   const [activeLink, setActiveLink] = useState("");
   const [header, setHeader] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isHiding, setIsHiding] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -156,27 +193,22 @@ export default function Header() {
   // Scroll behavior
   useEffect(() => {
     let lastScrollY = window.scrollY;
-    let scrollTimeout;
+    let hideTimeout;
+    let showTimeout;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Only trigger when scrolling down (not up)
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Only apply animation if not already scrolled
-        if (!isScrolled) {
-          // Hide navbar
-          setIsVisible(false);
-          
-          // Clear any existing timeout
-          clearTimeout(scrollTimeout);
-          
-          // Show navbar again after 300ms with bounce effect
-          scrollTimeout = setTimeout(() => {
-            setIsVisible(true);
-            setIsScrolled(true);
-          }, 300);
-        }
+      // Only trigger when scrolling down (not up) and not already scrolled
+      if (currentScrollY > lastScrollY && currentScrollY > 65 && !isScrolled) {
+        // Step 1: Hide navbar
+        setIsHiding(true);
+
+        // Clear any existing timeouts
+        clearTimeout(hideTimeout);
+
+        setIsHiding(false);
+        setIsScrolled(true);
       }
 
       lastScrollY = currentScrollY;
@@ -186,18 +218,21 @@ export default function Header() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
+      clearTimeout(hideTimeout);
+      clearTimeout(showTimeout);
     };
   }, [isScrolled]);
 
   // Set active link based on current pathname
   useEffect(() => {
     if (header?.navLinks) {
-      const currentLink = header.navLinks.find(link => {
-        return pathname === link.href || 
-               (link.href !== "/" && pathname.startsWith(link.href));
+      const currentLink = header.navLinks.find((link) => {
+        return (
+          pathname === link.href ||
+          (link.href !== "/" && pathname.startsWith(link.href))
+        );
       });
-      
+
       if (currentLink) {
         setActiveLink(currentLink.name);
       } else if (pathname === "/") {
@@ -217,64 +252,81 @@ export default function Header() {
 
   if (!header) return null;
 
-  return (
-    <Container variant="header">
-      <header 
-        className={`header-container flex items-center justify-between ${
-          isScrolled ? 'header-fixed' : ''
-        } ${isVisible ? 'header-visible' : 'header-hidden'}`}
+  // Navbar content component to reuse
+  const NavbarContent = () => (
+    <>
+      {/* Logo */}
+      <Link
+        href="/"
+        className="flex-shrink-0"
+        onClick={(e) => {
+          e.preventDefault();
+          setActiveLink("Home");
+          router.push("/");
+        }}
       >
-        {/* ✅ Dynamic Logo */}
-        <Link 
-          href="/" 
-          className="flex-shrink-0"
-          onClick={(e) => {
-            e.preventDefault();
-            setActiveLink("Home");
-            router.push("/");
-          }}
-        >
-          <Image
-            src={header.logo}
-            alt="Hirezy"
-            width={140.3}
-            height={37}
-            className="header-logo"
-          />
-        </Link>
+        <Image
+          src={header.logo}
+          alt="Hirezy"
+          width={140.3}
+          height={37}
+          className="header-logo"
+        />
+      </Link>
 
-        {/* ✅ Dynamic Desktop Navigation */}
-        <nav className="nav-link-container">
-          {header.navLinks?.map((link, i) => (
-            <Link
-              key={i}
-              href={link.href}
-              onClick={(e) => handleLinkClick(link.name, link.href, e)}
-              className={`nav-link ${activeLink === link.name ? "active-link" : ""}`}
+      {/* Desktop Navigation */}
+      <nav className="nav-link-container">
+        {header.navLinks?.map((link, i) => (
+          <Link
+            key={i}
+            href={link.href}
+            onClick={(e) => handleLinkClick(link.name, link.href, e)}
+            className={`nav-link ${
+              activeLink === link.name ? "active-link" : ""
+            }`}
+          >
+            <Typography
+              className="nav-link-color transition-colors"
+              variant="body-4"
+              style={{
+                lineHeight: "150%",
+                fontSize: "16px",
+              }}
             >
-              <Typography
-                className="nav-link-color transition-colors"
-                variant="body-4"
-                style={{
-                  lineHeight: "150%",
-                  fontSize: "16px",
-                }}
-              >
-                {link.name}
-              </Typography>
-            </Link>
-          ))}
-        </nav>
-
-        {/* ✅ Dynamic CTA */}
-        <div className="flex items-center">
-          <Link href={header.ctaLink}>
-            <Button variant="primary" size="xl" showIcon={false}>
-              {header.ctaText}
-            </Button>
+              {link.name}
+            </Typography>
           </Link>
-        </div>
+        ))}
+      </nav>
+
+      {/* CTA */}
+      <div className="flex items-center">
+        <Link href={header.ctaLink}>
+          <Button variant="primary" size="xl" showIcon={false}>
+            {header.ctaText}
+          </Button>
+        </Link>
+      </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Static Navbar - Initially visible, uses global spacing */}
+      <Container variant="header">
+        <header className="header-container-static flex items-center justify-between">
+          <NavbarContent />
+        </header>
+      </Container>
+
+      {/* Fixed Navbar - Shows on scroll with animation */}
+      <header
+        className={`header-container-fixed flex items-center justify-between ${
+          isHiding ? "header-hiding" : ""
+        } ${isScrolled ? "header-scrolled" : ""}`}
+      >
+        <NavbarContent />
       </header>
-    </Container>
+    </>
   );
 }
