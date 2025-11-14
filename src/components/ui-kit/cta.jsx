@@ -33,7 +33,7 @@ const TransformSection = () => {
 
   if (!section) return null;
 
-  // Background animation (comes first)
+
   const bgVariants = {
     hidden: { opacity: 0, scale: 0},
     visible: {
@@ -43,18 +43,18 @@ const TransformSection = () => {
     },
   };
 
-  // Text container animation (delayed after bg)
+ 
   const textContainer = {
     hidden: {},
     visible: {
       transition: {
-        delayChildren: 0.8, // wait until bg anim finishes
+        delayChildren: 0.8, 
         staggerChildren: 0.2,
       },
     },
   };
 
-  // Individual text items
+
   const textItem = {
     hidden: { opacity: 0, y: 20 },
     visible: {
