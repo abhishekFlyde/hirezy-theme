@@ -1,0 +1,91 @@
+"use client";
+import Header from "@/components/ui-kit/header";
+import Footer from "@/components/ui-kit/footer";
+import SectionHeader from "@/components/ui-kit/sectionHeader";
+import { Container } from "@/components/ui-kit/spacing";
+import Image from "next/image";
+import CTA from "@/components/ui-kit/cta";
+import { useState, useEffect } from "react";
+// import JobCards from "@/components/ui-kit/jobCards";
+import JobCard from "@/components/ui-kit/jobCard";
+
+export default function Careers() {
+  // for mobile and desktop Navbar animation logic.
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    // Check screen size on component mount
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 450);
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Add resize event listener
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <Container variant="primary">
+        <div className="careers-main-heading">
+          <SectionHeader
+            label="Careers"
+            title="Join Our Mission to Transform Hiring"
+            subtitle="We're building the future of recruitment technology. Join a team of innovators, creators, and problem-solvers making a real impact."
+            align={isMobile ? "left" : "center"}
+          />
+        </div>
+        <Container variant="primary">
+          <div className="careers-sub-heading">
+            <SectionHeader
+              title="Open Positions"
+              label="Careers 2"
+              subtitle="Find your next career opportunity and help us shape the future of recruitment."
+              align={isMobile ? "left" : "center"}
+              className="careers-title"
+            />
+          </div>
+          <div className="job-cards-container">
+            <JobCard
+              category="website"
+              title="Senior website designer"
+              description="Lead the design of our core recruitment platform, creating intuitive experiences for recruiters and candidates."
+              location="Remote"
+              jobType="Full-time"
+            />
+            <JobCard
+              category="website"
+              title="Senior website designer"
+              description="Lead the design of our core recruitment platform, creating intuitive experiences for recruiters and candidates."
+              location="Remote"
+              jobType="Full-time"
+            />
+            <JobCard
+              category="website"
+              title="Senior website designer"
+              description="Lead the design of our core recruitment platform, creating intuitive experiences for recruiters and candidates."
+              location="Remote"
+              jobType="Full-time"
+            />
+            <JobCard
+              category="website"
+              title="Senior website designer"
+              description="Lead the design of our core recruitment platform, creating intuitive experiences for recruiters and candidates."
+              location="Remote"
+              jobType="Full-time"
+            />
+          </div>
+        </Container>
+      </Container>
+      <Footer />
+    </>
+  );
+}
