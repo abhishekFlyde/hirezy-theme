@@ -9,10 +9,10 @@ export default function Card({
   iconSrc,
   iconAlt = "",
   variant = "default",
+  textLink = "", 
   className = "",
   ...props
-})
-{
+}) {
   const variants = {
     default: "card",
     secondary: "card-secondary",
@@ -33,8 +33,23 @@ export default function Card({
       )}
 
       <div className="card-content">
-        {title && <Typography variant="h3" className="card-title">{title}</Typography>}
-        {description && <Typography variant="body-4" className="card-description">{description}</Typography>}
+        {title && (
+          <Typography variant="h3" className="card-title">
+            {title}
+          </Typography>
+        )}
+
+        {description && (
+          <Typography variant="body-4" className="card-description">
+            {description}
+          </Typography>
+        )}
+
+        {textLink && (
+          <Typography variant="text-link" className="mt-4">
+            {textLink}
+          </Typography>
+        )}
       </div>
     </div>
   );

@@ -107,7 +107,8 @@ export default function SectionHeader({
   className = "",
   imageSrc = null,
   imageAlt = "",
-  imageVisibleOn = "mobile", // "mobile" | "desktop" | "both"
+  imageVisibleOn = "mobile",
+  labelBgColor = "var(--color-blue-300)", // 👈 new prop
 }) {
   // parent variant — controls stagger timing
   const container = {
@@ -164,7 +165,7 @@ export default function SectionHeader({
     >
       {label && (
         <motion.div variants={item} className="w-full">
-          <Label className="lable" text={label} />
+          <Label className="lable" text={label} bgColor={labelBgColor} />
         </motion.div>
       )}
 
@@ -175,13 +176,13 @@ export default function SectionHeader({
           className={clsx("w-full flex justify-center", imageVisibilityClass)}
         >
           {/* wrapper to control size, spacing — adjust max-w as required */}
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={280}
-              height={280}
-              className="w-full h-auto object-contain rounded-md"
-            />
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            width={280}
+            height={280}
+            className="w-full h-auto object-contain rounded-md"
+          />
         </motion.div>
       )}
 
