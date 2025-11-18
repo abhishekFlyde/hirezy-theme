@@ -3,6 +3,17 @@ import React from "react";
 import Image from "next/image";
 import Typography from "./typography";
 
+function getBgClass(variant) {
+  const map = {
+    default: "bg-default",
+    blue: "bg-blue",
+    white: "bg-white",
+    gray: "bg-gray",
+    custom: "",
+  };
+  return map[variant] || "";
+}
+
 export default function Card({
   title,
   description,
@@ -13,28 +24,20 @@ export default function Card({
   textLink = "",
   bgColor = "",
   className = "",
-  bg = "",
   ...props
 }) {
   const variants = {
     default: "card",
     secondary: "card-secondary",
   };
-  const bgVariants = {
-    default: "transparent",
-    blue: "#F7F8FF",
-    white: "#FFFFFF",
-    gray: "#F5F5F5",
-    custom: null,
-  };
-  const finalBg = bgVariant === "custom" ? bgColor : bgVariants[bgVariant];
 
-
+  // use it here
+  const bgClass = getBgClass(bgVariant);
 
   return (
     <div
-      className={`${variants[variant]} ${className}`}
-      style={{ backgroundColor: finalBg }}
+      className={`${variants[variant]} ${bgClass} ${className}`}
+      style={bgVariant === "custom" ? { backgroundColor: bgColor } : {}}
       {...props}
     >
       {iconSrc && (

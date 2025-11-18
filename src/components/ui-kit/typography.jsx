@@ -38,4 +38,5 @@ function getDefaultTag(variant) {
   return map[variant] || "p";
 }
 
+
 export default Typography;

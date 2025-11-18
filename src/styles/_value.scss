@@ -8,6 +8,19 @@
   padding: var(--sp-32);
   transition: all 0.25s ease-in-out;
 
+  .bg-default {
+    background: transparent;
+  }
+  .bg-blue {
+    background-color: var(--color-blue-300);
+  }
+  .bg-white {
+    background: var(--color-white);
+  }
+  .bg-gray {
+    background: var(--color-light-white);
+  }
+
   @media (max-width: 768px) {
     gap: 24px;
     padding: var(--sp-24);
@@ -47,18 +60,16 @@
   .card-description {
     color: var(--color-black-400);
   }
- 
- 
 }
 
 .card-secondary {
-    display: flex;
-    flex-direction: column;
-    max-width: 420px;
-    padding: var(--sp-32);
-    border-radius: var(--sp-24);
-    &.card-secondary .card-icon {
-      width: 54px;
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  padding: var(--sp-32);
+  border-radius: var(--sp-24);
+  &.card-secondary .card-icon {
+    width: 54px;
     height: 54px;
     border-radius: var(--radius-lg);
   }
@@ -68,15 +79,15 @@
     object-fit: cover;
   }
   &.card-secondary .card-title {
-  margin-top: var(--sp-24);  
-}
-&.card-secondary .card-description {
-  margin-top: var(--sp-16);
-}
+    margin-top: var(--sp-24);
+  }
+  &.card-secondary .card-description {
+    margin-top: var(--sp-16);
+  }
 
-@media (max-width: 450px) {
-  align-items: center;
-  text-align: center;
-  padding: 0px;
-}
+  @media (max-width: 450px) {
+    align-items: center;
+    text-align: center;
+    padding: 0px;
+  }
 }
