@@ -65,7 +65,7 @@ export default function JobCard({
         </span>
 
         <span className="meta-item">
-          <Image src="https://ik.imagekit.io/75zj3bigp/Icon.png" alt="type" width={16} height={16} />
+          <Image src="https://ik.imagekit.io/75zj3bigp/Icon%20(1).png?updatedAt=1763384802745" alt="type" width={16} height={16} />
           <Typography variant="body-4">{jobType}</Typography>
         </span>
       </motion.div>

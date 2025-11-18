@@ -29,6 +29,7 @@ export default function Card({
   const variants = {
     default: "card",
     secondary: "card-secondary",
+    tertiary: "card-tertiary",
   };
 
   // use it here

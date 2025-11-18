@@ -98,7 +98,8 @@ export default function Careers() {
           />
           <div className="why-hire-cards-container">
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
@@ -106,7 +107,8 @@ export default function Careers() {
               className="why-hire-card"
             />
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
@@ -114,7 +116,8 @@ export default function Careers() {
               className=""
             />
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
@@ -122,7 +125,8 @@ export default function Careers() {
               className=""
             />
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
@@ -130,7 +134,8 @@ export default function Careers() {
               className=""
             />
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
@@ -138,7 +143,8 @@ export default function Careers() {
               className=""
             />
             <Card
-              variant="secondary"
+              variant="tertiary"
+              bgVariant="white"
               title="Customer First"
               description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
               iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
