@@ -1,3 +1,6 @@
+
+
+
 "use client";
 import React, { Suspense } from "react";
 
@@ -6,9 +9,13 @@ const Typography = React.lazy(() => import("./typography"));
 export default function Label({
   text,
   className = "",
+  variant = "primary",  
   bgColor = "var(--color-blue-300)",
   ...props
-}) {
+}) 
+// Decide which typography variant to apply
+{
+const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
   return (
     <div
       {...props}
@@ -25,7 +32,14 @@ export default function Label({
       className={className}
     >
       <Suspense fallback={<div style={{ height: "1em" }} />}>
-        {text && <Typography variant="body-4">{text}</Typography>}
+      
+
+        {text && (
+          <Typography variant={typographyVariant}>
+            {text}
+          </Typography>
+        )}
+
       </Suspense>
     </div>
   );

@@ -13,6 +13,7 @@ export default function Card({
   textLink = "",
   bgColor = "",
   className = "",
+  bg = "",
   ...props
 }) {
   const variants = {

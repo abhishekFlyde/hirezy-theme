@@ -9,7 +9,10 @@ export const Container = ({ children, variant = "primary", className }) => {
     section: "section-spacing",
     header : "header-spacing",
     normal : "normal-spacing",
-    auth : "auth-spacing"
+    auth : "auth-spacing",
+    topSpacing : "top-spacing",
+    bottomSpacing : "bottom-spacing",
+    blockSpacing : "block-spacing"
   };
 
   return (
