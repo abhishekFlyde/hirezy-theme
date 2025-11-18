@@ -33,6 +33,7 @@ function getDefaultTag(variant) {
     "body-3": "p",
     "body-4": "p",
     "body-5": "p",
+    "text-link": "p",
   };
   return map[variant] || "p";
 }

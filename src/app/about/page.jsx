@@ -86,7 +86,7 @@ export default function AboutUs() {
               label="Our Values"
               title="What Drives Us Forward"
               subtitle="The principles that guide everything we do at Hirezy."
-              align="center" // Yahan fixed center rahega
+              align="center" 
             />
           </div>
           <div className="value-container">

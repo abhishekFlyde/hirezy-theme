@@ -98,3 +98,10 @@
   font-size: fluid(12px, 14px);
   line-height: 150%;
 }
+.text-link {
+  font-family: var(--font-jakarta);
+  font-weight: 500;
+  color: var(--color-black-500);
+  font-size: 16px;
+  line-height: 25.6px;
+}

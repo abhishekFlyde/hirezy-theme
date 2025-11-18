@@ -3,7 +3,7 @@
   display: flex;
   align-items: flex-start;
   gap: 32px;
-  background-color: var(--color-white-600);
+  // background-color: var(--color-white-600);
   border-radius: 12px;
   padding: var(--sp-32);
   transition: all 0.25s ease-in-out;
@@ -47,6 +47,8 @@
   .card-description {
     color: var(--color-black-400);
   }
+ 
+ 
 }
 
 .card-secondary {
@@ -54,6 +56,7 @@
     flex-direction: column;
     max-width: 420px;
     padding: var(--sp-32);
+    border-radius: var(--sp-24);
     &.card-secondary .card-icon {
       width: 54px;
     height: 54px;

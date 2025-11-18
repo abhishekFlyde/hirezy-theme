@@ -1,25 +1,4 @@
-// "use client";
-// import React, { Suspense } from "react";
 
-// const Typography = React.lazy(() => import("./typography"));
-
-
-// export default function Label({ text, variant = "primary", className = "", ...props }) {
-  
-//   // const secondaryLabel = variant === "secondary";
-
-//   return (
-//     <div {...props} style={{ padding: "0px 0px" }}>
-//       <Suspense fallback={<div style={{ height: "1em" }} />}>
-//         {text && (
-//           <Typography variant={"body-4"} className={`${className}`}>
-//             {text}
-//           </Typography>
-//         )}
-//       </Suspense>
-//     </div>
-//   );
-// }
 
 
 "use client";
@@ -29,16 +8,31 @@ const Typography = React.lazy(() => import("./typography"));
 
 export default function Label({
   text,
-  variant = "primary",   // will be "secondary" if parent sends secondary
   className = "",
+  variant = "primary",  
+  bgColor = "var(--color-blue-300)",
   ...props
-}) {
-  // Decide which typography variant to apply
-  const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
-
+}) 
+// Decide which typography variant to apply
+{
+const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
   return (
-    <div className={className} {...props}>
+    <div
+      {...props}
+      style={{
+        padding: "var(--sp-8) var(--sp-16)",
+        fontSize: "16px",
+        fontFamily: "var(--font-jakarta)",
+        fontWeight: 400,
+        lineHeight: "150%",
+        borderRadius: "var(--radius-md)",
+        backgroundColor: bgColor,
+        display: "inline-block",
+      }}
+      className={className}
+    >
       <Suspense fallback={<div style={{ height: "1em" }} />}>
+      
 
         {text && (
           <Typography variant={typographyVariant}>

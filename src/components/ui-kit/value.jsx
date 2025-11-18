@@ -9,18 +9,34 @@ export default function Card({
   iconSrc,
   iconAlt = "",
   variant = "default",
+  bgVariant = "default",
+  textLink = "",
+  bgColor = "",
   className = "",
   bg = "",
   ...props
-})
-{
+}) {
   const variants = {
     default: "card",
     secondary: "card-secondary",
   };
+  const bgVariants = {
+    default: "transparent",
+    blue: "#F7F8FF",
+    white: "#FFFFFF",
+    gray: "#F5F5F5",
+    custom: null,
+  };
+  const finalBg = bgVariant === "custom" ? bgColor : bgVariants[bgVariant];
+
+
 
   return (
-    <div className={`${variants[variant]} ${className}`} {...props}>
+    <div
+      className={`${variants[variant]} ${className}`}
+      style={{ backgroundColor: finalBg }}
+      {...props}
+    >
       {iconSrc && (
         <div className="card-icon">
           <Image
@@ -34,8 +50,23 @@ export default function Card({
       )}
 
       <div className="card-content">
-        {title && <Typography variant="h3" className="card-title">{title}</Typography>}
-        {description && <Typography variant="body-4" className="card-description">{description}</Typography>}
+        {title && (
+          <Typography variant="h3" className="card-title">
+            {title}
+          </Typography>
+        )}
+
+        {description && (
+          <Typography variant="body-4" className="card-description">
+            {description}
+          </Typography>
+        )}
+
+        {textLink && (
+          <Typography variant="text-link" className="mt-4">
+            {textLink}
+          </Typography>
+        )}
       </div>
     </div>
   );

@@ -23,7 +23,6 @@
 //   imageAlt = "",
 //   imageVisibleOn = "mobile", // "mobile" | "desktop" | "both"
 
-
 // }) {
 //   // parent variant — controls stagger timing
 //   const container = {
@@ -120,8 +119,6 @@
 //   );
 // }
 
-
-
 "use client";
 
 import React from "react";
@@ -140,6 +137,7 @@ export default function SectionHeader({
   imageSrc = null,
   imageAlt = "",
   imageVisibleOn = "mobile",
+  labelBgColor = "var(--color-blue-300)", // 👈 new prop
 
   variant = "primary", // PRIMARY | SECONDARY
 }) {
@@ -188,28 +186,32 @@ export default function SectionHeader({
       viewport={{ once: true, amount: 0.4 }}
       className={clsx(
         "headerSection flex flex-col gap-3",
-        variants[variant],           // <-- add variant CSS class 🔥
+        variants[variant], // <-- add variant CSS class 🔥
         align === "center" && "text-center items-center",
         align === "left" && "text-left items-start",
         align === "right" && "text-right items-end",
         className
       )}
     >
-
       {/* LABEL */}
       {label && (
         <motion.div variants={item} className="w-full">
           <Label
-            text={label}
-            variant={variant}   // <-- send same variant to Label
             className="lable"
+            text={label}
+            bgColor={labelBgColor}
+            variant={variant}
           />
         </motion.div>
       )}
 
       {/* IMAGE */}
       {imageSrc && (
-        <motion.div variants={item} className={`w-full flex justify-center ${imageVisibilityClass}`}>
+        <motion.div
+          variants={item}
+          className={clsx("w-full flex justify-center", imageVisibilityClass)}
+        >
+          {/* wrapper to control size, spacing — adjust max-w as required */}
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -223,9 +225,7 @@ export default function SectionHeader({
       {/* TITLE */}
       {title && (
         <motion.div variants={item} className="w-full">
-          <Typography variant={titleVariant}>
-            {title}
-          </Typography>
+          <Typography variant={titleVariant}>{title}</Typography>
         </motion.div>
       )}
 
