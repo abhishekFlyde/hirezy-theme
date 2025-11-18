@@ -210,3 +210,10 @@
     pointer-events: none;
   }
 }
+
+.btn--transparent {
+  background: transparent !important;
+  border: 0.5px solid var(--color-black-500) !important; /* optional if u want */
+  box-shadow: none !important;
+
+}

@@ -320,7 +320,6 @@ export default function Header() {
       </Container>
 
       {/* Fixed Navbar - Shows on scroll with animation */}
-      <Container variant="header">
       <header
         className={`header-container-fixed flex items-center justify-between ${
           isHiding ? "header-hiding" : ""
@@ -328,7 +327,6 @@ export default function Header() {
       >
         <NavbarContent />
       </header>
-      </Container>
     </>
   );
 }

@@ -1,0 +1,23 @@
+.success-stories {
+    background-color: var(--color-gray-50);
+}
+.success-header{
+    width: 55%;
+    justify-self: center;
+}
+.success-stories-metrics-block {
+    background-color: var(--color-blue-300);
+}
+.success-stories-cta-block{
+    background-color: var(--color-blue-300);
+    display: flex;
+    justify-content: center;
+}
+@media (max-width: 600px) {
+    .success-stories-btns{
+        flex-direction: column;
+        width: max-content;
+        justify-self: center;
+        gap: var(--sp-16);
+    }
+}

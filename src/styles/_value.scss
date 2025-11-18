@@ -97,6 +97,7 @@
 .card-tertiary {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   max-width: 420px;
   padding: var(--sp-32);
   border-radius: var(--sp-24);

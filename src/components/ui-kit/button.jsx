@@ -11,6 +11,7 @@ const Button = ({
   className,
   as,
   disabled,
+  transparent = false,
   ...props
 }) => {
   // Default showIcon based on variant
@@ -27,6 +28,7 @@ const Button = ({
         `btn--${size}`, 
         disabled && "btn--disabled",
         icon && shouldShowIcon && "btn--with-icon",
+        transparent && "btn--transparent",
         className
       )}
       {...props}
