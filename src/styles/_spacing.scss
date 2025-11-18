@@ -26,6 +26,18 @@
   padding: 0 0 0 0;
 }
 
+.top-spacing {
+  padding: var(--sp-80) 0 0 0;
+}
+
+.bottom-spacing {
+  padding: 0 0 var(--sp-80) 0;
+}
+
+.block-spacing {
+    padding: var(--sp-80) 0px;
+}
+
 @media (max-width: 834px) {
   .primary-spacing {
     padding: var(--sp-80) var(--sp-40);
@@ -49,6 +61,7 @@
   .auth-spacing {
     padding: 0px 0px 0px var(--sp-80);
   }
+  
 }
 
 @media (max-width: 600px) {
@@ -79,6 +92,18 @@
   .normal-spacing {
     padding: 0 0 0 0;
   }
+
+  .top-spacing {
+    padding: var(--sp-40) 0 0 0;
+  }
+
+  .bottom-spacing {
+    padding: 0 0 var(--sp-40) 0;
+  }
+
+  .block-spacing {
+    padding: var(--sp-40) 0px;
+}
 }
 
 @media (min-width: 1612px) {

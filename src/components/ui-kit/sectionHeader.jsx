@@ -145,7 +145,6 @@ export default function SectionHeader({
 }) {
   // ADD THIS 🔥
   const variants = {
-    primary: "section-header-primary",
     secondary: "section-header-secondary",
   };
 

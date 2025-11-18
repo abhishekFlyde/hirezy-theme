@@ -10,6 +10,7 @@ export default function Card({
   iconAlt = "",
   variant = "default",
   className = "",
+  bg = "",
   ...props
 })
 {

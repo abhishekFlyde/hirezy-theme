@@ -17,18 +17,26 @@ export default function JobCard({
 }) {
   return (
     <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className="job-container"
-  >
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.6, type: "spring", damping: 30, stiffness: 100 }}
+      viewport={{ amount: 0.2, once: true }}
+      className="job-container"
+    >
     <div className="job-card">
       {/* Top Label */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4, type: "spring", damping: 30, stiffness: 100 }}
+        viewport={{ amount: 0.2, once: true }}
+      >
       <Label
         text={category}
         variant="primary"
         className="lable job-card-label"
       />
+      </motion.div>
 
       <SectionHeader
         variant="secondary"
@@ -39,7 +47,13 @@ export default function JobCard({
       />
 
       {/* Icons Row */}
-      <div className="job-card-meta">
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4, type: "spring", damping: 30, stiffness: 100 }}
+        viewport={{ amount: 0.2, once: true }}
+        className="job-card-meta"
+      >
         <span className="meta-item">
           <Image
             src="https://ik.imagekit.io/75zj3bigp/Icon.png"
@@ -54,9 +68,15 @@ export default function JobCard({
           <Image src="https://ik.imagekit.io/75zj3bigp/Icon.png" alt="type" width={16} height={16} />
           <Typography variant="body-4">{jobType}</Typography>
         </span>
-      </div>
+      </motion.div>
 
       {/* Apply Button */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4, type: "spring", damping: 30, stiffness: 100 }}
+        viewport={{ amount: 0.2, once: true }}
+      >
       <Button
         variant="primary"
         size="smTwo"
@@ -73,6 +93,7 @@ export default function JobCard({
       >
         <Typography variant="h4">Apply Now</Typography>
       </Button>
+      </motion.div>
     </div>
     </motion.div>
   );

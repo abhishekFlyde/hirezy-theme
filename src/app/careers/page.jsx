@@ -8,6 +8,7 @@ import CTA from "@/components/ui-kit/cta";
 import { useState, useEffect } from "react";
 // import JobCards from "@/components/ui-kit/jobCards";
 import JobCard from "@/components/ui-kit/jobCard";
+import Card from "@/components/ui-kit/value";
 
 export default function Careers() {
   // for mobile and desktop Navbar animation logic.
@@ -36,18 +37,20 @@ export default function Careers() {
       <Header />
       <Container variant="primary">
         <div className="careers-main-heading">
-          <SectionHeader
-            label="Careers"
-            title="Join Our Mission to Transform Hiring"
-            subtitle="We're building the future of recruitment technology. Join a team of innovators, creators, and problem-solvers making a real impact."
-            align={isMobile ? "left" : "center"}
-          />
+          <Container variant="bottomSpacing">
+            <SectionHeader
+              // variant="tertiary"
+              label="Careers"
+              title="Join Our Mission to Transform Hiring"
+              subtitle="We're building the future of recruitment technology. Join a team of innovators, creators, and problem-solvers making a real impact."
+              align={isMobile ? "left" : "center"}
+            />
+          </Container>
         </div>
-        <Container variant="primary">
+        <Container variant="topSpacing">
           <div className="careers-sub-heading">
             <SectionHeader
               title="Open Positions"
-              label="Careers 2"
               subtitle="Find your next career opportunity and help us shape the future of recruitment."
               align={isMobile ? "left" : "center"}
               className="careers-title"
@@ -85,6 +88,26 @@ export default function Careers() {
           </div>
         </Container>
       </Container>
+      <div className="why-work">
+        <Container variant="primary">
+          <SectionHeader
+            title="Why Work at Hirezy?"
+            subtitle="We believe in creating an environment where talent thrives and innovation flourishes."
+            align={isMobile ? "left" : "center"}
+            className="careers-title"
+          />
+          <div>
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className=""
+            />
+          </div>
+        </Container>
+      </div>
       <Footer />
     </>
   );
