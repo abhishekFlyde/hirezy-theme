@@ -9,7 +9,9 @@ export default function Card({
   iconSrc,
   iconAlt = "",
   variant = "default",
-  textLink = "", 
+  bgVariant = "default",
+  textLink = "",
+  bgColor = "",
   className = "",
   ...props
 }) {
@@ -17,9 +19,23 @@ export default function Card({
     default: "card",
     secondary: "card-secondary",
   };
+  const bgVariants = {
+    default: "transparent",
+    blue: "#F7F8FF",
+    white: "#FFFFFF",
+    gray: "#F5F5F5",
+    custom: null,
+  };
+  const finalBg = bgVariant === "custom" ? bgColor : bgVariants[bgVariant];
+
+
 
   return (
-    <div className={`${variants[variant]} ${className}`} {...props}>
+    <div
+      className={`${variants[variant]} ${className}`}
+      style={{ backgroundColor: finalBg }}
+      {...props}
+    >
       {iconSrc && (
         <div className="card-icon">
           <Image
