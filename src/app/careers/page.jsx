@@ -96,7 +96,47 @@ export default function Careers() {
             align={isMobile ? "left" : "center"}
             className="careers-title"
           />
-          <div>
+          <div className="why-hire-cards-container">
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className="why-hire-card"
+            />
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className=""
+            />
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className=""
+            />
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className=""
+            />
+            <Card
+              variant="secondary"
+              title="Customer First"
+              description="Every feature we build, every decision we make starts with understanding our customers' needs and challenges."
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1762083596654"
+              iconAlt=""
+              className=""
+            />
             <Card
               variant="secondary"
               title="Customer First"

@@ -13,3 +13,15 @@
 .why-work{
     background-color: var(--color-blue-300);
 }
+
+.why-hire-cards-container{
+    display: flex;
+    gap: var(--sp-40);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.why-hire-card{
+    // max-width: 420px;
+    background-color: var(--color-white);
+}
