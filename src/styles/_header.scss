@@ -15,12 +15,18 @@
   right: 0;
   background: var(--color-white);
   z-index: 1000;
-  padding: var(--sp-24) var(--sp-50);
+  padding: 0;
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
-  // justify-content: space-between;
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-fixed-content {
+  width: 100%;
+  max-width: var(--layout-max-width);
 }
 
 /* Hiding state - slides up */
@@ -30,7 +36,7 @@
 
 /* Scrolled state with bounce effect - slides down */
 .header-scrolled {
-  animation: slideDownBounce 0.6s ease-out forwards;
+  animation: slideDownBounce 0.9s ease-out forwards;
   opacity: 1;
   pointer-events: all;
 }
@@ -90,8 +96,8 @@
     gap: var(--sp-40);
   }
   
-  .header-container-fixed {
-    padding: var(--sp-24) var(--sp-40);
+  .header-fixed-content {
+    padding: 0 var(--sp-40);
   }
 }
 
@@ -104,7 +110,7 @@
     display: none;
   }
   
-  .header-container-fixed {
-    padding: var(--sp-24) var(--sp-16);
+  .header-fixed-content {
+    padding: 0 var(--sp-16);
   }
 }
