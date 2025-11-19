@@ -77,7 +77,7 @@ export default function StoryCard({
           </div>
         </div>
 
-        <div className="story-card__metrics">
+        {/* <div className="story-card__metrics">
           {metricList.map((metric) => (
             <div className="story-card__metric" key={metric.label}>
               <Image
@@ -96,6 +96,11 @@ export default function StoryCard({
               </Typography>
             </div>
           ))}
+        </div> */}
+        <div className="story-card-container">
+        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
+        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
+        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
         </div>
 
         <div className="story-card__section">
@@ -116,16 +121,6 @@ export default function StoryCard({
           </Typography>
         </div>
 
-        {ctaText && (
-          <Button
-            variant="primary"
-            size="xl"
-            className="story-card__cta"
-            onClick={onCtaClick}
-          >
-            {ctaText}
-          </Button>
-        )}
       </div>
     </article>
   );

@@ -127,6 +127,12 @@
     align-self: flex-start;
   }
 }
+.story-card-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: var(--sp-24);
+}
 
 @media (max-width: 834px) {
   .story-card {
@@ -148,5 +154,9 @@
     &__metrics {
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
+  }
+  .story-card-container{
+    flex-direction: column;
+    gap: var(--sp-16);
   }
 }

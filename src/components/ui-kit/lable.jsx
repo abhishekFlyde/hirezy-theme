@@ -28,6 +28,7 @@ const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
         borderRadius: "var(--radius-md)",
         backgroundColor: bgColor,
         display: "inline-block",
+        width: "max-content",
       }}
       className={className}
     >
