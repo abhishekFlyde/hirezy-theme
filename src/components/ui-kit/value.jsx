@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Typography from "./typography";
 
@@ -30,7 +30,24 @@ export default function Card({
     default: "card",
     secondary: "card-secondary",
     tertiary: "card-tertiary",
+    story: "card-story",
   };
+
+  const [storyHeadingVariant, setStoryHeadingVariant] = useState("body-1");
+
+  useEffect(() => {
+    if (variant !== "story") return undefined;
+
+    const handleResize = () => {
+      setStoryHeadingVariant(window.innerWidth <= 450 ? "h2" : "body-1");
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [variant]);
+
+  const titleVariant = variant === "story" ? storyHeadingVariant : "h3";
 
   // use it here
   const bgClass = getBgClass(bgVariant);
@@ -55,13 +72,16 @@ export default function Card({
 
       <div className="card-content">
         {title && (
-          <Typography variant="h3" className="card-title">
+          <Typography variant={titleVariant} className="card-title">
             {title}
           </Typography>
         )}
 
         {description && (
-          <Typography variant="body-4" className="card-description">
+          <Typography
+            variant={variant === "story" ? "body-5" : "body-4"}
+            className="card-description"
+          >
             {description}
           </Typography>
         )}
