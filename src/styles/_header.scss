@@ -39,6 +39,10 @@
   animation: slideDownBounce 0.9s ease-out forwards;
   opacity: 1;
   pointer-events: all;
+  .header-container-static {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /* Slide up animation */
@@ -95,9 +99,9 @@
   .nav-link-container {
     gap: var(--sp-40);
   }
-  
+
   .header-fixed-content {
-    padding: 0 var(--sp-40);
+    padding: var(--sp-24) var(--sp-40);
   }
 }
 
@@ -109,8 +113,8 @@
   .nav-link-container {
     display: none;
   }
-  
+
   .header-fixed-content {
-    padding: 0 var(--sp-16);
+    padding: var(--sp-12) var(--sp-16) var(--sp-12) var(--sp-16);
   }
 }

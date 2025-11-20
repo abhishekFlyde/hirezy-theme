@@ -12,7 +12,8 @@ export const Container = ({ children, variant = "primary", className }) => {
     auth : "auth-spacing",
     topSpacing : "top-spacing",
     bottomSpacing : "bottom-spacing",
-    blockSpacing : "block-spacing"
+    blockSpacing : "block-spacing",
+    blogSpacing : "blog-spacing"
   };
 
   return (
