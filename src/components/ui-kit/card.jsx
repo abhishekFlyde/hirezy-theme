@@ -58,19 +58,19 @@ export const ImageCard = ({
             </div>
           )}
 
-          {readTime && (
+          {/* {readTime && (
             <div className="flex items-center gap-[8px]">
               <Image src="https://ik.imagekit.io/75zj3bigp/Icon%20(1).png?updatedAt=1763384802745" alt=""
               width={16}
               height={16} />
               <Typography variant="body-4">{readTime}</Typography>
             </div>
-          )}
+          )} */}
         </div>
       )}
 
       {/* ⭐ NEW - CTA BUTTON */}
-      {ctaText && (
+      {/* {ctaText && (
         // <Link
         //   href={ctaLink}
         //   className="mt-4 inline-block bg-lime-300 text-black px-6 py-2 rounded-full font-medium"
@@ -82,7 +82,7 @@ export const ImageCard = ({
           <Typography variant="h4">{ctaText}</Typography>
         </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 
