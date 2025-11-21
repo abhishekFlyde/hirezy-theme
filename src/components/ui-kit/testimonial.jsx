@@ -136,6 +136,7 @@ export default function Testimonial({ items = [] }) {
         </div>
 
         <div className="testimonial-card-container relative mt-8 overflow-visible">
+            <div className="motion-clip-wrapper">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={index}
@@ -234,6 +235,7 @@ export default function Testimonial({ items = [] }) {
               </motion.div>
             </motion.div>
           </AnimatePresence>
+          </div>
         </div>
 
         <div className="slick-dots flex justify-center gap-2 mt-4">

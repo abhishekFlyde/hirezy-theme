@@ -15,12 +15,20 @@
   right: 0;
   background: var(--color-white);
   z-index: 1000;
-  padding: var(--sp-24) var(--sp-50);
+  padding: 0;
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
-  // justify-content: space-between;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  // will-change: transform;
+  // transform: translateZ(0);
+}
+
+.header-fixed-content {
+  width: 100%;
+  max-width: var(--layout-max-width);
 }
 
 /* Hiding state - slides up */
@@ -30,9 +38,13 @@
 
 /* Scrolled state with bounce effect - slides down */
 .header-scrolled {
-  animation: slideDownBounce 0.6s ease-out forwards;
+  animation: slideDownBounce 0.9s ease-out forwards;
   opacity: 1;
   pointer-events: all;
+  .header-container-static {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /* Slide up animation */
@@ -89,8 +101,8 @@
   .nav-link-container {
     gap: var(--sp-40);
   }
-  
-  .header-container-fixed {
+
+  .header-fixed-content {
     padding: var(--sp-24) var(--sp-40);
   }
 }
@@ -103,8 +115,8 @@
   .nav-link-container {
     display: none;
   }
-  
-  .header-container-fixed {
-    padding: var(--sp-24) var(--sp-16);
+
+  .header-fixed-content {
+    padding: var(--sp-12) var(--sp-16) var(--sp-12) var(--sp-16);
   }
 }

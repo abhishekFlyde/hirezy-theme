@@ -3,7 +3,7 @@
 }
 
 .header-spacing {
-  padding: var(--sp-24) var(--sp-50) 0 var(--sp-50);
+  padding: var(--sp-24) var(--sp-50);
 }
 
 .hero-spacing {
@@ -37,6 +37,9 @@
 .block-spacing {
     padding: var(--sp-80) 0px;
 }
+.blog-spacing {
+    padding: var(--sp-56) var(--sp-50);
+}
 
 @media (max-width: 834px) {
   .primary-spacing {
@@ -44,7 +47,7 @@
   }
 
   .header-spacing {
-    padding: var(--sp-24) var(--sp-40) 0 var(--sp-40);
+    padding: var(--sp-24) var(--sp-40);
   }
 
   .hero-spacing {
@@ -103,6 +106,10 @@
 
   .block-spacing {
     padding: var(--sp-40) 0px;
+}
+
+.blog-spacing {
+    padding: var(--sp-40) var(--sp-16);
 }
 }
 

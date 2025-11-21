@@ -54,7 +54,7 @@ export default function Blogs() {
   return (
     <>
       <Header />
-      <Container variant="primary">
+      <Container variant="blogSpacing">
         <GridSection
           label={section.label}
           title={section.title}
@@ -69,8 +69,13 @@ export default function Blogs() {
                 <ImageCard
                   heading={card.heading}
                   description={card.description}
-                  imageLink={card.imageLink}
+                  // imageLink={card.imageLink}
                   textPosition={card.textPosition}
+                  label="Recruitment"
+                  date="Nov 5, 2025"
+                  readTime="5 min read"
+                  ctaText="Read More"
+                  ctaLink="ctaLink"
                 />
               </Link>
             ),

@@ -6,11 +6,16 @@ import clsx from "clsx";
 export default function HeroImageSection({
   mainImage,
   leftImage,
-  rightImage, 
+  rightImage,
   className,
 }) {
   return (
-    <section className={clsx("w-full flex justify-center imageSec pb-[50px]", className)}>
+    <section
+      className={clsx(
+        "w-full flex justify-center imageSec pb-[50px]",
+        className
+      )}
+    >
       <div className="relative w-full flex justify-center items-center">
         {/* MAIN IMAGE */}
         <div className="relative mainImageHome">
@@ -23,13 +28,13 @@ export default function HeroImageSection({
               className=" object-cover 
                             w-[278px] mx-auto
                             md:w-[337px]
-                            lg:w-[704px]"
+                            lg:w-[504px]"
             />
           )}
 
           {/* LEFT IMAGE (Desktop) */}
           {leftImage && (
-            <div className="hidden lg:block absolute -left-[239px] top-0">
+            <div className="hidden lg:block absolute -left-[139px] top-0">
               <Image
                 src={leftImage}
                 alt="left"
@@ -42,7 +47,7 @@ export default function HeroImageSection({
 
           {/* RIGHT IMAGE (Desktop) */}
           {rightImage && (
-            <div className="hidden lg:block absolute -right-[250px] bottom-0">
+            <div className="hidden lg:block absolute -right-[150px] bottom-0">
               <Image
                 src={rightImage}
                 alt="right"

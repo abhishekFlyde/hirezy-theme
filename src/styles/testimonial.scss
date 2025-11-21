@@ -6,7 +6,15 @@
   justify-items: center;
   overflow: visible;
 
+  .motion-clip-wrapper {
+    overflow: hidden; /* FIX CTA shift */
+    width: 100%; /* Prevent reflow */
+    position: relative;
+  }
+
   .testimonial-card {
+    // will-change: transform;
+    // transform: translateZ(0);
     display: flex;
     align-items: stretch;
     gap: var(--sp-32);
@@ -21,7 +29,7 @@
       .card-content {
         display: flex;
         flex-direction: column;
-        background: var(--color-blue-300) ;
+        background: var(--color-blue-300);
         border-radius: var(--radius-md);
         padding: var(--sp-40);
         gap: var(--sp-40);
