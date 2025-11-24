@@ -6,6 +6,12 @@ import { Container } from "@/components/ui-kit/spacing";
 import SectionHeader from "@/components/ui-kit/sectionHeader";
 import Header from "@/components/ui-kit/header";
 import Footer from "@/components/ui-kit/footer";
+import ArticleHeader from "@/components/ui-kit/articleHeader";
+import Image from "next/image";
+import {BlogsTextContent} from "@/components/ui-kit/blogsTextContent";
+import {TextInfoCard} from "@/components/ui-kit/textInfoCard";
+import "@/app/blogs/blogs.scss";
+
 
 export default function BlogDetails() {
   const { slug } = useParams(); // 🔹 Get slug from the URL
@@ -64,14 +70,27 @@ export default function BlogDetails() {
   return (
     <>
       <Header />
-      <Container variant="primary" className="mainSec">
-        {/* 🔹 Blog Header Section */}
-        <SectionHeader
-          label={blog.label}
-          title={blog.title}
-          subtitle={blog.subtitle}
-          align="center"
-        />
+      <ArticleHeader />
+      <Container variant="primary" className="blog-container">
+        <div className="blog-image">
+        <Image src='https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843' alt='Rectangle_1' width={916} height={516} />
+        </div>
+
+        <div className="blog-text-content">
+        <BlogsTextContent heading={blog.title} description={blog.subtitle} />
+        </div>
+
+        <div className="blog-text-content">
+        <BlogsTextContent heading={blog.title} description={blog.subtitle} />
+        </div>
+        
+        <div className="blog-text-content">
+        <BlogsTextContent heading={blog.title} description={blog.subtitle} />
+        </div>
+
+        <div className="blog-text-content">
+        <TextInfoCard heading='Conclusion' description='Building high-performing remote teams requires intentional effort and the right approach. By focusing on clear communication, the right tools, personal connections, and outcome-based management, you can create a thriving remote team culture.' />
+        </div>
 
      
       </Container>
