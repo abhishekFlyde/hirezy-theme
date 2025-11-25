@@ -30,9 +30,47 @@
   margin-bottom: var(--sp-40);
 }
 
+.offices-grid {
+  display: flex;
+  gap: var(--sp-80);
+  justify-content: center;
+  margin-top: var(--sp-56);
+}
+
+.office-card {
+  background: var(--color-blue-300);
+  padding: var(--sp-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  border-radius: var(--radius-md);
+  max-width: 300px;
+}
+
+.office-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+.office-card__phone {
+  margin-top: var(--sp-12);
+}
+
 @media (max-width: 868px) {
   .wrapper {
     row-gap: var(--sp-44);
+  }
+  .offices-grid {
+    gap: var(--sp-24);
+    flex-direction: column;
+  }
+  .office-card{
+    max-width: 100%;
+    text-align: center;
+    gap: var(--sp-16);
+  }
+  .office-card__header{
+    gap: var(--sp-4);
   }
 }
 @media (max-width: 768px) {

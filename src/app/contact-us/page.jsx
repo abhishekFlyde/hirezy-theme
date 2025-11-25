@@ -14,6 +14,39 @@ import Typography from "@/components/ui-kit/typography";
 import OfficeHours from "@/components/ui-kit/officeHours";
 import Image from "next/image";
 
+const officeLocations = [
+  {
+    city: "San Francisco",
+    label: "Headquarters",
+    address: [
+      "123 Innovation Street",
+      "San Francisco, CA 94102",
+      "United States",
+    ],
+    phone: "+1 (555) 123–4567",
+  },
+  {
+    city: "San Francisco",
+    label: "Headquarters",
+    address: [
+      "123 Innovation Street",
+      "San Francisco, CA 94102",
+      "United States",
+    ],
+    phone: "+1 (555) 123–4567",
+  },
+  {
+    city: "San Francisco",
+    label: "Headquarters",
+    address: [
+      "123 Innovation Street",
+      "San Francisco, CA 94102",
+      "United States",
+    ],
+    phone: "+1 (555) 123–4567",
+  },
+];
+
 export default function page() {
   const [isMobile, setIsMobile] = useState(true);
 
@@ -161,11 +194,38 @@ export default function page() {
       <div>
         <Container variant="primary">
           <SectionHeader
-            label="Contact Us"
-            title="Let's Start a Conversation"
-            subtitle="Have questions about Hirezy? We're here to help. Reach out to our team and we'll get back to you as soon as possible."
+            label="Our Offices"
+            title="Visit Us Worldwide"
+            subtitle="We have offices around the globe to serve you better"
             align={isMobile ? "left" : "center"}
           />
+          <div className="offices-grid">
+            {officeLocations.map((office) => (
+              <div className="office-card" key={office.city}>
+                <div className="office-card__header">
+                  <Typography variant="h3" className="office-card__city">
+                    {office.city}
+                  </Typography>
+                  <Typography variant="body-4" className="office-card__label">
+                    {office.label}
+                  </Typography>
+                </div>
+
+                <div className="office-card__body">
+                  <div className="office-card__address">
+                    {office.address.map((line) => (
+                      <Typography key={line} variant="body-4">
+                        {line}
+                      </Typography>
+                    ))}
+                  </div>
+                  <Typography variant="body-4" className="office-card__phone">
+                    {office.phone}
+                  </Typography>
+                </div>
+              </div>
+            ))}
+          </div>
         </Container>
       </div>
       <Footer />
