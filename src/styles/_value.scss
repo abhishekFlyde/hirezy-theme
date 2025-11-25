@@ -84,12 +84,6 @@
   &.card-secondary .card-description {
     margin-top: var(--sp-16);
   }
-
-  @media (max-width: 450px) {
-    align-items: center;
-    text-align: center;
-    padding: 0px;
-  }
 }
 
 // === CARD TERTIARY ===

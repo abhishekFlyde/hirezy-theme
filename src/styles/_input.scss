@@ -13,7 +13,7 @@
     padding: 5px 10px;
     font-size: 16px;
     border-radius: 10px;
-    border: 1px solid #e5e5e5;
+    border: 0.67px solid #e5e5e5;
     outline: none;
     transition: border-color 0.2s ease-in-out;
 
@@ -37,8 +37,33 @@
     border: none;
 
     &:focus {
-      border: 1px solid var(--color-lime);
+      border: 0.67px solid var(--color-lime);
       background-color: var(--color-white);
     }
   }
+}
+
+.ContactPageVariantInput{
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+
+  .input-field {
+    width: 100%;
+    padding: var(--sp-16);
+    font-size: 16px;
+    border-radius: var(--sp-16);
+    border: 0.67px solid var(--color-black-300);
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+      border-color: var(--color-lime);
+    }
+
+    &::placeholder {
+      color: var(--color-black-300);
+    }
+  }
+
 }
