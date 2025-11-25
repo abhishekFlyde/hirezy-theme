@@ -91,7 +91,6 @@ export default function BlogDetails() {
         <div className="blog-text-content">
         <TextInfoCard heading='Conclusion' description='Building high-performing remote teams requires intentional effort and the right approach. By focusing on clear communication, the right tools, personal connections, and outcome-based management, you can create a thriving remote team culture.' />
         </div>
-
      
       </Container>
       <Footer />
