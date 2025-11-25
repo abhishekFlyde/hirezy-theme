@@ -3,6 +3,7 @@ import { useEffect } from "react";
 export const useStaggeredScroll = (containerClass, options = {}) => {
   const {
     isDesktop = true,
+    
     desktopGaps = [320, 440, 680],
     mobileGaps = [120, 120, 120],
     trigger = containerClass,

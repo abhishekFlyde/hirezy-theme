@@ -4,6 +4,8 @@ import Footer from "@/components/ui-kit/footer";
 import SectionHeader from "@/components/ui-kit/sectionHeader";
 import Card from "@/components/ui-kit/value";
 import { Container } from "@/components/ui-kit/spacing";
+import InputGroup from "@/components/ui-kit/InputGroup";
+import Input from "@/components/ui-kit/input";
 import { useState, useEffect } from "react";
 import "../contact-us/contact-us.scss";
 
@@ -85,7 +87,23 @@ export default function page() {
           />
         </div>
 
-        <div></div>
+        <div>
+          <InputGroup columns={2}>
+            <Input
+              label="First Name"
+              name="firstName"
+              placeholder="Enter first name"
+            />
+            <Input
+              label="Last Name"
+              name="lastName"
+              placeholder="Enter last name"
+            />
+          </InputGroup>
+        </div>
+        <div>
+          
+        </div>
       </Container>
       <Footer />
     </>

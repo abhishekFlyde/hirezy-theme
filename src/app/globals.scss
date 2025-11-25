@@ -37,7 +37,7 @@ body {
   max-width: 1520px;
   width: 100%;
 }
-
+  
 html {
   display: flex;
   justify-content: center;
@@ -125,7 +125,7 @@ html {
   -webkit-column-break-inside: avoid;
   -moz-column-break-inside: avoid;
 }
-
+ 
 .imageSec {
   border-radius: var(--radius-lg);
   background-color: var(--color-blue-300);
