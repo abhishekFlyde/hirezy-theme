@@ -13,6 +13,7 @@ export const Container = ({ children, variant = "primary", className }) => {
     topSpacing : "top-spacing",
     bottomSpacing : "bottom-spacing",
     blockSpacing : "block-spacing",
+    inlineSpacing : "inline-spacing",
     blogSpacing : "blog-spacing"
   };
 
