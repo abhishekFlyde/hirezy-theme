@@ -37,6 +37,9 @@
 .block-spacing {
     padding: var(--sp-80) 0px;
 }
+.inline-spacing {
+  padding: 0px var(--sp-50);
+}
 .blog-spacing {
     padding: var(--sp-56) var(--sp-50);
 }
@@ -63,6 +66,9 @@
   }
   .auth-spacing {
     padding: 0px 0px 0px var(--sp-80);
+  }
+  .inline-spacing {
+    padding: 0px var(--sp-40);
   }
   
 }
@@ -109,7 +115,7 @@
 }
 
 .blog-spacing {
-    padding: var(--sp-40) var(--sp-16);
+    padding: 0px var(--sp-16);
 }
 }
 

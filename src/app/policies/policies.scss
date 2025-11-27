@@ -1,0 +1,19 @@
+.policies-container, .terms-container{
+    max-width: 1016px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.policies-content, .terms-content{
+    display: flex;
+    flex-direction: column;
+    margin-block: var(--sp-44); 
+    gap: var(--sp-44); 
+}
+.horizontal-line{
+    height: 1px;
+    background-color: var(--color-black-300);
+    max-width: 916px;
+    margin: 0 auto;
+    // margin-bottom: var(--sp-40);
+}
