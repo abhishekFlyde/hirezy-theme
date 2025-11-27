@@ -307,7 +307,7 @@ export default function Page() {
 
   return (
     <>
-      <Header />
+      <Header variant="blackNav" />
 
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
