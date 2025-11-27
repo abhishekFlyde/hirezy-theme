@@ -1,13 +1,11 @@
 "use client";
 
 import Header from "@/components/ui-kit/header";
-import Footer from "@/components/ui-kit/footer";
 import { Container } from "@/components/ui-kit/spacing";
 import SectionHeader from "@/components/ui-kit/sectionHeader";
 import { BlogsTextContent } from "@/components/ui-kit/blogsTextContent";
 import "./policies.scss";
 import { TextInfoCard } from "@/components/ui-kit/textInfoCard";
-import EmailNotification from "@/components/ui-kit/EmailNotification";
 
 export default function PoliciesPage() {
   return (

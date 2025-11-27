@@ -1,5 +1,7 @@
 "use clint";
 
+import CreateSiteForm from "../userInput (TEMP.)/CreateSiteForm";
+
 export default function EmailConfirmation() {
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -11,6 +13,7 @@ export default function EmailConfirmation() {
           border: "none",
         }}
       />
+      <CreateSiteForm />
     </div>
   );
 }
