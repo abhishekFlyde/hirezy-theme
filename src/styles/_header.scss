@@ -135,6 +135,11 @@
   color: var(--color-white);
 }
 
+.static-black-active .static-nav-link {
+  color: var(--color-black-500);
+  font-weight: 600;
+}
+
 
 /* FIXED NAVBAR — always default colors */
 .fixed-nav-link {

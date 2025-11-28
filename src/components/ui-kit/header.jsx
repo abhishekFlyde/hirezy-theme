@@ -18,7 +18,7 @@ export default function Header() {
   const router = useRouter();
 
   /* ROUTES jinke upar FIXED NAVBAR black hoga */
-  const darkRoutes = ["/services", "", "/xyz"];
+  const darkRoutes = ["/services"];
 
   /* true when current route is inside darkRoutes list */
   const isBlackRoute = darkRoutes.some((route) => pathname.startsWith(route));
@@ -61,6 +61,7 @@ export default function Header() {
 
   useEffect(() => {
     if (header?.navLinks) {
+      0;
       const currentLink = header.navLinks.find((link) => {
         return (
           pathname === link.href ||
@@ -120,8 +121,12 @@ export default function Header() {
                   ? activeLink === link.name
                     ? "fixed-active"
                     : ""
+                  : showDark
+                  ? activeLink === link.name
+                    ? "static-active" // white wala variant
+                    : ""
                   : activeLink === link.name
-                  ? "static-active"
+                  ? "static-black-active" // ← yeh new black active state
                   : ""
               }`}
             >
