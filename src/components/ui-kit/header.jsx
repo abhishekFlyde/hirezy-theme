@@ -168,7 +168,6 @@ export default function Header() {
             <NavbarContent isFixed={false} />
           </header>
         </Container>
-        
       </div>
 
       {/* FIXED NAVBAR — route based */}
