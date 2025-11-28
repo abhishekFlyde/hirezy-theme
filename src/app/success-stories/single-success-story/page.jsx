@@ -18,7 +18,7 @@ export default function page() {
         <Header />
         <Container variant="blogSpacing">
           <div className="flex gap-2 items-center">
-            <Typography variant="body-4" >
+            <Typography variant="body-4" colorVariant="secondary">
               Success Stories
             </Typography>
             <Image
@@ -27,7 +27,9 @@ export default function page() {
               width={20}
               height={20}
             />
-            <Typography variant="h6">TechCorp Solutions</Typography>
+            <Typography variant="h6" colorVariant="primary">
+              TechCorp Solutions
+            </Typography>
           </div>
           <div className="wrapper">
             <SectionHeader

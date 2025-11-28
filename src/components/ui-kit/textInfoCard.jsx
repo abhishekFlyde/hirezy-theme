@@ -29,8 +29,7 @@ export const TextInfoCard = ({
       <div className="textInfoCard flex flex-col w-full">
         <Typography variant="h3">{heading}</Typography>
 
-        <Typography variant={descriptionVariant}
-         color="gray200">
+        <Typography variant={descriptionVariant} colorVariant="gray">
           {description}
         </Typography>
       </div>

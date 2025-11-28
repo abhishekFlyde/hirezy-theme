@@ -124,7 +124,7 @@ export default function AboutUs() {
             label="Our Team"
             title="Meet the People Behind Hirezy"
             subtitle="A diverse team of experts passionate about revolutionizing recruitment."
-            align={isMobile ? "center" : "center"} // Yahan bhi same state use karo
+            align={isMobile ? "center" : "center"}
           />
         </div>
         <div className="our-team-cards-container">
