@@ -26,16 +26,14 @@ export const TextInfoCard = ({
 
   return (
     <div className="textInfoCardContainer">
+      <div className="textInfoCard flex flex-col w-full">
+        <Typography variant="h3">{heading}</Typography>
 
-    <div className="textInfoCard flex flex-col w-full">
-
-
-      <Typography variant="h3">{heading}</Typography>
-
-      <Typography variant={descriptionVariant} className="color-black-400">
-        {description}
-      </Typography>
-    </div>
+        <Typography variant={descriptionVariant}
+         color="gray200">
+          {description}
+        </Typography>
+      </div>
     </div>
   );
 };

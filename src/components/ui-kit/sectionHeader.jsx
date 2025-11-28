@@ -113,7 +113,7 @@ export default function SectionHeader({
       {/* SUBTITLE */}
       {subtitle && (
         <motion.div variants={item} className="max-w-[816px] w-full">
-          <Typography variant="body-4" className="color-black-400">
+          <Typography variant="body-4" >
             {subtitle}
           </Typography>
         </motion.div>
