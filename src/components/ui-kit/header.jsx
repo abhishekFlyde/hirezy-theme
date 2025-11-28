@@ -162,11 +162,14 @@ export default function Header() {
   return (
     <>
       {/* STATIC NAVBAR — always light */}
-      <Container variant="header">
-        <header className="header-container-static flex items-center justify-between">
-          <NavbarContent isFixed={false} />
-        </header>
-      </Container>
+      <div className="max-w-[var(--layout-max-width)] mx-auto w-full">
+        <Container variant="header">
+          <header className="header-container-static flex items-center justify-between">
+            <NavbarContent isFixed={false} />
+          </header>
+        </Container>
+        
+      </div>
 
       {/* FIXED NAVBAR — route based */}
       <header
