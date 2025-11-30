@@ -309,6 +309,7 @@ export default function Page() {
     <>
       <Header variant="blackNav" />
 
+      
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
           <motion.div

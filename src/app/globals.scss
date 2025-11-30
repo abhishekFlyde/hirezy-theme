@@ -27,6 +27,8 @@
 @import "../styles/textInfoCard";
 @import "../styles/contactInfo";
 @import "../styles/officeHours";
+@import "../styles/ourServices";
+@import "../styles/servicesCard";
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -37,6 +39,7 @@ body {
   background-color: var(--color-white);
   box-sizing: border-box;
   width: 100%;
+  max-width: var(--layout-max-width);
 }
   
 html {
