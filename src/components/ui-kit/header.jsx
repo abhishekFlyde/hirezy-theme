@@ -18,7 +18,7 @@ export default function Header() {
   const router = useRouter();
 
   /* ROUTES jinke upar FIXED NAVBAR black hoga */
-  const darkRoutes = ["/services"];
+  const darkRoutes = ["/services", "/SingleSuccessStory"];
 
   /* true when current route is inside darkRoutes list */
   const isBlackRoute = darkRoutes.some((route) => pathname.startsWith(route));

@@ -1,0 +1,28 @@
+.singleSuccessStoryBgColor{
+    background-color: var(--color-black-500);
+    height: 772.08px;
+}
+.sectionHeaderContainer{
+    max-width: 900px;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+}
+.topLeftTextContainer{
+    display: flex;
+    gap: var(--sp-12);
+    margin-bottom: var(--sp-40);
+}
+.successMetricContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--sp-40);
+}
+
+// Main Section 
+.mainSectionContainer{
+    max-width: 884px;
+    gap: var(--sp-40);
+    display: flex;
+    flex-direction: column;
+}

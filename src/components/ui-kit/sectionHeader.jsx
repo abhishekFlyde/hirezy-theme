@@ -13,6 +13,8 @@ export default function SectionHeader({
   label,
   title,
   subtitle,
+  icon,
+  iconPosition,
   align = "center",
   className = "",
   imageSrc = null,
@@ -84,6 +86,8 @@ export default function SectionHeader({
             text={label}
             bgColor={labelBgColor}
             variant={variant}
+            icon={icon}
+            iconPosition={iconPosition}
           />
         </motion.div>
       )}
