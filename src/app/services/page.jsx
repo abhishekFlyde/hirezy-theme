@@ -194,74 +194,86 @@ export default function ServicesPage() {
           {/* CTA Section */}
           <Container variant="topSpacing">
             <div className="cta-container">
-              <div className="cta-wrapper">
-                <Typography
-                  variant="h2"
-                  colorVariant="white"
-                  className="cta-title"
-                >
-                  Ready to Transform Your Hiring?
-                </Typography>
-
-                <Typography variant="body-3" className="cta-subtitle">
-                  Start your 14-day free trial today. No credit card required.
-                </Typography>
-
-                <div className="cta-buttons">
-                  <Button
-                    variant="primary"
-                    size="smTwo"
-                    className="cta-btn-width"
-                    icon={
-                      <Image
-                        src="/Arrow Right.png"
-                        width={14}
-                        height={12}
-                        alt="arrow"
-                        className="arrow-img"
-                      />
-                    }
-                    iconPosition="right"
+              {/* Add blur backgrounds */}
+              <div className="cta-blur-left">L</div>
+              <div className="cta-blur-right">R</div>
+              <div className="cta-wrap-content">
+                <div className="cta-wrapper">
+                  <Typography
+                    variant="h2"
+                    colorVariant="white"
+                    className="cta-title"
                   >
-                    <Typography variant="h4">Get Started Free</Typography>
-                  </Button>
-                  <Button
-                    variant="black-outline"
-                    size="smTwo"
-                    className="cta-btn-width"
-                    icon={
-                      <Image
-                        src="/Arrow Right.png"
-                        width={14}
-                        height={12}
-                        alt="arrow"
-                        className="arrow-img"
-                      />
-                    }
-                    iconPosition="right"
+                    Ready to Transform Your Hiring?
+                  </Typography>
+
+                  <Typography
+                    variant="body-4"
+                    colorVariant="white"
+                    className="cta-subtitle"
                   >
-                    <Typography variant="h4">More Services</Typography>
-                  </Button>
+                    Start your 14-day free trial today. No credit card required.
+                  </Typography>
                 </div>
 
-                <div className="cta-features">
-                  <div className="cta-feature-item">
-                    <span className="cta-check">✓</span>
-                    <Typography variant="body-4" colorVariant="white">
-                      No credit card required
-                    </Typography>
+                <div className="cta-buttons-container">
+                  <div className="cta-buttons">
+                    <Button
+                      variant="primary"
+                      size="smTwo"
+                      className="cta-btn-width"
+                      icon={
+                        <Image
+                          src="/Arrow Right.png"
+                          width={14}
+                          height={12}
+                          alt="arrow"
+                          className="arrow-img"
+                        />
+                      }
+                      iconPosition="right"
+                    >
+                      <Typography variant="h4">Get Started Free</Typography>
+                    </Button>
+                    <Button variant="white-outline" size="xl">
+                      <Typography variant="h4">Schedule Demo</Typography>
+                    </Button>
                   </div>
-                  <div className="cta-feature-item">
-                    <span className="cta-check">✓</span>
-                    <Typography variant="body-4" colorVariant="white">
-                      14-day free trial
-                    </Typography>
-                  </div>
-                  <div className="cta-feature-item">
-                    <span className="cta-check">✓</span>
-                    <Typography variant="body-4" colorVariant="white">
-                      Cancel anytime
-                    </Typography>
+
+                  <div className="cta-features">
+                    <div className="cta-feature-item">
+                      <Image
+                        src="https://ik.imagekit.io/75zj3bigp/Icon%20(9).png"
+                        width={20}
+                        height={20}
+                        alt="cta-check"
+                      />
+                      <Typography variant="body-4" colorVariant="white">
+                        No credit card required
+                      </Typography>
+                    </div>
+                    <div className="cta-feature-item">
+                      <Image
+                        src="https://ik.imagekit.io/75zj3bigp/Icon%20(9).png"
+                        width={20}
+                        height={20}
+                        alt="cta-check"
+                      />
+                      <Typography variant="body-4" colorVariant="white">
+                        14-day free trial
+                      </Typography>
+                    </div>
+                    <div className="cta-feature-item">
+                      <Image
+                        src="https://ik.imagekit.io/75zj3bigp/Icon%20(9).png"
+                        width={20}
+                        height={20}
+                        alt="cta-check"
+                      />
+                      <Typography variant="body-4" colorVariant="white">
+                        Cancel anytime
+                      </Typography>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -169,6 +169,11 @@ export default function Home() {
               Button
             </Button>
           </div>
+          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+            <Button variant="white-outline" size="xl">
+              <Typography variant="h4">Button</Typography>
+            </Button>
+          </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           <Label className="lable" text="Label" />

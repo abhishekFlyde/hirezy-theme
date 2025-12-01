@@ -166,13 +166,36 @@
   }
 }
 
-// CTA Section
 .cta-container {
   background: var(--color-black-500);
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+// Blur backgrounds
+.cta-blur-left {
+  position: absolute;
+  left: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(204, 239, 85, 0.3) 0%, rgba(204, 239, 85, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-blur-right {
+  position: absolute;
+  right: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(175, 183, 255, 0.3) 0%, rgba(175, 183, 255, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
 
 .cta-wrapper {
   max-width: var(--layout-max-width);
@@ -181,7 +204,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-24);
+  gap: var(--sp-20);
+  margin-bottom: var(--sp-40);
 }
 
 .cta-title {
@@ -193,6 +217,15 @@
   color: var(--color-black-300);
   margin: 0;
   max-width: 600px;
+}
+
+.cta-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-40);
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .cta-buttons {
@@ -254,12 +287,22 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+// Force white text color for white-outline button
+.btn--white-outline {
+  * {
+    color: var(--color-white) !important;
+  }
+  
+  &:hover * {
+    color: var(--color-black-500) !important;
+  }
+}
+
 .cta-features {
   display: flex;
   gap: var(--sp-32);
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: var(--sp-16);
 }
 
 .cta-feature-item {
@@ -278,7 +321,9 @@
   .cta-container {
     padding: var(--sp-56) var(--sp-16);
   }
-
+  .cta-btn-width{
+    width: 100%;
+}
   .cta-buttons {
     flex-direction: column;
     width: 100%;
@@ -291,8 +336,14 @@
     justify-content: center;
   }
 
+  .cta-blur-right{
+    display: none;
+  }
+  .servicesHeaderContainer{
+    height: auto;
+  }
+
   .cta-features {
-    flex-direction: column;
     gap: var(--sp-12);
     align-items: center;
   }
