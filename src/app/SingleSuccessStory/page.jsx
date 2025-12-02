@@ -9,8 +9,65 @@ import Metric from "@/components/ui-kit/key-metric";
 import Card from "@/components/ui-kit/value";
 import CardTestimonial from "@/components/ui-kit/cardTestimonial ";
 import SolutionCard from "@/components/ui-kit/solutionCard";
+import TheResultCard from "@/components/ui-kit/theResultCard";
+import CompanyDetailsCard from "@/components/ui-kit/companyDetailsCard";
+import ServicesListCard from "@/components/ui-kit/servicesListCard";
+import CTACard from "@/components/ui-kit/ctaCard";
+import MoreStoriesCard from "@/components/ui-kit/moreStoriesCard";
 
 export default function SingleSuccessStory() {
+  const solutionsData = [
+    {
+      icon: "https://ik.imagekit.io/75zj3bigp/Container.png?updatedAt=1763470634303",
+      title: "AI-Powered Screening",
+      description:
+        "Automated resume screening reduced manual review time by 80%",
+      iconBg: "var(--color-lime)", // lime green
+    },
+    {
+      icon: "https://ik.imagekit.io/75zj3bigp/Container.png?updatedAt=1763470634303",
+      title: "Team Collaboration",
+      description: "Seamless collaboration across 12 hiring managers",
+      iconBg: "var(--color-blue-400)", // light blue
+    },
+    {
+      icon: "https://ik.imagekit.io/75zj3bigp/Container.png?updatedAt=1763470634303",
+      title: "Automated Scheduling",
+      description: "Smart scheduling eliminated coordination headaches",
+      iconBg: "var(--color-blue-400)", // light blue
+    },
+    {
+      icon: "https://ik.imagekit.io/75zj3bigp/Container.png?updatedAt=1763470634303",
+      title: "Analytics Dashboard",
+      description: "Real-time insights into recruitment performance",
+      iconBg: "var(--color-lime)", // lime green
+    },
+  ];
+
+  // Result Card Data.
+  const resultsData = [
+    {
+      title: "Time-to-Hire",
+      subtitle: "Before: 45 days • After: 16 days",
+      result: "65% reduction",
+    },
+    {
+      title: "Cost-per-Hire",
+      subtitle: "Before: $5,000 • After: $2,000",
+      result: "60% reduction",
+    },
+    {
+      title: "Quality of Hire",
+      subtitle: "Before: 70% • After: 92%",
+      result: "31% increase",
+    },
+    {
+      title: "Candidate Experience",
+      subtitle: "Before: 3.2/5 • After: 4.8/5",
+      result: "50% improvement",
+    },
+  ];
+
   return (
     <>
       <div className="singleSuccessStoryBgColor">
@@ -65,8 +122,8 @@ export default function SingleSuccessStory() {
         </Container>
       </div>
       <Container variant="primary">
-        {/* Main Section */}
-        <div>
+        {/* Main Section (Left) */}
+        <div className="mainSectionParentContainer">
           <div className="mainSectionContainer">
             <Image
               src="https://ik.imagekit.io/75zj3bigp/Container%20(3).png"
@@ -85,24 +142,116 @@ export default function SingleSuccessStory() {
               role="Head of HR at TechCorp"
             />
             {/* Solution Section */}
-            <div>
+            <div className="solutionSection">
               <SectionHeader
                 title="The Solution"
                 subtitle="TechCorp implemented Hirezy's comprehensive recruitment platform, which included:"
                 align="left"
               />
-              <div>
-                // Basic usage
-                <SolutionCard
-                  icon="/trend-up-icon.png"
-                  title="AI-Powered Screening"
-                  description="Automated resume screening reduced manual review time by 80%"
-                />
+              <div className="solutionCardContainer">
+                {solutionsData.map((solution, index) => (
+                  <SolutionCard
+                    key={index}
+                    icon={solution.icon}
+                    title={solution.title}
+                    description={solution.description}
+                    iconBg={solution.iconBg}
+                  />
+                ))}
               </div>
             </div>
+            {/* The Result */}
+            <Container variant="blockSpacing">
+              <div>
+                <SectionHeader
+                  title="The Result"
+                  subtitle="Within six months of implementing Hirezy, TechCorp saw dramatic improvements across all their recruitment metrics:"
+                  align="left"
+                />
+                <div className="theResultCardContainer">
+                  {resultsData.map((item, index) => (
+                    <TheResultCard
+                      key={index}
+                      title={item.title}
+                      subtitle={item.subtitle}
+                      result={item.result}
+                    />
+                  ))}
+                </div>
+                <div className="twoImageContainer">
+                    <Image
+                      src="https://ik.imagekit.io/75zj3bigp/Container%20(3).png"
+                      width={432}
+                      height={280}
+                      className="twoImageContainer__image"
+                    />
+                    <Image
+                      src="https://ik.imagekit.io/75zj3bigp/Container%20(3).png"
+                      width={432}
+                      height={280}
+                      className="twoImageContainer__image"
+                    />
+                </div>
+              </div>
+            </Container>
+          </div>
+
+          {/* Company Details Card (Right) */}
+          <div className="companyDetailsCardContainer">
+            <CompanyDetailsCard
+              industry="Technology"
+              companySize="500+ employees"
+              location="San Francisco, CA"
+              timeline="6 months"
+            />
+            <CTACard
+              title="Ready for similar results?"
+              description="See how Hirezy can transform your recruitment process."
+              buttonText="Get Started"
+              titleColor="white"
+              descriptionColor="secondary"
+              onButtonClick={() => console.log("CTA clicked")}
+            />
+            <ServicesListCard
+              title="Services Used"
+              services={[
+                "Applicant Tracking System",
+                "AI-Powered Screening",
+                "Team Collaboration",
+                "Analytics & Reporting",
+              ]}
+            />
           </div>
         </div>
       </Container>
+      <div className="moreStoriesContainer">
+        <Container variant="primary">
+          <SectionHeader
+            title="More Success Stories"
+            subtitle="Discover how other companies are transforming their recruitment with Hirezy."
+            align="center"
+          />
+
+          <div className="moreStoriesCardContainer">
+            <MoreStoriesCard
+              image="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+              badge="75% faster hiring"
+              category="FinTech Innovations"
+              title="Scaling from 50 to 200 employees in 12 months"
+              buttonText="Read Story"
+              onButtonClick={() => console.log("Read story clicked")}
+            />
+            <MoreStoriesCard
+              image="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+              badge="75% faster hiring"
+              category="FinTech Innovations"
+              title="Scaling from 50 to 200 employees in 12 months"
+              buttonText="Read Story"
+              onButtonClick={() => console.log("Read story clicked")}
+            />
+          </div>
+        </Container>
+      </div>
     </>
   );
 }
