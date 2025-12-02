@@ -169,9 +169,16 @@ export default function Home() {
               Button
             </Button>
           </div>
+          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+            <Button variant="white-outline" size="xl">
+              <Typography variant="h4">Button</Typography>
+            </Button>
+          </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-          <Label className="lable" text="Label" />
+          <Label variant="primary" className="lable" text="Label" />
+          <Label variant="greenVariant" icon="https://ik.imagekit.io/75zj3bigp/Icon%20(10).png" className="lable" text="Label" />
+          <Label variant="secondary" className="lable" text="Label" />
         </div>
 
         <div className="flex flex-col gap-8">

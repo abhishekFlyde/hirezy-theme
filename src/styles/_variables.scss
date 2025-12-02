@@ -1,5 +1,6 @@
 :root {
   --color-lime: #ccef55;
+  --color-lime-light: rgb(204, 239, 85, 0.1);
   --color-blue-500: #afb7ff;
   --color-blue-400: #c7cdff;
   --color-blue-300: #f7f8ff;
@@ -15,10 +16,13 @@
   --sp-8: 8px;
   --sp-10: 10px; 
   --sp-12: 12px;
+  --sp-14: 14px;
   --sp-16: 16px;
   --sp-20: 20px;
+  --sp-22: 22px;
   --sp-24: 24px;
   --sp-25: 25px;
+  --sp-27: 27px;
   --sp-32: 32px;
   --sp-40: 40px;
   --sp-44: 44px;
@@ -29,6 +33,8 @@
   --sp-83: 83px;
   --sp-96: 96px;
   --sp-128: 128px;
+  --sp-136: 136px;
+  --sp-176: 176px;
 
   --radius-xs: 16px;
   --radius-md: 24px;

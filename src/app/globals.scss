@@ -27,6 +27,16 @@
 @import "../styles/textInfoCard";
 @import "../styles/contactInfo";
 @import "../styles/officeHours";
+@import "../styles/ourServices";
+@import "../styles/servicesCard";
+@import "../styles/SingleSuccessStory";
+@import "../styles/cardTestimonial";
+@import "../styles/solutionCard";
+@import "../styles/theResultCard";
+@import "../styles/companyDetailsCard";
+@import "../styles/ctaCard";
+@import "../styles/servicesListCard";
+@import "../styles/moreStoriesCard";
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -36,8 +46,8 @@
 body {
   background-color: var(--color-white);
   box-sizing: border-box;
-  max-width: 1520px;
   width: 100%;
+  max-width: var(--layout-max-width);
 }
   
 html {

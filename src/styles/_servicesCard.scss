@@ -1,0 +1,86 @@
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  padding: var(--sp-40);
+  background-color: var(--color-blue-300);
+  border-radius: var(--radius-md);
+  max-width: 431.3px;
+  min-height: 200px;
+  transition: all 0.3s ease-in-out;
+  justify-self: center;
+}
+.service-card:hover {
+    background-color: var(--color-black-500);
+}
+
+.service-card__icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background-color: var(--color-blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-card:hover .service-card__icon-wrapper {
+    background-color: var(--color-lime);
+}
+
+.service-card__icon-default {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid #222222;
+}
+
+.service-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+}
+
+.service-card__title {
+  margin: 0;
+}
+.service-card:hover .service-card__title {
+    color: var(--color-white) !important;
+}
+
+.service-card__description {
+  margin: 0;
+}
+
+.service-card__badge {
+  position: absolute;
+  top: var(--sp-16);
+  right: var(--sp-16);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-card__badge-inner {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background-color: #3b3b3b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-jakarta);
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .service-card {
+    padding: var(--sp-20);
+    max-width: 100%;
+  }
+}

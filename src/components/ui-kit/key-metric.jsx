@@ -54,7 +54,7 @@ function RollingDigit({ target, duration = 1.5 }) {
 }
 
 // --- Metric Component ---
-export default function Metric({ number = "250", label }) {
+export default function Metric({ number = "250", label, titleColor, labelColor }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [start, setStart] = useState(false);
@@ -64,9 +64,11 @@ export default function Metric({ number = "250", label }) {
   }, [isInView]);
 
   // Extract digits + suffix (like k, %, +)
-  const match = number.match(/^(\d+)([a-zA-Z%+]*)$/);
+const match = number.match(/^\$?(\d+)([a-zA-Z%+]*)$/);
   const numeric = match ? match[1] : "0";
   const suffix = match ? match[2] : "";
+  const prefix  = number.startsWith("$") ? "$" : "";
+
 
   const displayDigits = start
     ? numeric.split("")
@@ -78,13 +80,14 @@ export default function Metric({ number = "250", label }) {
       className="flex flex-col items-center gap-[8px]"
       style={{ fontVariantNumeric: "tabular-nums" }}
     >
-      <Typography variant="h1" className="flex items-baseline">
+      <Typography variant="h1" colorVariant={titleColor} className="flex items-baseline">
+        <span>{prefix}</span>
         {displayDigits.map((d, i) => (
           <RollingDigit key={i} target={parseInt(d, 10)} />
         ))}
         <span>{suffix}</span>
       </Typography>
-      <Typography variant="body-4">{label}</Typography>
+      <Typography colorVariant={labelColor} variant="body-4">{label}</Typography>
     </div>
   );
 }

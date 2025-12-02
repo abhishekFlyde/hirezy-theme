@@ -13,10 +13,14 @@ export default function SectionHeader({
   label,
   title,
   subtitle,
+  icon,
+  iconPosition,
   align = "center",
   className = "",
   imageSrc = null,
   imageAlt = "",
+  titleTextColor = "",
+  subTitleTextColor = "",
   imageVisibleOn = "mobile",
   labelBgColor = "var(--color-blue-300)", // 👈 new prop
 
@@ -82,6 +86,8 @@ export default function SectionHeader({
             text={label}
             bgColor={labelBgColor}
             variant={variant}
+            icon={icon}
+            iconPosition={iconPosition}
           />
         </motion.div>
       )}
@@ -106,14 +112,14 @@ export default function SectionHeader({
       {/* TITLE */}
       {title && (
         <motion.div variants={item} className="w-full">
-          <Typography variant={titleVariant}>{title}</Typography>
+          <Typography colorVariant={titleTextColor} variant={titleVariant}>{title}</Typography>
         </motion.div>
       )}
 
       {/* SUBTITLE */}
       {subtitle && (
         <motion.div variants={item} className="max-w-[816px] w-full">
-          <Typography variant="body-4" className="color-black-400">
+          <Typography colorVariant={subTitleTextColor} variant="body-4" >
             {subtitle}
           </Typography>
         </motion.div>

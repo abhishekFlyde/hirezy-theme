@@ -27,11 +27,9 @@ export const BlogsTextContent = ({
 
   return (
     <div className="blogsCardHead flex flex-col w-full">
-
-
       <Typography variant={headingVariant}>{heading}</Typography>
 
-      <Typography variant={descriptionVariant} className="color-black-400">
+      <Typography variant={descriptionVariant} colorVariant="gray">
         {description}
       </Typography>
     </div>

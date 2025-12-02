@@ -13,12 +13,20 @@ export default function Header() {
   const [header, setHeader] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHiding, setIsHiding] = useState(false);
+
   const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    window.dispatchEvent(new Event("header-ready"));
-  }, []);
+  /* ROUTES jinke upar FIXED NAVBAR black hoga */
+  const darkRoutes = ["/services", "/SingleSuccessStory"];
+
+  /* true when current route is inside darkRoutes list */
+  const isBlackRoute = darkRoutes.some((route) => pathname.startsWith(route));
+
+  const darkLogo =
+    "https://ik.imagekit.io/75zj3bigp/Logo12.png?updatedAt=1764157054343";
+
+  const lightLogo = header?.logo;
 
   useEffect(() => {
     (async () => {
@@ -31,27 +39,16 @@ export default function Header() {
     })();
   }, []);
 
-  // Scroll behavior
   useEffect(() => {
     let lastScrollY = window.scrollY;
-    let hideTimeout;
-    let showTimeout;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Only trigger when scrolling down (not up) and not already scrolled
-      if (currentScrollY > lastScrollY && currentScrollY > 65 && !isScrolled) {
-        // Step 1: Hide navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 65) {
         setIsHiding(true);
-
-        // Clear any existing timeouts
-        clearTimeout(hideTimeout);
-
         setIsHiding(false);
         setIsScrolled(true);
       }
-
       lastScrollY = currentScrollY;
     };
 
@@ -59,14 +56,12 @@ export default function Header() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(hideTimeout);
-      clearTimeout(showTimeout);
     };
-  }, [isScrolled]);
+  }, []);
 
-  // Set active link based on current pathname
   useEffect(() => {
     if (header?.navLinks) {
+      0;
       const currentLink = header.navLinks.find((link) => {
         return (
           pathname === link.href ||
@@ -74,17 +69,12 @@ export default function Header() {
         );
       });
 
-      if (currentLink) {
-        setActiveLink(currentLink.name);
-      } else if (pathname === "/") {
-        setActiveLink("Home");
-      } else {
-        setActiveLink("");
-      }
+      if (currentLink) setActiveLink(currentLink.name);
+      else if (pathname === "/") setActiveLink("Home");
+      else setActiveLink("");
     }
   }, [pathname, header]);
 
-  // Handle link click with proper navigation
   const handleLinkClick = (linkName, href, e) => {
     e.preventDefault();
     setActiveLink(linkName);
@@ -93,84 +83,104 @@ export default function Header() {
 
   if (!header) return null;
 
-  // Navbar content component to reuse
-  const NavbarContent = () => (
-    <>
-      {/* Logo */}
-      <Link
-        href="/"
-        className="flex-shrink-0"
-        onClick={(e) => {
-          e.preventDefault();
-          setActiveLink("Home");
-          router.push("/");
-        }}
-      >
-        <Image
-          src={header.logo}
-          alt="Hirezy"
-          width={140.3}
-          height={37}
-          className="header-logo"
-        />
-      </Link>
+  const NavbarContent = ({ isFixed }) => {
+    // const showDark = isFixed && isBlackRoute;
+    const showDark = !isFixed && isBlackRoute;
 
-      {/* Desktop Navigation */}
-      <nav className="nav-link-container">
-        {header.navLinks?.map((link, i) => (
-          <Link
-            key={i}
-            href={link.href}
-            onClick={(e) => handleLinkClick(link.name, link.href, e)}
-            className={`nav-link ${
-              activeLink === link.name ? "active-link" : ""
-            }`}
-          >
-            <Typography
-              className="nav-link-color transition-colors"
-              variant="body-4"
-              style={{
-                lineHeight: "150%",
-                fontSize: "16px",
-              }}
-            >
-              {link.name}
-            </Typography>
-          </Link>
-        ))}
-      </nav>
-
-      {/* CTA */}
-      <div className="flex items-center">
-        <Link href={header.ctaLink}>
-          <Button variant="primary" size="xl" showIcon={false}>
-            {header.ctaText}
-          </Button>
+    return (
+      <>
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex-shrink-0"
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveLink("Home");
+            router.push("/");
+          }}
+        >
+          <Image
+            // src={showDark ? darkLogo : lightLogo}
+            src={!isFixed && showDark ? darkLogo : lightLogo}
+            alt="Hirezy"
+            width={140.3}
+            height={37}
+            className="header-logo"
+          />
         </Link>
-      </div>
-    </>
-  );
+
+        {/* Desktop Navigation */}
+        <nav className="nav-link-container">
+          {header.navLinks?.map((link, i) => (
+            <Link
+              key={i}
+              href={link.href}
+              onClick={(e) => handleLinkClick(link.name, link.href, e)}
+              className={`nav-link ${
+                isFixed
+                  ? activeLink === link.name
+                    ? "fixed-active"
+                    : ""
+                  : showDark
+                  ? activeLink === link.name
+                    ? "static-active" // white wala variant
+                    : ""
+                  : activeLink === link.name
+                  ? "static-black-active" // ← yeh new black active state
+                  : ""
+              }`}
+            >
+              <Typography
+                className={`transition-colors ${
+                  !isFixed
+                    ? showDark
+                      ? "static-nav-link-white"
+                      : "static-nav-link"
+                    : "fixed-nav-link"
+                }`}
+                variant="body-4"
+                style={{ lineHeight: "150%", fontSize: "16px" }}
+              >
+                {link.name}
+              </Typography>
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <div className="flex items-center">
+          <Link href={header.ctaLink}>
+            <Button variant="primary" size="xl" showIcon={false}>
+              {header.ctaText}
+            </Button>
+          </Link>
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
-      {/* Static Navbar - Initially visible, uses global spacing */}
-      <Container variant="header">
-        <header className="header-container-static flex items-center justify-between">
-          <NavbarContent />
-        </header>
-      </Container>
+      {/* STATIC NAVBAR — always light */}
+      <div className="max-w-[var(--layout-max-width)] mx-auto w-full">
+        <Container variant="header">
+          <header className="header-container-static flex items-center justify-between">
+            <NavbarContent isFixed={false} />
+          </header>
+        </Container>
+      </div>
 
-      {/* Fixed Navbar - Shows on scroll with animation */}
+      {/* FIXED NAVBAR — route based */}
       <header
-        className={`header-container-fixed ${
-          isHiding ? "header-hiding" : ""
-        } ${isScrolled ? "header-scrolled" : ""}`}
+        className={`header-container-fixed ${isHiding ? "header-hiding" : ""} ${
+          isScrolled ? "header-scrolled" : ""
+        }`}
       >
         <Container
           variant="header"
           className="header-fixed-content flex items-center justify-between"
         >
-          <NavbarContent />
+          <NavbarContent isFixed={true} />
         </Container>
       </header>
     </>

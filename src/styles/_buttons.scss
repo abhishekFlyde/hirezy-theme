@@ -7,7 +7,7 @@
   cursor: pointer;
   border: none;
   line-height: 1;
-  user-select: none; 
+  user-select: none;
   border-radius: var(--radius-lg);
 
   /* Sizes */
@@ -48,7 +48,7 @@
   /* Variants */
   &--primary {
     background: var(--color-lime);
-    color: black ;
+    color: black;
     transition: 0.2s ease-in-out;
     border: 0.5px solid transparent;
 
@@ -81,7 +81,6 @@
       // background: lighten(var(--color-black-500), 5%);
     }
   }
-  
 
   &--black-outline {
     background: transparent;
@@ -92,6 +91,19 @@
       background: var(--color-black-500);
       color: var(--color-white);
       border: 0.5px solid var(--color-black-500);
+    }
+  }
+
+  &--white-outline {
+    background: transparent;
+    border: 0.5px solid var(--color-white);
+    color: var(--color-black-500);
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background: var(--color-white);
+      color: var(--color-black-500);
+      border: 0.5px solid var(--color-white);
     }
   }
 
@@ -164,7 +176,8 @@
   @media (max-width: 600px) {
     &--primary,
     &--white,
-    &--black-outline {
+    &--black-outline,
+    &--white-outline {
       padding: var(--sp-10) var(--sp-24);
       font-size: 16px;
       gap: var(--sp-16);
@@ -215,5 +228,4 @@
   background: transparent !important;
   border: 0.5px solid var(--color-black-500) !important; /* optional if u want */
   box-shadow: none !important;
-
 }

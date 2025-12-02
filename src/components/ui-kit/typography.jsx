@@ -1,10 +1,19 @@
 import clsx from "clsx";
 
+const colorMap = {
+  black: "#000000",
+  white: "#FFFFFF",
+  gray: "#636363",
+  primary: "#CCEF55",
+  secondary: "#AAAAAA",
+};
+
 const Typography = ({
   variant = "body-2",
   as,
   children,
   className,
+  colorVariant = "black", 
   ...props
 }) => {
   const Tag = as || getDefaultTag(variant);
@@ -12,8 +21,11 @@ const Typography = ({
   return (
     <Tag
       className={clsx(variant, className)}
+      style={{
+        whiteSpace: "pre-line",
+        color: colorMap[colorVariant] || colorMap.black, // apply variant color
+      }}
       {...props}
-      style={{ whiteSpace: "pre-line" }}
     >
       {children}
     </Tag>
@@ -37,6 +49,5 @@ function getDefaultTag(variant) {
   };
   return map[variant] || "p";
 }
-
 
 export default Typography;

@@ -19,10 +19,14 @@ export default function ArticleHeader() {
                 width={20}
                 height={20}
               />
-              <Typography variant="body-4">Back to Blog</Typography>
+              <Typography variant="body-4" colorVariant="gray">
+                Back to Blog
+              </Typography>
             </Link>
             <div className="flex gap-2 items-center">
-              <Typography variant="body-4">Blog</Typography>
+              <Typography variant="body-4" colorVariant="gray">
+                Blog
+              </Typography>
               <Image
                 src="https://ik.imagekit.io/75zj3bigp/Icon%20(6).png"
                 alt=""
@@ -62,6 +66,7 @@ export default function ArticleHeader() {
                   />
                   <Typography
                     variant="body-5"
+                    colorVariant="gray"
                     className="blog-author-meta__label"
                   >
                     Oct 28, 2025
@@ -79,6 +84,7 @@ export default function ArticleHeader() {
 
                   <Typography
                     variant="body-5"
+                    colorVariant="gray"
                     className="blog-author-meta__label"
                   >
                     7 min read

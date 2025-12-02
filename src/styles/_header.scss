@@ -2,7 +2,7 @@
 .header-container-static {
   font-family: var(--font-jakarta);
   position: relative;
-  background: var(--color-white);
+  // background: var(--color-white);
   z-index: 999;
 }
 
@@ -24,6 +24,7 @@
   justify-content: center;
   // will-change: transform;
   // transform: translateZ(0);
+  // max-width: var(--layout-max-width);
 }
 
 .header-fixed-content {
@@ -119,4 +120,36 @@
   .header-fixed-content {
     padding: var(--sp-12) var(--sp-16) var(--sp-12) var(--sp-16);
   }
+}
+
+/* STATIC NAVBAR VARIANT (route-based changes allowed) */
+.static-nav-link {
+  color: var(--color-black-400);
+  transition: all 0.2s ease-in-out;
+}
+
+.static-active .static-nav-link-white {
+  color: var(--color-lime);
+  font-weight: 600;
+}
+.static-nav-link-white {
+  color: var(--color-white);
+}
+
+.static-black-active .static-nav-link {
+  color: var(--color-black-500);
+  font-weight: 600;
+}
+
+
+/* FIXED NAVBAR — always default colors */
+.fixed-nav-link {
+  color: var(--color-black-400);
+  transition: all 0.2s ease-in-out;
+}
+
+.fixed-active .fixed-nav-link {
+  // color: var(--color-black-500);
+  color: var(--color-black-500);
+  font-weight: 600;
 }

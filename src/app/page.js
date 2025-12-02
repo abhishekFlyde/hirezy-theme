@@ -244,9 +244,10 @@ export default function Page() {
   const fetchMetricSection = async () => {
     try {
       const res = await api.get("/metrics-section");
+      console.log("Metrics API response:", res.data);
       setMetricsSection(res.data?.section || { items: [] });
     } catch (err) {
-      console.error("Failed to load metrics section");
+      console.error("Failed to load metrics section", err);
     }
   };
 
@@ -305,8 +306,9 @@ export default function Page() {
 
   return (
     <>
-      <Header />
+      <Header variant="blackNav" />
 
+      
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
           <motion.div

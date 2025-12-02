@@ -15,6 +15,8 @@ import OfficeHours from "@/components/ui-kit/officeHours";
 import Image from "next/image";
 
 const officeLocations = [
+
+  
   {
     city: "San Francisco",
     label: "Headquarters",
