@@ -97,7 +97,6 @@ export default function Page() {
     }
   };
 
-
   const [isMobile, setIsMobile] = useState(false);
   const [isIpad, setIsIpad] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -122,19 +121,19 @@ export default function Page() {
     } catch (err) {
       console.error("Failed to load Features Section");
     }
-  }; 
+  };
 
   const checkDevice = () => {
     const width = window.innerWidth;
     setIsMobile(width <= 600);
     setIsIpad(width > 600 && width <= 1100);
     setIsDesktop(width > 1024);
-  }; 
+  };
 
   useEffect(() => {
     checkDevice();
-    initThemeSocket()
-    
+    initThemeSocket();
+
     window.addEventListener("resize", checkDevice);
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
