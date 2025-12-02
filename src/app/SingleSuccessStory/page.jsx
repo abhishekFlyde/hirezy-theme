@@ -161,7 +161,7 @@ export default function SingleSuccessStory() {
               </div>
             </div>
             {/* The Result */}
-            <Container variant="blockSpacing">
+            <Container variant="topSpacing">
               <div>
                 <SectionHeader
                   title="The Result"
