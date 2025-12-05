@@ -33,6 +33,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
+import Tabs from "@/components/ui-kit/tabs";
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
@@ -303,12 +304,142 @@ export default function Page() {
 
   const desktopOrder = [0, 3, 1, 2, 4];
   // console.log(testimonialsSection);
+  const sectionData = {
+    label: "Top Features",
+    title: "Our Amazing Tools",
+    subtitle: "Build anything you imagine",
+    minColWidth: 280,
+    gap: 20,
+    columns: 3,
+    centerTitle: true,
+
+    // OLD ITEMS — SAFE, NOT USED FOR TABS
+    items: [
+      {
+        heading: "Brazilian Keratin",
+        description:
+          "Manage all hiring activities in one clean, organized platform.",
+        imageLink:
+          "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        textPosition: "top",
+        colSpan: 1,
+      },
+      {
+        heading: "Botox/Repair Keratin",
+        description:
+          "Manage all hiring activities in one clean, organized platform.",
+        imageLink:
+          "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        colSpan: 1,
+      },
+      {
+        heading: "Intensive Straightening",
+        description:
+          "Manage all hiring activities in one clean, organized platform.",
+        imageLink:
+          "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        colSpan: 1,
+      },
+    ],
+
+    // NEW — TABS CONTENT
+    tabsData: [
+      // TAB 1 — Keratin Treatments
+      [
+        {
+          heading: "Brazilian Keratin",
+          description: "Smooth & shine",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Botox Keratin",
+          description: "Repair dry hair",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Intensive Straightening",
+          description: "Strong straight look",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+      ],
+
+      // TAB 2 — Wash & Care
+      [
+        {
+          heading: "Keratin Shampoo",
+          description: "Gentle cleansing",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Keratin Conditioner",
+          description: "Soft & silky",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Hair Mask",
+          description: "Deep nourishment",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+      ],
+
+      // TAB 3 — Leave-In & Styling
+      [
+        {
+          heading: "Leave-In Cream",
+          description: "Daily styling",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Heat Protector",
+          description: "Before ironing",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Curl Enhancer",
+          description: "Boost curls",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+      ],
+
+      // TAB 4 — Oils & Finishing
+      [
+        {
+          heading: "Argan Oil",
+          description: "Shine + smooth",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291g",
+        },
+        {
+          heading: "Serum Drops",
+          description: "Anti-frizz",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+        {
+          heading: "Finishing Mist",
+          description: "Soft hold",
+          imageLink:
+            "https://ik.imagekit.io/a9uxeuyhx/cfe73c5f6487adf85d549f4a8989f09f2820a437.png?updatedAt=1764932885291",
+        },
+      ],
+    ],
+  };
+  
+  
 
   return (
     <>
       <Header variant="blackNav" />
 
-      
       <Container variant="heroSpacing">
         <div className="flex justify-between flex-wrap">
           <motion.div
@@ -385,7 +516,12 @@ export default function Page() {
           />
         </motion.div>
       </Container>
+      {/* <Logo
+        src="https://ik.imagekit.io/a9uxeuyhx/Logo_2%20(1).png"
+        alt="Your Site is Live"
+      /> */}
 
+      <Tabs section={sectionData} />
       <Container variant="primary">
         <GridSection
           label={section.label}

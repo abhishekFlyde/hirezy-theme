@@ -1,48 +1,3 @@
-// "use client";
-// import React, { Suspense } from "react";
-
-// const Typography = React.lazy(() => import("./typography"));
-
-// export default function Label({
-//   text,
-//   className = "",
-//   variant = "primary",  // primary | secondary | GreenVariant
-//   bgColor = "var(--color-blue-300)",
-//   ...props
-// }) 
-// {
-// const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
-//   return (
-//     <div
-//       {...props}
-//       style={{
-//         padding: "var(--sp-8) var(--sp-16)",
-//         fontSize: "16px",
-//         fontFamily: "var(--font-jakarta)",
-//         fontWeight: 400,
-//         lineHeight: "150%",
-//         borderRadius: "var(--radius-md)",
-//         backgroundColor: bgColor,
-//         display: "inline-block",
-//         width: "max-content",
-//       }}
-//       className={className}
-//     >
-//       <Suspense fallback={<div style={{ height: "1em" }} />}>
-      
-
-//         {text && (
-//           <Typography variant={typographyVariant}>
-//             {text}
-//           </Typography>
-//         )}
-
-//       </Suspense>
-//     </div>
-//   );
-// }
-
-
 "use client";
 import React, { Suspense } from "react";
 import Image from "next/image";
@@ -53,27 +8,31 @@ const Typography = React.lazy(() => import("./typography"));
 export default function Label({
   text,
   className = "",
-  variant = "primary",
+  variant = "primary", // primary | secondary | greenVariant | tab
   icon,
   iconPosition = "left",
+  active = false, // 👈 NEW for tab active color
   ...props
 }) {
-  // Decide which typography variant to apply
   const typographyVariant = variant === "secondary" ? "body-5" : "body-4";
-  
-  // Map label variant to typography color variant
+
   const getColorVariant = () => {
-    if (variant === "greenVariant") return "primary"; // lime color
-    return "gray"; // gray color for primary/secondary
+    if (variant === "greenVariant") return "primary";
+    if (variant === "tab" && active) return "primary"; // text becomes white-ish
+    return "gray";
   };
 
   return (
     <div
       {...props}
-      className={clsx("label", `label--${variant}`, className)}
+      className={clsx(
+        "label",
+        `label--${variant}`,
+        active && "label--active",
+        className
+      )}
     >
       <Suspense fallback={<div style={{ height: "1em" }} />}>
-        {/* Icon left */}
         {icon && iconPosition === "left" && (
           <Image
             src={icon}
@@ -85,7 +44,7 @@ export default function Label({
         )}
 
         {text && (
-          <Typography 
+          <Typography
             variant={typographyVariant}
             colorVariant={getColorVariant()}
           >
@@ -93,7 +52,6 @@ export default function Label({
           </Typography>
         )}
 
-        {/* Icon right */}
         {icon && iconPosition === "right" && (
           <Image
             src={icon}

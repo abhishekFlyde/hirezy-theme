@@ -83,7 +83,8 @@ export default function GridSection({
         className="relative grid gridSectionAuto !items-between !auto-rows-max !grid-flow-dense"
         style={{
           gap,
-          gridTemplateColumns: `repeat(${columns}, minmax(${minColWidth}, 1fr))`,
+          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+
           perspective: "1200px",
         }}
       >
