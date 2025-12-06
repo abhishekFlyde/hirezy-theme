@@ -521,7 +521,7 @@ export default function Page() {
         alt="Your Site is Live"
       /> */}
 
-      <Tabs section={sectionData} />
+      {/* <Tabs section={sectionData} /> */}
       <Container variant="primary">
         <GridSection
           label={section.label}

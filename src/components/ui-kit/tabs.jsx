@@ -4,6 +4,8 @@ import Label from "./lable";
 import GridSection from "./GridWrapper";
 import { ImageCard } from "./card";
 import { Container } from "./spacing";
+import SectionHeader from "./sectionHeader";
+
 
 export default function Tabs({ section }) {
   // Active tab state
@@ -22,38 +24,45 @@ export default function Tabs({ section }) {
 
   return (
     <>
-      {/* TABS */}
-      <Container variant="section" className="tabs">
-        {tabs.map((tab, index) => (
-          <Label
-            key={index}
-            text={tab}
-            variant="tab"
-            active={activeTab === index}
-            onClick={() => setActiveTab(index)}
-          />
-        ))}
-      </Container>
-
-      {/* GRID SECTION */}
-      <GridSection
-        minColWidth={section.minColWidth}
-        gap={section.gap}
-        columns={section.columns} // ALWAYS 3 COLUMNS
-        centerTitle={section.centerTitle}
-        items={activeItems.map((card) => ({
-          component: (
-            <ImageCard
-             
-              heading={card.heading}
-              description={card.description}
-              imageLink={card.imageLink}
-              textPosition={card.textPosition}
+      <Container>
+        <SectionHeader
+         
+          title={section.title || ""}
+          subtitle={section.subtitle || ""}
+          align={section?.centerTitle ? "center" : "left"}
+        />
+        {/* TABS */}
+        <Container variant="primary" className="tabs">
+          {tabs.map((tab, index) => (
+            <Label
+              key={index}
+              text={tab}
+              variant="tab"
+              active={activeTab === index}
+              onClick={() => setActiveTab(index)}
             />
-          ),
-          colSpan: 1, // FIXED: 3-column layout
-        }))}
-      />
+          ))}
+        </Container>
+
+        {/* GRID SECTION */}
+        <GridSection
+          minColWidth={section.minColWidth}
+          gap={section.gap}
+          columns={section.columns} // ALWAYS 3 COLUMNS
+          centerTitle={section.centerTitle}
+          items={activeItems.map((card) => ({
+            component: (
+              <ImageCard
+                heading={card.heading}
+                description={card.description}
+                imageLink={card.imageLink}
+                textPosition={card.textPosition}
+              />
+            ),
+            colSpan: 1, // FIXED: 3-column layout
+          }))}
+        />
+      </Container>
     </>
   );
 }
