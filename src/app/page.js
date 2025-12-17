@@ -174,6 +174,7 @@ export default function Page() {
         const triggerStart = windowHeight;
         const triggerEnd = windowHeight * 0.3;
 
+        
         let progress = 0;
         if (videoTop < triggerStart && videoBottom > 0) {
           const distanceFromTop = Math.max(0, triggerStart - videoTop);
