@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { Container } from "./ui-kit/spacing";
-import Label from "./ui-kit/lable";
+import Label from "./ui-kit/lable"; 
 import Typography from "./ui-kit/typography";
 import Button from "./ui-kit/button";
 import Card from "./ui-kit/value";
