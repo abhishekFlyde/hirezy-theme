@@ -4,7 +4,7 @@ import { Geist, Geist_Mono, Lato, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.scss";
 import ClientLayout from "./ClientLayout";
 
-
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
