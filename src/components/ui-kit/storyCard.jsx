@@ -6,6 +6,7 @@ import Typography from "./typography";
 import Button from "./button";
 import "@/styles/_storyCard.scss";
 import Card from "./value";
+import Link from "next/link";
 
 const defaultMetrics = [
   { value: "65%", label: "Faster Hiring" },
@@ -32,48 +33,50 @@ export default function StoryCard({
   const metricList = metrics?.length ? metrics : defaultMetrics;
 
   return (
-    <article className="story-card">
-      <div className="story-card__media">
-        <Image
-          src={heroImage}
-          alt={`${title} team photo`}
-          width={1280}
-          height={640}
-          className="story-card__media-img"
-        />
-      </div>
-
-      <div className="story-card__body">
-        <div className="story-card__header">
-          {category && <Label text={category} className="story-card__label" />}
-          <Typography variant="h2" className="story-card__title">
-            {title}
-          </Typography>
-          
+    <Link href="/success-stories/single-success-story" className="block">
+      <article className="story-card">
+        <div className="story-card__media">
+          <Image
+            src={heroImage}
+            alt={`${title} team photo`}
+            width={1280}
+            height={640}
+            className="story-card__media-img"
+          />
         </div>
 
-        <div className="story-card__quote">
-          <Image
-            src="https://ik.imagekit.io/75zj3bigp/Icon%20(2).png"
-            alt=""
-            width={32}
-            height={32}
-            className="story-card__quote-icon"
-          />
-          <Typography variant="body-3" className="story-card__quote-text">
-            {quote}
-          </Typography>
-          <div className="story-card__quote-author">
-            <Typography variant="h6" className="story-card__quote-name">
-              {authorName}
-            </Typography>
-            <Typography variant="body-4" className="story-card__quote-role">
-              {authorRole}
+        <div className="story-card__body">
+          <div className="story-card__header">
+            {category && (
+              <Label text={category} className="story-card__label" />
+            )}
+            <Typography variant="h2" className="story-card__title">
+              {title}
             </Typography>
           </div>
-        </div>
 
-        {/* <div className="story-card__metrics">
+          <div className="story-card__quote">
+            <Image
+              src="https://ik.imagekit.io/75zj3bigp/Icon%20(2).png"
+              alt=""
+              width={32}
+              height={32}
+              className="story-card__quote-icon"
+            />
+            <Typography variant="body-3" className="story-card__quote-text">
+              {quote}
+            </Typography>
+            <div className="story-card__quote-author">
+              <Typography variant="h6" className="story-card__quote-name">
+                {authorName}
+              </Typography>
+              <Typography variant="body-4" className="story-card__quote-role">
+                {authorRole}
+              </Typography>
+            </div>
+          </div>
+
+          {/* <div className="story-card__metrics">
           {metricList.map((metric) => (
             <div className="story-card__metric" key={metric.label}>
               <Image
@@ -93,31 +96,46 @@ export default function StoryCard({
             </div>
           ))}
         </div> */}
-        <div className="story-card-container">
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
-        </div>
+          <div className="story-card-container">
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+          </div>
 
-        <div className="story-card__section">
-          <Typography variant="h4" className="story-card__section-title">
-            {challengeTitle}
-          </Typography>
-          <Typography variant="body-4" className="story-card__section-copy">
-            {challengeDescription}
-          </Typography>
-        </div>
+          <div className="story-card__section">
+            <Typography variant="h4" className="story-card__section-title">
+              {challengeTitle}
+            </Typography>
+            <Typography variant="body-4" className="story-card__section-copy">
+              {challengeDescription}
+            </Typography>
+          </div>
 
-        <div className="story-card__section">
-          <Typography variant="h4" className="story-card__section-title">
-            {solutionTitle}
-          </Typography>
-          <Typography variant="body-4" className="story-card__section-copy">
-            {solutionDescription}
-          </Typography>
+          <div className="story-card__section">
+            <Typography variant="h4" className="story-card__section-title">
+              {solutionTitle}
+            </Typography>
+            <Typography variant="body-4" className="story-card__section-copy">
+              {solutionDescription}
+            </Typography>
+          </div>
         </div>
-
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }
