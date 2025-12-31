@@ -16,7 +16,7 @@ const defaultMetrics = [
 export default function StoryCard({
   category = "Technology",
   title = "TechFlow Solutions",
-  description = "Hirezy transformed our recruitment process. We reduced our time-to-hire by 65% and significantly improved candidate quality.",
+  
   heroImage = "https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843",
   quote = "Hirezy transformed our recruitment process. We reduced our time-to-hire by 65% and significantly improved candidate quality. The platform's AI-powered matching is incredibly accurate.",
   authorName = "Sarah Chen",
@@ -49,11 +49,7 @@ export default function StoryCard({
           <Typography variant="h2" className="story-card__title">
             {title}
           </Typography>
-          {description && (
-            <Typography variant="body-4" className="story-card__description">
-              {description}
-            </Typography>
-          )}
+          
         </div>
 
         <div className="story-card__quote">

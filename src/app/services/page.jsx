@@ -104,8 +104,19 @@ export default function ServicesPage() {
           />
         </Container>
       </div>
-      <OurServices />
-      <Container variant="primary">
+
+      <OurServices
+        imageSrc="https://ik.imagekit.io/75zj3bigp/ImageWithFallback%20(1).png"
+        eyebrow="OUR SERVICES"
+        title="Your Success, Our Priority"
+        cardIcon="https://ik.imagekit.io/a9uxeuyhx/Container%20(4).png"
+        cardHeading="Applicant Tracking"
+        cardShortDesc="A sophisticated platform with intuitive job posting tools and AI matching."
+        cardLongDesc="A sophisticated platform with intuitive job posting tools, dynamic resume filtering, and AI-powered candidate matching to save time and improve hiring quality."
+      />
+
+      <Container variant
+      ="primary">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[var(--sp-16)]">
           {servicesData.map((item, i) => (
             <ServiceCard

@@ -77,6 +77,7 @@ export default function page() {
             align={isMobile ? "left" : "center"}
           />
         </Container>
+
       <div className="contactUsLayoutShift">
         <div className="support-options">
           <Container variant="primary" className="wrapper">
@@ -193,43 +194,43 @@ export default function page() {
           </div>
         </Container>
       </div>
-      <div>
-        <Container variant="primary">
-          <SectionHeader
-            label="Our Offices"
-            title="Visit Us Worldwide"
-            subtitle="We have offices around the globe to serve you better"
-            align={isMobile ? "left" : "center"}
-          />
-          <div className="offices-grid">
-            {officeLocations.map((office) => (
-              <div className="office-card" key={office.city}>
-                <div className="office-card__header">
-                  <Typography variant="h3" className="office-card__city">
-                    {office.city}
-                  </Typography>
-                  <Typography variant="body-4" className="office-card__label">
-                    {office.label}
-                  </Typography>
-                </div>
-
-                <div className="office-card__body">
-                  <div className="office-card__address">
-                    {office.address.map((line) => (
-                      <Typography key={line} variant="body-4">
-                        {line}
-                      </Typography>
-                    ))}
+        <div>
+          <Container variant="primary">
+            <SectionHeader
+              label="Our Offices"
+              title="Visit Us Worldwide"
+              subtitle="We have offices around the globe to serve you better"
+              align={isMobile ? "left" : "center"}
+            />
+            <div className="offices-grid">
+              {officeLocations.map((office) => (
+                <div className="office-card" key={office.city}>
+                  <div className="office-card__header">
+                    <Typography variant="h3" className="office-card__city">
+                      {office.city}
+                    </Typography>
+                    <Typography variant="body-4" className="office-card__label">
+                      {office.label}
+                    </Typography>
                   </div>
-                  <Typography variant="body-4" className="office-card__phone">
-                    {office.phone}
-                  </Typography>
+
+                  <div className="office-card__body">
+                    <div className="office-card__address">
+                      {office.address.map((line) => (
+                        <Typography key={line} variant="body-4">
+                          {line}
+                        </Typography>
+                      ))}
+                    </div>
+                    <Typography variant="body-4" className="office-card__phone">
+                      {office.phone}
+                    </Typography>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </div>
+              ))}
+            </div>
+          </Container>
+        </div>
       <Footer />
     </>
   );
