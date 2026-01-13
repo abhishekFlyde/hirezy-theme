@@ -19,6 +19,7 @@ import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
 import StoryCard from "@/components/CreativeEventsComponents/storyCard";
+import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
 export default function Home() {
   const faqData = [
     {
@@ -46,7 +47,7 @@ export default function Home() {
       <SignIn />
       <CTA />
       <WhyChoose />
-      <WhatWeDo/>
+      <WhatWeDo />
       <div>
         <Typography variant="h1">Heading 1 - Lato</Typography>
         <br />
@@ -385,12 +386,11 @@ export default function Home() {
         </section>
 
         {/* Creative events Code */}
-
-        
       </div>
 
       <Footer />
       <StoryCard />
+      <ActiveMembers />
     </>
   );
 }
