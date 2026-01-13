@@ -77,30 +77,65 @@ export default function StoryCard({
           </div>
         </div>
 
-        {/* <div className="story-card__metrics">
-          {metricList.map((metric) => (
-            <div className="story-card__metric" key={metric.label}>
-              <Image
-                src="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
-                alt=""
-                width={40}
-                height={40}
-                className="story-card__metric-icon"
-                // aria-hidden="true"
-              />
-              <Typography variant="body-1" className="story-card__metric-value">
-                {metric.value}
+          <div className="story-card__quote">
+            <Image
+              src="https://ik.imagekit.io/75zj3bigp/Icon%20(2).png"
+              alt=""
+              width={32}
+              height={32}
+              className="story-card__quote-icon"
+            />
+            <Typography variant="body-3" className="story-card__quote-text">
+              {quote}
+            </Typography>
+            <div className="story-card__quote-author">
+              <Typography variant="h6" className="story-card__quote-name">
+                {authorName}
               </Typography>
-              <Typography variant="body-4" className="story-card__metric-label">
-                {metric.label}
+              <Typography variant="body-4" className="story-card__quote-role">
+                {authorRole}
               </Typography>
             </div>
-          ))}
-        </div> */}
-        <div className="story-card-container">
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
-        <Card title="65%" description="Faster Hiring" iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661" variant="story" />
+          </div>
+
+          <div className="story-card-container">
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+            <Card
+              title="65%"
+              description="Faster Hiring"
+              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
+              variant="story"
+            />
+          </div>
+
+          <div className="story-card__section">
+            <Typography variant="h4" className="story-card__section-title">
+              {challengeTitle}
+            </Typography>
+            <Typography variant="body-4" className="story-card__section-copy">
+              {challengeDescription}
+            </Typography>
+          </div>
+
+          <div className="story-card__section">
+            <Typography variant="h4" className="story-card__section-title">
+              {solutionTitle}
+            </Typography>
+            <Typography variant="body-4" className="story-card__section-copy">
+              {solutionDescription}
+            </Typography>
+          </div>
         </div>
 
         <div className="story-card__section">
@@ -120,8 +155,6 @@ export default function StoryCard({
             {solutionDescription}
           </Typography>
         </div>
-
-      </div>
     </article>
   );
 }

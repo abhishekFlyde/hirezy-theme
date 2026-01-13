@@ -16,6 +16,7 @@ import CTA from "@/components/ui-kit/cta";
 import WhyChoose from "@/components/WhyChoose";
 import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
+import StoryCard from "@/components/CreativeEventsComponents/storyCard";
 export default function Home() {
   const faqData = [
     {
@@ -367,9 +368,14 @@ export default function Home() {
             ]}
           />
         </section>
+
+        {/* Creative events Code */}
+
+        
       </div>
 
       <Footer />
+      <StoryCard />
     </>
   );
 }
