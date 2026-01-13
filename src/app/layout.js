@@ -3,6 +3,8 @@
 import { Geist, Geist_Mono, Lato, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.scss";
 import ClientLayout from "./ClientLayout";
+import localFont from "next/font/local";
+
 
  
 const geistSans = Geist({
@@ -28,6 +30,28 @@ const jakarata = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
 });
+
+const markOT = localFont({
+  variable: "--font-mark-ot",
+  src: [
+    {
+      path: "../fonts/Mark OT font/MarkOT.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Mark OT font/MarkOT-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Mark OT font/mark-ot-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+});
+
 
 export const metadata = {
   title: "Hirezy | Smart Recruitment Platform to Hire Top Talent Faster",
@@ -57,7 +81,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} ${jakarata.variable}`}>
+      <body
+        className={`${lato.variable} ${jakarata.variable} ${markOT.variable}`}
+      >
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

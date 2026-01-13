@@ -1,6 +1,6 @@
 // ✅ Fluid Helper → auto scale between mobile & desktop
 // Usage: font-size: fluid(16px, 24px);
-@function fluid($min, $max, $minViewport: 390px, $maxViewport: 1440px) {
+@function fluid($min, $max, $minViewport: 390px, $maxViewport: 1640px) {
   $difference: $max - $min;
   @return calc(
     #{$min} + #{$difference} *
@@ -104,4 +104,26 @@
   // color: var(--color-black-500);
   font-size: 16px;
   line-height: 25.6px;
+}
+
+
+.itel-label{
+  font-family: var(--font-mark-ot);
+  font-weight: 700;
+  font-size: fluid(18px, 21px);
+  line-height: 100%;
+}
+.itel-head {
+  font-family: var(--font-mark-ot);
+  font-weight: 500;
+  font-size: fluid(36px, 60px);
+  line-height: 124%;
+  letter-spacing: -10%;
+}
+.itel-desc {
+  font-family: var(--font-mark-ot);
+  font-weight: 400;
+  font-size: fluid(18px, 22px);
+  line-height: 117%;
+  letter-spacing: -3%;
 }

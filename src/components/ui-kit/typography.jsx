@@ -6,6 +6,11 @@ const colorMap = {
   gray: "#636363",
   primary: "#CCEF55",
   secondary: "#AAAAAA",
+  itel: "#E5E7EB",
+};
+
+const gradientMap = {
+  red: "linear-gradient(95.91deg, #FB0036 1.01%, #FF0039 99.04%)",
 };
 
 const Typography = ({
@@ -13,17 +18,30 @@ const Typography = ({
   as,
   children,
   className,
-  colorVariant = "black", 
+  colorVariant = "black",
   ...props
 }) => {
   const Tag = as || getDefaultTag(variant);
+
+  const isGradient = gradientMap[colorVariant];
 
   return (
     <Tag
       className={clsx(variant, className)}
       style={{
         whiteSpace: "pre-line",
-        color: colorMap[colorVariant] || colorMap.black, // apply variant color
+
+        ...(isGradient
+          ? {
+              background: gradientMap[colorVariant],
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              color: "transparent",
+            }
+          : {
+              color: colorMap[colorVariant] || colorMap.black,
+            }),
       }}
       {...props}
     >

@@ -98,9 +98,9 @@ export default function Page() {
     }
   };
 
-  const [isMobile, setIsMobile] = useState(false);
-  const [isIpad, setIsIpad] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isIpad, setIsIpad] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
 
   const [hero, setHero] = useState(null);
   const [section, setSection] = useState(null);
