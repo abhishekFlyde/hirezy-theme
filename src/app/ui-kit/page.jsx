@@ -17,6 +17,7 @@ import WhyChoose from "@/components/WhyChoose";
 import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
+import WhatWeDo from "@/components/ui-kit/whatWeDo";
 export default function Home() {
   const faqData = [
     {
@@ -44,6 +45,7 @@ export default function Home() {
       <SignIn />
       <CTA />
       <WhyChoose />
+      <WhatWeDo/>
       <div>
         <Typography variant="h1">Heading 1 - Lato</Typography>
         <br />
