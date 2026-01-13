@@ -16,6 +16,7 @@ import CTA from "@/components/ui-kit/cta";
 import WhyChoose from "@/components/WhyChoose";
 import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
+import MobileItel from "@/components/ui-kit/mobileItel";
 export default function Home() {
   const faqData = [
     {
@@ -30,7 +31,14 @@ export default function Home() {
   ];
   return (
     <>
-      <Header />
+      <MobileItel
+        model="A100C"
+        title="Design to Look Premium Built for Everyday India."
+        subtitle="Smart Performance,long battery life,and a refined design everything you need, nothing you don't."
+        imageSrc="https://ik.imagekit.io/a9uxeuyhx/hero.png"
+      />
+
+      {/* <Header /> */}
 
       {/* <Input label="Label" id="id" type="text" variant="input-default" placeholder="Placeholder"  /> */}
       <SignIn />
@@ -177,7 +185,12 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           <Label variant="primary" className="lable" text="Label" />
-          <Label variant="greenVariant" icon="https://ik.imagekit.io/75zj3bigp/Icon%20(10).png" className="lable" text="Label" />
+          <Label
+            variant="greenVariant"
+            icon="https://ik.imagekit.io/75zj3bigp/Icon%20(10).png"
+            className="lable"
+            text="Label"
+          />
           <Label variant="secondary" className="lable" text="Label" />
         </div>
 
