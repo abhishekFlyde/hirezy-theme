@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Label from "./lable";
-import Typography from "./typography";
-import Button from "./button";
+import Label from "../ui-kit/lable";
+import Typography from "../ui-kit/typography";
+// import Button from "./button";
 import "@/styles/_storyCard.scss";
-import Card from "./value";
+import Card from "../ui-kit/value";
 import Link from "next/link";
+import "./_storyCard.scss";
 
 const defaultMetrics = [
   { value: "65%", label: "Faster Hiring" },
@@ -17,7 +18,7 @@ const defaultMetrics = [
 export default function StoryCard({
   category = "Technology",
   title = "TechFlow Solutions",
-  
+
   heroImage = "https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843",
   quote = "Hirezy transformed our recruitment process. We reduced our time-to-hire by 65% and significantly improved candidate quality. The platform's AI-powered matching is incredibly accurate.",
   authorName = "Sarah Chen",
@@ -30,8 +31,6 @@ export default function StoryCard({
   ctaText = "Read Full Story",
   onCtaClick,
 }) {
-  const metricList = metrics?.length ? metrics : defaultMetrics;
-
   return (
     <Link href="/success-stories/single-success-story" className="block">
       <article className="story-card">
@@ -43,6 +42,23 @@ export default function StoryCard({
             height={640}
             className="story-card__media-img"
           />
+          <div className="story-card__overlay">
+            <div className="story-card__overlay-icon-wrapper">
+              <Image
+                src="https://ik.imagekit.io/75zj3bigp/Icon.png"
+                alt="Graph icon"
+                width={20}
+                height={20}
+                className="story-card__overlay-icon"
+              />
+            </div>
+            <Typography variant="h3" className="story-card__overlay-value">
+              7,700+
+            </Typography>
+            <Typography variant="body-4" className="story-card__overlay-label">
+              Tickets Sold
+            </Typography>
+          </div>
         </div>
 
         <div className="story-card__body">
@@ -74,65 +90,6 @@ export default function StoryCard({
                 {authorRole}
               </Typography>
             </div>
-          </div>
-
-          {/* <div className="story-card__metrics">
-          {metricList.map((metric) => (
-            <div className="story-card__metric" key={metric.label}>
-              <Image
-                src="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
-                alt=""
-                width={40}
-                height={40}
-                className="story-card__metric-icon"
-                // aria-hidden="true"
-              />
-              <Typography variant="body-1" className="story-card__metric-value">
-                {metric.value}
-              </Typography>
-              <Typography variant="body-4" className="story-card__quote-role">
-                {authorRole}
-              </Typography>
-            </div>
-          ))}
-        </div> */}
-          <div className="story-card-container">
-            <Card
-              title="65%"
-              description="Faster Hiring"
-              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
-              variant="story"
-            />
-            <Card
-              title="65%"
-              description="Faster Hiring"
-              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
-              variant="story"
-            />
-            <Card
-              title="65%"
-              description="Faster Hiring"
-              iconSrc="https://ik.imagekit.io/75zj3bigp/Icon%20(3).png?updatedAt=1762083596661"
-              variant="story"
-            />
-          </div>
-
-          <div className="story-card__section">
-            <Typography variant="h4" className="story-card__section-title">
-              {challengeTitle}
-            </Typography>
-            <Typography variant="body-4" className="story-card__section-copy">
-              {challengeDescription}
-            </Typography>
-          </div>
-
-          <div className="story-card__section">
-            <Typography variant="h4" className="story-card__section-title">
-              {solutionTitle}
-            </Typography>
-            <Typography variant="body-4" className="story-card__section-copy">
-              {solutionDescription}
-            </Typography>
           </div>
         </div>
       </article>

@@ -18,6 +18,7 @@ import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
+import StoryCard from "@/components/CreativeEventsComponents/storyCard";
 export default function Home() {
   const faqData = [
     {
@@ -382,9 +383,14 @@ export default function Home() {
             ]}
           />
         </section>
+
+        {/* Creative events Code */}
+
+        
       </div>
 
       <Footer />
+      <StoryCard />
     </>
   );
 }

@@ -2,11 +2,12 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { Container } from "./ui-kit/spacing";
-import Label from "./ui-kit/lable";
-import Typography from "./ui-kit/typography";
-import Button from "./ui-kit/button";
-import Card from "./ui-kit/value";
+import { Container } from "@/components/ui-kit/spacing";
+import Label from "@/components/ui-kit/lable";
+import Typography from "@/components/ui-kit/typography";
+// import Button from "./ui-kit/button";
+import Button from "@/components/ui-kit/button";
+import Card from "@/components/ui-kit/value";
 import api from "@/lib/api";
 
 const WhyChoose = ({ open, setOpen }) => {
