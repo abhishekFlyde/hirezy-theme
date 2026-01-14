@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap");
 
 .active-members {
-  background-color: var(--color-black-500, #000); // Fallback to black
+  // background-color: var(--color-black-500, #000); // Fallback to black
   padding: var(--sp-80) var(--sp-24);
   display: flex;
   flex-direction: column;
@@ -9,55 +9,11 @@
   text-align: center;
   color: var(--color-white);
 
-  // Badge Style
-  &__badge {
-    padding: var(--sp-8) var(--sp-24);
-    border: 1px solid #ff2883; // Custom pink border
-    border-radius: 999px;
-    font-family: var(--font-jakarta);
-    font-size: 14px;
-    color: #ff2883;
-    margin-bottom: var(--sp-32);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: rgba(255, 40, 131, 0.05); // Slight tint
-  }
-
-  &__header {
-    margin-bottom: var(--sp-56);
-    max-width: 800px;
-  }
-
-  &__title {
-    color: var(--color-white);
-    text-transform: uppercase;
-    margin-bottom: var(--sp-16);
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: var(--sp-12);
-    flex-wrap: wrap;
-
-    &--script {
-      font-family: "Caveat", cursive; // Handwritten font
-      font-weight: 400;
-      text-transform: none;
-      font-size: 1.2em; // Slightly larger visually
-    }
-  }
-
-  &__description {
-    color: #aaaaaa; // Grayish text
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
   &__grid {
     display: grid;
+    margin-top: var(--sp-56);
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-24);
+    gap: var(--sp-56);
     width: 100%;
     max-width: var(--layout-max-width);
     margin: 0 auto;
@@ -65,6 +21,7 @@
 
   &__card {
     position: relative;
+    width: 368px;
     border-radius: var(--radius-lg);
     overflow: hidden;
     aspect-ratio: 9/16; // Portrait aspect ratio for images
@@ -91,6 +48,10 @@
       transform: scale(1.05);
     }
   }
+}
+
+.active-members-header {
+  margin-bottom: var(--sp-56);
 }
 
 // Responsive

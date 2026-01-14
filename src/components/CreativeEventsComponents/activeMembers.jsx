@@ -11,19 +11,19 @@ export default function ActiveMembers() {
     {
       id: 1,
       image:
-        "https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843", // Placeholder
+        "https://ik.imagekit.io/75zj3bigp/Testimonial.png", // Placeholder
       alt: "Active Member 1",
     },
     {
       id: 2,
       image:
-        "https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843", // Placeholder
+        "https://ik.imagekit.io/75zj3bigp/Testimonial.png", // Placeholder
       alt: "Active Member 2",
     },
     {
       id: 3,
       image:
-        "https://ik.imagekit.io/75zj3bigp/default-image.jpg?updatedAt=1760090625843", // Placeholder
+        "https://ik.imagekit.io/75zj3bigp/Testimonial.png", // Placeholder
       alt: "Active Member 3",
     },
   ];
@@ -31,11 +31,10 @@ export default function ActiveMembers() {
   return (
     <section className="active-members">
       <SectionHeader
-        badge="Selected"
-        label="ACTIVE"
-        title="ACTIVE"
-        titleScript="MEMBERS"
-        description="Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results."
+        className="active-members-header"
+        label="Selected"
+        title="Active Members"
+        subtitle="Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results."
       />
 
       <div className="active-members__grid">
