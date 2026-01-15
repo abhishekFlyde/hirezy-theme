@@ -18,8 +18,8 @@ import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
-import StoryCard from "@/components/CreativeEventsComponents/storyCard";
-import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
+import SectionHeader from "@/components/ui-kit/sectionHeader";
+import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
 export default function Home() {
   const faqData = [
     {
@@ -34,6 +34,8 @@ export default function Home() {
   ];
   return (
     <>
+      <AboutOurTeam compVariant="pink" />
+
       <MobileItel
         model="A100C"
         title="Design to Look Premium Built for Everyday India."
@@ -41,9 +43,22 @@ export default function Home() {
         imageSrc="https://ik.imagekit.io/a9uxeuyhx/hero.png"
       />
 
-      
-
-    
+      <SectionHeader
+        label="Our Features"
+        title="Build Faster With Us"
+        subtitle="Everything you need to launch and scale."
+        buttons={[
+          {
+            label: "Get Started",
+            href: "/get-started",
+          },
+          {
+            label: "View Demo",
+            href: "/demo",
+            variant: "black-outline",
+          },
+        ]}
+      />
 
       {/* <Header /> */}
 

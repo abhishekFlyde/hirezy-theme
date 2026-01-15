@@ -48,18 +48,32 @@
 .about-our-team-heading {
   margin-bottom: var(--sp-56);
 }
+// .our-team-cards-container {
+//   display: flex;
+//   gap: var(--sp-40);
+//   justify-content: center;
+//   flex-wrap: wrap;
+// }
 .our-team-cards-container {
-  display: flex;
-  gap: var(--sp-40);
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  justify-items: center; 
 }
+
+//pink variant
+.about-our-team-wrapper.pink {
+  background: linear-gradient(
+    279.44deg,
+    #FF2883 0.45%,
+    #FF5A4D 81.82%
+  );
+}
+
+
 .about-metric-container {
   padding-bottom: 0px;
 }
-// .about-our-team-parent-container {
-//   padding-bottom: 0px;
-// }
 
 @media screen and (max-width: 767px) {
   .team-heading {
