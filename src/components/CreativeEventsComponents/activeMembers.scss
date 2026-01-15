@@ -2,7 +2,7 @@
 
 .active-members {
   // background-color: var(--color-black-500, #000); // Fallback to black
-  padding: var(--sp-80) var(--sp-24);
+  padding: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,7 @@
 
   &__card {
     position: relative;
-    width: 368px;
+    width: 100%;
     border-radius: var(--radius-lg);
     overflow: hidden;
     aspect-ratio: 9/16; // Portrait aspect ratio for images

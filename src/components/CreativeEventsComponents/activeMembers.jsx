@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import SectionHeader from "../ui-kit/sectionHeader";
 import Typography from "../ui-kit/typography";
+import { Container } from "../ui-kit/spacing";
 import "./activeMembers.scss";
 
 export default function ActiveMembers() {
@@ -29,7 +30,8 @@ export default function ActiveMembers() {
   ];
 
   return (
-    <section className="active-members">
+    <Container variant="activeMembers">
+      <section className="active-members">
       <SectionHeader
         className="active-members-header"
         label="Selected"
@@ -51,5 +53,6 @@ export default function ActiveMembers() {
         ))}
       </div>
     </section>
+    </Container>
   );
 }
