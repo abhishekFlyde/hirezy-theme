@@ -5,7 +5,7 @@ import Label from "./lable";
 import Typography from "./typography";
 
 const WhatWeDo = () => {
-  // ✅ Static data
+  // ✅ Static data 
   const section = {
     label: "Selected",
     title: "What we DO",
