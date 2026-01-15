@@ -20,6 +20,8 @@ import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
 import StoryCard from "@/components/CreativeEventsComponents/storyCard";
 import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
+import VenueStage from "@/components/CreativeEventsComponents/venueStage";
+
 export default function Home() {
   const faqData = [
     {
@@ -391,6 +393,7 @@ export default function Home() {
       <Footer />
       <StoryCard />
       <ActiveMembers />
+      <VenueStage />
     </>
   );
 }
