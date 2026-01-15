@@ -7,6 +7,9 @@ import Typography from "../ui-kit/typography";
 import "@/styles/_storyCard.scss";
 import Card from "../ui-kit/value";
 import Link from "next/link";
+import SectionHeader from "../ui-kit/sectionHeader";
+import DraggableTimeline from "./timeline";
+
 import "./_storyCard.scss";
 
 const defaultMetrics = [
@@ -14,6 +17,7 @@ const defaultMetrics = [
   { value: "3x", label: "More Applicants" },
   { value: "120hrs", label: "Time Saved" },
 ];
+
 
 export default function StoryCard({
   category = "Technology",
@@ -23,15 +27,28 @@ export default function StoryCard({
   quote = "Hirezy transformed our recruitment process. We reduced our time-to-hire by 65% and significantly improved candidate quality. The platform's AI-powered matching is incredibly accurate.",
   authorName = "Sarah Chen",
   authorRole = "VP of People Operations",
-  metrics = defaultMetrics,
-  challengeTitle = "The Challenge",
-  challengeDescription = "TechFlow was struggling with a lengthy hiring process that averaged 45 days, causing them to lose top talent to competitors. Their small HR team was overwhelmed with manual screening of hundreds of applications.",
-  solutionTitle = "The Solution",
-  solutionDescription = "By implementing Hirezy's AI-powered screening and automated workflows, TechFlow streamlined their entire recruitment pipeline. The platform's intelligent matching helped them identify the best candidates faster, while automated communications kept candidates engaged throughout the process.",
-  ctaText = "Read Full Story",
-  onCtaClick,
-}) {
+})
+
+{
   return (
+    <>
+    <div className="story-card-parent-container">
+      <div className="story-card-container__header">
+        <SectionHeader
+                className=""
+                label="Featured Artists"
+                title="Highlight REEL"
+                subtitle="Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results."
+              />
+      </div>
+
+
+    {/* Date timeline */}
+<div className="story-timeline-wrapper">
+  <DraggableTimeline />
+</div>
+
+
     <Link href="/success-stories/single-success-story" className="block">
       <article className="story-card">
         <div className="story-card__media">
@@ -94,5 +111,7 @@ export default function StoryCard({
         </div>
       </article>
     </Link>
+    </div>
+    </>
   );
 }

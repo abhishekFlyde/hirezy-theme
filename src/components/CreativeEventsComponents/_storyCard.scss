@@ -1,3 +1,9 @@
+.story-card-parent-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-80);
+}
+
 .story-card {
   position: relative;
   background: var(--color-white);
