@@ -4,7 +4,7 @@ import clsx from "clsx";
 const Button = ({
   children,
   variant = "primary",
-  size = "md",
+  size = "xl",
   icon,
   iconPosition = "right",
   showIcon,
