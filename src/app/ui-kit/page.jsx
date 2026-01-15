@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Button from "@/components/ui-kit/button";
 import Metric from "@/components/ui-kit/key-metric";
 import Pricing from "@/components/ui-kit/pricing";
@@ -7,7 +9,7 @@ import Card from "@/components/ui-kit/value";
 import FAQ from "@/components/ui-kit/faq";
 import Image from "next/image";
 import Label from "@/components/ui-kit/lable";
-import { ImageCard } from "@/components/ui-kit/card";
+import  ImageCard from "@/components/ui-kit/card";
 import Header from "@/components/ui-kit/header";
 import GridSection from "@/components/ui-kit/GridWrapper";
 import Tools from "@/components/ui-kit/tools";
@@ -32,17 +34,10 @@ export default function Home() {
       answer: "Yes, you can cancel or upgrade at any time.",
     },
   ];
+  const [section, setSection] = useState(null);
   return (
     <>
       <AboutOurTeam compVariant="pink" />
-
-      <MobileItel
-        model="A100C"
-        title="Design to Look Premium Built for Everyday India."
-        subtitle="Smart Performance,long battery life,and a refined design everything you need, nothing you don't."
-        imageSrc="https://ik.imagekit.io/a9uxeuyhx/hero.png"
-      />
-
       <SectionHeader
         label="Our Features"
         title="Build Faster With Us"
@@ -59,6 +54,105 @@ export default function Home() {
           },
         ]}
       />
+      <WhatWeDo />
+      <Container variant="primary">
+        <GridSection
+          label="Our Services"
+          title="What We Offer"
+          subtitle="Explore our range of solutions designed for you"
+          minColWidth="280px"
+          gap="24px"
+          columns={3}
+          centerTitle={true}
+          items={[
+            {
+              component: (
+                <ImageCard
+                  heading="Card One"
+                  description="This is the description for card one."
+                  imageLink="https://ik.imagekit.io/a9uxeuyhx/63450784e2d5bfd73a4dfd87d81515ccfd33f84b.png?updatedAt=1767442341717"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+            {
+              component: (
+                <ImageCard
+                  heading="Card Two"
+                  description="This is the description for card two."
+                  imageLink="https://ik.imagekit.io/a9uxeuyhx/12543219068e22e44d1f1478aad91189d51b6016.jpg?updatedAt=1767441869125"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+            {
+              component: (
+                <ImageCard
+                  heading="Card Three"
+                  description="This is the description for card three."
+                  imageLink="https://ik.imagekit.io/75zj3bigp/default-image.jpg"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+            {
+              component: (
+                <ImageCard
+                  heading="Card One"
+                  description="This is the description for card one."
+                  imageLink="https://ik.imagekit.io/a9uxeuyhx/63450784e2d5bfd73a4dfd87d81515ccfd33f84b.png?updatedAt=1767442341717"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+            {
+              component: (
+                <ImageCard
+                  heading="Card Two"
+                  description="This is the description for card two."
+                  imageLink="https://ik.imagekit.io/a9uxeuyhx/12543219068e22e44d1f1478aad91189d51b6016.jpg?updatedAt=1767441869125"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+            {
+              component: (
+                <ImageCard
+                  heading="Card Three"
+                  description="This is the description for card three."
+                  imageLink="https://ik.imagekit.io/75zj3bigp/default-image.jpg"
+                  textPosition="bottom"
+                  variant="compact"
+                />
+              ),
+              colSpan: 1,
+              rowSpan: 1,
+            },
+          ]}
+        />
+      </Container>
+
+      <MobileItel
+        model="A100C"
+        title="Design to Look Premium Built for Everyday India."
+        subtitle="Smart Performance,long battery life,and a refined design everything you need, nothing you don't."
+        imageSrc="https://ik.imagekit.io/a9uxeuyhx/hero.png"
+      />
 
       {/* <Header /> */}
 
@@ -66,7 +160,7 @@ export default function Home() {
       <SignIn />
       <CTA />
       <WhyChoose />
-      <WhatWeDo />
+
       <div>
         <Typography variant="h1">Heading 1 - Lato</Typography>
         <br />
