@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Label from "./lable";
 import GridSection from "./GridWrapper";
-import { ImageCard } from "./card";
+import  ImageCard  from "./card";
 import { Container } from "./spacing";
 import SectionHeader from "./sectionHeader";
 
