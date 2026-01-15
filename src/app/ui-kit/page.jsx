@@ -41,6 +41,10 @@ export default function Home() {
         imageSrc="https://ik.imagekit.io/a9uxeuyhx/hero.png"
       />
 
+      
+
+    
+
       {/* <Header /> */}
 
       {/* <Input label="Label" id="id" type="text" variant="input-default" placeholder="Placeholder"  /> */}
