@@ -4,6 +4,7 @@ export const Container = ({ children, variant = "primary", className }) => {
   const variants = {
     primary: "primary-spacing",
     activeMembers : "active-members-spacing",
+    venueStage : "venue-stage-spacing",
     header: "header-spacing",
     heroSpacing: "hero-spacing",
     secondary: "secondary-spacing",

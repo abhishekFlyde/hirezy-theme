@@ -3,8 +3,8 @@
 // Venue Stage Styles
 
 .venue-stage-container {
-//   min-height: 100vh;
-  padding: 2.5rem 1rem;
+  //   min-height: 100vh;
+  // padding: 2.5rem 1rem;
 }
 
 .venue-card {
@@ -26,8 +26,8 @@
   display: grid;
   gap: 2rem;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  // max-width: 1400px;
+  // margin: 0 auto;
 
   // Default to 1 column (Mobile)
   grid-template-columns: 1fr;
