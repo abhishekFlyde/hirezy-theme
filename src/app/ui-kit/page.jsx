@@ -22,6 +22,7 @@ import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
 import SectionHeader from "@/components/ui-kit/sectionHeader";
 import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
+import AboutOurStory from "@/components/ui-kit/aboutOurStory";
 export default function Home() {
   const faqData = [
     {
@@ -55,6 +56,8 @@ export default function Home() {
         ]}
       />
       <WhatWeDo />
+      <AboutOurStory />
+      <AboutOurStory variant="reverse" />
       <Container variant="primary">
         <GridSection
           label="Our Services"
