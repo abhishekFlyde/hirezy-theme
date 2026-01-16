@@ -23,6 +23,9 @@ import WhatWeDo from "@/components/ui-kit/whatWeDo";
 import StoryCard from "@/components/CreativeEventsComponents/storyCard";
 import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
 import VenueStage from "@/components/CreativeEventsComponents/venueStage";
+import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
+import SectionHeader from "@/components/ui-kit/sectionHeader";
+import AboutOurStory from "@/components/ui-kit/aboutOurStory";
 
 export default function Home() {
   const faqData = [
