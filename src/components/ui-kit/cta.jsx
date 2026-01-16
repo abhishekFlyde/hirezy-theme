@@ -33,9 +33,8 @@ const TransformSection = () => {
 
   if (!section) return null;
 
-
   const bgVariants = {
-    hidden: { opacity: 0, scale: 0},
+    hidden: { opacity: 0, scale: 0 },
     visible: {
       opacity: 1,
       scale: 1,
@@ -43,17 +42,15 @@ const TransformSection = () => {
     },
   };
 
- 
   const textContainer = {
     hidden: {},
     visible: {
       transition: {
-        delayChildren: 0.8, 
+        delayChildren: 0.8,
         staggerChildren: 0.2,
       },
     },
   };
-
 
   const textItem = {
     hidden: { opacity: 0, y: 20 },
@@ -83,7 +80,6 @@ const TransformSection = () => {
             backgroundPosition: "center",
           }}
         >
-          {/* Text content appears after bg */}
           <motion.div
             className="transform-card-content"
             variants={textContainer}
@@ -103,7 +99,6 @@ const TransformSection = () => {
             <motion.div variants={textItem}>
               <Button
                 variant="white"
-                size="smTwo"
                 showIcon={true}
                 iconPosition="right"
                 className="btn"

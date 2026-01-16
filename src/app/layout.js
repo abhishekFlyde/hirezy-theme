@@ -6,7 +6,7 @@ import ClientLayout from "./ClientLayout";
 import localFont from "next/font/local";
 
 
-
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

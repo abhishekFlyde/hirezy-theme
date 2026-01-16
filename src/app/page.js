@@ -174,6 +174,7 @@ export default function Page() {
         const triggerStart = windowHeight;
         const triggerEnd = windowHeight * 0.3;
 
+        
         let progress = 0;
         if (videoTop < triggerStart && videoBottom > 0) {
           const distanceFromTop = Math.max(0, triggerStart - videoTop);
@@ -516,7 +517,7 @@ export default function Page() {
           />
         </motion.div>
       </Container>
-      
+
       {/* <Logo
         src="https://ik.imagekit.io/a9uxeuyhx/Logo_2%20(1).png"
         alt="Your Site is Live"
@@ -532,6 +533,22 @@ export default function Page() {
           gap={section.gap}
           columns={section.columns}
           centerTitle={section.centerTitle}
+          variant="withButtons"
+          primaryBtnText="View Portfolio"
+          secondaryBtnText="Upcoming Events"
+          onPrimaryClick={() => console.log("Primary Click")}
+          onSecondaryClick={() => console.log("Secondary Click")}
+          primaryBtnIcon={
+            <Image
+              src="/Arrow Right.png"
+              width={14}
+              height={12}
+              alt="arrow"
+              className="arrow-img"
+            />
+          }
+          primaryBtnLink="/portfolio"
+          secondaryBtnLink="/services"
           items={section?.items?.map((card) => ({
             component: (
               <ImageCard

@@ -10,6 +10,7 @@ import {
   useSpring,
 } from "framer-motion";
 import SectionHeader from "./sectionHeader";
+import Button from "./button";
 
 // 🔹 Child component — handles per-item animation safely
 function GridItem({ itemData, i, smoothProgress, locked }) {
@@ -69,6 +70,15 @@ export default function GridSection({
   columns = 3,
   items = [],
   wrapperClass = "",
+  // 🔥 NEW
+  variant = "default",
+  primaryBtnText,
+  secondaryBtnText,
+  onPrimaryClick,
+  onSecondaryClick,
+  primaryBtnIcon,
+  primaryBtnLink,
+  secondaryBtnLink,
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
@@ -125,6 +135,47 @@ export default function GridSection({
           />
         ))}
       </div>
+
+      {variant === "withButtons" && (
+        <div className="flex justify-center gap-[32px] mt-[40px] flex-wrap">
+          {/* 🔥 BUTTON ROW */}
+          {variant === "withButtons" && (
+            <div className="flex justify-center gap-[32px] mt-[40px] flex-wrap">
+              {/* PRIMARY BUTTON (WITH ICON) */}
+              {primaryBtnText && (
+                <Button
+                  variant="primary"
+                  size="md"
+                  showIcon={!!primaryBtnIcon}
+                  iconPosition="right"
+                  className="btn"
+                  icon={primaryBtnIcon || null}
+                  as={primaryBtnLink ? "a" : "button"}
+                  href={primaryBtnLink || undefined}
+                  onClick={onPrimaryClick}
+                >
+                  {primaryBtnText}
+                </Button>
+              )}
+
+              {/* SECONDARY BUTTON (NO ICON) */}
+              {secondaryBtnText && (
+                <Button
+                  variant="white"
+                  size="md"
+                  showIcon={false}
+                  className="btn"
+                  as={secondaryBtnLink ? "a" : "button"}
+                  href={secondaryBtnLink || undefined}
+                  onClick={onSecondaryClick}
+                >
+                  {secondaryBtnText}
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </section>
   );
 }

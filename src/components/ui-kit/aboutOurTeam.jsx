@@ -12,7 +12,7 @@
 
     members = [
       {
-        name: "Sarah Johnson",
+        name: "Sarah Johnson", 
         
         imageSrc: "https://ik.imagekit.io/75zj3bigp/default-image.jpg",
       },

@@ -90,8 +90,8 @@ export default function StoryCard({
               <Typography variant="body-1" className="story-card__metric-value">
                 {metric.value}
               </Typography>
-              <Typography variant="body-4" className="story-card__metric-label">
-                {metric.label}
+              <Typography variant="body-4" className="story-card__quote-role">
+                {authorRole}
               </Typography>
             </div>
           ))}

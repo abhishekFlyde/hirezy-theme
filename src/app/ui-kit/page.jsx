@@ -25,6 +25,10 @@ import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
 import AboutOurStory from "@/components/ui-kit/aboutOurStory";
 import SuccessStoriesMetrics from "@/components/ui-kit/SuccessStoriesMetrics";
 import MissionSection from "@/components/ui-kit/MissionSection";
+import StoryCard from "@/components/CreativeEventsComponents/storyCard";
+import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
+import VenueStage from "@/components/CreativeEventsComponents/venueStage";
+
 export default function Home() {
   const faqData = [
     {
@@ -88,6 +92,7 @@ export default function Home() {
           gap="24px"
           columns={3}
           centerTitle={true}
+          
           items={[
             {
               component: (
@@ -521,9 +526,14 @@ export default function Home() {
             ]}
           />
         </section>
+
+        {/* Creative events Code */}
       </div>
 
       <Footer />
+      <StoryCard />
+      <ActiveMembers />
+      <VenueStage />
     </>
   );
 }
