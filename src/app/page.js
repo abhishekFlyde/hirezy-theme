@@ -14,7 +14,7 @@ import Button from "@/components/ui-kit/button";
 import Image from "next/image";
 import HeroImageSection from "@/components/ui-kit/heroImageSection";
 import GridSection from "@/components/ui-kit/GridWrapper";
-import  ImageCard  from "@/components/ui-kit/card";
+import { ImageCard } from "@/components/ui-kit/card";
 import Tools from "@/components/ui-kit/tools";
 import Pricing from "@/components/ui-kit/pricing";
 import TeamCard from "@/components/ui-kit/ourTeamCard";

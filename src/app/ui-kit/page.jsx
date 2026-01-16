@@ -9,7 +9,7 @@ import Card from "@/components/ui-kit/value";
 import FAQ from "@/components/ui-kit/faq";
 import Image from "next/image";
 import Label from "@/components/ui-kit/lable";
-import  ImageCard from "@/components/ui-kit/card";
+import  {ImageCard} from "@/components/ui-kit/card";
 import Header from "@/components/ui-kit/header";
 import GridSection from "@/components/ui-kit/GridWrapper";
 import Tools from "@/components/ui-kit/tools";
