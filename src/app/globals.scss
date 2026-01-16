@@ -46,7 +46,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--color-white);
   box-sizing: border-box;
   width: 100%;
   max-width: var(--layout-max-width);
