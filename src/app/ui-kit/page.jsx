@@ -20,9 +20,10 @@ import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
-import SectionHeader from "@/components/ui-kit/sectionHeader";
-import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
-import AboutOurStory from "@/components/ui-kit/aboutOurStory";
+import StoryCard from "@/components/CreativeEventsComponents/storyCard";
+import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
+import VenueStage from "@/components/CreativeEventsComponents/venueStage";
+
 export default function Home() {
   const faqData = [
     {
@@ -507,6 +508,7 @@ export default function Home() {
       <Footer />
       <StoryCard />
       <ActiveMembers />
+      <VenueStage />
     </>
   );
 }

@@ -3,10 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import SectionHeader from "../ui-kit/sectionHeader";
+import Typography from "../ui-kit/typography";
+import { Container } from "../ui-kit/spacing";
 import "./activeMembers.scss";
 
 export default function ActiveMembers({
-  label = "Selected",
+  
+  label = "Selected", 
   title = "Active Members",
   subtitle = "Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results.",
   members = [
@@ -28,7 +31,8 @@ export default function ActiveMembers({
   ],
 }) {
   return (
-    <section className="active-members">
+    <Container variant="activeMembers">
+      <section className="active-members">
       <SectionHeader
         className="active-members-header"
         label={label}
@@ -50,5 +54,6 @@ export default function ActiveMembers({
         ))}
       </div>
     </section>
+    </Container>
   );
 }

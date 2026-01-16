@@ -98,6 +98,13 @@
   font-size: fluid(12px, 14px);
   line-height: 150%;
 }
+.body-6 {
+  font-family: var(--font-jakarta);
+  font-weight: 500;
+  // color: var(--color-black-500);
+  font-size: fluid(10px, 12px);
+  line-height: 100%;
+}
 .text-link {
   font-family: var(--font-jakarta);
   font-weight: 500;
