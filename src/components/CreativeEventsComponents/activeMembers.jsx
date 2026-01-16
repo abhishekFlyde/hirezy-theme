@@ -8,7 +8,8 @@ import { Container } from "../ui-kit/spacing";
 import "./activeMembers.scss";
 
 export default function ActiveMembers({
-  label = "Selected",
+  
+  label = "Selected", 
   title = "Active Members",
   subtitle = "Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results.",
   members = [

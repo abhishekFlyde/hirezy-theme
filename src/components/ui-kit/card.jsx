@@ -1,3 +1,5 @@
+
+
 "use client";
 import Image from "next/image";
 import Typography from "./typography";
@@ -97,7 +99,7 @@ export const ImageCard = ({
       `}
     >
       {textPosition === "top" && <PrimaryTextBlock />}
-
+      <div className="imageWrapper">
       <Image
         src={imageLink}
         width={1000}
@@ -105,6 +107,7 @@ export const ImageCard = ({
         alt="image card"
         className={`cardimg primary-img ${imageClassName}`}
       />
+      </div>
 
       {textPosition === "bottom" && <PrimaryTextBlock />}
       {textPosition === "right" && <PrimaryTextBlock />}
@@ -142,3 +145,5 @@ export const ImageCard = ({
   ----------------------------------------------------------- */
   return variant === "blog" ? <BlogLayout /> : <PrimaryLayout />;
 };
+
+

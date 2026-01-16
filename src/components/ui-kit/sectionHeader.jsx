@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import React from "react";
@@ -8,6 +6,7 @@ import { motion } from "framer-motion";
 import Label from "./lable";
 import Typography from "./typography";
 import Image from "next/image";
+import Button from "./button";
 
 export default function SectionHeader({
   label,
@@ -22,16 +21,16 @@ export default function SectionHeader({
   titleTextColor = "",
   subTitleTextColor = "",
   imageVisibleOn = "mobile",
-  labelBgColor = "var(--color-blue-300)", // 👈 new prop
+  labelBgColor = "var(--color-blue-300)",
 
-  variant = "primary", // PRIMARY | SECONDARY
+  variant = "primary", // primary | secondary
+  buttons = [], // [{ label, onClick, variant }]
 }) {
-  // ADD THIS 🔥
   const variants = {
     secondary: "section-header-secondary",
   };
 
-  // Animation
+  // Animations
   const container = {
     hidden: {},
     show: {
@@ -52,7 +51,7 @@ export default function SectionHeader({
     },
   };
 
-  // Image visibility logic
+  // Image visibility
   const imageVisibilityClass =
     imageVisibleOn === "both"
       ? "block"
@@ -60,7 +59,7 @@ export default function SectionHeader({
       ? "hidden md:block"
       : "block md:hidden";
 
-  // Title variant logic
+  // Title variant
   const titleVariant = variant === "secondary" ? "h3" : "h2";
 
   return (
@@ -71,7 +70,7 @@ export default function SectionHeader({
       viewport={{ once: true, amount: 0.4 }}
       className={clsx(
         "headerSection flex flex-col gap-3",
-        variants[variant], // <-- add variant CSS class 🔥
+        variants[variant],
         align === "center" && "text-center items-center",
         align === "left" && "text-left items-start",
         align === "right" && "text-right items-end",
@@ -98,7 +97,6 @@ export default function SectionHeader({
           variants={item}
           className={clsx("w-full flex justify-center", imageVisibilityClass)}
         >
-          {/* wrapper to control size, spacing — adjust max-w as required */}
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -112,16 +110,33 @@ export default function SectionHeader({
       {/* TITLE */}
       {title && (
         <motion.div variants={item} className="w-full">
-          <Typography colorVariant={titleTextColor} variant={titleVariant}>{title}</Typography>
+          <Typography variant={titleVariant} colorVariant={titleTextColor}>
+            {title}
+          </Typography>
         </motion.div>
       )}
 
       {/* SUBTITLE */}
       {subtitle && (
         <motion.div variants={item} className="max-w-[816px] w-full">
-          <Typography colorVariant={subTitleTextColor} variant="body-4" >
+          <Typography variant="body-4" colorVariant={subTitleTextColor}>
             {subtitle}
           </Typography>
+        </motion.div>
+      )}
+
+      {/* 🔥 BUTTONS */}
+      {buttons.length > 0 && (
+        <motion.div variants={item} className="mt-8 flex justify-center gap-6">
+          {buttons.map((btn, index) => (
+            <Button
+              key={index}
+              href={btn.href || "#"}
+              variant={btn.variant || "primary"}
+            >
+              {btn.label}
+            </Button>
+          ))}
         </motion.div>
       )}
     </motion.div>
