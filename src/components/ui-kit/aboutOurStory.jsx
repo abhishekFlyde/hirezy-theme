@@ -5,7 +5,7 @@ import SectionHeader from "./sectionHeader";
 import Image from "next/image";
 
 export default function AboutOurStory({
-  label = "Our Story",
+  label = "Our Story", 
   title = "Building Better Hiring Since 2019",
   align = "left",
   subtitle = [

@@ -5,7 +5,7 @@ import { Container } from "./spacing";
 import SectionHeader from "./sectionHeader";
 import Metric from "./key-metric";
 
-const SuccessStoriesMetrics = ({
+const SuccessStoriesMetrics = ({ 
   title = "Trusted by Industry Leaders",
   subtitle = "Join 500+ companies that have transformed their hiring with Hirezy.",
   align = "center",

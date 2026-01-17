@@ -30,7 +30,7 @@ import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
 import VenueStage from "@/components/CreativeEventsComponents/venueStage";
 
 export default function Home() {
-  const faqData = [
+  const faqData = [ 
     {
       question: "How does the free trial work?",
       answer:

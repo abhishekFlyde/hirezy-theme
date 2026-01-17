@@ -31,7 +31,7 @@ const Typography = ({
       className={clsx(variant, className)}
       style={{
         whiteSpace: "pre-line",
-
+ 
         ...(isGradient
           ? {
               background: gradientMap[colorVariant],
