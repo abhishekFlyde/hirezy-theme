@@ -3,38 +3,50 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const YEARS = [
-  2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
-  2023, 2024, 2025,
-];
+/* =========================
+   DraggableTimeline
+========================= */
 
+export default function DraggableTimeline({
+  /* DATA */
+  years = [
+    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+    2022, 2023, 2024, 2025,
+  ],
 
-const ITEM_WIDTH = 200;
-const GAP = 128; // gap-32 = 8rem = 128px
-const STRIDE = ITEM_WIDTH + GAP;
-const START_OFFSET = -100; // Alignment offset to center the first item (Padding 50vw pushes start to center, item half-width is 100)
+  /* LAYOUT CONSTANTS */
+  itemWidth = 200,
+  gap = 128, // gap-32 = 8rem = 128px
+  startOffset = -100, // Alignment offset
 
-export default function DraggableTimeline() {
+  /* SPRING CONFIG */
+  springConfig = {
+    stiffness: 150,
+    damping: 18,
+    mass: 0.3,
+  },
+
+  /* DRAG CONFIG */
+  dragElastic = 0.05,
+  snapDelay = 200,
+}) {
   const containerRef = useRef(null);
   const itemRefs = useRef([]);
   const [centerX, setCenterX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  // Calculate constraints
-  const minX = START_OFFSET - (YEARS.length - 1) * STRIDE;
-  const maxX = START_OFFSET;
+  /* DERIVED VALUES (same logic) */
+  const stride = itemWidth + gap;
 
-  // Initial Position (Center of list)
-  const initialIndex = Math.floor(YEARS.length / 2);
-  const initialX = START_OFFSET - initialIndex * STRIDE;
+  const minX = startOffset - (years.length - 1) * stride;
+  const maxX = startOffset;
+
+  const initialIndex = Math.floor(years.length / 2);
+  const initialX = startOffset - initialIndex * stride;
 
   const x = useMotionValue(initialX);
 
-  const springX = useSpring(x, {
-    stiffness: 150,
-    damping: 18,
-    mass: 0.3,
-  });
+  const springX = useSpring(x, springConfig);
 
   useEffect(() => {
     const updateCenter = () => {
@@ -49,7 +61,7 @@ export default function DraggableTimeline() {
     return () => window.removeEventListener("resize", updateCenter);
   }, []);
 
-  // Snap to nearest item center when drag ends
+  /* SNAP TO CENTER */
   const snapToCenter = () => {
     if (!containerRef.current) return;
 
@@ -73,7 +85,6 @@ export default function DraggableTimeline() {
       }
     });
 
-    // Calculate offset needed to center the closest item
     const closestItem = itemRefs.current[closestIndex];
     if (closestItem) {
       const itemRect = closestItem.getBoundingClientRect();
@@ -81,7 +92,6 @@ export default function DraggableTimeline() {
         itemRect.left + itemRect.width / 2 - containerRect.left;
       const offset = viewportCenter - itemCenter;
 
-      // Use springX.get() current visual position as the base
       x.set(springX.get() + offset);
     }
   };
@@ -95,28 +105,17 @@ export default function DraggableTimeline() {
     const handleWheel = (e) => {
       e.preventDefault();
 
-      // Use deltaX for horizontal swipe, deltaY for vertical scroll
       const delta =
         Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
-      // Calculate new position
       const currentX = x.get();
       const newX = currentX - delta;
 
-      // Clamp within boundaries
-      // Note: maxX is the RIGHT limit (start of list), minX is the LEFT limit (end of list)
-      // If newX > maxX, clamp to maxX. If newX < minX, clamp to minX.
       const clampedX = Math.max(minX, Math.min(newX, maxX));
-
       x.set(clampedX);
 
-      // Clear previous timer
       clearTimeout(debounceTimer);
-
-      // Set new timer for snapping
-      debounceTimer = setTimeout(() => {
-        snapToCenter();
-      }, 200);
+      debounceTimer = setTimeout(snapToCenter, snapDelay);
     };
 
     container.addEventListener("wheel", handleWheel, { passive: false });
@@ -125,31 +124,21 @@ export default function DraggableTimeline() {
       container.removeEventListener("wheel", handleWheel);
       clearTimeout(debounceTimer);
     };
-  }, [minX, maxX, x]);
+  }, [minX, maxX, x, snapDelay]);
 
   return (
     <div
       ref={containerRef}
       className="relative w-full h-[var(--sp-80)] bg-black overflow-hidden flex items-center"
     >
-      {/* Gradient overlays for fade effect */}
-      {/* <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" /> */}
-      {/* <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" /> */}
-
-      {/* Center indicator */}
-      {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-20 bg-whitex/30 z-20 pointer-events-none" /> */}
-
       <motion.div
         drag="x"
         dragConstraints={{ left: minX, right: maxX }}
-        dragElastic={0.05}
+        dragElastic={dragElastic}
         dragMomentum={false}
         style={{ x: springX }}
-        onDragStart={() => {
-          setIsDragging(true);
-        }}
+        onDragStart={() => setIsDragging(true)}
         onDrag={(_, info) => {
-          // Direct update without spring during drag for smooth feel
           x.set(x.get() + info.delta.x);
         }}
         onDragEnd={() => {
@@ -158,31 +147,26 @@ export default function DraggableTimeline() {
         }}
         className="flex items-center gap-32 px-[50vw] cursor-grab active:cursor-grabbing select-none"
       >
-        {YEARS.map((year, i) => {
-          // Get actual DOM position of each item
-          const distanceFromCenter = useTransform(springX, (latest) => {
+        {years.map((year, i) => {
+          const distanceFromCenter = useTransform(springX, () => {
             const itemRef = itemRefs.current[i];
             if (!itemRef || !centerX) return 1000;
 
             const itemRect = itemRef.getBoundingClientRect();
             const containerRect = containerRef.current.getBoundingClientRect();
 
-            // Calculate item's center position relative to viewport center
             const itemCenter =
               itemRect.left + itemRect.width / 2 - containerRect.left;
-            const viewportCenter = centerX;
 
-            return Math.abs(itemCenter - viewportCenter);
+            return Math.abs(itemCenter - centerX);
           });
 
-          // FontSize: 56px -> 40px -> 36px -> 20px
           const fontSize = useTransform(
             distanceFromCenter,
             [0, 200, 400, 600],
             ["56px", "40px", "36px", "20px"]
           );
 
-          // Opacity: 1 -> 0.4 -> 0.3 -> 0.1
           const opacity = useTransform(
             distanceFromCenter,
             [0, 200, 400, 600],
@@ -196,10 +180,7 @@ export default function DraggableTimeline() {
               className="w-[200px] flex justify-center shrink-0"
             >
               <motion.div
-                style={{
-                  fontSize,
-                  opacity,
-                }}
+                style={{ fontSize, opacity }}
                 className="font-bold text-white whitespace-nowrap tracking-wide"
               >
                 {year}
