@@ -8,6 +8,7 @@ const YEARS = [
   2023, 2024, 2025,
 ];
 
+
 const ITEM_WIDTH = 200;
 const GAP = 128; // gap-32 = 8rem = 128px
 const STRIDE = ITEM_WIDTH + GAP;
