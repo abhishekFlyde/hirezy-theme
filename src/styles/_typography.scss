@@ -112,7 +112,12 @@
   font-size: 16px;
   line-height: 25.6px;
 }
-
+.big-text{
+font-family:  var(--font-jakarta);
+font-size: fluid(90px, 300px);
+font-weight: 600;
+line-height: 492px;
+}
 
 .itel-label{
   font-family: var(--font-mark-ot);

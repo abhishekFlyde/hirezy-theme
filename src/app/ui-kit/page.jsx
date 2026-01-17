@@ -20,6 +20,11 @@ import Input from "@/components/ui-kit/input";
 import { SignIn } from "@/components/ui-kit/signin";
 import MobileItel from "@/components/ui-kit/mobileItel";
 import WhatWeDo from "@/components/ui-kit/whatWeDo";
+import SectionHeader from "@/components/ui-kit/sectionHeader";
+import AboutOurTeam from "@/components/ui-kit/aboutOurTeam";
+import AboutOurStory from "@/components/ui-kit/aboutOurStory";
+import SuccessStoriesMetrics from "@/components/ui-kit/SuccessStoriesMetrics";
+import MissionSection from "@/components/ui-kit/MissionSection";
 import StoryCard from "@/components/CreativeEventsComponents/storyCard";
 import ActiveMembers from "@/components/CreativeEventsComponents/activeMembers";
 import VenueStage from "@/components/CreativeEventsComponents/venueStage";
@@ -43,6 +48,7 @@ export default function Home() {
   return (
     <>
       <AboutOurTeam compVariant="pink" />
+
       <SectionHeader
         label="Our Features"
         title="Build Faster With Us"
@@ -60,8 +66,26 @@ export default function Home() {
         ]}
       />
       <WhatWeDo />
+      <MissionSection
+        bgText="MISSION"
+        mainText="To serve Australia’s multicultural communities by creating experiences that blend entertainment with cultural heritage — connecting generations through music and celebration.
+        "
+        bgVariant="big-text"
+        textVariant="body-4"
+        textColor="white2"
+      />
+      <MissionSection
+        bgText="VISION"
+        mainText="To serve Australia’s multicultural communities by creating experiences that blend entertainment with cultural heritage — connecting generations through music and celebration.
+        "
+        bgVariant="big-text"
+        textVariant="body-4"
+        textColor="white2"
+      />
+
       <AboutOurStory />
       <AboutOurStory variant="reverse" />
+      <SuccessStoriesMetrics />
       <Container variant="primary">
         <GridSection
           label="Our Services"
@@ -71,6 +95,7 @@ export default function Home() {
           gap="24px"
           columns={3}
           centerTitle={true}
+          
           items={[
             {
               component: (
