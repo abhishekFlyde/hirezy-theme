@@ -1,0 +1,60 @@
+.mission-section {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  overflow: visible;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .mission-section {
+    min-height: 320px;
+    padding: 60px 20px;
+  }
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .mission-section {
+    min-height: auto;
+    /* content ke according height */
+    padding: 50px 16px;
+  }
+}
+/* Small Mobile */
+@media (max-width: 480px) {
+  .mission-section {
+    padding: 40px 12px;
+  }
+}
+/* ===== BACKGROUND TEXT ===== */
+.mission-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(249, 249, 249, 0.03) !important;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  transition: all 1.4s ease;
+}
+
+.mission-section:hover .mission-bg-text {
+  background: linear-gradient(279deg, #FF2883 0.45%, #FF5A4D 81.82%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mission-main-text {
+  position: relative;
+  white-space: nowrap;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
