@@ -137,19 +137,12 @@ const VenueStage = ({
   ],
   containerClass = "venue-stage-container w-full",
   buttonText = "View More",
+
 }) => {
   return (
     <Container className="bg-black" variant="venueStage">
       <div className={containerClass}>
-      <SectionHeader
-              className="active-members-header"
-              label="Our Venues"
-              title="The Biggest  Names, The Finest Stages"
-              subtitle="Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results."
-              labelTextColor="white"
-              titleTextColor="white"
-              subTitleTextColor="white"
-            />
+
 
 
       <div className="venue-grid">
