@@ -8,18 +8,31 @@ const YEARS = [
   2023, 2024, 2025,
 ];
 
+const ITEM_WIDTH = 200;
+const GAP = 128; // gap-32 = 8rem = 128px
+const STRIDE = ITEM_WIDTH + GAP;
+const START_OFFSET = -100; // Alignment offset to center the first item (Padding 50vw pushes start to center, item half-width is 100)
+
 export default function DraggableTimeline() {
   const containerRef = useRef(null);
   const itemRefs = useRef([]);
   const [centerX, setCenterX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const x = useMotionValue(0);
+  // Calculate constraints
+  const minX = START_OFFSET - (YEARS.length - 1) * STRIDE;
+  const maxX = START_OFFSET;
+
+  // Initial Position (Center of list)
+  const initialIndex = Math.floor(YEARS.length / 2);
+  const initialX = START_OFFSET - initialIndex * STRIDE;
+
+  const x = useMotionValue(initialX);
 
   const springX = useSpring(x, {
     stiffness: 150,
-    damping: 7,
-    mass: 0.5,
+    damping: 18,
+    mass: 0.3,
   });
 
   useEffect(() => {
@@ -40,7 +53,7 @@ export default function DraggableTimeline() {
     if (!containerRef.current) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
-    const viewportCenter = centerX;
+    const viewportCenter = containerRect.width / 2;
 
     let closestIndex = 0;
     let minDistance = Infinity;
@@ -72,21 +85,62 @@ export default function DraggableTimeline() {
     }
   };
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let debounceTimer;
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+
+      // Use deltaX for horizontal swipe, deltaY for vertical scroll
+      const delta =
+        Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+
+      // Calculate new position
+      const currentX = x.get();
+      const newX = currentX - delta;
+
+      // Clamp within boundaries
+      // Note: maxX is the RIGHT limit (start of list), minX is the LEFT limit (end of list)
+      // If newX > maxX, clamp to maxX. If newX < minX, clamp to minX.
+      const clampedX = Math.max(minX, Math.min(newX, maxX));
+
+      x.set(clampedX);
+
+      // Clear previous timer
+      clearTimeout(debounceTimer);
+
+      // Set new timer for snapping
+      debounceTimer = setTimeout(() => {
+        snapToCenter();
+      }, 200);
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+      clearTimeout(debounceTimer);
+    };
+  }, [minX, maxX, x]);
+
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen bg-black overflow-hidden flex items-center"
+      className="relative w-full h-[var(--sp-80)] bg-black overflow-hidden flex items-center"
     >
       {/* Gradient overlays for fade effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+      {/* <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" /> */}
+      {/* <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" /> */}
 
       {/* Center indicator */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-20 bg-white/30 z-20 pointer-events-none" />
+      {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-20 bg-whitex/30 z-20 pointer-events-none" /> */}
 
       <motion.div
         drag="x"
-        dragConstraints={{ left: -5000, right: 5000 }}
+        dragConstraints={{ left: minX, right: maxX }}
         dragElastic={0.05}
         dragMomentum={false}
         style={{ x: springX }}
@@ -120,47 +174,39 @@ export default function DraggableTimeline() {
             return Math.abs(itemCenter - viewportCenter);
           });
 
-          // Scale: bigger ONLY at exact center
-          const scale = useTransform(
+          // FontSize: 56px -> 40px -> 36px -> 20px
+          const fontSize = useTransform(
             distanceFromCenter,
-            [0, 50, 150, 300],
-            [1.2, 1.0, 0.85, 0.7]
+            [0, 200, 400, 600],
+            ["56px", "40px", "36px", "20px"]
           );
 
-          // Opacity: full at center, fade out
+          // Opacity: 1 -> 0.4 -> 0.3 -> 0.1
           const opacity = useTransform(
             distanceFromCenter,
-            [0, 50, 150, 300],
-            [1, 0.8, 0.5, 0.3]
-          );
-
-          // Color: white at center, gray on sides
-          const brightness = useTransform(
-            distanceFromCenter,
-            [0, 50, 150, 300],
-            [1, 0.8, 0.6, 0.4]
+            [0, 200, 400, 600],
+            [1, 0.6, 0.3, 0.1]
           );
 
           return (
-            <motion.div
+            <div
               key={year}
               ref={(el) => (itemRefs.current[i] = el)}
-              style={{
-                scale,
-                opacity,
-                filter: useTransform(brightness, (b) => `brightness(${b})`),
-              }}
-              className="text-7xl font-bold text-white whitespace-nowrap tracking-wide"
+              className="w-[200px] flex justify-center shrink-0"
             >
-              {year}
-            </motion.div>
+              <motion.div
+                style={{
+                  fontSize,
+                  opacity,
+                }}
+                className="font-bold text-white whitespace-nowrap tracking-wide"
+              >
+                {year}
+              </motion.div>
+            </div>
           );
         })}
       </motion.div>
-
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-sm">
-        ← Drag to navigate →
-      </div>
     </div>
   );
 }

@@ -138,29 +138,11 @@ const VenueStage = ({
   containerClass = "venue-stage-container w-full",
   buttonText = "View More",
 
-    /* SectionHeader props */
-  sectionHeaderClass = "active-members-header",
-  sectionLabel = "Our Venues",
-  sectionTitle = "The Biggest  Names, The Finest Stages",
-  sectionSubtitle =
-    "Our commitment is to use active ingredients of natural origin wherever possible without compromising the quality of the formulas and the results.",
-  sectionLabelTextColor = "white",
-  sectionTitleTextColor = "white",
-  sectionSubTitleTextColor = "white",
-
 }) => {
   return (
     <Container className="bg-black" variant="venueStage">
       <div className={containerClass}>
-      <SectionHeader
-          className={sectionHeaderClass}
-          label={sectionLabel}
-          title={sectionTitle}
-          subtitle={sectionSubtitle}
-          labelTextColor={sectionLabelTextColor}
-          titleTextColor={sectionTitleTextColor}
-          subTitleTextColor={sectionSubTitleTextColor}
-        />
+
 
 
       <div className="venue-grid">
