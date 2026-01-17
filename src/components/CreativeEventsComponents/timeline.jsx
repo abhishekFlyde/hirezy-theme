@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const YEARS = [
-  2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 
-  2020, 2021, 2022, 2023, 2024, 2025
+  2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+  2023, 2024, 2025,
 ];
 
 export default function DraggableTimeline() {
@@ -20,7 +15,7 @@ export default function DraggableTimeline() {
   const [isDragging, setIsDragging] = useState(false);
 
   const x = useMotionValue(0);
-  
+
   const springX = useSpring(x, {
     stiffness: 150,
     damping: 7,
@@ -28,10 +23,16 @@ export default function DraggableTimeline() {
   });
 
   useEffect(() => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setCenterX(rect.width / 2);
-    }
+    const updateCenter = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setCenterX(rect.width / 2);
+      }
+    };
+
+    updateCenter();
+    window.addEventListener("resize", updateCenter);
+    return () => window.removeEventListener("resize", updateCenter);
   }, []);
 
   // Snap to nearest item center when drag ends
@@ -46,9 +47,10 @@ export default function DraggableTimeline() {
 
     itemRefs.current.forEach((itemRef, i) => {
       if (!itemRef) return;
-      
+
       const itemRect = itemRef.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2 - containerRect.left;
+      const itemCenter =
+        itemRect.left + itemRect.width / 2 - containerRect.left;
       const distance = Math.abs(itemCenter - viewportCenter);
 
       if (distance < minDistance) {
@@ -61,22 +63,24 @@ export default function DraggableTimeline() {
     const closestItem = itemRefs.current[closestIndex];
     if (closestItem) {
       const itemRect = closestItem.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2 - containerRect.left;
+      const itemCenter =
+        itemRect.left + itemRect.width / 2 - containerRect.left;
       const offset = viewportCenter - itemCenter;
-      
-      x.set(x.get() + offset);
+
+      // Use springX.get() current visual position as the base
+      x.set(springX.get() + offset);
     }
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative w-full h-screen bg-black overflow-hidden flex items-center"
     >
       {/* Gradient overlays for fade effect */}
       <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-      
+
       {/* Center indicator */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-20 bg-white/30 z-20 pointer-events-none" />
 
@@ -104,14 +108,15 @@ export default function DraggableTimeline() {
           const distanceFromCenter = useTransform(springX, (latest) => {
             const itemRef = itemRefs.current[i];
             if (!itemRef || !centerX) return 1000;
-            
+
             const itemRect = itemRef.getBoundingClientRect();
             const containerRect = containerRef.current.getBoundingClientRect();
-            
+
             // Calculate item's center position relative to viewport center
-            const itemCenter = itemRect.left + itemRect.width / 2 - containerRect.left;
+            const itemCenter =
+              itemRect.left + itemRect.width / 2 - containerRect.left;
             const viewportCenter = centerX;
-            
+
             return Math.abs(itemCenter - viewportCenter);
           });
 
@@ -139,14 +144,11 @@ export default function DraggableTimeline() {
           return (
             <motion.div
               key={year}
-              ref={(el) => itemRefs.current[i] = el}
+              ref={(el) => (itemRefs.current[i] = el)}
               style={{
                 scale,
                 opacity,
-                filter: useTransform(
-                  brightness,
-                  (b) => `brightness(${b})`
-                ),
+                filter: useTransform(brightness, (b) => `brightness(${b})`),
               }}
               className="text-7xl font-bold text-white whitespace-nowrap tracking-wide"
             >
