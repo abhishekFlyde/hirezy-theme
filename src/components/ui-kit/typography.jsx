@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 const colorMap = {
   black: "#000000",
-  white: "#FFFFFF",
+  white: "var(--color-white)",
   white2: "#F9F9F9",
   gray: "#636363",
   primary: "#CCEF55",
@@ -59,9 +59,9 @@ function getDefaultTag(variant) {
     h4: "h4",
     h5: "h5",
     h6: "h6",
-    "body-1": "p",
-    "body-2": "p",
-    "body-3": "p",
+    "body-1": "bodyPrimary",
+    "body-2": "bodySecondary",
+    "body-3": "bodySmall",
     "body-4": "p",
     "body-5": "p",
     "text-link": "p",

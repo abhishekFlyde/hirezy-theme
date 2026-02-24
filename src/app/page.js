@@ -34,10 +34,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useStaggeredScroll } from "@/hooks/useStaggeredScroll";
 import AssembleSection from "@/components/ui-kit/FramerMotion Animation/AssembleSection";
 import Tabs from "@/components/ui-kit/tabs";
+import { applyStyleTheme } from "@/theme/themeManager";
 
 gsap.registerPlugin(ScrollTrigger);
 import api from "@/lib/api";
-import { applyTheme } from "@/lib/applyTheme";
 import { initThemeSocket } from "@/lib/themeSocket";
 
 export default function Page() {
@@ -52,12 +52,27 @@ export default function Page() {
   });
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    api.get("/theme-setting").then((res) => {
-      applyTheme(res.data.theme);
-      // console.log(res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   api.get("/theme-setting").then((res) => {
+  //     applyTheme(res.data.theme);
+  //     // console.log(res.data);
+  //   });
+  // }, []);
+
+// useEffect(() => {
+//   async function loadTheme() {
+//     const res = await fetch("/styles.json");
+//     console.log("Response:", res);
+
+//     const config = await res.json();
+//     console.log("Config:", config);
+
+//     applyStyleTheme(config, "light");
+//   }
+
+//   loadTheme();
+// }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -451,7 +466,7 @@ export default function Page() {
               delay: 0.1,
             }}
           >
-            <Typography variant="h1" style={{ whiteSpace: "pre-line" }}>
+            <Typography  variant="h1" style={{ whiteSpace: "pre-line" }}>
               {hero.title}
             </Typography>
           </motion.div>
@@ -466,7 +481,7 @@ export default function Page() {
             }}
           >
             <div className="md:w-[534px] flex flex-col justify-between spacing-40">
-              <Typography variant="body-4" style={{ whiteSpace: "pre-line" }}>
+              <Typography variant="body-2" style={{ whiteSpace: "pre-line" }}>
                 {hero.subtitle}
               </Typography>
 

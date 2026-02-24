@@ -7,15 +7,44 @@ import Link from "next/link";
 import { Container } from "./spacing";
 import api from "@/lib/api";
 import { usePathname, useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Header() {
   const [activeLink, setActiveLink] = useState("");
   const [header, setHeader] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHiding, setIsHiding] = useState(false);
+  const [themeLogo, setThemeLogo] = useState("");
+
+const { theme } = useTheme();
+
+const Logo =
+  theme?.identity?.logo?.light?.primary;
+  console.log(Logo);
+  
+  // setThemeLogo(Logo);
+
+//   useEffect(() => {
+//   async function loadThemeLogo() {
+//     try {
+//       const res = await fetch("/styles.json");
+//       const config = await res.json();
+
+//       const logo =
+//         config?.identity?.logo?.light?.primary;
+
+//       setThemeLogo(logo);
+//     } catch (err) {
+//       console.log("Failed to load theme logo");
+//     }
+//   }
+
+//   loadThemeLogo();
+// }, []);
 
   const pathname = usePathname();
   const router = useRouter();
+
 
   /* ROUTES jinke upar FIXED NAVBAR black hoga */
   const darkRoutes = ["/services", "/SingleSuccessStory"];
@@ -99,14 +128,16 @@ export default function Header() {
             router.push("/");
           }}
         >
-          <Image
+          <img
             // src={showDark ? darkLogo : lightLogo}
-            src={!isFixed && showDark ? darkLogo : lightLogo}
+            // src={!isFixed && showDark ? darkLogo : lightLogo}
+            src={Logo || ""}
             alt="Hirezy"
             width={140.3}
             height={37}
-            className="header-logo"
+            // className="header-logo"
           />
+          {/* {console.log(data-brand-logo)} */}
         </Link>
 
         {/* Desktop Navigation */}
@@ -122,12 +153,12 @@ export default function Header() {
                     ? "fixed-active"
                     : ""
                   : showDark
-                  ? activeLink === link.name
-                    ? "static-active" // white wala variant
-                    : ""
-                  : activeLink === link.name
-                  ? "static-black-active" // ← yeh new black active state
-                  : ""
+                    ? activeLink === link.name
+                      ? "static-active" // white wala variant
+                      : ""
+                    : activeLink === link.name
+                      ? "static-black-active" // ← yeh new black active state
+                      : ""
               }`}
             >
               <Typography

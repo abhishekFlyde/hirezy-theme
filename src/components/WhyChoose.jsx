@@ -49,7 +49,7 @@ const WhyChoose = ({ open, setOpen }) => {
               onClick={() => setOpen(true)}
               className="why-btn "
             >
-              <Typography variant="h4">{buttonText}</Typography>
+              <Typography colorVariant="white" variant="h4">{buttonText}</Typography>
             </Button>
           </div>
 

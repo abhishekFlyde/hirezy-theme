@@ -100,7 +100,7 @@ export default function Pricing({
       </div>
       {/* Price & Button */}
       <div className="pricing-bottom">
-        <button className="choose-btn"><Typography variant="h4">Choose Plan</Typography></button>
+        <button className="choose-btn"><Typography colorVariant="white" variant="h4">Choose Plan</Typography></button>
       </div>
     </div>
   );

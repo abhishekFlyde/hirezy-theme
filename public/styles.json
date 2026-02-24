@@ -1,0 +1,404 @@
+{
+  "meta": {
+    "name": "Acme Corpe Brwandn",
+    "description": "Primary brand configuration",
+    "updatedAt": "2026-02-23T07:20:19.973Z"
+  },
+  "identity": {
+    "logo": {
+      "light": {
+        "primary": "https://generaltechworks.com/images/gtw_new.png",
+        "secondary": "https://cdn.example.com/acme/logo-light-secondary.svg"
+      },
+      "dark": {
+        "primary": "https://generaltechworks.com/images/gtw_new1.png",
+        "secondary": "https://cdn.example.com/acme/logo-dark-secondary.svg"
+      }
+    },
+    "favicon": {
+      "light": "https://ik.imagekit.io/p1zreiw3z/GTW%20-%20Branding/GTW.svg",
+      "dark": "https://ik.imagekit.io/p1zreiw3z/GTW%20-%20Branding/GTW.svg",
+      "png": "blob:http://localhost:5173/a48ce209-c8ef-4a0a-9fd2-86b3a32cdda0"
+    },
+    "appIcon": "https://ik.imagekit.io/p1zreiw3z/GTW%20-%20Branding/App%20Icon.png",
+    "logos": {
+      "primary": "blob:http://localhost:5173/1e8e1a87-25c6-4ddc-8901-fd588184c7af"
+    }
+  },
+  "colors": {
+    "primitives": {
+      "palette": {
+        "primary400": "#437CF9",
+        "primary500": "#0647FF",
+        "primary600": "#0040CE",
+        "gray100": "#EDF2FF",
+        "gray300": "#E2E2E2",
+        "gray700": "#383838",
+        "white": "#FFFFFF",
+        "black": "#000000"
+      },
+      "gradients": {
+        "primaryGradient": {
+          "type": "linear",
+          "angle": 135,
+          "stops": [
+            {
+              "color": "primary400",
+              "position": 0
+            },
+            {
+              "color": "primary600",
+              "position": 100
+            }
+          ]
+        }
+      }
+    },
+    "modes": {
+      "light": {
+        "semantic": {
+          "primary": "primary500",
+          "primaryHover": "primary600",
+          "background": "white",
+          "surface": "gray100",
+          "border": "gray300",
+          "textPrimary": "gray700",
+          "textSecondary": "black"
+        }
+      },
+      "dark": {
+        "semantic": {
+          "primary": "primary500",
+          "primaryHover": "primary400",
+          "background": "black",
+          "surface": "gray700",
+          "border": "gray300",
+          "textPrimary": "white",
+          "textSecondary": "gray300"
+        }
+      }
+    }
+  },
+  "typography": {
+    "primitives": {
+      "fontFamilies": {
+        "carmenSans": {
+          "label": "Carmen Sans",
+          "family": "Carmen Sans",
+          "fallback": [
+            "Helvetica",
+            "Arial",
+            "sans-serif"
+          ],
+          "sources": [
+            {
+              "weight": 400,
+              "style": "normal",
+              "woff2": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-Regular.woff2",
+              "woff": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-Regular.woff"
+            },
+            {
+              "weight": 500,
+              "style": "normal",
+              "woff2": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-Medium.woff2",
+              "woff": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-Medium.woff"
+            },
+            {
+              "weight": 600,
+              "style": "normal",
+              "woff2": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-SemiBold.woff2",
+              "woff": "https://ik.imagekit.io/p1zreiw3z/Fonts/Carmen%20Sans/CarmenSans-SemiBold.woff"
+            }
+          ]
+        },
+        "montserrat": {
+          "label": "Montserrat",
+          "family": "Montserrat",
+          "fallback": [
+            "Helvetica",
+            "Arial",
+            "sans-serif"
+          ]
+        }
+      },
+      "fontWeights": [
+        400,
+        500,
+        600
+      ],
+      "cases": [
+        "none",
+        "uppercase"
+      ],
+      "decorations": [
+        "none",
+        "underline"
+      ],
+      "alignments": [
+        "left",
+        "center"
+      ]
+    },
+    "breakpoints": [
+      "desktop",
+      "mobile"
+    ],
+    "textStyles": {
+      "h1": {
+        "label": "H1",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "carmenSans",
+            "fontSize": 64,
+            "lineHeight": 80,
+            "fontWeight": 500,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "carmenSans",
+            "fontSize": 42,
+            "lineHeight": 50,
+            "fontWeight": 600,
+            "case": "none"
+          }
+        }
+      },
+      "h2": {
+        "label": "H2",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "carmenSans",
+            "fontSize": 48,
+            "lineHeight": 60,
+            "fontWeight": 500,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "carmenSans",
+            "fontSize": 36,
+            "lineHeight": 44,
+            "fontWeight": 500,
+            "case": "none"
+          }
+        }
+      },
+      "h3": {
+        "label": "H3",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "carmenSans",
+            "fontSize": 36,
+            "lineHeight": 50,
+            "fontWeight": 500,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "carmenSans",
+            "fontSize": 32,
+            "lineHeight": 36,
+            "fontWeight": 500,
+            "case": "none"
+          }
+        }
+      },
+      "h4": {
+        "label": "H4",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "montserrat",
+            "fontSize": 24,
+            "lineHeight": 32,
+            "fontWeight": 600,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "montserrat",
+            "fontSize": 24,
+            "lineHeight": 32,
+            "fontWeight": 600,
+            "case": "none"
+          }
+        }
+      },
+      "bodyPrimary": {
+        "label": "Body Primary",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "montserrat",
+            "fontSize": 24,
+            "lineHeight": 36,
+            "fontWeight": 400,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "montserrat",
+            "fontSize": 20,
+            "lineHeight": 30,
+            "fontWeight": 400,
+            "case": "none"
+          }
+        }
+      },
+      "bodySecondary": {
+        "label": "Body Secondary",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "montserrat",
+            "fontSize": 18,
+            "lineHeight": 24,
+            "fontWeight": 400,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "montserrat",
+            "fontSize": 16,
+            "lineHeight": 24,
+            "fontWeight": 400,
+            "case": "none"
+          }
+        }
+      },
+      "bodySmall": {
+        "label": "Body Small",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "montserrat",
+            "fontSize": 12,
+            "lineHeight": 16,
+            "fontWeight": 400,
+            "case": "none"
+          },
+          "mobile": {
+            "fontFamily": "montserrat",
+            "fontSize": 12,
+            "lineHeight": 16,
+            "fontWeight": 400,
+            "case": "none"
+          }
+        }
+      },
+      "button": {
+        "label": "Button",
+        "editable": true,
+        "variants": {
+          "desktop": {
+            "fontFamily": "montserrat",
+            "fontSize": 24,
+            "lineHeight": 36,
+            "fontWeight": 500,
+            "case": "uppercase"
+          },
+          "mobile": {
+            "fontFamily": "montserrat",
+            "fontSize": 20,
+            "lineHeight": 32,
+            "fontWeight": 500,
+            "case": "uppercase"
+          }
+        }
+      }
+    },
+    "defaults": {
+      "h1": "h1",
+      "h2": "h2",
+      "h3": "h3",
+      "body": "bodyPrimary",
+      "button": "button"
+    }
+  },
+  "layout": {
+    "spacing": {
+      "baseUnit": 4,
+      "scale": {
+        "none": 0,
+        "xxs": 4,
+        "xs": 8,
+        "sm": 12,
+        "md": 16,
+        "lg": 24,
+        "xl": 32,
+        "2xl": 40,
+        "3xl": 48
+      },
+      "semantic": {
+        "pagePadding": "lg",
+        "sectionGap": "xl",
+        "cardPadding": "md",
+        "listItemGap": "sm",
+        "formFieldGap": "sm",
+        "buttonPaddingX": "md",
+        "buttonPaddingY": "sm",
+        "sectionPadding": {
+          "desktop": 1
+        },
+        "containerPadding": {
+          "laptop": 2
+        }
+      },
+      "custom": {
+        "heroOverlap": 72
+      }
+    },
+    "sizing": {
+      "scale": {
+        "iconXs": 12,
+        "iconSm": 16,
+        "iconMd": 24,
+        "iconLg": 32,
+        "avatarSm": 32,
+        "avatarMd": 40,
+        "avatarLg": 56,
+        "buttonHeightSm": 32,
+        "buttonHeightMd": 40,
+        "buttonHeightLg": 48,
+        "inputHeightSm": 32,
+        "inputHeightMd": 40
+      },
+      "semantic": {
+        "primaryButtonHeight": "buttonHeightMd",
+        "secondaryButtonHeight": "buttonHeightSm",
+        "inputHeight": "inputHeightMd",
+        "avatarDefault": "avatarMd"
+      },
+      "custom": {
+        "pricingCardWidth": 360,
+        "modalMaxWidth": 640
+      }
+    },
+    "radii": {
+      "scale": {
+        "none": 0,
+        "xs": 2,
+        "sm": 4,
+        "md": 8,
+        "lg": 12,
+        "xl": 16,
+        "full": 999
+      },
+      "semantic": {
+        "button": "md",
+        "card": "lg",
+        "input": "sm",
+        "badge": "full",
+        "modal": "xl",
+        "global": {
+          "desktop": 2
+        }
+      },
+      "custom": {
+        "heroImage": 20
+      }
+    }
+  },
+  "assets": {
+    "fileIcon": "https://cdn.example.com/acme/file-icon.png",
+    "watermark": "https://cdn.example.com/acme/watermark.png"
+  }
+}

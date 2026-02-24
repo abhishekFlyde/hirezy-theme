@@ -48,7 +48,7 @@
   /* Variants */
   &--primary {
     background: var(--color-lime);
-    color: black;
+    color: var(--color-white);
     transition: 0.2s ease-in-out;
     border: 0.5px solid transparent;
 
@@ -60,7 +60,7 @@
 
   &--primary-two {
     background: var(--color-lime);
-    color: var(--color-black-500);
+    color: var(--color-white);
     &:hover {
       // background: darken(var(--color-lime), 5%);
     }

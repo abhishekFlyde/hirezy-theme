@@ -1,17 +1,13 @@
-
-
 import { Geist, Geist_Mono, Lato, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.scss";
 import ClientLayout from "./ClientLayout";
 import localFont from "next/font/local";
+import ThemeLoader from "@/components/ThemeLoader";
+import { ThemeProvider } from "@/context/ThemeContext";
 
-
- 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-
-  
 });
 
 const geistMono = Geist_Mono({
@@ -52,7 +48,6 @@ const markOT = localFont({
   ],
 });
 
-
 export const metadata = {
   title: "Hirezy | Smart Recruitment Platform to Hire Top Talent Faster",
   description:
@@ -76,15 +71,18 @@ export const metadata = {
   metadataBase: new URL("https://www.hirezy.com"),
 };
 
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${lato.variable} ${jakarata.variable} ${markOT.variable}`}
       >
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout>
+          {" "}
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </ClientLayout>
       </body>
     </html>
   );
