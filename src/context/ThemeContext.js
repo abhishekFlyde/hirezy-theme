@@ -1,5 +1,4 @@
 "use client";
-
 import { applyStyleTheme } from "@/theme/themeManager";
 import { createContext, useContext, useEffect, useState } from "react";
 
