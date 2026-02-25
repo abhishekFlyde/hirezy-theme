@@ -482,7 +482,10 @@ export default function Page() {
           >
             <div className="md:w-[534px] flex flex-col justify-between spacing-40">
               <Typography variant="body-2" style={{ whiteSpace: "pre-line" }}>
-                {hero.subtitle}
+                {/* {hero.subtitle} */}
+                Hirezy streamlines your recruitment process with smart tools, intuitive
+dashboards, and seamless integrations, helping you connect with top talent faster.
+
               </Typography>
 
               <div className="sp-24Home">

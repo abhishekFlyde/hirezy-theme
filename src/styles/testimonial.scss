@@ -91,22 +91,31 @@
 
   .arrows {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 12px;
     margin-left: auto;
     right: 0;
 
+    .prev {
+      // width: 50px;
+      // height: 50px;
+      padding: 12px;
+      transition: transform 0.2s ease;
+      background-color: var(--color-lime);
+      border-radius: 50%;
+    }
+    .next {
+      padding: 12px;
+      transition: transform 0.2s ease;
+      background-color: var(--color-lime);
+      border-radius: 50%;
+    }
     button {
       background: none;
       border: none;
       cursor: pointer;
       padding: 0;
 
-      img {
-        width: 50px;
-        height: 50px;
-        transition: transform 0.2s ease;
-      }
 
       &:hover img {
         transform: scale(1.1);

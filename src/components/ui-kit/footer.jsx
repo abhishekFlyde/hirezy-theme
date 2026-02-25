@@ -5,6 +5,7 @@ import Typography from "@/components/ui-kit/typography";
 import { Container } from "@/components/ui-kit/spacing";
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
+import { useTheme } from "@/context/ThemeContext";
 
 
 const Footer = () => {
@@ -31,6 +32,10 @@ const Footer = () => {
     })();
   }, []);
 
+  const { theme } = useTheme();
+  const Logo = theme?.identity?.logo?.light?.primary;
+  // console.log(Logo);
+
   if (!footer) return null;
 
   return (
@@ -42,7 +47,7 @@ const Footer = () => {
             <div className="footer__brand">
               <div className="footer__brand-content">
                 <Link href="/" className="footer__logo">
-                  <Image src={footer.logo} width={100} height={40} alt="logo" />
+                  <Image src={Logo} width={100} height={40} alt="logo" />
                 </Link>
 
                 <Typography variant="body-4" className="footer__desc">
@@ -64,13 +69,66 @@ const Footer = () => {
               <div className="footer__links">
                 <Typography variant="h5">Quick Links</Typography>
                 <ul>
-                  {footer.quickLinks?.map((link, i) => (
-                    <li key={i}>
-                      <Link href={link.href}>
-                        <Typography variant="body-4">{link.name}</Typography>
+                  {/* {footer.quickLinks?.map((link, i) => ( */}
+                    {/* <li key={i}> */}
+                    <li className="flex flex-col gap-4">
+                      {/* <Link href={link.href}> */}
+                      <Link href="/">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Home
+                          </Typography>
+                      </Link>
+                      <Link href="/about">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          About
+                          </Typography>
+                      </Link>
+                      <Link href="/careers">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Careers
+                          </Typography>
+                      </Link>
+                      <Link href="/blogs">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Blogs
+                          </Typography>
+                      </Link>
+                      <Link href="/contact-us">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Contact Us
+                          </Typography>
+                      </Link>
+                      <Link href="/success-stories">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Success Stories
+                          </Typography>
+                      </Link>
+                      <Link href="/success-stories/single-success-story">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Single Success Stories
+                          </Typography>
+                      </Link>
+                      <Link href="/services">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Services
+                          </Typography>
+                      </Link>
+                      <Link href="/policies">
+                        <Typography variant="body-4">
+                          {/* {link.name} */}
+                          Policies
+                          </Typography>
                       </Link>
                     </li>
-                  ))}
+                  {/* ))} */}
                 </ul>
               </div>
 
@@ -106,12 +164,25 @@ const Footer = () => {
             <div className="footer__input">
               <input type="email" placeholder="Enter your email" />
               <button className="arrow-btn">
-                <Image
+                {/* <Image
                   src="/Arrow Right.png"
                   width={14}
                   height={12}
                   alt="arrow"
-                />
+                /> */}
+                <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi text-white bi-arrow-right-short"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+              />
+            </svg>
               </button>
             </div>
           </div>

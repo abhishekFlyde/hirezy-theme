@@ -20,7 +20,7 @@ const { theme } = useTheme();
 
 const Logo =
   theme?.identity?.logo?.light?.primary;
-  console.log(Logo);
+  // console.log(Logo);
   
   // setThemeLogo(Logo);
 
@@ -182,7 +182,8 @@ const Logo =
         <div className="flex items-center">
           <Link href={header.ctaLink}>
             <Button variant="primary" size="xl" showIcon={false}>
-              {header.ctaText}
+              {/* {header.ctaText} */}
+              Sign In
             </Button>
           </Link>
         </div>

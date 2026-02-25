@@ -39,7 +39,7 @@ export default function Pricing({
         </div>
         {tag && (
           <div className="pricing-tag">
-            <Typography variant="body-5">{tag}</Typography>
+            <Typography colorVariant="white" variant="body-5">{tag}</Typography>
           </div>
         )}
       </div>

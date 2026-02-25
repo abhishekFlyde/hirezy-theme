@@ -111,12 +111,19 @@ export default function Testimonial({ items = [] }) {
               setIsFirstCard(false);
             }}
           >
-            <Image
-              src="https://ik.imagekit.io/a9uxeuyhx/Icon%20(3).png?updatedAt=1762114130234"
-              alt="Previous"
-              width={50}
-              height={50}
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi rotate-180 text-white bi-arrow-right-short"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+              />
+            </svg>
           </button>
           <button
             className="next"
@@ -126,115 +133,124 @@ export default function Testimonial({ items = [] }) {
               setIsFirstCard(false);
             }}
           >
-            <Image
-              src="https://ik.imagekit.io/a9uxeuyhx/Icon%20(4).png?updatedAt=1762114154276"
-              alt="Next"
-              width={50}
-              height={50}
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi text-white bi-arrow-right-short"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+              />
+            </svg>
           </button>
         </div>
 
         <div className="testimonial-card-container relative mt-8 overflow-visible">
-            <div className="motion-clip-wrapper">
-          <AnimatePresence custom={direction} mode="wait">
-            <motion.div
-              key={index}
-              className="testimonial-card"
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
+          <div className="motion-clip-wrapper">
+            <AnimatePresence custom={direction} mode="wait">
               <motion.div
-                className="image-wrapper"
-                initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
-                animate={
-                  isFirstCard ? {} : { x: 0, opacity: 1, filter: "blur(0px)" }
-                }
-                whileInView={
-                  isFirstCard ? { x: 0, opacity: 1, filter: "blur(0px)" } : {}
-                }
-                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                transition={{
-                  type: "spring",
-                  damping: 15,
-                  stiffness: 100,
-                  bounce: 0.4,
-                  duration: 0.8,
-                  delay: isFirstCard ? 0 : 0.2,
-                }}
+                key={index}
+                className="testimonial-card"
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
               >
-                <Image
-                  src={imageSrc}
-                  alt={name}
-                  width={600}
-                  height={900}
-                  priority
-                  className="object-cover rounded-2xl"
-                />
-              </motion.div>
+                <motion.div
+                  className="image-wrapper"
+                  initial={{ x: -50, opacity: 0, filter: "blur(10px)" }}
+                  animate={
+                    isFirstCard ? {} : { x: 0, opacity: 1, filter: "blur(0px)" }
+                  }
+                  whileInView={
+                    isFirstCard ? { x: 0, opacity: 1, filter: "blur(0px)" } : {}
+                  }
+                  viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
+                  transition={{
+                    type: "spring",
+                    damping: 15,
+                    stiffness: 100,
+                    bounce: 0.4,
+                    duration: 0.8,
+                    delay: isFirstCard ? 0 : 0.2,
+                  }}
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={name}
+                    width={600}
+                    height={900}
+                    priority
+                    className="object-cover rounded-2xl"
+                  />
+                </motion.div>
 
-              <motion.div
-                className="content-wrapper"
-                initial={{ x: 50, opacity: 0 }}
-                animate={isFirstCard ? {} : { x: 0, opacity: 1 }}
-                whileInView={isFirstCard ? { x: 0, opacity: 1 } : {}}
-                viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                transition={{
-                  type: "spring",
-                  damping: 15,
-                  stiffness: 100,
-                  bounce: 0.4,
-                  duration: 0.8,
-                  delay: isFirstCard ? 0.1 : 0.3,
-                }}
-              >
-                <div className="card-content">
-                  <div className="company-logo">
-                    <Image
-                      src={companyLogo}
-                      alt="Company Logo"
-                      width={100}
-                      height={40}
-                      className="object-contain"
-                    />
+                <motion.div
+                  className="content-wrapper"
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={isFirstCard ? {} : { x: 0, opacity: 1 }}
+                  whileInView={isFirstCard ? { x: 0, opacity: 1 } : {}}
+                  viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
+                  transition={{
+                    type: "spring",
+                    damping: 15,
+                    stiffness: 100,
+                    bounce: 0.4,
+                    duration: 0.8,
+                    delay: isFirstCard ? 0.1 : 0.3,
+                  }}
+                >
+                  <div className="card-content">
+                    <div className="company-logo">
+                      <Image
+                        src={companyLogo}
+                        alt="Company Logo"
+                        width={100}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </div>
+
+                    <motion.div
+                      initial="hidden"
+                      animate={isFirstCard ? {} : "visible"}
+                      whileInView={isFirstCard ? "visible" : {}}
+                      viewport={
+                        isFirstCard ? { once: true, margin: "0px" } : {}
+                      }
+                      transition={{ delay: isFirstCard ? 0.2 : 0.6 }}
+                      variants={contentVariants}
+                    >
+                      <motion.div variants={itemVariants}>
+                        <Typography variant="body-1" className="quote">
+                          {quote}
+                        </Typography>
+                      </motion.div>
+
+                      <motion.div variants={itemVariants}>
+                        <Typography variant="body-4" className="details">
+                          {details}
+                        </Typography>
+                      </motion.div>
+
+                      <motion.div className="author" variants={itemVariants}>
+                        <Typography variant="h6" className="name">
+                          {name}
+                        </Typography>
+                        <Typography variant="body-5" className="role">
+                          {role}
+                        </Typography>
+                      </motion.div>
+                    </motion.div>
                   </div>
-
-                  <motion.div
-                    initial="hidden"
-                    animate={isFirstCard ? {} : "visible"}
-                    whileInView={isFirstCard ? "visible" : {}}
-                    viewport={isFirstCard ? { once: true, margin: "0px" } : {}}
-                    transition={{ delay: isFirstCard ? 0.2 : 0.6 }}
-                    variants={contentVariants}
-                  >
-                    <motion.div variants={itemVariants}>
-                      <Typography variant="body-1" className="quote">
-                        {quote}
-                      </Typography>
-                    </motion.div>
-
-                    <motion.div variants={itemVariants}>
-                      <Typography variant="body-4" className="details">
-                        {details}
-                      </Typography>
-                    </motion.div>
-
-                    <motion.div className="author" variants={itemVariants}>
-                      <Typography variant="h6" className="name">
-                        {name}
-                      </Typography>
-                      <Typography variant="body-5" className="role">
-                        {role}
-                      </Typography>
-                    </motion.div>
-                  </motion.div>
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
           </div>
         </div>
 
@@ -251,7 +267,8 @@ export default function Testimonial({ items = [] }) {
               animate={{
                 width: i === index ? 24 : 8, // active one expands
                 opacity: i === index ? 1 : 0.4,
-                backgroundColor: i === index ? "#CCEF55" : "#9CA3AF",
+                backgroundColor:
+                  i === index ? "var(--color-lime)" : "var(--color-blue-400)",
               }}
               transition={{
                 type: "spring",
@@ -262,7 +279,6 @@ export default function Testimonial({ items = [] }) {
             />
           ))}
         </div>
-      
       </div>
     </section>
   );
