@@ -14,7 +14,7 @@ export function ThemeProvider({ children }) {
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/brand/export`,
           {
             headers: {
-              "X-API-KEY": `${process.env.NEXT_PUBLIC_API_KEY}`,
+              "X-API-KEY": `${process.env.NEXT_PUBLIC_API}`,
             },
           },
         );
