@@ -11,7 +11,10 @@ const ServiceCard = ({
     <div className="service-card">
       <div className="service-card__icon-wrapper">
         {icon && (
-            <Image src={icon} alt="" width={24} height={24} />
+            <Image 
+            // src={icon}
+            src="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1768300131238"
+             alt="" width={24} height={24} />
         )}
       </div>
 

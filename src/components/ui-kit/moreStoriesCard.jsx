@@ -36,7 +36,7 @@ export default function MoreStoriesCard({
             {/* Badge */}
             {badge && (
               <div className="more-stories-card__badge">
-                <Typography variant="body-5" className="more-stories-card__badge-text">
+                <Typography colorVariant="white" variant="body-5" className="more-stories-card__badge-text">
                   {badge}
                 </Typography>
               </div>
@@ -78,7 +78,7 @@ export default function MoreStoriesCard({
             }
             iconPosition="right"
           >
-            <Typography variant="h4">{buttonText}</Typography>
+            <Typography colorVariant="white" variant="h4">{buttonText}</Typography>
           </Button>
         </div>
       </Suspense>

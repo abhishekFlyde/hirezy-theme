@@ -45,6 +45,12 @@
     // padding: var(--sp-16) var(--sp-24);
     border-radius: var(--radius-xs);
     // background-color: var(--color-blue-300);
+
+    img{
+      padding: 8px;
+      border-radius: 50%;
+      background-color: var(--color-blue-400);
+    }
   }
 
   &__card-body {

@@ -183,7 +183,7 @@ export default function page() {
                   }
                   iconPosition="right"
                 >
-                  <Typography variant="h4">Send Message</Typography>
+                  <Typography colorVariant="white" variant="h4">Send Message</Typography>
                 </Button>
               </div>
             </div>

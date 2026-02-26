@@ -23,10 +23,11 @@ export default function SolutionCard({
         {icon && (
           <div className="solution-card__icon">
             <Image
-              src={icon}
+              // src={icon}
+              src="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1768300131238"
               alt={title || "solution icon"}
-              width={64}
-              height={64}
+              width={26}
+              height={26}
             />
           </div>
         )}

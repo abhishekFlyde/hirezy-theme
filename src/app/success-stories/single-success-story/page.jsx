@@ -90,7 +90,7 @@ export default function SingleSuccessStory() {
           <div className="sectionHeaderContainer">
             <SectionHeader
               label="Success Story"
-              icon="https://ik.imagekit.io/75zj3bigp/Icon%20(10).png?updatedAt=1764576071687"
+              icon="https://ik.imagekit.io/75zj3bigp/Mail.png?updatedAt=1761982895241"
               title="How TechCorp Reduced Hiring Time by 65%"
               subtitle="Discover how TechCorp Solutions transformed their recruitment process with Hirezy's intelligent platform."
               // align={isMobile ? "left" : "center"}

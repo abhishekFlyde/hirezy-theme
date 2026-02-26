@@ -153,7 +153,7 @@ const Footer = () => {
           </div>
 
           {/* Subscribe */}
-          <div className="footer__subscribe">
+          <div className="footer__subscribe h-fit">
             <div className="footer__subscribe-content">
               <Typography variant="h3">{footer.subscribeTitle}</Typography>
               <Typography variant="body-4" className="footer__subscribe-desc">
@@ -172,8 +172,8 @@ const Footer = () => {
                 /> */}
                 <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="22"
+              height="22"
               fill="currentColor"
               class="bi text-white bi-arrow-right-short"
               viewBox="0 0 16 16"

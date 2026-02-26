@@ -34,7 +34,7 @@ export default function TheResultCard({
         {/* Right Side - Result Badge */}
         {result && (
           <div className="result-card__badge">
-            <Typography variant="body-5" className="result-card__badge-text">
+            <Typography colorVariant="white" variant="body-5" className="result-card__badge-text">
               {result}
             </Typography>
           </div>

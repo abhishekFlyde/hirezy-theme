@@ -80,7 +80,7 @@ export const ImageCard = ({
       {ctaText && (
         <div className="mt-4">
           <Button text={ctaText} variant="primary">
-            <Typography variant="h4">{ctaText}</Typography>
+            <Typography colorVariant="white" variant="h4">{ctaText}</Typography>
           </Button>
         </div>
       )}

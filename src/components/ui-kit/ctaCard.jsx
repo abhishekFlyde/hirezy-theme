@@ -56,7 +56,7 @@ export default function CTACard({
           }
           iconPosition="right"
         >
-          <Typography variant="h4">{buttonText}</Typography>
+          <Typography colorVariant="white" variant="h4">{buttonText}</Typography>
         </Button>
       </Suspense>
     </div>

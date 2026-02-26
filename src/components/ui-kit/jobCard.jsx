@@ -91,7 +91,7 @@ export default function JobCard({
         }
         iconPosition="right"
       >
-        <Typography variant="h4">Apply Now</Typography>
+        <Typography colorVariant="white" variant="h4">Apply Now</Typography>
       </Button>
       </motion.div>
     </div>

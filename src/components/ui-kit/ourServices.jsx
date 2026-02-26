@@ -45,10 +45,11 @@ const OurServices = ({
             <div className="flex flex-col gap-[var(--sp-24)] mt-[var(--sp-8)]">
               <div className="our-services__card">
                 <Image
-                  src={cardIcon}
+                  // src={cardIcon}
+                  src="https://ik.imagekit.io/75zj3bigp/innovation.svg?updatedAt=1760099656996"
                   alt="service icon"
-                  width={56}
-                  height={56}
+                  width={40}
+                  height={40}
                 />
 
                 <div className="our-services__card-body">

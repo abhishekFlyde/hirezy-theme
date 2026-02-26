@@ -43,13 +43,16 @@
 
 .pricing-icon {
   display: flex;
-  height: 41px;
-  width: 42px;
+  padding: 18px;
+  border-radius: 50%;
+  background-color: var(--color-blue-400);
   justify-content: center;
-
+  
   img {
-    width: auto;
-    height: auto;
+    height: 16px;
+    width: 16px;
+    // width: auto;
+    // height: auto;
     object-fit: cover;
   }
 }

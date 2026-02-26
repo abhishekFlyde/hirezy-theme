@@ -59,7 +59,7 @@ export default function SuccessStories() {
             
             <div className="success-stories-btns flex justify-center gap-[var(--sp-32)] mt-[var(--sp-32)]">
               <Button variant="primary" size="xl" showIcon={false}>
-                <Typography variant="h4">Start Free Trial</Typography>
+                <Typography colorVariant="white" variant="h4">Start Free Trial</Typography>
               </Button>
               <Button
                 transparent={true}

@@ -1,11 +1,11 @@
 import clsx from "clsx";
 
 const colorMap = {
-  black: "#000000",
+  black: "var(--color-black-500)",
   white: "var(--color-white)",
   white2: "#F9F9F9",
   gray: "#636363",
-  primary: "#CCEF55",
+  primary: "var(--color-blue-400)",
   secondary: "#AAAAAA",
   itel: "#E5E7EB",
 };

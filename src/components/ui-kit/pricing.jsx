@@ -35,7 +35,10 @@ export default function Pricing({
       {/* Icon and Tag */}
       <div className="pricing-header">
         <div className="pricing-icon">
-          <img src={iconSrc} alt={`${planName} Icon`} />
+          <img 
+          // src={iconSrc}
+          src="https://ik.imagekit.io/75zj3bigp/Vector.png"
+           alt={`${planName} Icon`} />
         </div>
         {tag && (
           <div className="pricing-tag">

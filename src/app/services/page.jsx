@@ -160,7 +160,7 @@ export default function ServicesPage() {
                 }
                 iconPosition="right"
               >
-                <Typography variant="h4">More Services</Typography>
+                <Typography colorVariant="white" variant="h4">More Services</Typography>
               </Button>
 
               <div className="hero-image-wrapper">
@@ -177,10 +177,11 @@ export default function ServicesPage() {
                 <div key={index} className="feature-card">
                   <div className="feature-icon">
                     <Image
-                      src={feature.icon}
+                      // src={feature.icon}
+                      src="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1768300131238"
                       alt={feature.title}
-                      width={52}
-                      height={52}
+                      width={32}
+                      height={32}
                     />
                   </div>
                   <div className="feature-content">
@@ -244,7 +245,7 @@ export default function ServicesPage() {
                       }
                       iconPosition="right"
                     >
-                      <Typography variant="h4">Get Started Free</Typography>
+                      <Typography colorVariant="white" variant="h4">Get Started Free</Typography>
                     </Button>
                     <Button variant="white-outline" size="xl">
                       <Typography variant="h4">Schedule Demo</Typography>

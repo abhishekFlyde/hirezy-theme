@@ -61,10 +61,11 @@ export default function Card({
       {iconSrc && (
         <div className="card-icon">
           <Image
-            src={iconSrc}
+            // src={iconSrc}
+            src="https://ik.imagekit.io/75zj3bigp/Icon.png?updatedAt=1768300131238"
             alt={iconAlt}
-            width={24}
-            height={24}
+            width={12}
+            height={12}
             className="icon-img"
           />
         </div>
