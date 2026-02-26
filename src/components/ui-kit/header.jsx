@@ -20,7 +20,7 @@ const { theme } = useTheme();
 
 const Logo =
   theme?.identity?.logo?.light?.primary;
-  // console.log(Logo);
+  // console.log(theme.identity.favicon.dark);
   
   // setThemeLogo(Logo);
 

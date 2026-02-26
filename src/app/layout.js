@@ -4,6 +4,7 @@ import ClientLayout from "./ClientLayout";
 import localFont from "next/font/local";
 import ThemeLoader from "@/components/ThemeLoader";
 import { ThemeProvider } from "@/context/ThemeContext";
+import FaviconUpdater from "@/components/FaviconUpdater";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +53,9 @@ export const metadata = {
   title: "Hirezy | Smart Recruitment Platform to Hire Top Talent Faster",
   description:
     "Hirezy simplifies hiring with AI-driven tools, real-time dashboards, and seamless integrations, making it easy to find and manage top candidates efficiently.",
+    icons: {
+      icon:"/favicon.ico" 
+    },
   openGraph: {
     title: "Hirezy | Smart Recruitment Platform to Hire Top Talent Faster",
     description:
@@ -60,7 +64,7 @@ export const metadata = {
     siteName: "Hirezy",
     images: [
       {
-        url: "https://ik.imagekit.io/a9uxeuyhx/Favicon.png?updatedAt=1762177502579",
+        // url: "https://ik.imagekit.io/a9uxeuyhx/Favicon.png?updatedAt=1762177502579",
         width: 1200,
         height: 630,
         alt: "Hirezy Platform Overview",
@@ -80,6 +84,7 @@ export default function RootLayout({ children }) {
         <ClientLayout>
           {" "}
           <ThemeProvider>
+            <FaviconUpdater />
             {children}
           </ThemeProvider>
         </ClientLayout>
