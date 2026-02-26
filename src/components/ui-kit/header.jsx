@@ -154,10 +154,10 @@ const Logo =
                     : ""
                   : showDark
                     ? activeLink === link.name
-                      ? "static-active" // white wala variant
+                      ? "static-active"
                       : ""
                     : activeLink === link.name
-                      ? "static-black-active" // ← yeh new black active state
+                      ? "static-black-active"
                       : ""
               }`}
             >
